@@ -14,7 +14,7 @@
     "calendar"
   ],
   "author": "DHLab Basel <t.schweizer@unibas.ch> (http://www.dhlab.unibas.ch)",
-  "license": "GNU Affero General Public License v3.0",
+  "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/dhlab-basel/JDNConvertibleCalendar/issues"
   },
