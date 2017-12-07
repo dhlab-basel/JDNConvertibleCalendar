@@ -4,7 +4,7 @@
   "description": "Support of various calendar formats and conversions between them using Julian Day Number",
   "main": "index.js",
   "scripts": {
-    "test": "rm test/*.js && tsc test/*.ts && node test/testJDNConvertibleCalendar.js"
+    "test": "tsc test/*.ts && node test/testJDNConvertibleCalendar.js"
   },
   "repository": {
     "type": "git",
