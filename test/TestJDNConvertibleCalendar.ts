@@ -22,6 +22,7 @@ import {JDNConvertibleCalendar} from "../src/JDNConvertibleCalendar";
 import CalendarDate = JDNConvertibleCalendar.CalendarDate;
 import GregorianCalendar = JDNConvertibleCalendar.GregorianCalendar;
 import JDNPeriod = JDNConvertibleCalendar.JDNPeriod;
+import JulianCalendar = JDNConvertibleCalendar.JulianCalendar;
 
 let assert = require('assert');
 
@@ -63,3 +64,13 @@ const jdnPeriod3: JDNPeriod = julianCalendar3.toJDN();
 
 assert.strictEqual(jdnPeriod3.jdnStart, 2458094, `Conversion to JDNPeriod failed: start`);
 assert.strictEqual(jdnPeriod3.jdnEnd, 2458094, `Conversion to JDNPeriod failed: end`);
+
+// instantiate a JulianCalendar and convert it to a GregorianCalendar
+const julianCalendar4 = new JulianCalendar(new JDNPeriod(2458094, 2458094));
+
+const gregorianCalendar4: JDNConvertibleCalendar.JDNConvertibleCalendar = julianCalendar4.convertCalendar('Gregorian');
+
+const jdnPeriod4: JDNPeriod = gregorianCalendar4.toJDN();
+
+assert.strictEqual(jdnPeriod4.jdnStart, 2458094, `Conversion to JDNPeriod failed: start`);
+assert.strictEqual(jdnPeriod4.jdnEnd, 2458094, `Conversion to JDNPeriod failed: end`);
