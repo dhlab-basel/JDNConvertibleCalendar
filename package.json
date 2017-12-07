@@ -1,0 +1,28 @@
+{
+  "name": "jdnconvertiblecalendar",
+  "version": "0.0.1",
+  "description": "Support of various calendar formats and conversions between them using Julian Day Number",
+  "main": "index.js",
+  "scripts": {
+    "test": "rm test/*.js && tsc test/*.ts && node test/testJDNConvertibleCalendar.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhlab-basel/JDNConvertibleCalendar.git"
+  },
+  "keywords": [
+    "calendar"
+  ],
+  "author": "DHLab Basel <t.schweizer@unibas.ch> (http://www.dhlab.unibas.ch)",
+  "license": "GNU Affero General Public License v3.0",
+  "bugs": {
+    "url": "https://github.com/dhlab-basel/JDNConvertibleCalendar/issues"
+  },
+  "homepage": "https://github.com/dhlab-basel/JDNConvertibleCalendar#readme",
+  "dependencies": {
+    "assert": "^1.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.56"
+  }
+}
