@@ -258,7 +258,19 @@ export module JDNConvertibleCalendar {
         // end of a given date
         protected endDate: CalendarDate;
 
+        // indicates if the date is exact (day precision)
         protected exactDate: Boolean;
+
+        // returns the year of the date (same result for all precisions)
+        public getYear(): number {
+            return this.startDate.year;
+        }
+
+        // TODO: implement this for different precisions
+        public getMonth() {}
+
+        // TODO: implement this for different precisions
+        public getDay() {}
 
         /**
          * Determines the precision of the instance of JDNConvertibleCalendar.
