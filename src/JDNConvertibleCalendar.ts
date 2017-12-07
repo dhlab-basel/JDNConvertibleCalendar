@@ -116,7 +116,7 @@ export module JDNConvertibleCalendar {
                 Math.floor((30.6001 * (monthInt + 1))) +
                 dayInt) - 1524.5);
 
-            return Math.floor(jdn);
+            return Math.round(jdn);
         }
 
         /**
@@ -167,7 +167,7 @@ export module JDNConvertibleCalendar {
     /**
      * Represents a period as two JDNs.
      */
-    class JDNPeriod {
+    export class JDNPeriod {
 
         constructor(readonly jdnStart: number, readonly jdnEnd: number) {
 
@@ -240,7 +240,6 @@ export module JDNConvertibleCalendar {
             super();
 
             // create a Gregorian calendar date from jdnPeriod
-
             this.startDate = JDNCalendarConversion.JDNToGregorian(jdnPeriod.jdnStart);
             this.endDate = JDNCalendarConversion.JDNToGregorian(jdnPeriod.jdnEnd);
 
@@ -263,12 +262,17 @@ export module JDNConvertibleCalendar {
         constructor(jdnPeriod: JDNPeriod) {
             super();
 
-            // create a Gregorian calendar date from jdn
+            // create a Gregorian calendar date from jdnPeriod
+            this.startDate = JDNCalendarConversion.JDNToJulian(jdnPeriod.jdnStart);
+            this.endDate = JDNCalendarConversion.JDNToJulian(jdnPeriod.jdnEnd);
 
         }
 
         toJDN() {
-            return new JDNPeriod(0, 0);
+            const startJDN = JDNCalendarConversion.julianToJDN(this.startDate);
+            const endJDN = JDNCalendarConversion.julianToJDN(this.endDate);
+
+            return new JDNPeriod(startJDN, endJDN);
         }
 
     }
