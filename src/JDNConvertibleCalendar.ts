@@ -228,6 +228,15 @@ export module JDNConvertibleCalendar {
     }
 
     /**
+     * Represents the precision of a given JDNConvertibleCalendar instance.
+     */
+    enum Precision {
+        Day = 0,
+        Month = 1,
+        Year = 2
+    }
+
+    /**
      * Abstract class representing any calendar format
      * that can be converted from and to a Julian Day Number (JDN).
      */
@@ -250,6 +259,28 @@ export module JDNConvertibleCalendar {
         protected endDate: CalendarDate;
 
         protected exactDate: Boolean;
+
+        /**
+         * Determines the precision of the instance of JDNConvertibleCalendar.
+         *
+         * @returns {JDNConvertibleCalendar.Precision}
+         */
+        protected getPrecision(): Precision {
+
+            if (this.exactDate) {
+                return Precision.Day
+            } else if (this.startDate.month === this.endDate.month) {
+                // TODO: make sure that the days are correct: from the first to the last of the month
+                return Precision.Month
+            } else if (this.startDate.year === this.endDate.year) {
+                // TODO: make sure that the days and months are correct:
+                // TODO: from the first day of the first month to the last day of the last month
+                return Precision.Year
+            } else {
+                throw new JDNConvertibleCalendarError("Invalid precision");
+            }
+
+        }
 
         /**
          * Converts an instance of JDNConvertibleCalendar to a JDNPeriod.
@@ -304,6 +335,8 @@ export module JDNConvertibleCalendar {
                 this.startDate = JDNCalendarConversion.JDNToGregorian(jdnPeriod.jdnStart);
                 this.endDate = JDNCalendarConversion.JDNToGregorian(jdnPeriod.jdnEnd);
             }
+
+            this.getPrecision();
         }
 
         toJDN(): JDNPeriod {
@@ -340,6 +373,8 @@ export module JDNConvertibleCalendar {
                 this.startDate = JDNCalendarConversion.JDNToJulian(jdnPeriod.jdnStart);
                 this.endDate = JDNCalendarConversion.JDNToJulian(jdnPeriod.jdnEnd);
             }
+
+            this.getPrecision();
 
         }
 
