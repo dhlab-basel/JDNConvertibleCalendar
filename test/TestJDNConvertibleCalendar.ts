@@ -20,9 +20,9 @@
 
 import {JDNConvertibleCalendar} from "../src/JDNConvertibleCalendar";
 import CalendarDate = JDNConvertibleCalendar.CalendarDate;
-import GregorianCalendar = JDNConvertibleCalendar.GregorianCalendar;
+import GregorianCalendar = JDNConvertibleCalendar.GregorianCalendarDate;
 import JDNPeriod = JDNConvertibleCalendar.JDNPeriod;
-import JulianCalendar = JDNConvertibleCalendar.JulianCalendar;
+import JulianCalendar = JDNConvertibleCalendar.JulianCalendarDate;
 
 let assert = require('assert');
 
@@ -55,24 +55,20 @@ assert.strictEqual(julianCalendarDate2_.year, julianCalendarDate2.year, `Convers
 assert.strictEqual(julianCalendarDate2_.month, julianCalendarDate2.month, `Conversion of JDN to Julian date failed: month`);
 assert.strictEqual(julianCalendarDate2_.day, julianCalendarDate2.day, `Conversion of JDN to Julian date failed: day`);
 
-// instantiate a GregorianCalendar and convert it to a JulianCalendar
+// instantiate a GregorianCalendarDate and convert it to a JulianCalendarDate
 const gregorianCalendar3 = new GregorianCalendar(new JDNPeriod(2458094, 2458094));
 
 const julianCalendar3: JDNConvertibleCalendar.JDNConvertibleCalendar = gregorianCalendar3.convertCalendar('Julian');
-
-assert.strictEqual(julianCalendar3.getYear(), 2017, `got wrong year from getYear()`);
 
 const jdnPeriod3: JDNPeriod = julianCalendar3.toJDN();
 
 assert.strictEqual(jdnPeriod3.jdnStart, 2458094, `Conversion to JDNPeriod failed: start`);
 assert.strictEqual(jdnPeriod3.jdnEnd, 2458094, `Conversion to JDNPeriod failed: end`);
 
-// instantiate a JulianCalendar and convert it to a GregorianCalendar
+// instantiate a JulianCalendarDate and convert it to a GregorianCalendarDate
 const julianCalendar4 = new JulianCalendar(new JDNPeriod(2458094, 2458094));
 
 const gregorianCalendar4: JDNConvertibleCalendar.JDNConvertibleCalendar = julianCalendar4.convertCalendar('Gregorian');
-
-assert.strictEqual(gregorianCalendar4.getYear(), 2017, `got wrong year from getYear()`);
 
 const jdnPeriod4: JDNPeriod = gregorianCalendar4.toJDN();
 
