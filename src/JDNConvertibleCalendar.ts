@@ -264,7 +264,7 @@ export module JDNConvertibleCalendar {
         static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian];
 
         // calendar format of a subclass of JDNConvertibleCalendar
-        protected readonly calendarFormat: string;
+        public readonly calendarFormat: string;
 
         // start of a given date
         protected periodStart: CalendarDate;
@@ -289,7 +289,7 @@ export module JDNConvertibleCalendar {
          *
          * @returns {JDNConvertibleCalendar.JDNPeriod}
          */
-        public abstract toJDN(): JDNPeriod;
+        public abstract toJDNPeriod(): JDNPeriod;
 
         /**
          * Converts from one calendar format into another.
@@ -305,7 +305,7 @@ export module JDNConvertibleCalendar {
 
             if (this.calendarFormat == toCalendarType) return this; // no conversion needed
 
-            const jdnPeriod: JDNPeriod = this.toJDN();
+            const jdnPeriod: JDNPeriod = this.toJDNPeriod();
 
             switch (toCalendarType) {
                 case JDNConvertibleCalendar.gregorian:
@@ -325,7 +325,7 @@ export module JDNConvertibleCalendar {
      */
     export class GregorianCalendarDate extends JDNConvertibleCalendar {
 
-        calendarFormat = JDNConvertibleCalendar.gregorian;
+        public readonly calendarFormat = JDNConvertibleCalendar.gregorian;
 
         constructor(jdnPeriod: JDNPeriod) {
             super();
@@ -344,7 +344,7 @@ export module JDNConvertibleCalendar {
 
         }
 
-        toJDN(): JDNPeriod {
+        toJDNPeriod(): JDNPeriod {
 
             if (this.exactDate) {
                 const jdn = JDNCalendarConversion.gregorianToJDN(this.periodStart);
@@ -364,7 +364,7 @@ export module JDNConvertibleCalendar {
      */
     export class JulianCalendarDate extends JDNConvertibleCalendar {
 
-        readonly calendarFormat = JDNConvertibleCalendar.julian;
+        public readonly calendarFormat = JDNConvertibleCalendar.julian;
 
         constructor(jdnPeriod: JDNPeriod) {
             super();
@@ -385,7 +385,7 @@ export module JDNConvertibleCalendar {
 
         }
 
-        toJDN(): JDNPeriod {
+        toJDNPeriod(): JDNPeriod {
             if (this.exactDate) {
                 const jdn = JDNCalendarConversion.julianToJDN(this.periodStart);
                 return new JDNPeriod(jdn, jdn);
