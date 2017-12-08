@@ -62,8 +62,8 @@ const julianCalendar3: JDNConvertibleCalendar.JDNConvertibleCalendar = gregorian
 
 const jdnPeriod3: JDNPeriod = julianCalendar3.toJDN();
 
-assert.strictEqual(jdnPeriod3.jdnStart, 2458094, `Conversion to JDNPeriod failed: start`);
-assert.strictEqual(jdnPeriod3.jdnEnd, 2458094, `Conversion to JDNPeriod failed: end`);
+assert.strictEqual(jdnPeriod3.periodStart, 2458094, `Conversion to JDNPeriod failed: start`);
+assert.strictEqual(jdnPeriod3.periodEnd, 2458094, `Conversion to JDNPeriod failed: end`);
 
 // instantiate a JulianCalendarDate and convert it to a GregorianCalendarDate
 const julianCalendar4 = new JulianCalendar(new JDNPeriod(2458094, 2458094));
@@ -72,5 +72,5 @@ const gregorianCalendar4: JDNConvertibleCalendar.JDNConvertibleCalendar = julian
 
 const jdnPeriod4: JDNPeriod = gregorianCalendar4.toJDN();
 
-assert.strictEqual(jdnPeriod4.jdnStart, 2458094, `Conversion to JDNPeriod failed: start`);
-assert.strictEqual(jdnPeriod4.jdnEnd, 2458094, `Conversion to JDNPeriod failed: end`);
+assert.strictEqual(jdnPeriod4.periodStart, 2458094, `Conversion to JDNPeriod failed: start`);
+assert.strictEqual(jdnPeriod4.periodEnd, 2458094, `Conversion to JDNPeriod failed: end`);

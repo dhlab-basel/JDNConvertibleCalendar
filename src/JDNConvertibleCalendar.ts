@@ -217,7 +217,18 @@ export module JDNConvertibleCalendar {
      */
     export class CalendarDate {
 
-        constructor(readonly year: number, readonly month: number, readonly day: number) {
+        constructor(public readonly year: number, public readonly month: number, public readonly day: number) {
+
+        }
+
+    }
+
+    /**
+     * Represents a period as two calendar dates.
+     */
+    export class CalendarPeriod {
+
+        constructor(public readonly periodStart: CalendarDate, public readonly periodEnd: CalendarDate) {
 
         }
 
@@ -228,13 +239,13 @@ export module JDNConvertibleCalendar {
      */
     export class JDNPeriod {
 
-        // indicates if the date is exact (day precisionn)
-        readonly exactDate: Boolean;
+        // indicates if the date is exact (day precision)
+        public readonly exactDate: Boolean;
 
-        constructor(readonly jdnStart: number, readonly jdnEnd: number) {
-            if (jdnStart > jdnEnd) throw new JDNConvertibleCalendarError(`start of a JDNPeriod must not be greater than its end.`)
+        constructor(public readonly periodStart: number, public readonly periodEnd: number) {
+            if (periodStart > periodEnd) throw new JDNConvertibleCalendarError(`start of a JDNPeriod must not be greater than its end.`)
 
-            this.exactDate = (jdnStart === jdnEnd);
+            this.exactDate = (periodStart === periodEnd);
 
         }
     }
@@ -265,11 +276,20 @@ export module JDNConvertibleCalendar {
         protected exactDate: Boolean;
 
         /**
+         * Returns the given period as two calendar dates.
+         *
+         * @returns {JDNConvertibleCalendar.CalendarPeriod}
+         */
+        public toCalendarPeriod(): CalendarPeriod {
+            return new CalendarPeriod(this.periodStart, this.periodEnd);
+        }
+
+        /**
          * Converts an instance of JDNConvertibleCalendar to a JDNPeriod.
          *
          * @returns {JDNConvertibleCalendar.JDNPeriod}
          */
-        abstract toJDN(): JDNPeriod;
+        public abstract toJDN(): JDNPeriod;
 
         /**
          * Converts from one calendar format into another.
@@ -277,7 +297,7 @@ export module JDNConvertibleCalendar {
          * @param {"Gregorian" | "Julian"} toCalendarType
          * @returns {JDNConvertibleCalendar}
          */
-        convertCalendar(toCalendarType: 'Gregorian' | 'Julian'): JDNConvertibleCalendar {
+        public convertCalendar(toCalendarType: 'Gregorian' | 'Julian'): JDNConvertibleCalendar {
 
             if (JDNConvertibleCalendar.supportedCalendars.indexOf(toCalendarType) == -1) {
                 throw new JDNConvertibleCalendarError("Target calendar format not supported: " + toCalendarType);
@@ -305,7 +325,7 @@ export module JDNConvertibleCalendar {
      */
     export class GregorianCalendarDate extends JDNConvertibleCalendar {
 
-        readonly calendarFormat = JDNConvertibleCalendar.gregorian;
+        calendarFormat = JDNConvertibleCalendar.gregorian;
 
         constructor(jdnPeriod: JDNPeriod) {
             super();
@@ -313,13 +333,13 @@ export module JDNConvertibleCalendar {
             this.exactDate = jdnPeriod.exactDate;
 
             if (this.exactDate) {
-                const date: CalendarDate = JDNCalendarConversion.JDNToGregorian(jdnPeriod.jdnStart);
+                const date: CalendarDate = JDNCalendarConversion.JDNToGregorian(jdnPeriod.periodStart);
                 this.periodStart = date;
                 this.periodEnd = date;
             } else {
                 // create a Gregorian calendar date from jdnPeriod
-                this.periodStart = JDNCalendarConversion.JDNToGregorian(jdnPeriod.jdnStart);
-                this.periodEnd = JDNCalendarConversion.JDNToGregorian(jdnPeriod.jdnEnd);
+                this.periodStart = JDNCalendarConversion.JDNToGregorian(jdnPeriod.periodStart);
+                this.periodEnd = JDNCalendarConversion.JDNToGregorian(jdnPeriod.periodEnd);
             }
 
         }
@@ -353,13 +373,13 @@ export module JDNConvertibleCalendar {
 
             // create a Julian calendar date from jdnPeriod
             if (this.exactDate) {
-                const date: CalendarDate = JDNCalendarConversion.JDNToJulian(jdnPeriod.jdnStart);
+                const date: CalendarDate = JDNCalendarConversion.JDNToJulian(jdnPeriod.periodStart);
                 this.periodStart = date;
                 this.periodEnd = date;
             } else {
                 // create a Gregorian calendar date from jdnPeriod
-                this.periodStart = JDNCalendarConversion.JDNToJulian(jdnPeriod.jdnStart);
-                this.periodEnd = JDNCalendarConversion.JDNToJulian(jdnPeriod.jdnEnd);
+                this.periodStart = JDNCalendarConversion.JDNToJulian(jdnPeriod.periodStart);
+                this.periodEnd = JDNCalendarConversion.JDNToJulian(jdnPeriod.periodEnd);
             }
 
 
