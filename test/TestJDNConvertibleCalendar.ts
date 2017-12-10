@@ -95,3 +95,23 @@ const jdnPeriod4: JDNPeriod = gregorianCalendar4.toJDNPeriod();
 
 assert.strictEqual(jdnPeriod4.periodStart, 2458094, `Conversion to JDNPeriod failed: start`);
 assert.strictEqual(jdnPeriod4.periodEnd, 2458094, `Conversion to JDNPeriod failed: end`);
+
+// create a Gregorian date and transpose it
+
+const gregorianCalendarDate5: CalendarDate = new CalendarDate(2017, 12, 6);
+const jdn5: number = JDNConvertibleCalendar.JDNCalendarConversion.gregorianToJDN(gregorianCalendarDate5);
+
+const gregorianCalendar5 = new GregorianCalendar(new JDNPeriod(jdn5, jdn5));
+
+// shift date 365 into the future
+gregorianCalendar5.transposePeriod(365);
+
+const gregorianCalendarPeriod5 = gregorianCalendar5.toCalendarPeriod();
+
+assert.strictEqual(gregorianCalendarPeriod5.periodStart.year, 2018, `calendar period wrong: year`);
+assert.strictEqual(gregorianCalendarPeriod5.periodStart.month, 12, `calendar period wrong: month`);
+assert.strictEqual(gregorianCalendarPeriod5.periodStart.day, 6, `calendar period wrong: day`);
+
+assert.strictEqual(gregorianCalendarPeriod5.periodEnd.year, 2018, `calendar period wrong: year`);
+assert.strictEqual(gregorianCalendarPeriod5.periodEnd.month, 12, `calendar period wrong: month`);
+assert.strictEqual(gregorianCalendarPeriod5.periodEnd.day, 6, `calendar period wrong: day`);

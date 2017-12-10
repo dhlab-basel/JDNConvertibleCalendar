@@ -13,7 +13,7 @@
   "keywords": [
     "calendar"
   ],
-  "author": "DHLab Basel <t.schweizer@unibas.ch> (http://www.dhlab.unibas.ch)",
+  "author": "Tobias Schweizer <t.schweizer@unibas.ch> DHLab University of Basel (http://www.dhlab.unibas.ch)",
   "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/dhlab-basel/JDNConvertibleCalendar/issues"

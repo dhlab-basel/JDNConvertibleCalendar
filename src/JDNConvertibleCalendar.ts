@@ -291,7 +291,12 @@ export module JDNConvertibleCalendar {
          */
         protected abstract calendarToJDN(date: CalendarDate): number;
 
-        constructor(jdnPeriod: JDNPeriod) {
+        /**
+         * Converts the given JDN period to a calendar period and stores it.
+         *
+         * @param {JDNConvertibleCalendar.JDNPeriod} jdnPeriod
+         */
+        protected convertJDNPeriodToCalendarPeriod(jdnPeriod: JDNPeriod): void {
             this.exactDate = jdnPeriod.exactDate;
 
             // check if the date is exact (start of period equals end of period)
@@ -305,6 +310,10 @@ export module JDNConvertibleCalendar {
                 this.periodStart = this.JDNToCalendar(jdnPeriod.periodStart);
                 this.periodEnd = this.JDNToCalendar(jdnPeriod.periodEnd);
             }
+        }
+
+        constructor(jdnPeriod: JDNPeriod) {
+            this.convertJDNPeriodToCalendarPeriod(jdnPeriod);
         }
 
         /**
@@ -358,6 +367,19 @@ export module JDNConvertibleCalendar {
                     return new JulianCalendarDate(jdnPeriod);
             }
 
+        }
+
+        /**
+         * Transposes the current period by the given number of days.
+         *
+         * @param {number} days the number of days that the current period will be shifted.
+         */
+        public transposePeriod(days: number) {
+            const currentPeriod = this.toJDNPeriod();
+
+            const newPeriod = new JDNPeriod(currentPeriod.periodStart + days, currentPeriod.periodEnd + days);
+
+            this.convertJDNPeriodToCalendarPeriod(newPeriod);
         }
 
     }
