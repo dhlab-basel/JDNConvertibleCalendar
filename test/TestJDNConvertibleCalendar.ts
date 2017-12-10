@@ -23,6 +23,7 @@ import CalendarDate = JDNConvertibleCalendar.CalendarDate;
 import GregorianCalendar = JDNConvertibleCalendar.GregorianCalendarDate;
 import JDNPeriod = JDNConvertibleCalendar.JDNPeriod;
 import JulianCalendar = JDNConvertibleCalendar.JulianCalendarDate;
+import JDNConvertibleCalendarError = JDNConvertibleCalendar.JDNConvertibleCalendarError;
 
 let assert = require('assert');
 
@@ -115,3 +116,15 @@ assert.strictEqual(gregorianCalendarPeriod5.periodStart.day, 6, `calendar period
 assert.strictEqual(gregorianCalendarPeriod5.periodEnd.year, 2018, `calendar period wrong: year`);
 assert.strictEqual(gregorianCalendarPeriod5.periodEnd.month, 12, `calendar period wrong: month`);
 assert.strictEqual(gregorianCalendarPeriod5.periodEnd.day, 6, `calendar period wrong: day`);
+
+// instantiate a JDNPeriod with invalid arguments
+assert.throws(
+    () => {new JDNPeriod(1.1, 2)
+    },
+    function(err) {
+        if ((err instanceof Error) && err.message === 'JDNs are expected to be integers') {
+            return true;
+        }
+    }
+);
+

@@ -242,8 +242,19 @@ export module JDNConvertibleCalendar {
         // indicates if the date is exact (day precision)
         public readonly exactDate: Boolean;
 
+        private isInteger(num: number) {
+
+            // https://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer
+            return num % 1 === 0;
+        }
+
         constructor(public readonly periodStart: number, public readonly periodEnd: number) {
             if (periodStart > periodEnd) throw new JDNConvertibleCalendarError(`start of a JDNPeriod must not be greater than its end.`)
+
+            // check that given arguments are integers (JDNs have to fractions)
+            if (!(this.isInteger(periodStart) && this.isInteger(periodEnd))) {
+                throw new JDNConvertibleCalendarError("JDNs are expected to be integers");
+            }
 
             this.exactDate = (periodStart === periodEnd);
 
