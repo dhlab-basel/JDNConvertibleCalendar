@@ -275,8 +275,20 @@ export module JDNConvertibleCalendar {
         // indicates if the date is exact (start and end of the given period are equal)
         protected exactDate: Boolean;
 
+        /**
+         * Converts a given JDN to a calendar date.
+         *
+         * @param {number} jdn Julian Day Number
+         * @returns {JDNConvertibleCalendar.CalendarDate}
+         */
         protected abstract JDNToCalendar(jdn: number): CalendarDate;
 
+        /**
+         * Converts a given calendar date to JDN.
+         *
+         * @param {JDNConvertibleCalendar.CalendarDate} date calendar date
+         * @returns {number}
+         */
         protected abstract calendarToJDN(date: CalendarDate): number;
 
         constructor(jdnPeriod: JDNPeriod) {
@@ -309,7 +321,18 @@ export module JDNConvertibleCalendar {
          *
          * @returns {JDNConvertibleCalendar.JDNPeriod}
          */
-        public abstract toJDNPeriod(): JDNPeriod;
+        public toJDNPeriod(): JDNPeriod {
+
+            if (this.exactDate) {
+                const jdn = this.calendarToJDN(this.periodStart);
+                return new JDNPeriod(jdn, jdn);
+            } else {
+                const startJDN = this.calendarToJDN(this.periodStart);
+                const endJDN = this.calendarToJDN(this.periodEnd);
+
+                return new JDNPeriod(startJDN, endJDN);
+            }
+        }
 
         /**
          * Converts from one calendar format into another.
@@ -358,20 +381,6 @@ export module JDNConvertibleCalendar {
         constructor(jdnPeriod: JDNPeriod) {
             super(jdnPeriod);
         }
-
-        toJDNPeriod(): JDNPeriod {
-
-            if (this.exactDate) {
-                const jdn = JDNCalendarConversion.gregorianToJDN(this.periodStart);
-                return new JDNPeriod(jdn, jdn);
-            } else {
-                const startJDN = JDNCalendarConversion.gregorianToJDN(this.periodStart);
-                const endJDN = JDNCalendarConversion.gregorianToJDN(this.periodEnd);
-
-                return new JDNPeriod(startJDN, endJDN);
-            }
-        }
-
     }
 
     /**
@@ -391,18 +400,6 @@ export module JDNConvertibleCalendar {
 
         constructor(jdnPeriod: JDNPeriod) {
             super(jdnPeriod);
-        }
-
-        toJDNPeriod(): JDNPeriod {
-            if (this.exactDate) {
-                const jdn = JDNCalendarConversion.julianToJDN(this.periodStart);
-                return new JDNPeriod(jdn, jdn);
-            } else {
-                const startJDN = JDNCalendarConversion.julianToJDN(this.periodStart);
-                const endJDN = JDNCalendarConversion.julianToJDN(this.periodEnd);
-
-                return new JDNPeriod(startJDN, endJDN);
-            }
         }
 
     }
