@@ -275,6 +275,26 @@ export module JDNConvertibleCalendar {
         // indicates if the date is exact (start and end of the given period are equal)
         protected exactDate: Boolean;
 
+        protected abstract JDNToCalendar(jdn: number): CalendarDate;
+
+        protected abstract calendarToJDN(date: CalendarDate): number;
+
+        constructor(jdnPeriod: JDNPeriod) {
+            this.exactDate = jdnPeriod.exactDate;
+
+            // check if the date is exact (start of period equals end of period)
+            if (this.exactDate) {
+                // only one converion needed
+                const date: CalendarDate = this.JDNToCalendar(jdnPeriod.periodStart);
+                this.periodStart = date;
+                this.periodEnd = date;
+            } else {
+                // calculate calendar dates for both start and end of period
+                this.periodStart = this.JDNToCalendar(jdnPeriod.periodStart);
+                this.periodEnd = this.JDNToCalendar(jdnPeriod.periodEnd);
+            }
+        }
+
         /**
          * Returns the given period as two calendar dates.
          *
@@ -327,21 +347,16 @@ export module JDNConvertibleCalendar {
 
         public readonly calendarFormat = JDNConvertibleCalendar.gregorian;
 
+        protected JDNToCalendar(jdn: number): CalendarDate {
+            return JDNCalendarConversion.JDNToGregorian(jdn);
+        };
+
+        protected calendarToJDN(date: CalendarDate): number {
+            return JDNCalendarConversion.gregorianToJDN(date);
+        }
+
         constructor(jdnPeriod: JDNPeriod) {
-            super();
-
-            this.exactDate = jdnPeriod.exactDate;
-
-            if (this.exactDate) {
-                const date: CalendarDate = JDNCalendarConversion.JDNToGregorian(jdnPeriod.periodStart);
-                this.periodStart = date;
-                this.periodEnd = date;
-            } else {
-                // create a Gregorian calendar date from jdnPeriod
-                this.periodStart = JDNCalendarConversion.JDNToGregorian(jdnPeriod.periodStart);
-                this.periodEnd = JDNCalendarConversion.JDNToGregorian(jdnPeriod.periodEnd);
-            }
-
+            super(jdnPeriod);
         }
 
         toJDNPeriod(): JDNPeriod {
@@ -364,25 +379,18 @@ export module JDNConvertibleCalendar {
      */
     export class JulianCalendarDate extends JDNConvertibleCalendar {
 
+        protected JDNToCalendar(jdn: number): CalendarDate {
+            return JDNCalendarConversion.JDNToJulian(jdn);
+        }
+
+        protected calendarToJDN(date:CalendarDate): number {
+            return JDNCalendarConversion.julianToJDN(date);
+        }
+
         public readonly calendarFormat = JDNConvertibleCalendar.julian;
 
         constructor(jdnPeriod: JDNPeriod) {
-            super();
-
-            this.exactDate = jdnPeriod.exactDate;
-
-            // create a Julian calendar date from jdnPeriod
-            if (this.exactDate) {
-                const date: CalendarDate = JDNCalendarConversion.JDNToJulian(jdnPeriod.periodStart);
-                this.periodStart = date;
-                this.periodEnd = date;
-            } else {
-                // create a Gregorian calendar date from jdnPeriod
-                this.periodStart = JDNCalendarConversion.JDNToJulian(jdnPeriod.periodStart);
-                this.periodEnd = JDNCalendarConversion.JDNToJulian(jdnPeriod.periodEnd);
-            }
-
-
+            super(jdnPeriod);
         }
 
         toJDNPeriod(): JDNPeriod {
