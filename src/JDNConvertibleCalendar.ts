@@ -230,11 +230,11 @@ export module JDNConvertibleCalendar {
         public readonly calendarFormat = JDNConvertibleCalendar.gregorian;
 
         protected JDNToCalendar(jdn: number): CalendarDate {
-            return JDNConvertibleConversion.JDNCalendarConversion.JDNToGregorian(jdn);
+            return JDNConvertibleConversion.JDNToGregorian(jdn);
         };
 
         protected calendarToJDN(date: CalendarDate): number {
-            return JDNConvertibleConversion.JDNCalendarConversion.gregorianToJDN(date);
+            return JDNConvertibleConversion.gregorianToJDN(date);
         }
 
         constructor(jdnPeriod: JDNPeriod) {
@@ -248,11 +248,11 @@ export module JDNConvertibleCalendar {
     export class JulianCalendarDate extends JDNConvertibleCalendar {
 
         protected JDNToCalendar(jdn: number): CalendarDate {
-            return JDNConvertibleConversion.JDNCalendarConversion.JDNToJulian(jdn);
+            return JDNConvertibleConversion.JDNToJulian(jdn);
         }
 
         protected calendarToJDN(date:CalendarDate): number {
-            return JDNConvertibleConversion.JDNCalendarConversion.julianToJDN(date);
+            return JDNConvertibleConversion.julianToJDN(date);
         }
 
         public readonly calendarFormat = JDNConvertibleCalendar.julian;
