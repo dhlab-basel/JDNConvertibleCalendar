@@ -30,6 +30,8 @@ export module JDNConvertibleConversion {
     /**
      * Indicates if given year is a leap year in Gregorian calendar.
      *
+     * Algorithm from: https://www.fourmilab.ch/documents/calendar/calendar.js
+     *
      * @param {number} year year to check for.
      * @returns {boolean}
      */
@@ -39,6 +41,9 @@ export module JDNConvertibleConversion {
     };
 
     // TODO: document this method
+    /*
+     * Algorithm from https://www.fourmilab.ch/documents/calendar/astro.js
+     */
     const mod = (a, b): number => {
         return a - (b * Math.floor(a / b));
     };
@@ -47,7 +52,7 @@ export module JDNConvertibleConversion {
      * Converts a Gregorian calendar date to a JDN.
      *
      * Conversion algorithm from:
-     * https://www.fourmilab.ch/documents/calendar/
+     * https://www.fourmilab.ch/documents/calendar/calendar.js
      *
      * @param {JDNConvertibleCalendar.CalendarDate} calendarDate Gregorian calendar date to be converted to JDN.
      * @returns {number}
@@ -76,7 +81,7 @@ export module JDNConvertibleConversion {
      * Converts a JDN to a Gregorian Calendar date.
      *
      * Conversion algorithm from:
-     * https://www.fourmilab.ch/documents/calendar/
+     * https://www.fourmilab.ch/documents/calendar/calendar.js
      *
      * @param {number} jdn JDN to be converted to a Gregorian calendar date.
      * @returns {JDNConvertibleCalendar.CalendarDate}
@@ -118,7 +123,7 @@ export module JDNConvertibleConversion {
      * Converts a Julian calendar date to a JDN.
      *
      * Conversion algorithm from:
-     * https://www.fourmilab.ch/documents/calendar/
+     * https://www.fourmilab.ch/documents/calendar/calendar.js
      *
      * @param {JDNConvertibleCalendar.CalendarDate} calendarDate Julian calendar date to be converted to JDN.
      * @returns {number}
@@ -155,7 +160,7 @@ export module JDNConvertibleConversion {
      * Converts a JDN to a Julian Calendar date.
      *
      * Conversion algorithm from:
-     * https://www.fourmilab.ch/documents/calendar/
+     * https://www.fourmilab.ch/documents/calendar/calendar.js
      *
      * @param {number} jdn JDN to be converted to a Julian calendar date.
      * @returns {JDNConvertibleCalendar.CalendarDate}
