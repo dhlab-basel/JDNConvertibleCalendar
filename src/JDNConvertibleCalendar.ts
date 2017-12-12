@@ -68,17 +68,17 @@ export module JDNConvertibleCalendar {
         // indicates if the date is exact (day precision)
         public readonly exactDate: Boolean;
 
-        private isInteger(num: number) {
+        private static isInteger(num: number) {
 
             // https://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer
             return num % 1 === 0;
         }
 
         constructor(public readonly periodStart: number, public readonly periodEnd: number) {
-            if (periodStart > periodEnd) throw new JDNConvertibleCalendarError(`start of a JDNPeriod must not be greater than its end.`)
+            if (periodStart > periodEnd) throw new JDNConvertibleCalendarError(`start of a JDNPeriod must not be greater than its end.`);
 
             // check that given arguments are integers (JDNs have to fractions)
-            if (!(this.isInteger(periodStart) && this.isInteger(periodEnd))) {
+            if (!(JDNPeriod.isInteger(periodStart) && JDNPeriod.isInteger(periodEnd))) {
                 throw new JDNConvertibleCalendarError("JDNs are expected to be integers");
             }
 
@@ -103,14 +103,25 @@ export module JDNConvertibleCalendar {
         // calendar format of a subclass of JDNConvertibleCalendar
         public readonly calendarFormat: string;
 
+        //
+        // Both calendar dates and JDNs are stored in parallel to avoid unnecessary conversions (JDN to calendar date and possibly back to JDN).
+        // Manipulations are exclusively performed by `this.convertJDNPeriodToCalendarPeriod` that keeps them in sync.
+        //
+
         // start of a given date
-        protected periodStart: CalendarDate;
+        protected calendarStart: CalendarDate;
 
         // end of a given date
-        protected periodEnd: CalendarDate;
+        protected calendarEnd: CalendarDate;
 
         // indicates if the date is exact (start and end of the given period are equal)
         protected exactDate: Boolean;
+
+        // start of given date as JDN
+        protected jdnStart: number;
+
+        // end of given date as JDN
+        protected jdnEnd: number;
 
         /**
          * Converts a given JDN to a calendar date.
@@ -131,21 +142,26 @@ export module JDNConvertibleCalendar {
         /**
          * Converts the given JDN period to a calendar period and stores it.
          *
+         * This method makes sure that JDNs and calendar dates are in sync.
+         *
          * @param {JDNConvertibleCalendar.JDNPeriod} jdnPeriod
          */
         protected convertJDNPeriodToCalendarPeriod(jdnPeriod: JDNPeriod): void {
+
             this.exactDate = jdnPeriod.exactDate;
+            this.jdnStart = jdnPeriod.periodStart;
+            this.jdnEnd = jdnPeriod.periodEnd;
 
             // check if the date is exact (start of period equals end of period)
             if (this.exactDate) {
-                // only one converion needed
+                // only one conversion needed
                 const date: CalendarDate = this.JDNToCalendar(jdnPeriod.periodStart);
-                this.periodStart = date;
-                this.periodEnd = date;
+                this.calendarStart = date;
+                this.calendarEnd = date;
             } else {
                 // calculate calendar dates for both start and end of period
-                this.periodStart = this.JDNToCalendar(jdnPeriod.periodStart);
-                this.periodEnd = this.JDNToCalendar(jdnPeriod.periodEnd);
+                this.calendarStart = this.JDNToCalendar(jdnPeriod.periodStart);
+                this.calendarEnd = this.JDNToCalendar(jdnPeriod.periodEnd);
             }
         }
 
@@ -159,7 +175,7 @@ export module JDNConvertibleCalendar {
          * @returns {JDNConvertibleCalendar.CalendarPeriod}
          */
         public toCalendarPeriod(): CalendarPeriod {
-            return new CalendarPeriod(this.periodStart, this.periodEnd);
+            return new CalendarPeriod(this.calendarStart, this.calendarEnd);
         }
 
         /**
@@ -169,15 +185,8 @@ export module JDNConvertibleCalendar {
          */
         public toJDNPeriod(): JDNPeriod {
 
-            if (this.exactDate) {
-                const jdn = this.calendarToJDN(this.periodStart);
-                return new JDNPeriod(jdn, jdn);
-            } else {
-                const startJDN = this.calendarToJDN(this.periodStart);
-                const endJDN = this.calendarToJDN(this.periodEnd);
+            return new JDNPeriod(this.jdnStart, this.jdnEnd);
 
-                return new JDNPeriod(startJDN, endJDN);
-            }
         }
 
         /**
