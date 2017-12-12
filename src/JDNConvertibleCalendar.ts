@@ -106,6 +106,9 @@ export module JDNConvertibleCalendar {
         // calendar format of a subclass of JDNConvertibleCalendar
         public readonly calendarFormat: string;
 
+        // indicates how many months a year has
+        public abstract readonly monthsInYear: number;
+
         //
         // Both calendar dates and JDNs are stored in parallel to avoid unnecessary conversions (JDN to calendar date and possibly back to JDN).
         // Manipulations are exclusively performed by `this.convertJDNPeriodToCalendarPeriod` that keeps them in sync.
@@ -149,6 +152,34 @@ export module JDNConvertibleCalendar {
          * @returns {number} day of week of the given JDN (as a 0 based index).
          */
         protected abstract dayOfWeekFromJDN(jdn: number): number;
+
+        /**
+         * Calculates number of days of the month of the given date.
+         *
+         * @param {JDNConvertibleCalendar.CalendarDate} date given date.
+         * @returns {number} number of days in month of given date.
+         */
+        public daysInMonth(date: CalendarDate): number {
+
+            // get JDN for first day of the month of the given calendar date
+            const firstDayOfGivenMonth = this.calendarToJDN(new CalendarDate(date.year, date.month, 1));
+
+            // first day of next month
+            let firstDayOfNextMonth;
+
+            // if the given date is in the last month of the year, switch to first day of the first month the next year.
+            if ((date.month + 1) > this.monthsInYear) {
+                firstDayOfNextMonth = this.calendarToJDN(new CalendarDate(date.year + 1, 1, 1));
+            }
+            else {
+                // switch to the first day of the next month
+                firstDayOfNextMonth = this.calendarToJDN(new CalendarDate(date.year, date.month + 1, 1));
+            }
+
+            // calculate the difference between the first day of the month of the given day
+            // and the first day of the next month -> number of days of the month of the given date
+            return firstDayOfNextMonth - firstDayOfGivenMonth;
+        }
 
         /**
          * Converts the given JDN period to a calendar period and stores it.
@@ -263,6 +294,8 @@ export module JDNConvertibleCalendar {
 
         public readonly calendarFormat = JDNConvertibleCalendar.gregorian;
 
+        public readonly monthsInYear = 12;
+
         protected JDNToCalendar(jdn: number): CalendarDate {
             return JDNConvertibleConversion.JDNToGregorian(jdn);
         };
@@ -286,6 +319,8 @@ export module JDNConvertibleCalendar {
     export class JulianCalendarDate extends JDNConvertibleCalendar {
 
         public readonly calendarFormat = JDNConvertibleCalendar.julian;
+
+        public readonly monthsInYear = 12;
 
         protected JDNToCalendar(jdn: number): CalendarDate {
             return JDNConvertibleConversion.JDNToJulian(jdn);
