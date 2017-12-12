@@ -194,6 +194,7 @@ export module JDNConvertibleConversion {
         return new JDNConvertibleCalendar.CalendarDate(Math.round(year), Math.round(month), Math.round(day));
     };
 
+    // TODO: I am not sure if this is useful for other calendar formats than Gregorian and Julian
     /**
      * Determine the day of week from the given JDN.
      *

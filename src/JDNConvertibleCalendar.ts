@@ -51,6 +51,7 @@ export module JDNConvertibleCalendar {
 
         constructor(public readonly year: number, public readonly month: number, public readonly day: number,  readonly dayOfWeek?: number) {
 
+            // TODO: When other calendar formats than Gregorian or Julian are implemented, this may have to be changed
             if (dayOfWeek !== undefined && (!isInteger(dayOfWeek) || dayOfWeek < 0 || dayOfWeek > 6)) throw new JDNConvertibleCalendarError("Invalid day of week: " + dayOfWeek)
 
         }
@@ -142,6 +143,14 @@ export module JDNConvertibleCalendar {
         protected abstract calendarToJDN(date: CalendarDate): number;
 
         /**
+         * Calucaltes the day of week of a given JDN.
+         *
+         * @param {number} jdn Julian Day Number
+         * @returns {number} day of week of the given JDN (as a 0 based index).
+         */
+        protected abstract dayOfWeekFromJDN(jdn: number): number;
+
+        /**
          * Converts the given JDN period to a calendar period and stores it.
          *
          * This method makes sure that JDNs and calendar dates are in sync.
@@ -160,7 +169,7 @@ export module JDNConvertibleCalendar {
                 const date: CalendarDate = this.JDNToCalendar(jdnPeriod.periodStart);
 
                 // calculate the day of the week
-                const dayOfWeek = JDNConvertibleConversion.dayOfWeekFromJDN(jdnPeriod.periodStart);
+                const dayOfWeek = this.dayOfWeekFromJDN(jdnPeriod.periodStart);
 
                 const dateWithDayOfWeek = new CalendarDate(date.year, date.month, date.day, dayOfWeek);
 
@@ -168,8 +177,8 @@ export module JDNConvertibleCalendar {
                 this.calendarEnd = dateWithDayOfWeek;
             } else {
                 // calculate the days of the week
-                const dayOfWeekStart = JDNConvertibleConversion.dayOfWeekFromJDN(jdnPeriod.periodStart);
-                const dayOfWeekEnd = JDNConvertibleConversion.dayOfWeekFromJDN(jdnPeriod.periodEnd);
+                const dayOfWeekStart = this.dayOfWeekFromJDN(jdnPeriod.periodStart);
+                const dayOfWeekEnd = this.dayOfWeekFromJDN(jdnPeriod.periodEnd);
 
                 const dateStart = this.JDNToCalendar(jdnPeriod.periodStart);
                 const dateEnd = this.JDNToCalendar(jdnPeriod.periodEnd);
@@ -262,6 +271,10 @@ export module JDNConvertibleCalendar {
             return JDNConvertibleConversion.gregorianToJDN(date);
         }
 
+        protected dayOfWeekFromJDN(jdn: number): number {
+            return JDNConvertibleConversion.dayOfWeekFromJDN(jdn);
+        };
+
         constructor(jdnPeriod: JDNPeriod) {
             super(jdnPeriod);
         }
@@ -272,6 +285,8 @@ export module JDNConvertibleCalendar {
      */
     export class JulianCalendarDate extends JDNConvertibleCalendar {
 
+        public readonly calendarFormat = JDNConvertibleCalendar.julian;
+
         protected JDNToCalendar(jdn: number): CalendarDate {
             return JDNConvertibleConversion.JDNToJulian(jdn);
         }
@@ -280,7 +295,9 @@ export module JDNConvertibleCalendar {
             return JDNConvertibleConversion.julianToJDN(date);
         }
 
-        public readonly calendarFormat = JDNConvertibleCalendar.julian;
+        protected dayOfWeekFromJDN(jdn: number): number {
+            return JDNConvertibleConversion.dayOfWeekFromJDN(jdn);
+        };
 
         constructor(jdnPeriod: JDNPeriod) {
             super(jdnPeriod);
