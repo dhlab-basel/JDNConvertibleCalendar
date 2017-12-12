@@ -192,5 +192,23 @@ export module JDNConvertibleConversion {
         }
 
         return new JDNConvertibleCalendar.CalendarDate(Math.round(year), Math.round(month), Math.round(day));
+    };
+
+    /**
+     * Determine the day of week from the given JDN.
+     *
+     * Algorithm from: https://www.fourmilab.ch/documents/calendar/calendar.js
+     *
+     * Jean Meeus: Astronomical Algorithms, 1998, p. 65.
+     *
+     * @param {number} jdn given Julian Day Number.
+     * @returns {number} the number of the day of the week (0 Sunday, 1 Monday, 2 Tuesday, 3 Wednesday, 4 Thursday, 5 Friday, 6 Saturday).
+     */
+    export const dayOfWeekFromJDN: (jdn: number) => number = (jdn: number) => {
+
+        const jdnInt = Math.floor(jdn);
+
+        return mod(Math.floor((jdnInt + 1.5)), 7);
+
     }
 }

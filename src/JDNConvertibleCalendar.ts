@@ -22,6 +22,12 @@ import {JDNConvertibleConversion} from "./JDNCalendarConversion";
 
 export module JDNConvertibleCalendar {
 
+    const isInteger = (num: number) => {
+
+        // https://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer
+        return num % 1 === 0;
+    };
+
     /**
      * Represents an error that occurred when using JDNConvertibleCalendar.
      */
@@ -43,7 +49,9 @@ export module JDNConvertibleCalendar {
      */
     export class CalendarDate {
 
-        constructor(public readonly year: number, public readonly month: number, public readonly day: number) {
+        constructor(public readonly year: number, public readonly month: number, public readonly day: number,  readonly dayOfWeek?: number) {
+
+            if (dayOfWeek !== undefined && (!isInteger(dayOfWeek) || dayOfWeek < 0 || dayOfWeek > 6)) throw new JDNConvertibleCalendarError("Invalid day of week: " + dayOfWeek)
 
         }
 
@@ -68,17 +76,11 @@ export module JDNConvertibleCalendar {
         // indicates if the date is exact (day precision)
         public readonly exactDate: Boolean;
 
-        private static isInteger(num: number) {
-
-            // https://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer
-            return num % 1 === 0;
-        }
-
         constructor(public readonly periodStart: number, public readonly periodEnd: number) {
             if (periodStart > periodEnd) throw new JDNConvertibleCalendarError(`start of a JDNPeriod must not be greater than its end.`);
 
             // check that given arguments are integers (JDNs have to fractions)
-            if (!(JDNPeriod.isInteger(periodStart) && JDNPeriod.isInteger(periodEnd))) {
+            if (!(isInteger(periodStart) && isInteger(periodEnd))) {
                 throw new JDNConvertibleCalendarError("JDNs are expected to be integers");
             }
 
@@ -156,12 +158,26 @@ export module JDNConvertibleCalendar {
             if (this.exactDate) {
                 // only one conversion needed
                 const date: CalendarDate = this.JDNToCalendar(jdnPeriod.periodStart);
-                this.calendarStart = date;
-                this.calendarEnd = date;
+
+                // calculate the day of the week
+                const dayOfWeek = JDNConvertibleConversion.dayOfWeekFromJDN(jdnPeriod.periodStart);
+
+                const dateWithDayOfWeek = new CalendarDate(date.year, date.month, date.day, dayOfWeek);
+
+                this.calendarStart = dateWithDayOfWeek;
+                this.calendarEnd = dateWithDayOfWeek;
             } else {
+                // calculate the days of the week
+                const dayOfWeekStart = JDNConvertibleConversion.dayOfWeekFromJDN(jdnPeriod.periodStart);
+                const dayOfWeekEnd = JDNConvertibleConversion.dayOfWeekFromJDN(jdnPeriod.periodEnd);
+
+                const dateStart = this.JDNToCalendar(jdnPeriod.periodStart);
+                const dateEnd = this.JDNToCalendar(jdnPeriod.periodEnd);
+
                 // calculate calendar dates for both start and end of period
-                this.calendarStart = this.JDNToCalendar(jdnPeriod.periodStart);
-                this.calendarEnd = this.JDNToCalendar(jdnPeriod.periodEnd);
+                this.calendarStart = new CalendarDate(dateStart.year, dateStart.month, dateStart.day, dayOfWeekStart);
+                this.calendarEnd = new CalendarDate(dateEnd.year, dateEnd.month, dateEnd.day, dayOfWeekEnd);
+
             }
         }
 

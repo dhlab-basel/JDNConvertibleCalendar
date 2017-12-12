@@ -128,3 +128,34 @@ assert.throws(
     }
 );
 
+// check that day of week is correctly set
+const gregorianCalendar6 = new GregorianCalendar(new JDNPeriod(2434924, 2434924));
+
+// see sample calculation in Jean Meeus: Astronomical Algorithms, 1998, p. 65.
+const gregorianCalendarDate6 = gregorianCalendar6.toCalendarPeriod();
+
+assert.strictEqual(gregorianCalendarDate6.periodStart.year, 1954, `calendar period wrong: year`);
+assert.strictEqual(gregorianCalendarDate6.periodStart.month, 6, `calendar period wrong: month`);
+assert.strictEqual(gregorianCalendarDate6.periodStart.day, 30, `calendar period wrong: day`);
+assert.strictEqual(gregorianCalendarDate6.periodStart.dayOfWeek, 3, `calendar period wrong: day of week`);
+
+assert.strictEqual(gregorianCalendarDate6.periodEnd.year, 1954, `calendar period wrong: year`);
+assert.strictEqual(gregorianCalendarDate6.periodEnd.month, 6, `calendar period wrong: month`);
+assert.strictEqual(gregorianCalendarDate6.periodEnd.day, 30, `calendar period wrong: day`);
+assert.strictEqual(gregorianCalendarDate6.periodEnd.dayOfWeek, 3, `calendar period wrong: day of week`);
+
+const julianCalendar6 = new JulianCalendar(new JDNPeriod(2434924, 2434924));
+
+// see sample calculation in Jean Meeus: Astronomical Algorithms, 1998, p. 65.
+const julianCalendarDate6 = julianCalendar6.toCalendarPeriod();
+
+assert.strictEqual(julianCalendarDate6.periodStart.year, 1954, `calendar period wrong: year`);
+assert.strictEqual(julianCalendarDate6.periodStart.month, 6, `calendar period wrong: month`);
+assert.strictEqual(julianCalendarDate6.periodStart.day, 17, `calendar period wrong: day`);
+assert.strictEqual(julianCalendarDate6.periodStart.dayOfWeek, 3, `calendar period wrong: day of week`);
+
+assert.strictEqual(julianCalendarDate6.periodEnd.year, 1954, `calendar period wrong: year`);
+assert.strictEqual(julianCalendarDate6.periodEnd.month, 6, `calendar period wrong: month`);
+assert.strictEqual(julianCalendarDate6.periodEnd.day, 17, `calendar period wrong: day`);
+assert.strictEqual(julianCalendarDate6.periodEnd.dayOfWeek, 3, `calendar period wrong: day of week`);
+
