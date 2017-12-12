@@ -22,6 +22,9 @@ import {JDNConvertibleCalendar} from "./JDNConvertibleCalendar";
 
 export module JDNConvertibleConversion {
 
+    /**
+     * From https://www.fourmilab.ch/documents/calendar/calendar.js
+     */
     const GREGORIAN_EPOCH = 1721425.5;
     const JULIAN_EPOCH = 1721423.5;
     const HEBREW_EPOCH = 347995.5;
@@ -154,7 +157,7 @@ export module JDNConvertibleConversion {
             dayInt) - 1524.5);
 
         return Math.round(jdn);
-    }
+    };
 
     /**
      * Converts a JDN to a Julian Calendar date.
