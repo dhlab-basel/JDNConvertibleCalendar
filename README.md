@@ -1,22 +1,35 @@
 # JDNConvertibleCalendar
 
+## General Remarks
+
 **Please note that this software is still in a very early state of development. Its existing functionality hasn't been properly tested yet.**
 
 ## Introduction
 
-Different calendar formats may be freely converted using Julian Day Number.
+`JDNConvertibleCalendar` offers a conventient way to convert a given date to different calendar formats making use of Julian Day Number (JDN). 
 
-`JDNConvertibleCalendar` is an abstract class that can be implemented for concrete calendar formats.
-Currently Gregorian and Julian calendar are implemented.
+Currently, Gregorian and Julian calendar are supported.
 
-The abstract parent class offers a generic way to convert from and to any of its subclasses making use of Julian Day Number.
+## Focus
+
+The focus of this project is to provide a design or archictecture distributed as an npm module that makes it easy to convert between calendar formats. It is, however, not primarily a library for astronomical algorithms. For now, we put the these methods in the module `JDNConvertibleConversion` which is basically a (partial) reimplementation in TypeScript of what you find at <https://www.fourmilab.ch/documents/calendar>. We would like to make this an separate module which could be used with `JDNConvertibleCalendar` (see <https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/1>). 
+
+## Design
+
+`JDNConvertibleCalendar` is an abstract class that can be implemented for various calendar formats, provided that those can be converted from and to JDN. 
+
+The abstract base class offers a generic way to convert from and to any of its subclasses. Also calculations based on JDN are already implemented in the base class.
 
 All dates are treated as periods. This allows for the handling of different precisions.
 
-## Ongoing Work
+## Adding more Calendar Formats
 
-For now, instances of implementations of `JDNConvertibleCalendar` cannot be manipulated (changing a date). This is the next feature that is going to be added.
+When adding a new subclass, calendar specific methods have to be implemented, e.g., the conversion from and to JDN. Calendar specific methods are declared abstract in the base class and have to be implemented when making a subclass.
+
+## Documentation
+
+The HTML-documentation can be built locally running `npm run-script builddocs` in the project root.
 
 ## Examples
 
-For working examples, please see the tests in the test directory.
+For working examples, please see the tests in the test directory. Run the test with `npm test` from the project root. 
