@@ -104,7 +104,7 @@ export module JDNConvertibleCalendar {
         static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian];
 
         // calendar format of a subclass of JDNConvertibleCalendar
-        public readonly calendarFormat: string;
+        public abstract readonly calendarFormat: string;
 
         // indicates how many months a year has
         public abstract readonly monthsInYear: number;
