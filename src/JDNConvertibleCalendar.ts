@@ -49,7 +49,7 @@ export module JDNConvertibleCalendar {
      */
     export class CalendarDate {
 
-        constructor(public readonly year: number, public readonly month: number, public readonly day: number,  readonly dayOfWeek?: number) {
+        constructor(public readonly year: number, public readonly month: number, public readonly day: number, readonly dayOfWeek?: number) {
 
             // TODO: When other calendar formats than Gregorian or Julian are implemented, this may have to be changed
             if (dayOfWeek !== undefined && (!isInteger(dayOfWeek) || dayOfWeek < 0 || dayOfWeek > 6)) throw new JDNConvertibleCalendarError("Invalid day of week: " + dayOfWeek)
@@ -101,7 +101,7 @@ export module JDNConvertibleCalendar {
         protected static readonly julian = 'Julian';
 
         // supported calendar formats (to be extended when new subclasses are implemented)
-        static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian];
+        public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian];
 
         // calendar format of a subclass of JDNConvertibleCalendar
         public abstract readonly calendarFormat: string;
@@ -146,7 +146,7 @@ export module JDNConvertibleCalendar {
         protected abstract calendarToJDN(date: CalendarDate): number;
 
         /**
-         * Calucaltes the day of week of a given JDN.
+         * Calculates the day of week of a given JDN.
          *
          * @param {number} jdn Julian Day Number
          * @returns {number} day of week of the given JDN (as a 0 based index).
@@ -221,6 +221,11 @@ export module JDNConvertibleCalendar {
             }
         }
 
+        /**
+         * This constructor is inherited by all subclasses (no implementation in subclass required).
+         *
+         * @param {JDNConvertibleCalendar.JDNPeriod} jdnPeriod JDN period to create a calendar specific date from.
+         */
         constructor(jdnPeriod: JDNPeriod) {
             this.convertJDNPeriodToCalendarPeriod(jdnPeriod);
         }
@@ -240,15 +245,15 @@ export module JDNConvertibleCalendar {
          * @returns {JDNConvertibleCalendar.JDNPeriod}
          */
         public toJDNPeriod(): JDNPeriod {
-
             return new JDNPeriod(this.jdnStart, this.jdnEnd);
-
         }
 
         /**
          * Converts from one calendar format into another.
          *
-         * @param {"Gregorian" | "Julian"} toCalendarType
+         * To be extended when new subclasses are added.
+         *
+         * @param {"Gregorian" | "Julian"} toCalendarType calendar to convert to.
          * @returns {JDNConvertibleCalendar}
          */
         public convertCalendar(toCalendarType: 'Gregorian' | 'Julian'): JDNConvertibleCalendar {
@@ -308,9 +313,6 @@ export module JDNConvertibleCalendar {
             return JDNConvertibleConversion.dayOfWeekFromJDN(jdn);
         };
 
-        constructor(jdnPeriod: JDNPeriod) {
-            super(jdnPeriod);
-        }
     }
 
     /**
@@ -326,18 +328,13 @@ export module JDNConvertibleCalendar {
             return JDNConvertibleConversion.JDNToJulian(jdn);
         }
 
-        protected calendarToJDN(date:CalendarDate): number {
+        protected calendarToJDN(date: CalendarDate): number {
             return JDNConvertibleConversion.julianToJDN(date);
         }
 
         protected dayOfWeekFromJDN(jdn: number): number {
             return JDNConvertibleConversion.dayOfWeekFromJDN(jdn);
         };
-
-        constructor(jdnPeriod: JDNPeriod) {
-            super(jdnPeriod);
-        }
-
     }
 
 }
