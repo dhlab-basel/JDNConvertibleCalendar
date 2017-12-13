@@ -39,7 +39,6 @@ export module JDNConvertibleCalendar {
         }
     }
 
-
     /**
      * Represents a calendar date (calendar format agnostic).
      *

@@ -4,7 +4,8 @@
   "description": "Support of various calendar formats and conversions between them using Julian Day Number",
   "main": "index.js",
   "scripts": {
-    "test": "tsc test/*.ts && node test/testJDNConvertibleCalendar.js"
+    "test": "tsc test/*.ts && node test/testJDNConvertibleCalendar.js",
+    "builddocs": "typedoc --out docs --module commonjs src/*.ts"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "assert": "^1.4.1"
   },
   "devDependencies": {
-    "@types/node": "^8.0.56"
+    "@types/node": "^8.0.56",
+    "typedoc": "^0.9.0"
   }
 }
