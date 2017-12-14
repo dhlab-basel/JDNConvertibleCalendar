@@ -28,7 +28,9 @@ When adding a new subclass, calendar specific methods have to be implemented, e.
 
 ## Documentation
 
-The HTML-documentation can be built locally running `npm run-script builddocs` in the project root.
+See <https://dhlab-basel.github.io/JDNConvertibleCalendar/docs/index.html>.
+
+The HTML-documentation can also be built locally running `npm run-script builddocs` in the project root.
 
 ## Examples
 
