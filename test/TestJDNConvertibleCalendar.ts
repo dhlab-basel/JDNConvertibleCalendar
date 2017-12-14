@@ -140,6 +140,18 @@ assert.strictEqual(gregorianCalendarPeriod5_.periodEnd.year, 2017, `calendar per
 assert.strictEqual(gregorianCalendarPeriod5_.periodEnd.month, 12, `calendar period wrong: month`);
 assert.strictEqual(gregorianCalendarPeriod5_.periodEnd.day, 6, `calendar period wrong: day`);
 
+gregorianCalendar5.transposePeriodByMonth(6);
+
+const gregorianCalendarPeriod5__ = gregorianCalendar5.toCalendarPeriod();
+
+assert.strictEqual(gregorianCalendarPeriod5__.periodStart.year, 2018, `calendar period wrong: year`);
+assert.strictEqual(gregorianCalendarPeriod5__.periodStart.month, 6, `calendar period wrong: month`);
+assert.strictEqual(gregorianCalendarPeriod5__.periodStart.day, 6, `calendar period wrong: day`);
+
+assert.strictEqual(gregorianCalendarPeriod5__.periodEnd.year, 2018, `calendar period wrong: year`);
+assert.strictEqual(gregorianCalendarPeriod5__.periodEnd.month, 6, `calendar period wrong: month`);
+assert.strictEqual(gregorianCalendarPeriod5__.periodEnd.day, 6, `calendar period wrong: day`);
+
 // instantiate a JDNPeriod with invalid arguments
 assert.throws(
     () => {new JDNPeriod(1.1, 2)
@@ -181,4 +193,22 @@ assert.strictEqual(julianCalendarDate6.periodEnd.year, 1954, `calendar period wr
 assert.strictEqual(julianCalendarDate6.periodEnd.month, 6, `calendar period wrong: month`);
 assert.strictEqual(julianCalendarDate6.periodEnd.day, 17, `calendar period wrong: day`);
 assert.strictEqual(julianCalendarDate6.periodEnd.dayOfWeek, 3, `calendar period wrong: day of week`);
+
+const gregorianCalendar7: CalendarDate = new CalendarDate(2017, 1, 1);
+const jdn7: number = JDNConvertibleConversion.gregorianToJDN(gregorianCalendar7);
+const gregorianCalendarDate7 = new GregorianCalendar(new JDNPeriod(jdn7, jdn7));
+
+gregorianCalendarDate7.transposePeriodByMonth(-1);
+
+const gregorianDate7 = gregorianCalendarDate7.toCalendarPeriod();
+
+assert.strictEqual(gregorianDate7.periodStart.year, 2016, `calendar period wrong: year`);
+assert.strictEqual(gregorianDate7.periodStart.month, 12, `calendar period wrong: month`);
+assert.strictEqual(gregorianDate7.periodStart.day, 1, `calendar period wrong: day`);
+
+assert.strictEqual(gregorianDate7.periodEnd.year, 2016, `calendar period wrong: year`);
+assert.strictEqual(gregorianDate7.periodEnd.month, 12, `calendar period wrong: month`);
+assert.strictEqual(gregorianDate7.periodEnd.day, 1, `calendar period wrong: day`);
+
+
 

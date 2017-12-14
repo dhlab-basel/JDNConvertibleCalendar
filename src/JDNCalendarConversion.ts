@@ -95,7 +95,7 @@ export module JDNConvertibleConversion {
         // if it is has a fraction below 0.5, it refers to a time before midnight which is the day before
         // 2457498.5 -> 2016-04-20 0h
         // 2457498.4 -> 2016-04-19
-        const wjd = Math.floor(jdn - 0.5) + 0.5;
+        const wjd = jdn; //Math.floor(jdn - 0.5) + 0.5; // TODO: check this for correctness!
         const depoch = wjd - GREGORIAN_EPOCH;
         const quadricent = Math.floor(depoch / 146097);
         const dqc = mod(depoch, 146097);

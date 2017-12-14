@@ -342,6 +342,11 @@ export module JDNConvertibleCalendar {
          * @param {number} days the number of days that the current period will be shifted.
          */
         public transposePeriodByDay(days: number) {
+
+            if (days === 0) return;
+
+            if (!isInteger(days)) throw new JDNConvertibleCalendarError(`parameter "days" is expected to be an integer`);
+
             const currentPeriod = this.toJDNPeriod();
 
             const newPeriod = new JDNPeriod(currentPeriod.periodStart + days, currentPeriod.periodEnd + days);
@@ -354,7 +359,12 @@ export module JDNConvertibleCalendar {
          *
          * @param {number} years the number of years that the current period will be shifted.
          */
-        public transposePeriodByYear(years: number) {
+        public transposePeriodByYear(years: number): void {
+
+            if (years === 0) return;
+
+            if (!isInteger(years)) throw new JDNConvertibleCalendarError(`parameter "years" is expected to be an integer`);
+
             const currentCalendarPeriod = this.toCalendarPeriod();
 
             let newJDNPeriod: JDNPeriod;
@@ -389,6 +399,117 @@ export module JDNConvertibleCalendar {
                 let newJDNEnd = this.calendarToJDN(newCalendarDateEnd);
 
                 newJDNPeriod = new JDNPeriod(newJDNStart, newJDNStart);
+            }
+
+            this.convertJDNPeriodToCalendarPeriod(newJDNPeriod);
+
+        }
+
+        /**
+         * Converts the given calendar date to a new one, shifting the months by the given number.
+         *
+         * @param {JDNConvertibleCalendar.CalendarDate} calendarDate the given calendar date.
+         * @param {number} months the number of months to shift.
+         * @returns {JDNConvertibleCalendar.CalendarDate}
+         */
+        protected handleMonthTransposition(calendarDate: CalendarDate, months: number): CalendarDate {
+
+            if (months === 0) return calendarDate;
+
+            if (!isInteger(months)) throw new JDNConvertibleCalendarError(`parameter "months" is expected to be an integer`);
+
+            // indicates if the shifting is towards the future or the past
+            const intoTheFuture: Boolean = (months > 0);
+
+            // get number of full years to shift
+            const yearsToShift = Math.floor(Math.abs(months) / this.monthsInYear);
+
+            // get remaining months to shift: max. this.monthsInYear - 1
+            const monthsToShift = Math.abs(months) % this.monthsInYear;
+
+            let newCalendarDate: CalendarDate;
+
+            if (intoTheFuture) {
+                // switch to the next year if the number of months does not fit
+                if (calendarDate.month + monthsToShift > this.monthsInYear) {
+
+                    // months to be added to new year
+                    const monthsOverflow = calendarDate.month + monthsToShift - this.monthsInYear;
+
+                    newCalendarDate = new CalendarDate(
+                        calendarDate.year + yearsToShift + 1, // add an extra year
+                        monthsOverflow,
+                        calendarDate.day
+                    );
+                } else {
+                    newCalendarDate = new CalendarDate(
+                        calendarDate.year + yearsToShift,
+                        calendarDate.month + monthsToShift,
+                        calendarDate.day
+                    );
+
+                }
+            } else {
+                // switch to the previous year if the number of months does not fit
+                if (calendarDate.month - monthsToShift < 1) {
+
+                    // months to be subtracted from the previous year
+                    const newMonth =  this.monthsInYear - (monthsToShift - calendarDate.month);
+
+                    newCalendarDate = new CalendarDate(
+                        calendarDate.year - yearsToShift -1, // add an extra year
+                        newMonth,
+                        calendarDate.day
+                    );
+
+                } else {
+                    newCalendarDate = new CalendarDate(
+                        calendarDate.year - yearsToShift,
+                        calendarDate.month - monthsToShift,
+                        calendarDate.day
+                    );
+
+                }
+            }
+
+            return newCalendarDate;
+        }
+
+        /**
+         * Transposes the current period by the given number of months.
+         *
+         * @param {number} months the number of months that the current period will be shifted.
+         */
+        public transposePeriodByMonth(months: number): void {
+
+            if (months === 0) return;
+
+            if (!isInteger(months)) throw new JDNConvertibleCalendarError(`parameter "months" is expected to be an integer`);
+
+            const currentCalendarPeriod = this.toCalendarPeriod();
+
+            let newJDNPeriod: JDNPeriod;
+
+            if (this.exactDate) {
+
+                const newCalDate = this.handleMonthTransposition(currentCalendarPeriod.periodStart, months);
+
+                const newJDN = this.calendarToJDN(newCalDate);
+
+                newJDNPeriod = new JDNPeriod(newJDN, newJDN);
+
+            } else {
+
+                const newCalDateStart = this.handleMonthTransposition(currentCalendarPeriod.periodStart, months);
+
+                const newJDNStart = this.calendarToJDN(newCalDateStart);
+
+                const newCalDateEnd = this.handleMonthTransposition(currentCalendarPeriod.periodEnd, months);
+
+                const newJDNEnd = this.calendarToJDN(newCalDateEnd);
+
+                newJDNPeriod = new JDNPeriod(newJDNStart, newJDNEnd);
+
             }
 
             this.convertJDNPeriodToCalendarPeriod(newJDNPeriod);
