@@ -22,6 +22,17 @@ import {JDNConvertibleConversion} from "./JDNCalendarConversion";
 
 export module JDNConvertibleCalendar {
 
+    /**
+     * Type alias for a Julian Day Number (JDN).
+     */
+    type JDN = number;
+
+    /**
+     * Checks if a given number is an integer.
+     *
+     * @param {number} num number to check for.
+     * @returns {boolean}
+     */
     const isInteger = (num: number) => {
 
         // https://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer
@@ -95,17 +106,29 @@ export module JDNConvertibleCalendar {
      */
     export abstract class JDNConvertibleCalendar {
 
-        // calendar format name constants (shared among all instances)
+        /**
+         * Constant for the Gregorian calendar format.
+         */
         protected static readonly gregorian = 'Gregorian';
+
+        /**
+         * Constant for the Julian calendar format.
+         */
         protected static readonly julian = 'Julian';
 
-        // supported calendar formats (to be extended when new subclasses are implemented)
+        /**
+         * Supported calendar formats (to be extended when new subclasses are implemented)
+         */
         public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian];
 
-        // calendar format of a subclass of JDNConvertibleCalendar
+        /**
+         * Specific calendar format of a subclass of JDNConvertibleCalendar.
+         */
         public abstract readonly calendarFormat: string;
 
-        // indicates how many months a year has
+        /**
+         * Indicates how many months a year has in a specific calendar format.
+         */
         public abstract readonly monthsInYear: number;
 
         //
@@ -113,23 +136,35 @@ export module JDNConvertibleCalendar {
         // Manipulations are exclusively performed by `this.convertJDNPeriodToCalendarPeriod` that keeps them in sync.
         //
 
-        // start of a given date
+        /**
+         * Start of a given date in a specific calendar format.
+         */
         protected calendarStart: CalendarDate;
 
-        // end of a given date
+        /**
+         * End of a given date in a specific calendar format.
+         */
         protected calendarEnd: CalendarDate;
 
-        // indicates if the date is exact (start and end of the given period are equal)
+        /**
+         * Indicates if the date is exact (start and end of the given period are equal).
+         */
         protected exactDate: Boolean;
 
-        // start of given date as JDN
+        /**
+         * Start of given date as JDN.
+         */
         protected jdnStart: number;
 
-        // end of given date as JDN
+        /**
+         * End of given date as JDN.
+         */
         protected jdnEnd: number;
 
         /**
          * Converts a given JDN to a calendar date.
+         * This method has to be implemented for each subclass
+         * (specific calendar format).
          *
          * @param {number} jdn Julian Day Number
          * @returns {JDNConvertibleCalendar.CalendarDate}
@@ -138,6 +173,8 @@ export module JDNConvertibleCalendar {
 
         /**
          * Converts a given calendar date to JDN.
+         * This method has to be implemented for each subclass
+         * (specific calendar format).
          *
          * @param {JDNConvertibleCalendar.CalendarDate} date calendar date
          * @returns {number}
@@ -184,6 +221,9 @@ export module JDNConvertibleCalendar {
          * Converts the given JDN period to a calendar period and stores it.
          *
          * This method makes sure that JDNs and calendar dates are in sync.
+         *
+         * Do not manipulate members `this.exactDate`, `this.jdnStart`, `this.jdnEnd`, `this.calendarStart`, and `this.calendarEnd` directly,
+         * use this method instead.
          *
          * @param {JDNConvertibleCalendar.JDNPeriod} jdnPeriod
          */
