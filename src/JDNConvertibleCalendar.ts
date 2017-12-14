@@ -382,6 +382,9 @@ export module JDNConvertibleCalendar {
 
             } else
             {
+
+                // TODO: knowing the difference in days for the given period, just calculate one JDN and determine the other by addition of the known difference
+
                 const newCalendarDateStart = new CalendarDate(
                     currentCalendarPeriod.periodStart.year + years,
                     currentCalendarPeriod.periodStart.month,
@@ -499,6 +502,8 @@ export module JDNConvertibleCalendar {
                 newJDNPeriod = new JDNPeriod(newJDN, newJDN);
 
             } else {
+
+                // TODO: knowing the difference in days for the given period, just calculate one JDN and determine the other by addition of the known difference
 
                 const newCalDateStart = this.handleMonthTransposition(currentCalendarPeriod.periodStart, months);
 
