@@ -116,7 +116,7 @@ const jdn5: number = JDNConvertibleConversion.gregorianToJDN(gregorianCalendarDa
 const gregorianCalendar5 = new GregorianCalendar(new JDNPeriod(jdn5, jdn5));
 
 // shift date 365 into the future
-gregorianCalendar5.transposePeriod(365);
+gregorianCalendar5.transposePeriodByDay(365);
 
 const gregorianCalendarPeriod5 = gregorianCalendar5.toCalendarPeriod();
 
@@ -127,6 +127,18 @@ assert.strictEqual(gregorianCalendarPeriod5.periodStart.day, 6, `calendar period
 assert.strictEqual(gregorianCalendarPeriod5.periodEnd.year, 2018, `calendar period wrong: year`);
 assert.strictEqual(gregorianCalendarPeriod5.periodEnd.month, 12, `calendar period wrong: month`);
 assert.strictEqual(gregorianCalendarPeriod5.periodEnd.day, 6, `calendar period wrong: day`);
+
+gregorianCalendar5.transposePeriodByYear(-1);
+
+const gregorianCalendarPeriod5_ = gregorianCalendar5.toCalendarPeriod();
+
+assert.strictEqual(gregorianCalendarPeriod5_.periodStart.year, 2017, `calendar period wrong: year`);
+assert.strictEqual(gregorianCalendarPeriod5_.periodStart.month, 12, `calendar period wrong: month`);
+assert.strictEqual(gregorianCalendarPeriod5_.periodStart.day, 6, `calendar period wrong: day`);
+
+assert.strictEqual(gregorianCalendarPeriod5_.periodEnd.year, 2017, `calendar period wrong: year`);
+assert.strictEqual(gregorianCalendarPeriod5_.periodEnd.month, 12, `calendar period wrong: month`);
+assert.strictEqual(gregorianCalendarPeriod5_.periodEnd.day, 6, `calendar period wrong: day`);
 
 // instantiate a JDNPeriod with invalid arguments
 assert.throws(

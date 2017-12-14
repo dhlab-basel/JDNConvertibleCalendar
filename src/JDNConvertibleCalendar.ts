@@ -341,12 +341,58 @@ export module JDNConvertibleCalendar {
          *
          * @param {number} days the number of days that the current period will be shifted.
          */
-        public transposePeriod(days: number) {
+        public transposePeriodByDay(days: number) {
             const currentPeriod = this.toJDNPeriod();
 
             const newPeriod = new JDNPeriod(currentPeriod.periodStart + days, currentPeriod.periodEnd + days);
 
             this.convertJDNPeriodToCalendarPeriod(newPeriod);
+        }
+
+        /**
+         * Transposes the current period by the given number of years.
+         *
+         * @param {number} years the number of years that the current period will be shifted.
+         */
+        public transposePeriodByYear(years: number) {
+            const currentCalendarPeriod = this.toCalendarPeriod();
+
+            let newJDNPeriod: JDNPeriod;
+
+            if (this.exactDate) {
+                const newCalendarDate = new CalendarDate(
+                    currentCalendarPeriod.periodStart.year + years,
+                    currentCalendarPeriod.periodStart.month,
+                    currentCalendarPeriod.periodStart.day
+                );
+
+                let newJDN = this.calendarToJDN(newCalendarDate);
+
+                newJDNPeriod = new JDNPeriod(newJDN, newJDN);
+
+            } else
+            {
+                const newCalendarDateStart = new CalendarDate(
+                    currentCalendarPeriod.periodStart.year + years,
+                    currentCalendarPeriod.periodStart.month,
+                    currentCalendarPeriod.periodStart.day
+                );
+
+                let newJDNStart = this.calendarToJDN(newCalendarDateStart);
+
+                const newCalendarDateEnd = new CalendarDate(
+                    currentCalendarPeriod.periodEnd.year + years,
+                    currentCalendarPeriod.periodEnd.month,
+                    currentCalendarPeriod.periodEnd.day
+                );
+
+                let newJDNEnd = this.calendarToJDN(newCalendarDateEnd);
+
+                newJDNPeriod = new JDNPeriod(newJDNStart, newJDNStart);
+            }
+
+            this.convertJDNPeriodToCalendarPeriod(newJDNPeriod);
+
         }
 
     }
