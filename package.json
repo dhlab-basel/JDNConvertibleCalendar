@@ -1,11 +1,11 @@
 {
   "name": "jdnconvertiblecalendar",
   "version": "0.0.1",
-  "description": "Support of various calendar formats and conversions between them using Julian Day Number",
+  "description": "Conversions between various calendar formats and manipulations using Julian Day Number (JDN)",
   "main": "index.js",
   "scripts": {
     "test": "tsc test/*.ts && node test/testJDNConvertibleCalendar.js",
-    "builddocs": "typedoc --out docs --module commonjs src/*.ts"
+    "builddocs": "typedoc --out docs --readme none --name 'JDNConvertibleCalendar API Documentation' --module commonjs src/*.ts"
   },
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
   "keywords": [
     "calendar"
   ],
-  "author": "Tobias Schweizer <t.schweizer@unibas.ch> DHLab University of Basel (http://www.dhlab.unibas.ch)",
+  "author": "Tobias Schweizer <t.schweizer@unibas.ch>, DHLab University of Basel (http://www.dhlab.unibas.ch)",
   "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/dhlab-basel/JDNConvertibleCalendar/issues"
