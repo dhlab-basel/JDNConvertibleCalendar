@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU Affero General Public
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 import {JDNConvertibleCalendar} from "../src/JDNConvertibleCalendar";
 import CalendarDate = JDNConvertibleCalendar.CalendarDate;
 import {JDNConvertibleConversion} from "../src/JDNCalendarConversion";
@@ -79,7 +80,47 @@ describe('JDN conversions to Julian calendar format and back', () => {
 
 });
 
-describe('Conversions between Gregorian and Julian calendar format', () => {
+describe('Conversions from JDN to Gregorian and Julian calendar format an in between conversions', () => {
+
+    it('create a Gregorian date from JDN using an example from Meeus', () => {
+
+        // see sample calculation in Jean Meeus: Astronomical Algorithms, 1998, p. 65.
+
+        const gregorianCalendar = new GregorianCalendarDate(new JDNPeriod(2434924, 2434924));
+
+        const gregorianCalendarDate: JDNConvertibleCalendar.CalendarPeriod = gregorianCalendar.toCalendarPeriod();
+
+        assert.strictEqual(gregorianCalendarDate.periodStart.year, 1954, `calendar period wrong: year`);
+        assert.strictEqual(gregorianCalendarDate.periodStart.month, 6, `calendar period wrong: month`);
+        assert.strictEqual(gregorianCalendarDate.periodStart.day, 30, `calendar period wrong: day`);
+        assert.strictEqual(gregorianCalendarDate.periodStart.dayOfWeek, 3, `calendar period wrong: day of week`);
+
+        assert.strictEqual(gregorianCalendarDate.periodEnd.year, 1954, `calendar period wrong: year`);
+        assert.strictEqual(gregorianCalendarDate.periodEnd.month, 6, `calendar period wrong: month`);
+        assert.strictEqual(gregorianCalendarDate.periodEnd.day, 30, `calendar period wrong: day`);
+        assert.strictEqual(gregorianCalendarDate.periodEnd.dayOfWeek, 3, `calendar period wrong: day of week`);
+
+    });
+
+    it('create a Julian date from JDN using an example from Meeus', () => {
+
+        // see sample calculation in Jean Meeus: Astronomical Algorithms, 1998, p. 65.
+
+        const julianCalendar = new JulianCalendarDate(new JDNPeriod(2434924, 2434924));
+
+        const julianCalendarDate = julianCalendar.toCalendarPeriod();
+
+        assert.strictEqual(julianCalendarDate.periodStart.year, 1954, `calendar period wrong: year`);
+        assert.strictEqual(julianCalendarDate.periodStart.month, 6, `calendar period wrong: month`);
+        assert.strictEqual(julianCalendarDate.periodStart.day, 17, `calendar period wrong: day`);
+        assert.strictEqual(julianCalendarDate.periodStart.dayOfWeek, 3, `calendar period wrong: day of week`);
+
+        assert.strictEqual(julianCalendarDate.periodEnd.year, 1954, `calendar period wrong: year`);
+        assert.strictEqual(julianCalendarDate.periodEnd.month, 6, `calendar period wrong: month`);
+        assert.strictEqual(julianCalendarDate.periodEnd.day, 17, `calendar period wrong: day`);
+        assert.strictEqual(julianCalendarDate.periodEnd.dayOfWeek, 3, `calendar period wrong: day of week`);
+
+    });
 
     it('convert a Gregorian date into a Julian date', () => {
 
@@ -93,10 +134,12 @@ describe('Conversions between Gregorian and Julian calendar format', () => {
         assert.strictEqual(gregorianCalendarPeriod.periodStart.year, 2017, `calendar period wrong: year`);
         assert.strictEqual(gregorianCalendarPeriod.periodStart.month, 12, `calendar period wrong: month`);
         assert.strictEqual(gregorianCalendarPeriod.periodStart.day, 6, `calendar period wrong: day`);
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.dayOfWeek, 3, `Conversion of JDN to Gregorian date failed: day of week`);
 
         assert.strictEqual(gregorianCalendarPeriod.periodEnd.year, 2017, `calendar period wrong: year`);
         assert.strictEqual(gregorianCalendarPeriod.periodEnd.month, 12, `calendar period wrong: month`);
         assert.strictEqual(gregorianCalendarPeriod.periodEnd.day, 6, `calendar period wrong: day`);
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.dayOfWeek, 3, `Conversion of JDN to Gregorian date failed: day of week`);
 
         const julianDate: JDNConvertibleCalendar.JDNConvertibleCalendar = gregorianDate.convertCalendar('Julian');
 
@@ -110,12 +153,16 @@ describe('Conversions between Gregorian and Julian calendar format', () => {
         assert.strictEqual(julianCalendarPeriod.periodStart.year, 2017, `calendar period wrong: year`);
         assert.strictEqual(julianCalendarPeriod.periodStart.month, 11, `calendar period wrong: month`);
         assert.strictEqual(julianCalendarPeriod.periodStart.day, 23, `calendar period wrong: day`);
+        assert.strictEqual(julianCalendarPeriod.periodStart.dayOfWeek, 3, `Conversion of JDN to Gregorian date failed: day of week`);
 
         assert.strictEqual(julianCalendarPeriod.periodEnd.year, 2017, `calendar period wrong: year`);
         assert.strictEqual(julianCalendarPeriod.periodEnd.month, 11, `calendar period wrong: month`);
         assert.strictEqual(julianCalendarPeriod.periodEnd.day, 23, `calendar period wrong: day`);
+        assert.strictEqual(julianCalendarPeriod.periodEnd.dayOfWeek, 3, `Conversion of JDN to Gregorian date failed: day of week`);
 
     });
+
+
 
 
 });
@@ -151,7 +198,6 @@ describe('Get the number of days for a given month', () => {
 
 
 });
-
 
 describe('Create a Gregorian date and transpose it by a given number of days', () => {
 
