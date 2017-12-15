@@ -213,6 +213,8 @@ export module JDNConvertibleCalendar {
         /**
          * Calculates number of days of the month of the given date.
          *
+         * The given date is expected to be of the same calendar format as the instance the method is called on.
+         *
          * @param {JDNConvertibleCalendar.CalendarDate} date given date.
          * @returns {number} number of days in month of given date.
          */
@@ -440,16 +442,23 @@ export module JDNConvertibleCalendar {
                     // months to be added to new year
                     const monthsOverflow = calendarDate.month + monthsToShift - this.monthsInYear;
 
+                    // determine max. number of days in the new month
+                    const maxDaysInNewMonth = this.daysInMonth(new CalendarDate(calendarDate.year + yearsToShift + 1, monthsOverflow, 1));
+
                     newCalendarDate = new CalendarDate(
                         calendarDate.year + yearsToShift + 1, // add an extra year
                         monthsOverflow,
-                        calendarDate.day
+                        (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
                     );
                 } else {
+
+                    // determine max. number of days in the new month
+                    const maxDaysInNewMonth = this.daysInMonth(new CalendarDate(calendarDate.year + yearsToShift, calendarDate.month + monthsToShift, 1));
+
                     newCalendarDate = new CalendarDate(
                         calendarDate.year + yearsToShift,
                         calendarDate.month + monthsToShift,
-                        calendarDate.day
+                        (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
                     );
 
                 }
@@ -460,17 +469,24 @@ export module JDNConvertibleCalendar {
                     // months to be subtracted from the previous year
                     const newMonth =  this.monthsInYear - (monthsToShift - calendarDate.month);
 
+                    // determine max. number of days in the new month
+                    const maxDaysInNewMonth = this.daysInMonth(new CalendarDate(calendarDate.year - yearsToShift -1, newMonth, 1));
+
                     newCalendarDate = new CalendarDate(
                         calendarDate.year - yearsToShift -1, // subtract an extra year
                         newMonth,
-                        calendarDate.day
+                        (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
                     );
 
                 } else {
+
+                    // determine max. number of days in the new month
+                    const maxDaysInNewMonth = this.daysInMonth(new CalendarDate(calendarDate.year - yearsToShift, calendarDate.month - monthsToShift, 1));
+
                     newCalendarDate = new CalendarDate(
                         calendarDate.year - yearsToShift,
                         calendarDate.month - monthsToShift,
-                        calendarDate.day
+                        (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
                     );
 
                 }
