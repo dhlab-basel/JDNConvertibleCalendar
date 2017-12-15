@@ -461,7 +461,7 @@ export module JDNConvertibleCalendar {
                     const newMonth =  this.monthsInYear - (monthsToShift - calendarDate.month);
 
                     newCalendarDate = new CalendarDate(
-                        calendarDate.year - yearsToShift -1, // add an extra year
+                        calendarDate.year - yearsToShift -1, // subtract an extra year
                         newMonth,
                         calendarDate.day
                     );

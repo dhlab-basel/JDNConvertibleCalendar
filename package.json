@@ -4,7 +4,7 @@
   "description": "Conversions between various calendar formats and manipulations using Julian Day Number (JDN)",
   "main": "index.js",
   "scripts": {
-    "test": "tsc test/*.ts && node test/testJDNConvertibleCalendar.js",
+    "test": "./node_modules/mocha/bin/mocha -r ts-node/register test/unitTests.ts",
     "builddocs": "typedoc --out docs --readme none --name 'JDNConvertibleCalendar API Documentation' --module commonjs src/*.ts"
   },
   "repository": {
@@ -20,11 +20,12 @@
     "url": "https://github.com/dhlab-basel/JDNConvertibleCalendar/issues"
   },
   "homepage": "https://github.com/dhlab-basel/JDNConvertibleCalendar#readme",
-  "dependencies": {
-    "assert": "^1.4.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^8.0.56",
+    "assert": "^1.4.1",
+    "mocha": "^4.0.1",
+    "ts-node": "^4.0.2",
     "typedoc": "^0.9.0"
   }
 }
