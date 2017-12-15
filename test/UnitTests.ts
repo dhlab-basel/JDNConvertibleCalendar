@@ -308,9 +308,6 @@ describe('Create a Gregorian date and transpose it by a given number of months',
 
         const gregorianCalendarPeriod = gregorianDate.toCalendarPeriod();
 
-
-        //console.log(gregorianDate.toJDNPeriod());
-
         assert.strictEqual(gregorianCalendarPeriod.periodStart.year, 2017, `calendar period wrong: year`);
         assert.strictEqual(gregorianCalendarPeriod.periodStart.month, 11, `calendar period wrong: month`);
         assert.strictEqual(gregorianCalendarPeriod.periodStart.day, 30, `calendar period wrong: day`);
@@ -325,5 +322,40 @@ describe('Create a Gregorian date and transpose it by a given number of months',
         assert.strictEqual(jdn - 31, jdnPeriod.periodEnd, `end of JDN period wrong`);
 
     });
+});
+
+describe('Create a JDNPeriod', () => {
+
+
+    it('attempt to create a JDN with invalid args: non integers', () => {
+
+        assert.throws(
+            () => {new JDNPeriod(1.1, 2)
+            },
+            function(err) {
+                if ((err instanceof Error) && err.message === 'JDNs are expected to be integers') {
+                    return true;
+                }
+            }
+        );
+
+    });
+
+    it('attempt to create a JDN with invalid args: end greater than start', () => {
+
+        assert.throws(
+            () => {new JDNPeriod(2, 1)
+            },
+            function(err) {
+
+                if ((err instanceof Error) && err.message === 'start of a JDNPeriod must not be greater than its end') {
+                    return true;
+                }
+            }
+        );
+
+    });
+
+
 });
 

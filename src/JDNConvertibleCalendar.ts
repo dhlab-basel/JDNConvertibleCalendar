@@ -109,7 +109,7 @@ export module JDNConvertibleCalendar {
          * @param {JDNConvertibleCalendar.JDN} periodEnd End of the period.
          */
         constructor(public readonly periodStart: JDN, public readonly periodEnd: JDN) {
-            if (periodStart > periodEnd) throw new JDNConvertibleCalendarError(`start of a JDNPeriod must not be greater than its end.`);
+            if (periodStart > periodEnd) throw new JDNConvertibleCalendarError(`start of a JDNPeriod must not be greater than its end`);
 
             // check that given arguments are integers (JDNs have to fractions)
             if (!(isInteger(periodStart) && isInteger(periodEnd))) {
