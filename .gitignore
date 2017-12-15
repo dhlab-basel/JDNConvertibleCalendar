@@ -1,2 +1,5 @@
 .DS_Store
 .idea/*
+src/*.js
+node_modules/*
+test/*.js
