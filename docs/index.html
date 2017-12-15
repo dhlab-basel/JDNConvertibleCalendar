@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>jdnconvertiblecalendar</title>
+	<title>JDNConvertibleCalendar API Documentation</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">jdnconvertiblecalendar</a>
+					<a href="index.html" class="title">JDNConvertibleCalendar API Documentation</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -53,42 +53,36 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="index.html">Globals</a>
 				</li>
 			</ul>
-			<h1> jdnconvertiblecalendar</h1>
+			<h1> JDNConvertibleCalendar API Documentation</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<h1 id="jdnconvertiblecalendar">JDNConvertibleCalendar</h1>
-				<h2 id="general-remarks">General Remarks</h2>
-				<p><strong>Please note that this software is still in a very early state of development. Its existing functionality hasn&#39;t been properly tested yet.</strong></p>
-				<h2 id="introduction">Introduction</h2>
-				<p><code>JDNConvertibleCalendar</code> offers a conventient way to convert a given date to different calendar formats making use of Julian Day Number (JDN). </p>
-				<p>Currently, Gregorian and Julian calendar are supported.</p>
-				<h2 id="focus">Focus</h2>
-				<p>The focus of this project is to provide a design or archictecture distributed as an npm module that makes it easy to convert between calendar formats. It is, however, not primarily a library for astronomical algorithms. For now, we put the these methods in the module <code>JDNConvertibleConversion</code> which is basically a (partial) reimplementation in TypeScript of what you find at <a href="https://www.fourmilab.ch/documents/calendar">https://www.fourmilab.ch/documents/calendar</a>. We would like to make this an separate module which could be used with <code>JDNConvertibleCalendar</code> (see <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/1">https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/1</a>). </p>
-				<h2 id="design">Design</h2>
-				<p><code>JDNConvertibleCalendar</code> is an abstract class that can be implemented for various calendar formats, provided that those can be converted from and to JDN. </p>
-				<p>The abstract base class offers a generic way to convert from and to any of its subclasses. Also calculations based on JDN are already implemented in the base class.</p>
-				<p>All dates are treated as periods. This allows for the handling of different precisions.</p>
-				<h2 id="adding-more-calendar-formats">Adding more Calendar Formats</h2>
-				<p>When adding a new subclass, calendar specific methods have to be implemented, e.g., the conversion from and to JDN. Calendar specific methods are declared abstract in the base class and have to be implemented when making a subclass.</p>
-				<h2 id="documentation">Documentation</h2>
-				<p>The HTML-documentation can be built locally running <code>npm run-script builddocs</code> in the project root.</p>
-				<h2 id="examples">Examples</h2>
-				<p>For working examples, please see the tests in the test directory. Run the test with <code>npm test</code> from the project root. </p>
-			</div>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>External modules</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-external-module"><a href="modules/_jdncalendarconversion_.html" class="tsd-kind-icon">"JDNCalendar<wbr>Conversion"</a></li>
+								<li class="tsd-kind-external-module"><a href="modules/_jdnconvertiblecalendar_.html" class="tsd-kind-icon">"JDNConvertible<wbr>Calendar"</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class="globals current ">
+						<a href="index.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_jdncalendarconversion_.html">"JDNCalendar<wbr>Conversion"</a>
