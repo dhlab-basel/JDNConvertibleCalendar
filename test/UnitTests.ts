@@ -27,35 +27,64 @@ import JulianCalendarDate = JDNConvertibleCalendar.JulianCalendarDate;
 
 let assert = require('assert');
 
+/**
+ * Checks if the received calendar date corresponds to the expected calendar date.
+ *
+ * @param {JDNConvertibleCalendar.CalendarDate} expected expected calendar date.
+ * @param {JDNConvertibleCalendar.CalendarDate} received received calendar date.
+ */
+const checkCalendarDate = (expected: CalendarDate, received: CalendarDate) => {
+
+    assert.strictEqual(received.year, expected.year, `calendar date is wrong: year is ${received.year} instead of ${expected.year}`);
+    assert.strictEqual(received.month, expected.month, `calendar date is wrong: month is ${received.month} instead of ${expected.month}`);
+    assert.strictEqual(received.day, expected.day, `calendar date is wrong: day is ${received.day} instead of ${expected.day}`);
+    assert.strictEqual(received.dayOfWeek, expected.dayOfWeek, `calendar date is wrong: day of week is ${received.dayOfWeek} instead of ${expected.dayOfWeek}`);
+
+};
+
+/**
+ * Checks if the received JDN correspons to the expected JDN.
+ *
+ * @param {number} expected expected JDN.
+ * @param {number} received received JDN.
+ */
+const checkJDN = (expected: number, received: number) => {
+
+    // make sure that the received JDN has no fraction
+    assert.strictEqual(Math.floor(received), received, `JDN contains a fraction: ${received}`);
+
+    assert.strictEqual(received, expected, `JDN is wrong: received JDN is ${received} instead of ${expected}`);
+};
+
 describe('JDN conversions to Gregorian calendar format and back', () => {
     it('convert the Gregorian Calendar date 06-12-2017 to JDN', () => {
         const gregorianCalendarDate1: CalendarDate = new CalendarDate(2017, 12, 6);
         const jdn: number = JDNConvertibleConversion.gregorianToJDN(gregorianCalendarDate1);
 
-        assert.strictEqual(jdn, 2458094, `Conversion of Gregorian date to JDN failed`);
+        checkJDN(2458094, jdn);
     });
 
     it('convert the JDN 2458094 back to the Gregorian Calendar date 06-12-2017', () => {
         const gregorianDate = JDNConvertibleConversion.JDNToGregorian(2458094);
 
-        assert.strictEqual(gregorianDate.year, 2017, `Conversion of JDN to Gregorian date failed: year`);
-        assert.strictEqual(gregorianDate.month, 12, `Conversion of JDN to Gregorian date failed: month`);
-        assert.strictEqual(gregorianDate.day, 6, `Conversion of JDN to Gregorian date failed: day`);
+        const expectedDate = new CalendarDate(2017, 12, 6);
+
+        checkCalendarDate(expectedDate, gregorianDate);
     });
 
     it('convert the Gregorian Calendar date 31-12-2016 to JDN', () => {
         const gregorianCalendarDate1: CalendarDate = new CalendarDate(2016, 12, 31);
         const jdn: number = JDNConvertibleConversion.gregorianToJDN(gregorianCalendarDate1);
 
-        assert.strictEqual(jdn, 2457754, `Conversion of Gregorian date to JDN failed`);
+        checkJDN(2457754, jdn);
     });
 
     it('convert the JDN 2457754 back to the Gregorian Calendar date 31-12-2016', () => {
         const gregorianDate = JDNConvertibleConversion.JDNToGregorian(2457754);
 
-        assert.strictEqual(gregorianDate.year, 2016, `Conversion of JDN to Gregorian date failed: year`);
-        assert.strictEqual(gregorianDate.month, 12, `Conversion of JDN to Gregorian date failed: month`);
-        assert.strictEqual(gregorianDate.day, 31, `Conversion of JDN to Gregorian date failed: day`);
+        const expectedDate = new CalendarDate(2016, 12, 31);
+
+        checkCalendarDate(expectedDate, gregorianDate);
     });
 
 });
@@ -67,15 +96,15 @@ describe('JDN conversions to Julian calendar format and back', () => {
         const julianCalendarDate2: CalendarDate = new CalendarDate(2017, 11, 23);
         const jdn = JDNConvertibleConversion.julianToJDN(julianCalendarDate2);
 
-        assert.strictEqual(jdn, 2458094, `Conversion of Julian date to JDN failed`);
+        checkJDN(2458094, jdn);
     });
 
     it('convert the JDN 2458094 back to the Julian Calendar date 23-11-2017', () => {
         const julianCalendarDate = JDNConvertibleConversion.JDNToJulian(2458094);
 
-        assert.strictEqual(julianCalendarDate.year, 2017, `Conversion of JDN to Julian date failed: year`);
-        assert.strictEqual(julianCalendarDate.month, 11, `Conversion of JDN to Julian date failed: month`);
-        assert.strictEqual(julianCalendarDate.day, 23, `Conversion of JDN to Julian date failed: day`);
+        const expectedDate = new CalendarDate(2017, 11, 23);
+
+        checkCalendarDate(expectedDate, julianCalendarDate);
     });
 
 });
@@ -88,17 +117,12 @@ describe('Conversions from JDN to Gregorian and Julian calendar format an in bet
 
         const gregorianCalendar = new GregorianCalendarDate(new JDNPeriod(2434924, 2434924));
 
-        const gregorianCalendarDate: JDNConvertibleCalendar.CalendarPeriod = gregorianCalendar.toCalendarPeriod();
+        const gregorianCalendarPeriod: JDNConvertibleCalendar.CalendarPeriod = gregorianCalendar.toCalendarPeriod();
 
-        assert.strictEqual(gregorianCalendarDate.periodStart.year, 1954, `calendar period wrong: year`);
-        assert.strictEqual(gregorianCalendarDate.periodStart.month, 6, `calendar period wrong: month`);
-        assert.strictEqual(gregorianCalendarDate.periodStart.day, 30, `calendar period wrong: day`);
-        assert.strictEqual(gregorianCalendarDate.periodStart.dayOfWeek, 3, `calendar period wrong: day of week`);
+        const expectedDate = new CalendarDate(1954, 6, 30, 3);
 
-        assert.strictEqual(gregorianCalendarDate.periodEnd.year, 1954, `calendar period wrong: year`);
-        assert.strictEqual(gregorianCalendarDate.periodEnd.month, 6, `calendar period wrong: month`);
-        assert.strictEqual(gregorianCalendarDate.periodEnd.day, 30, `calendar period wrong: day`);
-        assert.strictEqual(gregorianCalendarDate.periodEnd.dayOfWeek, 3, `calendar period wrong: day of week`);
+        checkCalendarDate(expectedDate, gregorianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, gregorianCalendarPeriod.periodEnd);
 
     });
 
@@ -108,17 +132,12 @@ describe('Conversions from JDN to Gregorian and Julian calendar format an in bet
 
         const julianCalendar = new JulianCalendarDate(new JDNPeriod(2434924, 2434924));
 
-        const julianCalendarDate = julianCalendar.toCalendarPeriod();
+        const julianCalendarPeriod = julianCalendar.toCalendarPeriod();
 
-        assert.strictEqual(julianCalendarDate.periodStart.year, 1954, `calendar period wrong: year`);
-        assert.strictEqual(julianCalendarDate.periodStart.month, 6, `calendar period wrong: month`);
-        assert.strictEqual(julianCalendarDate.periodStart.day, 17, `calendar period wrong: day`);
-        assert.strictEqual(julianCalendarDate.periodStart.dayOfWeek, 3, `calendar period wrong: day of week`);
+        const expectedDate = new CalendarDate(1954, 6, 17, 3);
 
-        assert.strictEqual(julianCalendarDate.periodEnd.year, 1954, `calendar period wrong: year`);
-        assert.strictEqual(julianCalendarDate.periodEnd.month, 6, `calendar period wrong: month`);
-        assert.strictEqual(julianCalendarDate.periodEnd.day, 17, `calendar period wrong: day`);
-        assert.strictEqual(julianCalendarDate.periodEnd.dayOfWeek, 3, `calendar period wrong: day of week`);
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
 
     });
 
@@ -161,8 +180,6 @@ describe('Conversions from JDN to Gregorian and Julian calendar format an in bet
         assert.strictEqual(julianCalendarPeriod.periodEnd.dayOfWeek, 3, `Conversion of JDN to Gregorian date failed: day of week`);
 
     });
-
-
 
 
 });
@@ -512,8 +529,8 @@ describe('Create a Gregorian date and transpose it by a given number of months',
         const jdnPeriod = gregorianDate.toJDNPeriod();
 
         // 2016 is a leap year: 366 days
-        assert.strictEqual(jdn - 31 - 28 - 31 -366, jdnPeriod.periodStart, `start of JDN period wrong`);
-        assert.strictEqual(jdn - 31 - 28 - 31 -366, jdnPeriod.periodEnd, `end of JDN period wrong`);
+        assert.strictEqual(jdn - 31 - 28 - 31 - 366, jdnPeriod.periodStart, `start of JDN period wrong`);
+        assert.strictEqual(jdn - 31 - 28 - 31 - 366, jdnPeriod.periodEnd, `end of JDN period wrong`);
 
     });
 
@@ -526,9 +543,10 @@ describe('Create a JDNPeriod', () => {
     it('attempt to create a JDN with invalid args: non integers', () => {
 
         assert.throws(
-            () => {new JDNPeriod(1.1, 2)
+            () => {
+                new JDNPeriod(1.1, 2)
             },
-            function(err) {
+            function (err) {
                 if ((err instanceof Error) && err.message === 'JDNs are expected to be integers') {
                     return true;
                 }
@@ -540,9 +558,10 @@ describe('Create a JDNPeriod', () => {
     it('attempt to create a JDN with invalid args: end greater than start', () => {
 
         assert.throws(
-            () => {new JDNPeriod(2, 1)
+            () => {
+                new JDNPeriod(2, 1)
             },
-            function(err) {
+            function (err) {
 
                 if ((err instanceof Error) && err.message === 'start of a JDNPeriod must not be greater than its end') {
                     return true;
