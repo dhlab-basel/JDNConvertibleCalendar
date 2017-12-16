@@ -24,6 +24,7 @@ import {JDNConvertibleConversion} from "../src/JDNCalendarConversion";
 import GregorianCalendarDate = JDNConvertibleCalendar.GregorianCalendarDate;
 import JDNPeriod = JDNConvertibleCalendar.JDNPeriod;
 import JulianCalendarDate = JDNConvertibleCalendar.JulianCalendarDate;
+import JulianCalendarDate = JDNConvertibleCalendar.JulianCalendarDate;
 
 let assert = require('assert');
 
@@ -519,3 +520,38 @@ describe('Create a JDNPeriod', () => {
 
 });
 
+describe('Create a BCE date', () => {
+
+    it('create the JDN for the Julian calendar date when Caesar was murdered and convert it to Gregorian', () => {
+
+        // murder of Caesar
+        const jdn = JDNConvertibleConversion.julianToJDN(new CalendarDate(-44,3,15));
+
+        checkJDN(1705426, jdn);
+
+        const murderOfCaesarJulianCalendarDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const murderOfJuliusCaesarJulianCalPeriod = murderOfCaesarJulianCalendarDate.toCalendarPeriod();
+
+        const expectedJulianCalendarDate = new CalendarDate(-44, 3, 15, 3);
+
+        checkCalendarDate(expectedJulianCalendarDate, murderOfJuliusCaesarJulianCalPeriod.periodStart);
+        checkCalendarDate(expectedJulianCalendarDate, murderOfJuliusCaesarJulianCalPeriod.periodEnd);
+
+        const murderOfCaesarGregorianCalendarDate = murderOfCaesarJulianCalendarDate.convertCalendar('Gregorian');
+
+        const murderOfJuliusCaesarGregorianCalPeriod = murderOfCaesarGregorianCalendarDate.toCalendarPeriod();
+
+        const expectedGregorianCalendarDate = new CalendarDate(-43, 3, 13, 3);
+
+        checkCalendarDate(expectedGregorianCalendarDate, murderOfJuliusCaesarGregorianCalPeriod.periodStart);
+        checkCalendarDate(expectedGregorianCalendarDate, murderOfJuliusCaesarGregorianCalPeriod.periodEnd);
+
+        const jdnPeriodFromGregorian = murderOfCaesarGregorianCalendarDate.toJDNPeriod();
+
+        checkJDN(jdn, jdnPeriodFromGregorian.periodStart);
+        checkJDN(jdn, jdnPeriodFromGregorian.periodEnd);
+
+    });
+
+});
