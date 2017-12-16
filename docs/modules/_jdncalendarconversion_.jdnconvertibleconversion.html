@@ -105,7 +105,7 @@
 					<div class="tsd-signature tsd-kind-icon">FRENCH_<wbr>REVOLUTIONARY_<wbr>EPOCH<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">2375839.5</span><span class="tsd-signature-symbol"> =&nbsp;2375839.5</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/4a21071/src/JDNCalendarConversion.ts#L31">JDNCalendarConversion.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/39ba126/src/JDNCalendarConversion.ts#L31">JDNCalendarConversion.ts:31</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -115,7 +115,7 @@
 					<div class="tsd-signature tsd-kind-icon">GREGORIAN_<wbr>EPOCH<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">1721425.5</span><span class="tsd-signature-symbol"> =&nbsp;1721425.5</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/4a21071/src/JDNCalendarConversion.ts#L28">JDNCalendarConversion.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/39ba126/src/JDNCalendarConversion.ts#L28">JDNCalendarConversion.ts:28</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -130,7 +130,7 @@
 					<div class="tsd-signature tsd-kind-icon">HEBREW_<wbr>EPOCH<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">347995.5</span><span class="tsd-signature-symbol"> =&nbsp;347995.5</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/4a21071/src/JDNCalendarConversion.ts#L30">JDNCalendarConversion.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/39ba126/src/JDNCalendarConversion.ts#L30">JDNCalendarConversion.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -140,7 +140,7 @@
 					<div class="tsd-signature tsd-kind-icon">JULIAN_<wbr>EPOCH<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">1721423.5</span><span class="tsd-signature-symbol"> =&nbsp;1721423.5</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/4a21071/src/JDNCalendarConversion.ts#L29">JDNCalendarConversion.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/39ba126/src/JDNCalendarConversion.ts#L29">JDNCalendarConversion.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -157,7 +157,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/4a21071/src/JDNCalendarConversion.ts#L92">JDNCalendarConversion.ts:92</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/39ba126/src/JDNCalendarConversion.ts#L108">JDNCalendarConversion.ts:108</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -166,6 +166,14 @@
 								</div>
 								<p>Conversion algorithm from:
 								<a href="https://www.fourmilab.ch/documents/calendar/calendar.js">https://www.fourmilab.ch/documents/calendar/calendar.js</a></p>
+								<p>There is a year 0.</p>
+								<p>From <a href="https://www.fourmilab.ch/documents/calendar">https://www.fourmilab.ch/documents/calendar</a>:</p>
+								<blockquote>
+									<p>&quot;While one can&#39;t properly speak of &#39;Gregorian dates&#39; prior to the adoption of the calendar in 1582,
+										the calendar can be extrapolated to prior dates. In doing so, this implementation uses the convention that the year prior to year 1 is year 0.
+										This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
+									The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar.&quot;</p>
+								</blockquote>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -192,7 +200,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/4a21071/src/JDNCalendarConversion.ts#L171">JDNCalendarConversion.ts:171</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/39ba126/src/JDNCalendarConversion.ts#L203">JDNCalendarConversion.ts:203</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -201,6 +209,14 @@
 								</div>
 								<p>Conversion algorithm from:
 								<a href="https://www.fourmilab.ch/documents/calendar/calendar.js">https://www.fourmilab.ch/documents/calendar/calendar.js</a></p>
+								<p>There is <strong>no</strong> year 0.</p>
+								<p>From <a href="https://www.fourmilab.ch/documents/calendar">https://www.fourmilab.ch/documents/calendar</a>:</p>
+								<blockquote>
+									<p>&quot;While one can&#39;t properly speak of &#39;Gregorian dates&#39; prior to the adoption of the calendar in 1582,
+										the calendar can be extrapolated to prior dates. In doing so, this implementation uses the convention that the year prior to year 1 is year 0.
+										This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
+									The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar.&quot;</p>
+								</blockquote>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -227,7 +243,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/4a21071/src/JDNCalendarConversion.ts#L208">JDNCalendarConversion.ts:208</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/39ba126/src/JDNCalendarConversion.ts#L240">JDNCalendarConversion.ts:240</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -263,7 +279,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/4a21071/src/JDNCalendarConversion.ts#L63">JDNCalendarConversion.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/39ba126/src/JDNCalendarConversion.ts#L71">JDNCalendarConversion.ts:71</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -272,6 +288,14 @@
 								</div>
 								<p>Conversion algorithm from:
 								<a href="https://www.fourmilab.ch/documents/calendar/calendar.js">https://www.fourmilab.ch/documents/calendar/calendar.js</a></p>
+								<p>There is a year 0.</p>
+								<p>From <a href="https://www.fourmilab.ch/documents/calendar">https://www.fourmilab.ch/documents/calendar</a>:</p>
+								<blockquote>
+									<p>&quot;While one can&#39;t properly speak of &#39;Gregorian dates&#39; prior to the adoption of the calendar in 1582,
+										the calendar can be extrapolated to prior dates. In doing so, this implementation uses the convention that the year prior to year 1 is year 0.
+										This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
+									The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar.&quot;</p>
+								</blockquote>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -298,7 +322,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/4a21071/src/JDNCalendarConversion.ts#L134">JDNCalendarConversion.ts:134</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/39ba126/src/JDNCalendarConversion.ts#L158">JDNCalendarConversion.ts:158</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -307,6 +331,14 @@
 								</div>
 								<p>Conversion algorithm from:
 								<a href="https://www.fourmilab.ch/documents/calendar/calendar.js">https://www.fourmilab.ch/documents/calendar/calendar.js</a></p>
+								<p>There is <strong>no</strong> year 0.</p>
+								<p>From <a href="https://www.fourmilab.ch/documents/calendar">https://www.fourmilab.ch/documents/calendar</a>:</p>
+								<blockquote>
+									<p>&quot;While one can&#39;t properly speak of &#39;Gregorian dates&#39; prior to the adoption of the calendar in 1582,
+										the calendar can be extrapolated to prior dates. In doing so, this implementation uses the convention that the year prior to year 1 is year 0.
+										This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
+									The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar.&quot;</p>
+								</blockquote>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -333,7 +365,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/4a21071/src/JDNCalendarConversion.ts#L41">JDNCalendarConversion.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/39ba126/src/JDNCalendarConversion.ts#L41">JDNCalendarConversion.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -367,7 +399,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/4a21071/src/JDNCalendarConversion.ts#L50">JDNCalendarConversion.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/39ba126/src/JDNCalendarConversion.ts#L50">JDNCalendarConversion.ts:50</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
