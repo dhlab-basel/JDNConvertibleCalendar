@@ -520,9 +520,9 @@ describe('Create a JDNPeriod', () => {
 
 });
 
-describe('Create a BCE date', () => {
+describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
-    it('create the JDN for the Julian calendar date when Caesar was murdered and convert it to Gregorian', () => {
+    it('create the JDN for the Julian calendar date 15-03-44 BCE when Caesar was murdered and convert it to Gregorian', () => {
 
         // murder of Caesar
         const jdn = JDNConvertibleConversion.julianToJDN(new CalendarDate(-44,3,15));
@@ -533,6 +533,8 @@ describe('Create a BCE date', () => {
 
         const murderOfJuliusCaesarJulianCalPeriod = murderOfCaesarJulianCalendarDate.toCalendarPeriod();
 
+        // in the Julian calendar, there is no year 0 in the conversion algorithm we use: <http://fourmilab.ch/documents/calendar/>, 44 BCE -> -44
+        // TODO: see https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/3
         const expectedJulianCalendarDate = new CalendarDate(-44, 3, 15, 3);
 
         checkCalendarDate(expectedJulianCalendarDate, murderOfJuliusCaesarJulianCalPeriod.periodStart);
@@ -542,6 +544,8 @@ describe('Create a BCE date', () => {
 
         const murderOfJuliusCaesarGregorianCalPeriod = murderOfCaesarGregorianCalendarDate.toCalendarPeriod();
 
+        // in the Gregorian calendar, there is a year 0 in the conversion algorithm we use: http://fourmilab.ch/documents/calendar/ 44 BCE -> -43
+        // TODO: https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/3
         const expectedGregorianCalendarDate = new CalendarDate(-43, 3, 13, 3);
 
         checkCalendarDate(expectedGregorianCalendarDate, murderOfJuliusCaesarGregorianCalPeriod.periodStart);

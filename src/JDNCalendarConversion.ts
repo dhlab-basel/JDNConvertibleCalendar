@@ -57,6 +57,14 @@ export module JDNConvertibleConversion {
      * Conversion algorithm from:
      * https://www.fourmilab.ch/documents/calendar/calendar.js
      *
+     * There is a year 0.
+     *
+     * From <https://www.fourmilab.ch/documents/calendar>:
+     * > "While one can't properly speak of 'Gregorian dates' prior to the adoption of the calendar in 1582,
+     * > the calendar can be extrapolated to prior dates. In doing so, this implementation uses the convention that the year prior to year 1 is year 0.
+     * > This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
+     * > The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar."
+     *
      * @param {JDNConvertibleCalendar.CalendarDate} calendarDate Gregorian calendar date to be converted to JDN.
      * @returns {number}
      */
@@ -85,6 +93,14 @@ export module JDNConvertibleConversion {
      *
      * Conversion algorithm from:
      * https://www.fourmilab.ch/documents/calendar/calendar.js
+     *
+     * There is a year 0.
+     *
+     * From <https://www.fourmilab.ch/documents/calendar>:
+     * > "While one can't properly speak of 'Gregorian dates' prior to the adoption of the calendar in 1582,
+     * > the calendar can be extrapolated to prior dates. In doing so, this implementation uses the convention that the year prior to year 1 is year 0.
+     * > This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
+     * > The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar."
      *
      * @param {number} jdn JDN to be converted to a Gregorian calendar date.
      * @returns {JDNConvertibleCalendar.CalendarDate}
@@ -128,6 +144,14 @@ export module JDNConvertibleConversion {
      * Conversion algorithm from:
      * https://www.fourmilab.ch/documents/calendar/calendar.js
      *
+     * There is **no** year 0.
+     *
+     * From <https://www.fourmilab.ch/documents/calendar>:
+     * > "While one can't properly speak of 'Gregorian dates' prior to the adoption of the calendar in 1582,
+     * > the calendar can be extrapolated to prior dates. In doing so, this implementation uses the convention that the year prior to year 1 is year 0.
+     * > This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
+     * > The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar."
+     *
      * @param {JDNConvertibleCalendar.CalendarDate} calendarDate Julian calendar date to be converted to JDN.
      * @returns {number}
      */
@@ -164,6 +188,14 @@ export module JDNConvertibleConversion {
      *
      * Conversion algorithm from:
      * https://www.fourmilab.ch/documents/calendar/calendar.js
+     *
+     * There is **no** year 0.
+     *
+     * From <https://www.fourmilab.ch/documents/calendar>:
+     * > "While one can't properly speak of 'Gregorian dates' prior to the adoption of the calendar in 1582,
+     * > the calendar can be extrapolated to prior dates. In doing so, this implementation uses the convention that the year prior to year 1 is year 0.
+     * > This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
+     * > The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar."
      *
      * @param {number} jdn JDN to be converted to a Julian calendar date.
      * @returns {JDNConvertibleCalendar.CalendarDate}

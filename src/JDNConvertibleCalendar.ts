@@ -63,6 +63,9 @@ export module JDNConvertibleCalendar {
 
         /**
          *
+         * Attention: depending on the conventions used, there may be a year 0 or not.
+         * This depends on the implementation of the conversion functions: `JDNConvertibleCalendar.JDNToCalendar`, `JDNConvertibleCalendar.calendarToJDN`
+         *
          * @param {number} year Year of the given date.
          * @param {number} month Month of the given date.
          * @param {number} day Day of the given date (day of month, 1 based index).
@@ -187,6 +190,9 @@ export module JDNConvertibleCalendar {
          * This method has to be implemented for each subclass
          * (specific calendar format).
          *
+         * Attention: depending on the conventions used, there may be a year 0 or not.
+         * This depends on the implementation of this conversion function.
+         *
          * @param {JDN} jdn Julian Day Number
          * @returns {JDNConvertibleCalendar.CalendarDate}
          */
@@ -196,6 +202,9 @@ export module JDNConvertibleCalendar {
          * Converts a given calendar date to JDN.
          * This method has to be implemented for each subclass
          * (specific calendar format).
+         *
+         * Attention: depending on the conventions used, there may be a year 0 or not.
+         * This depends on the implementation of this conversion function.
          *
          * @param {JDNConvertibleCalendar.CalendarDate} date calendar date
          * @returns {JDN}
