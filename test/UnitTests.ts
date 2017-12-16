@@ -349,7 +349,7 @@ describe('Create a Gregorian date and transpose it by a given number of months',
 
         const gregorianDate: GregorianCalendarDate = new GregorianCalendarDate(new JDNPeriod(jdn, jdn));
 
-        // shift date 365 into the future
+        // shift date one month into the past
         gregorianDate.transposePeriodByMonth(-1);
 
         const gregorianCalendarPeriod = gregorianDate.toCalendarPeriod();
@@ -368,6 +368,96 @@ describe('Create a Gregorian date and transpose it by a given number of months',
         assert.strictEqual(jdn - 31, jdnPeriod.periodEnd, `end of JDN period wrong`);
 
     });
+
+    it('create a Gregorian date 31-03-2017 and shift it one month into the past', () => {
+
+        // Gregorian Calendar date 31-03-2017
+        const jdn = 2457844;
+
+        const gregorianDate: GregorianCalendarDate = new GregorianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date one month into the past
+        gregorianDate.transposePeriodByMonth(-1);
+
+        const gregorianCalendarPeriod = gregorianDate.toCalendarPeriod();
+
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.year, 2017, `calendar period wrong: year`);
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.month, 2, `calendar period wrong: month`);
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.day, 28, `calendar period wrong: day`);
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.dayOfWeek, 2, `calendar period wrong: day`);
+
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.year, 2017, `calendar period wrong: year`);
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.month, 2, `calendar period wrong: month`);
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.day, 28, `calendar period wrong: day`);
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.dayOfWeek, 2, `calendar period wrong: day`);
+
+        const jdnPeriod = gregorianDate.toJDNPeriod();
+
+        assert.strictEqual(jdn - 31, jdnPeriod.periodStart, `start of JDN period wrong`);
+        assert.strictEqual(jdn - 31, jdnPeriod.periodEnd, `end of JDN period wrong`);
+
+    });
+
+    it('create a Gregorian date 31-03-2017 and shift it three months into the past', () => {
+
+        // Gregorian Calendar date 31-03-2017
+        const jdn = 2457844;
+
+        const gregorianDate: GregorianCalendarDate = new GregorianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date three months into the past
+        gregorianDate.transposePeriodByMonth(-3);
+
+        const gregorianCalendarPeriod = gregorianDate.toCalendarPeriod();
+
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.year, 2016, `calendar period wrong: year`);
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.month, 12, `calendar period wrong: month`);
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.day, 31, `calendar period wrong: day`);
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.dayOfWeek, 6, `calendar period wrong: day`);
+
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.year, 2016, `calendar period wrong: year`);
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.month, 12, `calendar period wrong: month`);
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.day, 31, `calendar period wrong: day`);
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.dayOfWeek, 6, `calendar period wrong: day`);
+
+        const jdnPeriod = gregorianDate.toJDNPeriod();
+
+        assert.strictEqual(jdn - 31 - 28 - 31, jdnPeriod.periodStart, `start of JDN period wrong`);
+        assert.strictEqual(jdn - 31 - 28 - 31, jdnPeriod.periodEnd, `end of JDN period wrong`);
+
+    });
+
+    it('create a Gregorian date 31-03-2017 and shift it 15 months into the past', () => {
+
+        // Gregorian Calendar date 31-03-2017
+        const jdn = 2457844;
+
+        const gregorianDate: GregorianCalendarDate = new GregorianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date 15 months into the past
+        gregorianDate.transposePeriodByMonth(-15);
+
+        const gregorianCalendarPeriod = gregorianDate.toCalendarPeriod();
+
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.year, 2015, `calendar period wrong: year`);
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.month, 12, `calendar period wrong: month`);
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.day, 31, `calendar period wrong: day`);
+        assert.strictEqual(gregorianCalendarPeriod.periodStart.dayOfWeek, 4, `calendar period wrong: day`);
+
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.year, 2015, `calendar period wrong: year`);
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.month, 12, `calendar period wrong: month`);
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.day, 31, `calendar period wrong: day`);
+        assert.strictEqual(gregorianCalendarPeriod.periodEnd.dayOfWeek, 4, `calendar period wrong: day`);
+
+        const jdnPeriod = gregorianDate.toJDNPeriod();
+
+        // 2016 is a leap year: 366 days
+        assert.strictEqual(jdn - 31 - 28 - 31 -366, jdnPeriod.periodStart, `start of JDN period wrong`);
+        assert.strictEqual(jdn - 31 - 28 - 31 -366, jdnPeriod.periodEnd, `end of JDN period wrong`);
+
+    });
+
+
 });
 
 describe('Create a JDNPeriod', () => {
