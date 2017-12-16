@@ -817,6 +817,58 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
     });
 
+    it('shift the Julian Calendar date 1-1-1 CE one day into the past and check for correct behaviour for year 0', () => {
+
+        // Julian Calendar date 1-1-1 CE
+        const jdn = 1721424;
+
+        const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        julianCalendarDate.transposePeriodByDay(-1);
+
+        const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
+
+        // Julian Calendar dates have no year 0 (convention used in the conversions functions)
+        // hence the year after -1 is the year 1
+        const expectedDate = new CalendarDate(-1,12,31, 5);
+
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
+
+        const jdnPeriodFromJulian = julianCalendarDate.toJDNPeriod();
+
+        checkJDN(jdn -1, jdnPeriodFromJulian.periodStart);
+        checkJDN(jdn -1, jdnPeriodFromJulian.periodEnd);
+
+    });
+
+    /*it('shift the Julian Calendar date 1-1-1 CE one month into the past and check for correct behaviour for year 0', () => {
+
+        // Julian Calendar date 1-1-1 CE
+            const jdn = 1721424;
+
+        const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        julianCalendarDate.transposePeriodByMonth(-1);
+
+        const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
+
+        // Julian Calendar dates have no year 0 (convention used in the conversions functions)
+        // hence the year after -1 is the year 1
+        const expectedDate = new CalendarDate(-1,12,1, 5);
+
+        //console.log(julianCalendarDate);
+
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
+
+        /*const jdnPeriodFromJulian = julianCalendarDate.toJDNPeriod();
+
+        checkJDN(jdn -31, jdnPeriodFromJulian.periodStart);
+        checkJDN(jdn -31, jdnPeriodFromJulian.periodEnd);
+
+    });*/
+
 
 
 });
