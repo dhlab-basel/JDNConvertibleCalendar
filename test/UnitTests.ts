@@ -742,4 +742,81 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
     });
 
+    it('shift the Julian Calendar date 31-12-1 BCE one day into the future and check for correct behaviour for year 0', () => {
+
+        // Julian Calendar date 31-12-1 BCE
+        const jdn = 1721423;
+
+        const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        julianCalendarDate.transposePeriodByDay(1);
+
+        const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
+
+        // Julian Calendar dates have no year 0 (convention used in the conversions functions)
+        // hence the year after -1 is the year 1
+        const expectedDate = new CalendarDate(1,1,1, 6);
+
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
+
+        const jdnPeriodFromJulian = julianCalendarDate.toJDNPeriod();
+
+        checkJDN(jdn +1, jdnPeriodFromJulian.periodStart);
+        checkJDN(jdn +1, jdnPeriodFromJulian.periodEnd);
+
+    });
+
+    it('shift the Julian Calendar date 31-12-1 BCE one month into the future and check for correct behaviour for year 0', () => {
+
+        // Julian Calendar date 31-12-1 BCE
+        const jdn = 1721423;
+
+        const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        julianCalendarDate.transposePeriodByMonth(1);
+
+        const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
+
+        // Julian Calendar dates have no year 0 (convention used in the conversions functions)
+        // hence the year after -1 is the year 1
+        const expectedDate = new CalendarDate(1,1,31, 1);
+
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
+
+        const jdnPeriodFromJulian = julianCalendarDate.toJDNPeriod();
+
+        checkJDN(jdn +31, jdnPeriodFromJulian.periodStart);
+        checkJDN(jdn +31, jdnPeriodFromJulian.periodEnd);
+
+    });
+
+    it('shift the Julian Calendar date 31-12-1 BCE one year into the future and check for correct behaviour for year 0', () => {
+
+        // Julian Calendar date 31-12-1 BCE
+        const jdn = 1721423;
+
+        const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        julianCalendarDate.transposePeriodByYear(1);
+
+        const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
+
+        // Julian Calendar dates have no year 0 (convention used in the conversions functions)
+        // hence the year after -1 is the year 1
+        const expectedDate = new CalendarDate(1,12,31, 6);
+
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
+
+        const jdnPeriodFromJulian = julianCalendarDate.toJDNPeriod();
+
+        checkJDN(jdn +365, jdnPeriodFromJulian.periodStart);
+        checkJDN(jdn +365, jdnPeriodFromJulian.periodEnd);
+
+    });
+
+
+
 });
