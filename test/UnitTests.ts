@@ -524,7 +524,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
     it('create the JDN for the Julian calendar date 15-03-44 BCE when Caesar was murdered and convert it to Gregorian', () => {
 
-        // murder of Caesar
+        //  assassination of Caesar
         const jdn = JDNConvertibleConversion.julianToJDN(new CalendarDate(-44,3,15));
 
         checkJDN(1705426, jdn);
@@ -555,6 +555,98 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         checkJDN(jdn, jdnPeriodFromGregorian.periodStart);
         checkJDN(jdn, jdnPeriodFromGregorian.periodEnd);
+
+    });
+
+    it('shift the Julian calendar date 15-03-44 BCE into the future by one year', () => {
+
+        //  assassination of Caesar
+        const jdn = 1705426;
+
+        const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        julianCalendarDate.transposePeriodByYear(1);
+
+        const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(-43, 3, 15, 4);
+
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
+
+        const jdnPeriodFromJulian = julianCalendarDate.toJDNPeriod();
+
+        checkJDN(jdn + 365, jdnPeriodFromJulian.periodStart);
+        checkJDN(jdn + 365, jdnPeriodFromJulian.periodEnd);
+
+    });
+
+    it('shift the Julian calendar date 15-03-44 BCE into the past by one year', () => {
+
+        //  assassination of Caesar
+        const jdn = 1705426;
+
+        const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        julianCalendarDate.transposePeriodByYear(-1);
+
+        const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(-45, 3, 15, 2);
+
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
+
+        const jdnPeriodFromJulian = julianCalendarDate.toJDNPeriod();
+
+        checkJDN(jdn - 365, jdnPeriodFromJulian.periodStart);
+        checkJDN(jdn - 365, jdnPeriodFromJulian.periodEnd);
+
+    });
+
+    it('shift the Julian calendar date 15-03-44 BCE into the future by one month', () => {
+
+        //  assassination of Caesar
+        const jdn = 1705426;
+
+        const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        julianCalendarDate.transposePeriodByMonth(1);
+
+        const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(-44, 4, 15, 6);
+
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
+
+        const jdnPeriodFromJulian = julianCalendarDate.toJDNPeriod();
+
+        checkJDN(jdn + 31, jdnPeriodFromJulian.periodStart);
+        checkJDN(jdn + 31, jdnPeriodFromJulian.periodEnd);
+
+    });
+
+    it('shift the Julian calendar date 15-03-44 BCE into the past by one month', () => {
+
+        //  assassination of Caesar
+        const jdn = 1705426;
+
+        const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        julianCalendarDate.transposePeriodByMonth(-1);
+
+        const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(-44, 2, 15, 3);
+
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
+
+        const jdnPeriodFromJulian = julianCalendarDate.toJDNPeriod();
+
+        checkJDN(jdn - 28, jdnPeriodFromJulian.periodStart);
+        checkJDN(jdn - 28, jdnPeriodFromJulian.periodEnd);
 
     });
 
