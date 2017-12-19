@@ -373,6 +373,9 @@ export module JDNConvertibleCalendarModule {
         /**
          * Transposes the current period by the given number of years.
          *
+         * This method is not accurate in the arithmetical sense: it tries to fit the given day in the month of the new year.
+         * If this is not possible, it takes the last day of the new month (e.g., February 29 will become the last possible day of February).
+         *
          * @param {number} years the number of years that the current period will be shifted.
          */
         public transposePeriodByYear(years: number): void {
@@ -385,13 +388,28 @@ export module JDNConvertibleCalendarModule {
 
             let newJDNPeriod: JDNPeriod;
 
-            // TODO: handle year zero correctly
+
+            // indicates if the shifting is towards the future or the past
+            const intoTheFuture: Boolean = (years > 0);
 
             if (this.exactDate) {
+
+                let yearZeroCorrection = 0;
+                // when switching from a negative to a negative year and the year zero does not exist in the calendar used, correct it.
+                if (!this.yearZeroExists && intoTheFuture && currentCalendarPeriod.periodStart.year < 1 && (currentCalendarPeriod.periodStart.year + years > -1)) {
+                    yearZeroCorrection = 1;
+                // when switching from a positive to a negative year and the year zero does not exist in the calendar used, correct it.
+                } else if (!this.yearZeroExists && !intoTheFuture && currentCalendarPeriod.periodStart.year > -1 && (currentCalendarPeriod.periodStart.year + years < 1)) {
+                    yearZeroCorrection = -1;
+                }
+
+                // determine max. number of days in the new month
+                const maxDaysInNewMonth: number = this.daysInMonth(new CalendarDate(currentCalendarPeriod.periodStart.year + years + yearZeroCorrection, currentCalendarPeriod.periodStart.month, 1));
+
                 const newCalendarDate = new CalendarDate(
-                    currentCalendarPeriod.periodStart.year + years,
+                    currentCalendarPeriod.periodStart.year + years + yearZeroCorrection,
                     currentCalendarPeriod.periodStart.month,
-                    currentCalendarPeriod.periodStart.day
+                    (currentCalendarPeriod.periodStart.day > maxDaysInNewMonth) ? maxDaysInNewMonth : currentCalendarPeriod.periodStart.day
                 );
 
                 let newJDN = this.calendarToJDN(newCalendarDate);
@@ -401,28 +419,47 @@ export module JDNConvertibleCalendarModule {
             } else
             {
 
-                // TODO: handle year zero correctly
+                let yearZeroCorrectionStart = 0;
+                // when switching from a negative to a negative year and the year zero does not exist in the calendar used, correct it.
+                if (!this.yearZeroExists && intoTheFuture && currentCalendarPeriod.periodStart.year < 1 && (currentCalendarPeriod.periodStart.year + years > -1)) {
+                    yearZeroCorrectionStart = 1;
+                    // when switching from a positive to a negative year and the year zero does not exist in the calendar used, correct it.
+                } else if (!this.yearZeroExists && !intoTheFuture && currentCalendarPeriod.periodStart.year > -1 && (currentCalendarPeriod.periodStart.year + years < 1)) {
+                    yearZeroCorrectionStart = -1;
+                }
 
-                // TODO: knowing the difference in days for the given period, just calculate one JDN and determine the other by addition of the known difference
-                // TODO: I think this wouldn't work because the difference in JDNs may change because there are leap years
+                // determine max. number of days in the new month
+                const maxDaysInNewMonthStart: number = this.daysInMonth(new CalendarDate(currentCalendarPeriod.periodStart.year + years + yearZeroCorrectionStart, currentCalendarPeriod.periodStart.month, 1));
 
                 const newCalendarDateStart = new CalendarDate(
-                    currentCalendarPeriod.periodStart.year + years,
+                    currentCalendarPeriod.periodStart.year + years + yearZeroCorrectionStart,
                     currentCalendarPeriod.periodStart.month,
-                    currentCalendarPeriod.periodStart.day
+                    (currentCalendarPeriod.periodStart.day > maxDaysInNewMonthStart) ? maxDaysInNewMonthStart : currentCalendarPeriod.periodStart.day
                 );
 
                 let newJDNStart = this.calendarToJDN(newCalendarDateStart);
 
+                let yearZeroCorrectionEnd = 0;
+                // when switching from a negative to a negative year and the year zero does not exist in the calendar used, correct it.
+                if (!this.yearZeroExists && intoTheFuture && currentCalendarPeriod.periodEnd.year < 1 && (currentCalendarPeriod.periodEnd.year + years > -1)) {
+                    yearZeroCorrectionEnd = 1;
+                    // when switching from a positive to a negative year and the year zero does not exist in the calendar used, correct it.
+                } else if (!this.yearZeroExists && !intoTheFuture && currentCalendarPeriod.periodEnd.year > -1 && (currentCalendarPeriod.periodEnd.year + years < 1)) {
+                    yearZeroCorrectionEnd = -1;
+                }
+
+                // determine max. number of days in the new month
+                const maxDaysInNewMonthEnd: number = this.daysInMonth(new CalendarDate(currentCalendarPeriod.periodEnd.year + years + yearZeroCorrectionEnd, currentCalendarPeriod.periodEnd.month, 1));
+
                 const newCalendarDateEnd = new CalendarDate(
-                    currentCalendarPeriod.periodEnd.year + years,
+                    currentCalendarPeriod.periodEnd.year + years + yearZeroCorrectionEnd,
                     currentCalendarPeriod.periodEnd.month,
-                    currentCalendarPeriod.periodEnd.day
+                    (currentCalendarPeriod.periodEnd.day > maxDaysInNewMonthEnd) ? maxDaysInNewMonthEnd : currentCalendarPeriod.periodEnd.day
                 );
 
                 let newJDNEnd = this.calendarToJDN(newCalendarDateEnd);
 
-                newJDNPeriod = new JDNPeriod(newJDNStart, newJDNStart);
+                newJDNPeriod = new JDNPeriod(newJDNStart, newJDNEnd);
             }
 
             this.convertJDNPeriodToCalendarPeriod(newJDNPeriod);
@@ -528,6 +565,9 @@ export module JDNConvertibleCalendarModule {
         /**
          * Transposes the current period by the given number of months.
          *
+         * This method is not accurate in the arithmetical sense: it tries to fit the given day in the new month.
+         * If this is not possible, it takes the last day of the new month (e.g., January 31 will become the last possible day of February).
+         *
          * @param {number} months the number of months that the current period will be shifted.
          */
         public transposePeriodByMonth(months: number): void {
@@ -549,9 +589,6 @@ export module JDNConvertibleCalendarModule {
                 newJDNPeriod = new JDNPeriod(newJDN, newJDN);
 
             } else {
-
-                // TODO: knowing the difference in days for the given period, just calculate one JDN and determine the other by addition of the known difference
-                // TODO: I think this wouldn't work because the difference in JDNs may change because months have different numbers of days
 
                 const newCalDateStart = this.handleMonthTransposition(currentCalendarPeriod.periodStart, months);
 
