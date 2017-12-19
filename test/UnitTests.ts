@@ -19,11 +19,10 @@
  */
 
 import {JDNConvertibleCalendarModule} from "../src/JDNConvertibleCalendar";
-import CalendarDate = JDNConvertibleCalendarModule.CalendarDate;
 import {JDNConvertibleConversionModule} from "../src/JDNCalendarConversion";
+import CalendarDate = JDNConvertibleCalendarModule.CalendarDate;
 import GregorianCalendarDate = JDNConvertibleCalendarModule.GregorianCalendarDate;
 import JDNPeriod = JDNConvertibleCalendarModule.JDNPeriod;
-import JulianCalendarDate = JDNConvertibleCalendarModule.JulianCalendarDate;
 import JulianCalendarDate = JDNConvertibleCalendarModule.JulianCalendarDate;
 
 let assert = require('assert');
