@@ -155,6 +155,11 @@ export module JDNConvertibleCalendar {
          */
         public abstract readonly monthsInYear: number;
 
+        /**
+         * Indicates if the year 0 exists in a specific calendar format.
+         */
+        public abstract readonly yearZeroExists: Boolean;
+
         //
         // Both calendar dates and JDNs are stored in parallel to avoid unnecessary conversions (JDN to calendar date and possibly back to JDN).
         // Manipulations are exclusively performed by `this.convertJDNPeriodToCalendarPeriod` that keeps them in sync.
@@ -380,6 +385,8 @@ export module JDNConvertibleCalendar {
 
             let newJDNPeriod: JDNPeriod;
 
+            // TODO: handle year zero correctly
+
             if (this.exactDate) {
                 const newCalendarDate = new CalendarDate(
                     currentCalendarPeriod.periodStart.year + years,
@@ -393,6 +400,8 @@ export module JDNConvertibleCalendar {
 
             } else
             {
+
+                // TODO: handle year zero correctly
 
                 // TODO: knowing the difference in days for the given period, just calculate one JDN and determine the other by addition of the known difference
                 // TODO: I think this wouldn't work because the difference in JDNs may change because there are leap years
@@ -451,11 +460,17 @@ export module JDNConvertibleCalendar {
                     // months to be added to new year
                     const monthsOverflow = calendarDate.month + monthsToShift - this.monthsInYear;
 
+                    // when switching from a negative to a negative year and the year zero does not exist in the calendar used, correct it.
+                    let yearZeroCorrection = 0;
+                    if (!this.yearZeroExists && calendarDate.year < 1 && (calendarDate.year + yearsToShift +1 > -1)) {
+                        yearZeroCorrection = 1;
+                    }
+
                     // determine max. number of days in the new month
-                    const maxDaysInNewMonth = this.daysInMonth(new CalendarDate(calendarDate.year + yearsToShift + 1, monthsOverflow, 1));
+                    const maxDaysInNewMonth: number = this.daysInMonth(new CalendarDate(calendarDate.year + yearsToShift + 1 + yearZeroCorrection, monthsOverflow, 1));
 
                     newCalendarDate = new CalendarDate(
-                        calendarDate.year + yearsToShift + 1, // add an extra year
+                        calendarDate.year + yearsToShift + 1 + yearZeroCorrection, // add an extra year
                         monthsOverflow,
                         (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
                     );
@@ -478,11 +493,17 @@ export module JDNConvertibleCalendar {
                     // months to be subtracted from the previous year
                     const newMonth =  this.monthsInYear - (monthsToShift - calendarDate.month);
 
+                    // when switching from a positive to a negative year and the year zero does not exist in the calendar used, correct it.
+                    let yearZeroCorrection = 0;
+                    if (!this.yearZeroExists && calendarDate.year > -1 && (calendarDate.year - yearsToShift -1 < 1)) {
+                        yearZeroCorrection = -1;
+                    }
+
                     // determine max. number of days in the new month
-                    const maxDaysInNewMonth = this.daysInMonth(new CalendarDate(calendarDate.year - yearsToShift -1, newMonth, 1));
+                    const maxDaysInNewMonth = this.daysInMonth(new CalendarDate(calendarDate.year - yearsToShift -1 + yearZeroCorrection, newMonth, 1));
 
                     newCalendarDate = new CalendarDate(
-                        calendarDate.year - yearsToShift -1, // subtract an extra year
+                        calendarDate.year - yearsToShift -1 + yearZeroCorrection, // subtract an extra year
                         newMonth,
                         (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
                     );
@@ -560,6 +581,10 @@ export module JDNConvertibleCalendar {
 
         public readonly monthsInYear = 12;
 
+        // we use a calendar conversion methods that uses the convention
+        // that the year zero exists in the Gregorian Calendar: https://www.fourmilab.ch/documents
+        public readonly yearZeroExists = true;
+
         protected JDNToCalendar(jdn: JDN): CalendarDate {
             return JDNConvertibleConversion.JDNToGregorian(jdn);
         };
@@ -582,6 +607,10 @@ export module JDNConvertibleCalendar {
         public readonly calendarFormat = JDNConvertibleCalendar.julian;
 
         public readonly monthsInYear = 12;
+
+        // we use a calendar conversion methods that uses the convention
+        // that the year zero does not exist in the Julian Calendar: https://www.fourmilab.ch/documents
+        public readonly yearZeroExists = false;
 
         protected JDNToCalendar(jdn: JDN): CalendarDate {
             return JDNConvertibleConversion.JDNToJulian(jdn);
