@@ -18,9 +18,9 @@
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {JDNConvertibleConversion} from "./JDNCalendarConversion";
+import {JDNConvertibleConversionModule} from "./JDNCalendarConversion";
 
-export module JDNConvertibleCalendar {
+export module JDNConvertibleCalendarModule {
 
     /**
      * Type alias for a Julian Day Number (JDN).
@@ -42,7 +42,7 @@ export module JDNConvertibleCalendar {
     };
 
     /**
-     * Represents an error that occurred when using JDNConvertibleCalendar.
+     * Represents an error that occurred when using JDNConvertibleCalendarModule.
      */
     export class JDNConvertibleCalendarError extends Error {
 
@@ -64,7 +64,7 @@ export module JDNConvertibleCalendar {
         /**
          *
          * Attention: depending on the conventions used, there may be a year 0 or not.
-         * This depends on the implementation of the conversion functions: `JDNConvertibleCalendar.JDNToCalendar`, `JDNConvertibleCalendar.calendarToJDN`
+         * This depends on the implementation of the conversion functions: `JDNConvertibleCalendarModule.JDNToCalendar`, `JDNConvertibleCalendarModule.calendarToJDN`
          *
          * @param {number} year Year of the given date.
          * @param {number} month Month of the given date.
@@ -87,8 +87,8 @@ export module JDNConvertibleCalendar {
 
         /**
          *
-         * @param {JDNConvertibleCalendar.CalendarDate} periodStart start of the period.
-         * @param {JDNConvertibleCalendar.CalendarDate} periodEnd End of the period.
+         * @param {JDNConvertibleCalendarModule.CalendarDate} periodStart start of the period.
+         * @param {JDNConvertibleCalendarModule.CalendarDate} periodEnd End of the period.
          */
         constructor(public readonly periodStart: CalendarDate, public readonly periodEnd: CalendarDate) {
 
@@ -108,8 +108,8 @@ export module JDNConvertibleCalendar {
 
         /**
          *
-         * @param {JDNConvertibleCalendar.JDN} periodStart start of the period.
-         * @param {JDNConvertibleCalendar.JDN} periodEnd End of the period.
+         * @param {JDNConvertibleCalendarModule.JDN} periodStart start of the period.
+         * @param {JDNConvertibleCalendarModule.JDN} periodEnd End of the period.
          */
         constructor(public readonly periodStart: JDN, public readonly periodEnd: JDN) {
             if (periodStart > periodEnd) throw new JDNConvertibleCalendarError(`start of a JDNPeriod must not be greater than its end`);
@@ -146,7 +146,7 @@ export module JDNConvertibleCalendar {
         public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian];
 
         /**
-         * Specific calendar format of a subclass of JDNConvertibleCalendar.
+         * Specific calendar format of a subclass of `JDNConvertibleCalendar`.
          */
         public abstract readonly calendarFormat: string;
 
@@ -199,7 +199,7 @@ export module JDNConvertibleCalendar {
          * This depends on the implementation of this conversion function.
          *
          * @param {JDN} jdn Julian Day Number
-         * @returns {JDNConvertibleCalendar.CalendarDate}
+         * @returns {JDNConvertibleCalendarModule.CalendarDate}
          */
         protected abstract JDNToCalendar(jdn: JDN): CalendarDate;
 
@@ -211,7 +211,7 @@ export module JDNConvertibleCalendar {
          * Attention: depending on the conventions used, there may be a year 0 or not.
          * This depends on the implementation of this conversion function.
          *
-         * @param {JDNConvertibleCalendar.CalendarDate} date calendar date
+         * @param {JDNConvertibleCalendarModule.CalendarDate} date calendar date
          * @returns {JDN}
          */
         protected abstract calendarToJDN(date: CalendarDate): JDN;
@@ -229,7 +229,7 @@ export module JDNConvertibleCalendar {
          *
          * The given date is expected to be of the same calendar format as the instance the method is called on.
          *
-         * @param {JDNConvertibleCalendar.CalendarDate} date given date.
+         * @param {JDNConvertibleCalendarModule.CalendarDate} date given date.
          * @returns {number} number of days in month of given date.
          */
         public daysInMonth(date: CalendarDate): number {
@@ -262,7 +262,7 @@ export module JDNConvertibleCalendar {
          * Do not manipulate members `this.exactDate`, `this.jdnStart`, `this.jdnEnd`, `this.calendarStart`, and `this.calendarEnd` directly,
          * use this method instead.
          *
-         * @param {JDNConvertibleCalendar.JDNPeriod} jdnPeriod
+         * @param {JDNConvertibleCalendarModule.JDNPeriod} jdnPeriod
          */
         protected convertJDNPeriodToCalendarPeriod(jdnPeriod: JDNPeriod): void {
 
@@ -300,7 +300,7 @@ export module JDNConvertibleCalendar {
         /**
          * This constructor is inherited by all subclasses (no implementation in subclass required).
          *
-         * @param {JDNConvertibleCalendar.JDNPeriod} jdnPeriod JDN period to create a calendar specific date from.
+         * @param {JDNConvertibleCalendarModule.JDNPeriod} jdnPeriod JDN period to create a calendar specific date from.
          */
         constructor(jdnPeriod: JDNPeriod) {
             this.convertJDNPeriodToCalendarPeriod(jdnPeriod);
@@ -309,16 +309,16 @@ export module JDNConvertibleCalendar {
         /**
          * Returns the given period as two calendar dates.
          *
-         * @returns {JDNConvertibleCalendar.CalendarPeriod}
+         * @returns {JDNConvertibleCalendarModule.CalendarPeriod}
          */
         public toCalendarPeriod(): CalendarPeriod {
             return new CalendarPeriod(this.calendarStart, this.calendarEnd);
         }
 
         /**
-         * Converts an instance of JDNConvertibleCalendar to a JDNPeriod.
+         * Converts an instance of `JDNConvertibleCalendar` to a `JDNPeriod`.
          *
-         * @returns {JDNConvertibleCalendar.JDNPeriod}
+         * @returns {JDNConvertibleCalendarModule.JDNPeriod}
          */
         public toJDNPeriod(): JDNPeriod {
             return new JDNPeriod(this.jdnStart, this.jdnEnd);
@@ -432,9 +432,9 @@ export module JDNConvertibleCalendar {
         /**
          * Converts the given calendar date to a new one, shifting the months by the given number.
          *
-         * @param {JDNConvertibleCalendar.CalendarDate} calendarDate the given calendar date.
+         * @param {JDNConvertibleCalendarModule.CalendarDate} calendarDate the given calendar date.
          * @param {number} months the number of months to shift.
-         * @returns {JDNConvertibleCalendar.CalendarDate}
+         * @returns {JDNConvertibleCalendarModule.CalendarDate}
          */
         protected handleMonthTransposition(calendarDate: CalendarDate, months: number): CalendarDate {
 
@@ -586,15 +586,15 @@ export module JDNConvertibleCalendar {
         public readonly yearZeroExists = true;
 
         protected JDNToCalendar(jdn: JDN): CalendarDate {
-            return JDNConvertibleConversion.JDNToGregorian(jdn);
+            return JDNConvertibleConversionModule.JDNToGregorian(jdn);
         };
 
         protected calendarToJDN(date: CalendarDate): JDN {
-            return JDNConvertibleConversion.gregorianToJDN(date);
+            return JDNConvertibleConversionModule.gregorianToJDN(date);
         }
 
         protected dayOfWeekFromJDN(jdn: number): number {
-            return JDNConvertibleConversion.dayOfWeekFromJDN(jdn);
+            return JDNConvertibleConversionModule.dayOfWeekFromJDN(jdn);
         };
 
     }
@@ -613,15 +613,15 @@ export module JDNConvertibleCalendar {
         public readonly yearZeroExists = false;
 
         protected JDNToCalendar(jdn: JDN): CalendarDate {
-            return JDNConvertibleConversion.JDNToJulian(jdn);
+            return JDNConvertibleConversionModule.JDNToJulian(jdn);
         }
 
         protected calendarToJDN(date: CalendarDate): JDN {
-            return JDNConvertibleConversion.julianToJDN(date);
+            return JDNConvertibleConversionModule.julianToJDN(date);
         }
 
         protected dayOfWeekFromJDN(jdn: JDN): number {
-            return JDNConvertibleConversion.dayOfWeekFromJDN(jdn);
+            return JDNConvertibleConversionModule.dayOfWeekFromJDN(jdn);
         };
     }
 

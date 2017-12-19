@@ -18,9 +18,9 @@
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {JDNConvertibleCalendar} from "./JDNConvertibleCalendar";
+import {JDNConvertibleCalendarModule} from "./JDNConvertibleCalendar";
 
-export module JDNConvertibleConversion {
+export module JDNConvertibleConversionModule {
 
     /**
      * From https://www.fourmilab.ch/documents/calendar/calendar.js
@@ -65,10 +65,10 @@ export module JDNConvertibleConversion {
      * > This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
      * > The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar."
      *
-     * @param {JDNConvertibleCalendar.CalendarDate} calendarDate Gregorian calendar date to be converted to JDN.
+     * @param {JDNConvertibleCalendarModule.CalendarDate} calendarDate Gregorian calendar date to be converted to JDN.
      * @returns {number}
      */
-    export const gregorianToJDN = (calendarDate: JDNConvertibleCalendar.CalendarDate): number => {
+    export const gregorianToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): number => {
 
         // TODO: check validity of given calendar date
 
@@ -103,9 +103,9 @@ export module JDNConvertibleConversion {
      * > The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar."
      *
      * @param {number} jdn JDN to be converted to a Gregorian calendar date.
-     * @returns {JDNConvertibleCalendar.CalendarDate}
+     * @returns {JDNConvertibleCalendarModule.CalendarDate}
      */
-    export const JDNToGregorian = (jdn: number): JDNConvertibleCalendar.CalendarDate => {
+    export const JDNToGregorian = (jdn: number): JDNConvertibleCalendarModule.CalendarDate => {
 
         // if a Julian Day has a fraction of 0.5 or higher, it refers to midnight (0h) or later
         // if it is has a fraction below 0.5, it refers to a time before midnight which is the day before
@@ -127,15 +127,15 @@ export module JDNConvertibleConversion {
             year++;
         }
 
-        const yearday = wjd - gregorianToJDN(new JDNConvertibleCalendar.CalendarDate(year, 1, 1));
-        const leapadj = ((wjd < gregorianToJDN(new JDNConvertibleCalendar.CalendarDate(year, 3, 1))) ? 0 : (leapGregorian(year) ? 1 : 2));
+        const yearday = wjd - gregorianToJDN(new JDNConvertibleCalendarModule.CalendarDate(year, 1, 1));
+        const leapadj = ((wjd < gregorianToJDN(new JDNConvertibleCalendarModule.CalendarDate(year, 3, 1))) ? 0 : (leapGregorian(year) ? 1 : 2));
         const month = Math.floor((((yearday + leapadj) * 12) + 373) / 367);
 
-        const day = (wjd - gregorianToJDN(new JDNConvertibleCalendar.CalendarDate(year, month, 1))) + 1;
+        const day = (wjd - gregorianToJDN(new JDNConvertibleCalendarModule.CalendarDate(year, month, 1))) + 1;
 
         // if (year <= 0) year--; // correction for PHPvar JULIAN_EPOCH = 1721423.5;
 
-        return new JDNConvertibleCalendar.CalendarDate(Math.round(year), Math.round(month), Math.round(day));
+        return new JDNConvertibleCalendarModule.CalendarDate(Math.round(year), Math.round(month), Math.round(day));
     };
 
     /**
@@ -152,10 +152,10 @@ export module JDNConvertibleConversion {
      * > This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
      * > The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar."
      *
-     * @param {JDNConvertibleCalendar.CalendarDate} calendarDate Julian calendar date to be converted to JDN.
+     * @param {JDNConvertibleCalendarModule.CalendarDate} calendarDate Julian calendar date to be converted to JDN.
      * @returns {number}
      */
-    export const julianToJDN = (calendarDate: JDNConvertibleCalendar.CalendarDate) => {
+    export const julianToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate) => {
 
         // TODO: check validity of given calendar date
 
@@ -198,9 +198,9 @@ export module JDNConvertibleConversion {
      * > The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar."
      *
      * @param {number} jdn JDN to be converted to a Julian calendar date.
-     * @returns {JDNConvertibleCalendar.CalendarDate}
+     * @returns {JDNConvertibleCalendarModule.CalendarDate}
      */
-    export const JDNToJulian = (jdn: number): JDNConvertibleCalendar.CalendarDate => {
+    export const JDNToJulian = (jdn: number): JDNConvertibleCalendarModule.CalendarDate => {
         let jdc = Math.floor(jdn) + 0.5;
 
         const z = Math.floor(jdc);
@@ -223,7 +223,7 @@ export module JDNConvertibleConversion {
             year--;
         }
 
-        return new JDNConvertibleCalendar.CalendarDate(Math.round(year), Math.round(month), Math.round(day));
+        return new JDNConvertibleCalendarModule.CalendarDate(Math.round(year), Math.round(month), Math.round(day));
     };
 
     // TODO: I am not sure if this is useful for other calendar formats than Gregorian and Julian

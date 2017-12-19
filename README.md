@@ -12,7 +12,7 @@ Currently, Gregorian and Julian calendar are supported.
 
 ## Focus
 
-The focus of this project is to provide a design or archictecture distributed as an `npm` module that makes it easy to convert between calendar formats. It is, however, not primarily a library for astronomical algorithms. For now, we put the these methods in the module `JDNConvertibleConversion` which is basically a (partial) reimplementation in TypeScript of what you find at <https://www.fourmilab.ch/documents/calendar>. We would like to make this an separate module which could be used with `JDNConvertibleCalendar` (see <https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/1>). 
+The focus of this project is to provide a design or architecture distributed as an `npm` module that makes it easy to convert between calendar formats. It is, however, not primarily a library for astronomical algorithms. For now, we put the these methods in the module `JDNConvertibleConversionModule` which is basically a (partial) reimplementation in TypeScript of what you find at <https://www.fourmilab.ch/documents/calendar>. We would like to make this an separate module which could be used with `JDNConvertibleCalendar` (see <https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/1>).
 
 ## Known Problems
 

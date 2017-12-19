@@ -18,21 +18,21 @@
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {JDNConvertibleCalendar} from "../src/JDNConvertibleCalendar";
-import CalendarDate = JDNConvertibleCalendar.CalendarDate;
-import {JDNConvertibleConversion} from "../src/JDNCalendarConversion";
-import GregorianCalendarDate = JDNConvertibleCalendar.GregorianCalendarDate;
-import JDNPeriod = JDNConvertibleCalendar.JDNPeriod;
-import JulianCalendarDate = JDNConvertibleCalendar.JulianCalendarDate;
-import JulianCalendarDate = JDNConvertibleCalendar.JulianCalendarDate;
+import {JDNConvertibleCalendarModule} from "../src/JDNConvertibleCalendar";
+import CalendarDate = JDNConvertibleCalendarModule.CalendarDate;
+import {JDNConvertibleConversionModule} from "../src/JDNCalendarConversion";
+import GregorianCalendarDate = JDNConvertibleCalendarModule.GregorianCalendarDate;
+import JDNPeriod = JDNConvertibleCalendarModule.JDNPeriod;
+import JulianCalendarDate = JDNConvertibleCalendarModule.JulianCalendarDate;
+import JulianCalendarDate = JDNConvertibleCalendarModule.JulianCalendarDate;
 
 let assert = require('assert');
 
 /**
  * Checks if the received calendar date corresponds to the expected calendar date.
  *
- * @param {JDNConvertibleCalendar.CalendarDate} expected expected calendar date.
- * @param {JDNConvertibleCalendar.CalendarDate} received received calendar date.
+ * @param {JDNConvertibleCalendarModule.CalendarDate} expected expected calendar date.
+ * @param {JDNConvertibleCalendarModule.CalendarDate} received received calendar date.
  */
 const checkCalendarDate = (expected: CalendarDate, received: CalendarDate) => {
 
@@ -60,13 +60,13 @@ const checkJDN = (expected: number, received: number) => {
 describe('JDN conversions to Gregorian calendar format and back', () => {
     it('convert the Gregorian Calendar date 06-12-2017 to JDN', () => {
         const gregorianCalendarDate1: CalendarDate = new CalendarDate(2017, 12, 6);
-        const jdn: number = JDNConvertibleConversion.gregorianToJDN(gregorianCalendarDate1);
+        const jdn: number = JDNConvertibleConversionModule.gregorianToJDN(gregorianCalendarDate1);
 
         checkJDN(2458094, jdn);
     });
 
     it('convert the JDN 2458094 back to the Gregorian Calendar date 06-12-2017', () => {
-        const gregorianDate = JDNConvertibleConversion.JDNToGregorian(2458094);
+        const gregorianDate = JDNConvertibleConversionModule.JDNToGregorian(2458094);
 
         const expectedDate = new CalendarDate(2017, 12, 6);
 
@@ -75,13 +75,13 @@ describe('JDN conversions to Gregorian calendar format and back', () => {
 
     it('convert the Gregorian Calendar date 31-12-2016 to JDN', () => {
         const gregorianCalendarDate1: CalendarDate = new CalendarDate(2016, 12, 31);
-        const jdn: number = JDNConvertibleConversion.gregorianToJDN(gregorianCalendarDate1);
+        const jdn: number = JDNConvertibleConversionModule.gregorianToJDN(gregorianCalendarDate1);
 
         checkJDN(2457754, jdn);
     });
 
     it('convert the JDN 2457754 back to the Gregorian Calendar date 31-12-2016', () => {
-        const gregorianDate = JDNConvertibleConversion.JDNToGregorian(2457754);
+        const gregorianDate = JDNConvertibleConversionModule.JDNToGregorian(2457754);
 
         const expectedDate = new CalendarDate(2016, 12, 31);
 
@@ -95,13 +95,13 @@ describe('JDN conversions to Julian calendar format and back', () => {
     it('convert the Julian Calendar date 2017-11-23 to JDN', () => {
 
         const julianCalendarDate2: CalendarDate = new CalendarDate(2017, 11, 23);
-        const jdn = JDNConvertibleConversion.julianToJDN(julianCalendarDate2);
+        const jdn = JDNConvertibleConversionModule.julianToJDN(julianCalendarDate2);
 
         checkJDN(2458094, jdn);
     });
 
     it('convert the JDN 2458094 back to the Julian Calendar date 23-11-2017', () => {
-        const julianCalendarDate = JDNConvertibleConversion.JDNToJulian(2458094);
+        const julianCalendarDate = JDNConvertibleConversionModule.JDNToJulian(2458094);
 
         const expectedDate = new CalendarDate(2017, 11, 23);
 
@@ -118,7 +118,7 @@ describe('Conversions from JDN to Gregorian and Julian calendar format an in bet
 
         const gregorianCalendar = new GregorianCalendarDate(new JDNPeriod(2434924, 2434924));
 
-        const gregorianCalendarPeriod: JDNConvertibleCalendar.CalendarPeriod = gregorianCalendar.toCalendarPeriod();
+        const gregorianCalendarPeriod: JDNConvertibleCalendarModule.CalendarPeriod = gregorianCalendar.toCalendarPeriod();
 
         const expectedDate = new CalendarDate(1954, 6, 30, 3);
 
@@ -149,14 +149,14 @@ describe('Conversions from JDN to Gregorian and Julian calendar format an in bet
 
         const gregorianDate: GregorianCalendarDate = new GregorianCalendarDate(new JDNPeriod(jdn, jdn));
 
-        const gregorianCalendarPeriod: JDNConvertibleCalendar.CalendarPeriod = gregorianDate.toCalendarPeriod();
+        const gregorianCalendarPeriod: JDNConvertibleCalendarModule.CalendarPeriod = gregorianDate.toCalendarPeriod();
 
         const expectedGregorianDate = new CalendarDate(2017, 12, 6, 3);
 
         checkCalendarDate(expectedGregorianDate, gregorianCalendarPeriod.periodStart);
         checkCalendarDate(expectedGregorianDate, gregorianCalendarPeriod.periodEnd);
 
-        const julianDate: JDNConvertibleCalendar.JDNConvertibleCalendar = gregorianDate.convertCalendar('Julian');
+        const julianDate: JDNConvertibleCalendarModule.JDNConvertibleCalendar = gregorianDate.convertCalendar('Julian');
 
         const jdnPeriod = julianDate.toJDNPeriod();
 
@@ -525,7 +525,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
     it('create the JDN for the Julian calendar date 15-03-44 BCE when Caesar was murdered and convert it to Gregorian', () => {
 
         // assassination of Caesar: Julian calendar date 15-03-44 BCE
-        const jdn = JDNConvertibleConversion.julianToJDN(new CalendarDate(-44,3,15));
+        const jdn = JDNConvertibleConversionModule.julianToJDN(new CalendarDate(-44,3,15));
 
         checkJDN(1705426, jdn);
 
