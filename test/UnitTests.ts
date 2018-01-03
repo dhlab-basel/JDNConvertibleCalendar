@@ -18,20 +18,14 @@
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {JDNConvertibleCalendarModule} from "../src/JDNConvertibleCalendar";
-import {JDNConvertibleConversionModule} from "../src/JDNCalendarConversion";
-import CalendarDate = JDNConvertibleCalendarModule.CalendarDate;
-import GregorianCalendarDate = JDNConvertibleCalendarModule.GregorianCalendarDate;
-import JDNPeriod = JDNConvertibleCalendarModule.JDNPeriod;
-import JulianCalendarDate = JDNConvertibleCalendarModule.JulianCalendarDate;
-
+import {CalendarDate, JDNPeriod, JDNConvertibleConversionModule, GregorianCalendarDate, JulianCalendarDate, CalendarPeriod, JDNConvertibleCalendar} from '../src'
 let assert = require('assert');
 
 /**
  * Checks if the received calendar date corresponds to the expected calendar date.
  *
- * @param {JDNConvertibleCalendarModule.CalendarDate} expected expected calendar date.
- * @param {JDNConvertibleCalendarModule.CalendarDate} received received calendar date.
+ * @param {CalendarDate} expected expected calendar date.
+ * @param {CalendarDate} received received calendar date.
  */
 const checkCalendarDate = (expected: CalendarDate, received: CalendarDate) => {
 
@@ -117,7 +111,7 @@ describe('Conversions from JDN to Gregorian and Julian calendar format an in bet
 
         const gregorianCalendar = new GregorianCalendarDate(new JDNPeriod(2434924, 2434924));
 
-        const gregorianCalendarPeriod: JDNConvertibleCalendarModule.CalendarPeriod = gregorianCalendar.toCalendarPeriod();
+        const gregorianCalendarPeriod: CalendarPeriod = gregorianCalendar.toCalendarPeriod();
 
         const expectedDate = new CalendarDate(1954, 6, 30, 3);
 
@@ -148,14 +142,14 @@ describe('Conversions from JDN to Gregorian and Julian calendar format an in bet
 
         const gregorianDate: GregorianCalendarDate = new GregorianCalendarDate(new JDNPeriod(jdn, jdn));
 
-        const gregorianCalendarPeriod: JDNConvertibleCalendarModule.CalendarPeriod = gregorianDate.toCalendarPeriod();
+        const gregorianCalendarPeriod: CalendarPeriod = gregorianDate.toCalendarPeriod();
 
         const expectedGregorianDate = new CalendarDate(2017, 12, 6, 3);
 
         checkCalendarDate(expectedGregorianDate, gregorianCalendarPeriod.periodStart);
         checkCalendarDate(expectedGregorianDate, gregorianCalendarPeriod.periodEnd);
 
-        const julianDate: JDNConvertibleCalendarModule.JDNConvertibleCalendar = gregorianDate.convertCalendar('Julian');
+        const julianDate: JDNConvertibleCalendar = gregorianDate.convertCalendar('Julian');
 
         const jdnPeriod = julianDate.toJDNPeriod();
 
@@ -506,7 +500,7 @@ describe('Create a JDNPeriod', () => {
             () => {
                 new JDNPeriod(2, 1)
             },
-            function (err) {
+            function (err: Error) {
 
                 if ((err instanceof Error) && err.message === 'start of a JDNPeriod must not be greater than its end') {
                     return true;

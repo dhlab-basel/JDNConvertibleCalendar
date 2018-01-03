@@ -2,10 +2,8 @@
   "name": "jdnconvertiblecalendar",
   "version": "0.0.1",
   "description": "Conversions between various calendar formats and manipulations using Julian Day Number (JDN)",
-  "types": [
-    "dist/JDNCalendarConversion.d.ts",
-    "dist/JDNConvertibleCalendar.d.ts"
-  ],
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",
