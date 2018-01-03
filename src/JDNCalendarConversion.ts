@@ -47,7 +47,7 @@ export module JDNConvertibleConversionModule {
     /*
      * Algorithm from https://www.fourmilab.ch/documents/calendar/astro.js
      */
-    const mod = (a, b): number => {
+    const mod = (a: number, b: number): number => {
         return a - (b * Math.floor(a / b));
     };
 

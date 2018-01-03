@@ -27,7 +27,7 @@ export module JDNConvertibleCalendarModule {
      *
      * A JDN is an integer representing a Julian Day (without fraction).
      */
-    type JDN = number;
+    export type JDN = number;
 
     /**
      * Checks if a given number is an integer.
