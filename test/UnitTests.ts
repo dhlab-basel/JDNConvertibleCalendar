@@ -485,7 +485,7 @@ describe('Create a JDNPeriod', () => {
             () => {
                 new JDNPeriod(1.1, 2)
             },
-            function (err) {
+            function (err: Error) {
                 if ((err instanceof Error) && err.message === 'JDNs are expected to be integers') {
                     return true;
                 }
