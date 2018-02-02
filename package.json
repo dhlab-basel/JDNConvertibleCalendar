@@ -15,7 +15,11 @@
     "url": "git+https://github.com/dhlab-basel/JDNConvertibleCalendar.git"
   },
   "keywords": [
-    "calendar"
+    "calendar format",
+    "conversion",
+    "Julian Day Number",
+    "JDN",
+    "date"
   ],
   "author": "Tobias Schweizer <t.schweizer@unibas.ch>, DHLab University of Basel (http://www.dhlab.unibas.ch)",
   "license": "AGPL-3.0",
