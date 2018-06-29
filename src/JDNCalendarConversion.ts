@@ -72,26 +72,22 @@ export module JDNConvertibleConversionModule {
 
         // TODO: check validity of given calendar date
 
-        const yearInt = Math.floor(calendarDate.year);
-        const monthInt = Math.floor(calendarDate.month);
+        let yearInt = Math.floor(calendarDate.year);
+        let monthInt = Math.floor(calendarDate.month);
         const dayInt = Math.floor(calendarDate.day);
-/*
-        const jdn = (GREGORIAN_EPOCH - 1) +
-            (365 * (yearInt - 1)) +
-            Math.floor((yearInt - 1) / 4) +
-            (-Math.floor((yearInt - 1) / 100)) +
-            Math.floor((yearInt - 1) / 400) +
-            Math.floor((((367 * monthInt) - 362) / 12) +
-                ((monthInt <= 2) ? 0 : (leapGregorian(yearInt) ? -1 : -2)) + dayInt);
-*/
-        const a = Math.floor(yearInt/100);
-        const b = 2 - a + Math.floor(a/4);
-        const jdn = Math.floor(365.25*(yearInt+4716)) +
+
+        if (monthInt <= 2) {
+            yearInt = yearInt - 1;
+            monthInt = monthInt + 12;
+        }
+
+        const a = Math.floor(yearInt/100.0);
+        const b = 2 - a + Math.floor(a/4.);
+        const jdn = Math.floor(365.25*(yearInt + 4716)) +
             Math.floor(30.6001*(monthInt + 1)) +
             dayInt + b - 1524.5;
         // convert JDC to JDN (ignore fraction)
-        //return Math.round(jdn);
-        return Math.ceil(jdn);
+        return Math.floor(jdn + 0.5);
     };
 
     /**
