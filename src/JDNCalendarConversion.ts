@@ -22,6 +22,12 @@ import {JDNConvertibleCalendarModule} from "./JDNConvertibleCalendar";
 
 export module JDNConvertibleConversionModule {
 
+
+    const truncateDecimals =  (num: number): number => {
+        return Math[num < 0 ? 'ceil' : 'floor'](num);
+    };
+
+
     /**
      * From https://www.fourmilab.ch/documents/calendar/calendar.js
      */
@@ -52,67 +58,94 @@ export module JDNConvertibleConversionModule {
     };
 
     /**
-     * Converts a Gregorian calendar date to a JDN.
+     * Converts a Gregorian calendar date to a JDC.
      *
      * Conversion algorithm from:
-     * https://www.fourmilab.ch/documents/calendar/calendar.js
+     * Jean Meeus, Astronomical Algorithms, 1998, 60pp.
      *
      * There is a year 0.
      *
-     * From <https://www.fourmilab.ch/documents/calendar>:
-     * > "While one can't properly speak of 'Gregorian dates' prior to the adoption of the calendar in 1582,
-     * > the calendar can be extrapolated to prior dates. In doing so, this implementation uses the convention that the year prior to year 1 is year 0.
-     * > This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
-     * > The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar."
+     * @param {JDNConvertibleCalendarModule.CalendarDate} calendarDate Gregorian calendar date to be converted to JDC.
+     * @returns {number}
+     */
+    export const gregorianToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): number => {
+
+        // TODO: check validity of given calendar date
+
+        let year = 0;
+        let month = 0;
+        let day = calendarDate.day;
+
+        if (calendarDate.daytime !== undefined) {
+            day = day + calendarDate.daytime;
+        }
+
+        if (calendarDate.month > 2) {
+            year = calendarDate.year;
+            month = calendarDate.month;
+        }
+        else {
+            year = calendarDate.year - 1;
+            month = calendarDate.month + 12;
+        }
+
+
+        let a = 0;
+        let b = 0;
+        let c = 0;
+
+        if (year < 0) {
+            c = -0.75;
+        }
+        else {
+            const idate = calendarDate.year*10000 + month*100 + day;
+            if (idate <= 15821015) {
+                a = truncateDecimals(year/100.);
+                b = 2 - a + Math.floor(a/4.);
+            }
+            else {
+                b = -13;
+            }
+        }
+
+        const jdc = truncateDecimals(365.25*year + c) +
+            truncateDecimals(30.6001*(month + 1)) +
+            day + b + 1720994.5;
+
+        return jdc;
+    };
+
+
+    /**
+     * Converts a Gregorian calendar date to a JDN.
      *
      * @param {JDNConvertibleCalendarModule.CalendarDate} calendarDate Gregorian calendar date to be converted to JDN.
      * @returns {number}
      */
     export const gregorianToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): number => {
-
-        // TODO: check validity of given calendar date
-
-        let yearInt = Math.floor(calendarDate.year);
-        let monthInt = Math.floor(calendarDate.month);
-        const dayInt = Math.floor(calendarDate.day);
-
-        if (monthInt <= 2) {
-            yearInt = yearInt - 1;
-            monthInt = monthInt + 12;
-        }
-
-        const a = Math.floor(yearInt/100.0);
-        const b = 2 - a + Math.floor(a/4.);
-        const jdn = Math.floor(365.25*(yearInt + 4716)) +
-            Math.floor(30.6001*(monthInt + 1)) +
-            dayInt + b - 1524.5;
-        // convert JDC to JDN (ignore fraction)
-        return Math.floor(jdn + 0.5);
+        const jdc = gregorianToJDC(calendarDate);
+        return Math.floor(jdc + 0.5); // adaption because full number without fraction of JDC represents noon.
     };
+
 
     /**
      * Converts a JDN to a Gregorian Calendar date.
      *
      * Conversion algorithm from:
-     * https://www.fourmilab.ch/documents/calendar/calendar.js
      *
      * There is a year 0.
      *
-     * From <https://www.fourmilab.ch/documents/calendar>:
-     * > "While one can't properly speak of 'Gregorian dates' prior to the adoption of the calendar in 1582,
-     * > the calendar can be extrapolated to prior dates. In doing so, this implementation uses the convention that the year prior to year 1 is year 0.
-     * > This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
-     * > The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar."
      *
-     * @param {number} jdn JDN to be converted to a Gregorian calendar date.
+     * @param {number} jdc JDN to be converted to a Gregorian calendar date.
      * @returns {JDNConvertibleCalendarModule.CalendarDate}
      */
-    export const JDNToGregorian = (jdn: number): JDNConvertibleCalendarModule.CalendarDate => {
+    export const JDCToGregorian = (jdc: number): JDNConvertibleCalendarModule.CalendarDate => {
 
         // if a Julian Day has a fraction of 0.5 or higher, it refers to midnight (0h) or later
         // if it is has a fraction below 0.5, it refers to a time before midnight which is the day before
         // 2457498.5 -> 2016-04-20 0h
         // 2457498.4 -> 2016-04-19
+        /*
         const wjd = jdn; //Math.floor(jdn - 0.5) + 0.5; // TODO: check this for correctness!
         const depoch = wjd - GREGORIAN_EPOCH;
         const quadricent = Math.floor(depoch / 146097);
@@ -138,6 +171,48 @@ export module JDNConvertibleConversionModule {
         // if (year <= 0) year--; // correction for PHPvar JULIAN_EPOCH = 1721423.5;
 
         return new JDNConvertibleCalendarModule.CalendarDate(Math.round(year), Math.round(month), Math.round(day));
+        */
+        jdc = jdc + 0.5;
+        const z = Math.floor(jdc);
+        const f = jdc - z;
+        let a;
+        if (z < 2299161) {
+            a = z;
+        }
+        else {
+            const alpha = Math.floor((z - 1867216.25)/36524.25);
+            a = z + 1 + alpha - Math.floor(alpha/4.);
+        }
+        const b = a + 1524;
+        const c = Math.floor((b - 122.1)/365.25);
+        const d = Math.floor(365.25*c);
+        const e = Math.floor((b - d)/30.6001);
+
+        const day = b - d - Math.floor(30.6001*e) + f;
+        let month;
+        if (e < 14) {
+            month = e - 1;
+        }
+        else {
+            month = e - 13;
+        }
+        let year;
+        if (month > 2) {
+            year = c - 4716;
+        }
+        else {
+            year = c - 4715;
+        }
+
+        console.log("year: " + year + " month: " + month + " day: " + day);
+
+        let fullday = Math.floor(day);
+        let daytime = day - fullday;
+        return new JDNConvertibleCalendarModule.CalendarDate(year, month, fullday, undefined, daytime);
+    };
+
+    export const JDNToGregorian = (jdn: number): JDNConvertibleCalendarModule.CalendarDate => {
+       return JDCToGregorian(jdn);
     };
 
     /**

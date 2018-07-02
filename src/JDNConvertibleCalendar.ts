@@ -71,7 +71,7 @@ export module JDNConvertibleCalendarModule {
          * @param {number} day Day of the given date (day of month, 1 based index).
          * @param {number} dayOfWeek Day of week of the given date (0 based index).
          */
-        constructor(public readonly year: number, public readonly month: number, public readonly day: number, readonly dayOfWeek?: number) {
+        constructor(public readonly year: number, public readonly month: number, public readonly day: number, public readonly dayOfWeek?: number, public readonly daytime?: number) {
 
             // TODO: When other calendar formats than Gregorian or Julian are implemented, this may have to be changed
             if (dayOfWeek !== undefined && (!isInteger(dayOfWeek) || dayOfWeek < 0 || dayOfWeek > 6)) throw new JDNConvertibleCalendarError("Invalid day of week: " + dayOfWeek)

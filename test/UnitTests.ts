@@ -45,20 +45,48 @@ const checkCalendarDate = (expected: CalendarDate, received: CalendarDate) => {
 const checkJDN = (expected: number, received: number) => {
 
     // make sure that the received JDN has no fraction
-    //assert.strictEqual(Math.floor(received), received, `JDN contains a fraction: ${received}`);
+    assert.strictEqual(Math.floor(received), received, `JDN contains a fraction: ${received}`);
 
     assert.strictEqual(received, expected, `JDN is wrong: received JDN is ${received} instead of ${expected}`);
 };
 
-describe('JDN conversions to Gregorian calendar format and back', () => {
-    it('convert the Gregorian Calendar date 06-12-2017 to JDN', () => {
-        const gregorianCalendarDate1: CalendarDate = new CalendarDate(2017, 12, 6);
-        const jdn: number = JDNConvertibleConversionModule.gregorianToJDN(gregorianCalendarDate1);
+const checkJDC = (expected: number, received: number) => {
+    assert.strictEqual(received, expected, `JDN is wrong: received JDN is ${received} instead of ${expected}`);
+};
 
-        checkJDN(2458094, jdn);
+describe('Conversion Gregorian calendar to JDC', () => {
+    it('convert the Gregorian Calendar date 27-01-1987 to JDC', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(1987, 1, 27, undefined, 0);
+        const jdn: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate1);
+
+        checkJDC(2446822.5, jdn);
+    });
+
+    it('convert the Gregorian Calendar date 27-01-1987 to JDC', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(1987, 1, 27, undefined, 0.5);
+        const jdn: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate1);
+
+        checkJDC(2446822.5, jdn);
+    });
+
+    it('convert the Gregorian Calendar date 17-08-(-1001) to JDC', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(-1001, 8, 17, undefined, 0.9);
+        const jdn: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate1);
+
+        checkJDC(1355671.4, jdn);
     });
 
 
+    it('convert the Gregorian Calendar date 01-01-(-4712) to JDC', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(-4712, 1, 1, undefined, 0.5);
+        const jdn: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate1);
+
+        checkJDC(0, jdn);
+    });
+
+});
+
+describe('Conversion Gregorian calendar to JDN', () => {
     it('convert the Gregorian Calendar date 01-01-2000 to JDN', () => {
         const gregorianCalendarDate1: CalendarDate = new CalendarDate(2000, 1, 1);
         const jdn: number = JDNConvertibleConversionModule.gregorianToJDN(gregorianCalendarDate1);
@@ -66,7 +94,19 @@ describe('JDN conversions to Gregorian calendar format and back', () => {
         checkJDN(2451545, jdn);
     });
 
+    it('convert the Gregorian Calendar date 06-12-2017 to JDN', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(2017, 12, 6);
+        const jdn: number = JDNConvertibleConversionModule.gregorianToJDN(gregorianCalendarDate1);
 
+        checkJDN(2458094, jdn);
+    });
+
+    it('convert the Gregorian Calendar date 01-01-2000 to JDN', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(2000, 1, 1);
+        const jdn: number = JDNConvertibleConversionModule.gregorianToJDN(gregorianCalendarDate1);
+
+        checkJDN(2451545, jdn);
+    });
 
     it('convert the Gregorian Calendar date 27-01-1987 to JDN', () => {
         const gregorianCalendarDate1: CalendarDate = new CalendarDate(1987, 1, 27);
@@ -124,30 +164,74 @@ describe('JDN conversions to Gregorian calendar format and back', () => {
         checkJDN(2026872, jdn);
     });
 
-    /*
-         it('convert the JDN 2458094 back to the Gregorian Calendar date 06-12-2017', () => {
-             const gregorianDate = JDNConvertibleConversionModule.JDNToGregorian(2458094);
+    it('convert the Gregorian Calendar date 31-12-2016 to JDN', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(2016, 12, 31);
+        const jdn: number = JDNConvertibleConversionModule.gregorianToJDN(gregorianCalendarDate1);
 
-             const expectedDate = new CalendarDate(2017, 12, 6);
+        checkJDN(2457754, jdn);
+    });
 
-             checkCalendarDate(expectedDate, gregorianDate);
-         });
+    it('convert the JDN 2457754 back to the Gregorian Calendar date 31-12-2016', () => {
+        const gregorianDate = JDNConvertibleConversionModule.JDNToGregorian(2457754);
 
-         it('convert the Gregorian Calendar date 31-12-2016 to JDN', () => {
-             const gregorianCalendarDate1: CalendarDate = new CalendarDate(2016, 12, 31);
-             const jdn: number = JDNConvertibleConversionModule.gregorianToJDN(gregorianCalendarDate1);
+        const expectedDate = new CalendarDate(2016, 12, 31);
 
-             checkJDN(2457754, jdn);
-         });
+        checkCalendarDate(expectedDate, gregorianDate);
+    });
 
-         it('convert the JDN 2457754 back to the Gregorian Calendar date 31-12-2016', () => {
-             const gregorianDate = JDNConvertibleConversionModule.JDNToGregorian(2457754);
+    //------------
 
-             const expectedDate = new CalendarDate(2016, 12, 31);
+    it('convert the Gregorian Calendar date 17-08-(-1001) to JDC', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(-1001, 8, 17);
+        const jdn: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate1);
 
-             checkCalendarDate(expectedDate, gregorianDate);
-         });
-     */
+        checkJDC(1355671, jdn);
+    });
+
+
+    it('convert the Gregorian Calendar date 01-01-(-4712) to JDC', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(-4712, 1, 1);
+        const jdn: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate1);
+
+        checkJDC(0, jdn);
+    });
+
+
+});
+
+describe('Conversion JDN to Gregorian calendar', () => {
+    it('convert the JDC 2458094 back to the Gregorian Calendar date 06-12-2017', () => {
+        const gregorianDate = JDNConvertibleConversionModule.JDNToGregorian(2458094);
+
+        const expectedDate = new CalendarDate(2017, 12, 6);
+
+        checkCalendarDate(expectedDate, gregorianDate);
+    });
+
+    it('convert the JDC 2458094 back to the Gregorian Calendar date 06-12-2017', () => {
+        const gregorianDate = JDNConvertibleConversionModule.JDNToGregorian(2458093.5);
+
+        const expectedDate = new CalendarDate(2017, 12, 6);
+
+        checkCalendarDate(expectedDate, gregorianDate);
+    });
+
+    it('convert the JDC 2458094 back to the Gregorian Calendar date 06-12-2017', () => {
+        const gregorianDate = JDNConvertibleConversionModule.JDNToGregorian(2458094.4999);
+
+        const expectedDate = new CalendarDate(2017, 12, 6);
+
+        checkCalendarDate(expectedDate, gregorianDate);
+    });
+
+    it('convert the JDC 1355671 back to the Gregorian Calendar date 17-08-(-1001)', () => {
+        const gregorianDate = JDNConvertibleConversionModule.JDNToGregorian(1355671);
+
+        const expectedDate = new CalendarDate(-1001, 8, 17);
+
+        checkCalendarDate(expectedDate, gregorianDate);
+    });
+
 });
 
 /*
