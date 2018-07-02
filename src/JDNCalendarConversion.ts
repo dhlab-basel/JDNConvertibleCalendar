@@ -99,12 +99,9 @@ export module JDNConvertibleConversionModule {
         }
         else {
             const idate = calendarDate.year*10000 + month*100 + day;
-            if (idate <= 15821015) {
+            if (idate >= 15821015) {
                 a = truncateDecimals(year/100.);
-                b = 2 - a + Math.floor(a/4.);
-            }
-            else {
-                b = -13;
+                b = 2 - a + truncateDecimals(a/4.);
             }
         }
 
@@ -124,7 +121,7 @@ export module JDNConvertibleConversionModule {
      */
     export const gregorianToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): number => {
         const jdc = gregorianToJDC(calendarDate);
-        return Math.floor(jdc + 0.5); // adaption because full number without fraction of JDC represents noon.
+        return truncateDecimals(jdc + 0.5); // adaption because full number without fraction of JDC represents noon.
     };
 
 
