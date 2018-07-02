@@ -54,7 +54,18 @@ const checkJDC = (expected: number, received: number) => {
     assert.strictEqual(received, expected, `JDN is wrong: received JDN is ${received} instead of ${expected}`);
 };
 
+//
+// first we test Gregorian to JDC
+//
 describe('Conversion Gregorian calendar to JDC', () => {
+
+    it('convert the Gregorian Calendar date 01-01-2000 12:00 to JDC', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(2000, 1, 1, undefined, 0.5);
+        const jdn: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate1);
+
+        checkJDC(2451545.0, jdn);
+    });
+
     it('convert the Gregorian Calendar date 27-01-1987 to JDC', () => {
         const gregorianCalendarDate1: CalendarDate = new CalendarDate(1987, 1, 27, undefined, 0);
         const jdn: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate1);
@@ -62,23 +73,11 @@ describe('Conversion Gregorian calendar to JDC', () => {
         checkJDC(2446822.5, jdn);
     });
 
-    it('convert the Gregorian Calendar date 17-08-(-1001) to JDC', () => {
-        const gregorianCalendarDate1: CalendarDate = new CalendarDate(-1001, 8, 17, undefined, 0.9);
-        const jdn: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate1);
-
-        checkJDC(1355671.4, jdn);
-    });
-
-
-    it('convert the Gregorian Calendar date 01-01-(-4712) to JDC', () => {
-        const gregorianCalendarDate1: CalendarDate = new CalendarDate(-4712, 1, 1, undefined, 0.5);
-        const jdn: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate1);
-
-        checkJDC(0, jdn);
-    });
-
 });
 
+//
+// second we test Gregorian to JDN
+//
 describe('Conversion Gregorian calendar to JDN', () => {
     it('convert the Gregorian Calendar date 01-01-2000 to JDN', () => {
         const gregorianCalendarDate1: CalendarDate = new CalendarDate(2000, 1, 1);
@@ -151,23 +150,6 @@ describe('Conversion Gregorian calendar to JDN', () => {
         checkCalendarDate(expectedDate, gregorianDate);
     });
 
-    //------------
-
-    it('convert the Gregorian Calendar date 17-08-(-1001) to JDC', () => {
-        const gregorianCalendarDate1: CalendarDate = new CalendarDate(-1001, 8, 17);
-        const jdn: number = JDNConvertibleConversionModule.gregorianToJDN(gregorianCalendarDate1);
-
-        checkJDC(1355671, jdn);
-    });
-
-
-    it('convert the Gregorian Calendar date 01-01-(-4712) to JDC', () => {
-        const gregorianCalendarDate1: CalendarDate = new CalendarDate(-4712, 1, 1);
-        const jdn: number = JDNConvertibleConversionModule.gregorianToJDN(gregorianCalendarDate1);
-
-        checkJDC(0, jdn);
-    });
-
     it('convert the Gregorian Calendar date 01-01-1600 to JDN', () => {
         const gregorianCalendarDate1: CalendarDate = new CalendarDate(1600, 1, 1);
         const jdn: number = JDNConvertibleConversionModule.gregorianToJDN(gregorianCalendarDate1);
@@ -182,14 +164,67 @@ describe('Conversion Gregorian calendar to JDN', () => {
         checkJDN(2305813, jdn);
     });
 
-    it('convert the Gregorian Calendar date 10-04-837 to JDN', () => {
-        const gregorianCalendarDate1: CalendarDate = new CalendarDate(837, 4, 10);
-        const jdn: number = JDNConvertibleConversionModule.gregorianToJDN(gregorianCalendarDate1);
+
+});
+
+//
+// testing Julian to JDC
+//
+describe('Conversion Julian calendar to JDC', () => {
+
+    it('convert the Julian Calendar date 10-04-837 to JDC', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(837, 4, 10, undefined, 0.3);
+        const jdn: number = JDNConvertibleConversionModule.julianToJDC(gregorianCalendarDate1);
+
+        checkJDC(2026871.8, jdn);
+    });
+
+    it('convert the Julian Calendar date 17-08-(-1001) to JDC', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(-1001, 8, 17, undefined, 0.9);
+        const jdn: number = JDNConvertibleConversionModule.julianToJDC(gregorianCalendarDate1);
+
+        checkJDC(1355671.4, jdn);
+    });
+
+
+    it('convert the Julian Calendar date 01-01-(-4712) to JDC', () => {
+        const gregorianCalendarDate1: CalendarDate = new CalendarDate(-4712, 1, 1, undefined, 0.5);
+        const jdn: number = JDNConvertibleConversionModule.julianToJDC(gregorianCalendarDate1);
+
+        checkJDC(0, jdn);
+    });
+
+
+});
+
+//
+// testing Julian to JDN
+//
+describe('Conversion Julian calendar to JDN', () => {
+
+    it('convert the Julian Calendar date 10-04-837 to JDN', () => {
+        const julianCalendarDate1: CalendarDate = new CalendarDate(837, 4, 10);
+        const jdn: number = JDNConvertibleConversionModule.julianToJDN(julianCalendarDate1);
 
         checkJDN(2026872, jdn);
     });
 
+    it('convert the Gregorian Calendar date 17-08-(-1001) to JDC', () => {
+        const julianCalendarDate1: CalendarDate = new CalendarDate(-1001, 8, 17);
+        const jdn: number = JDNConvertibleConversionModule.julianToJDN(julianCalendarDate1);
+
+        checkJDC(1355671, jdn);
+    });
+
+
+    it('convert the Gregorian Calendar date 01-01-(-4712) to JDC', () => {
+        const julianCalendarDate1: CalendarDate = new CalendarDate(-4712, 1, 1);
+        const jdn: number = JDNConvertibleConversionModule.julianToJDN(julianCalendarDate1);
+
+        checkJDC(0, jdn);
+    });
 });
+
 
 describe('Conversion JDN to Gregorian calendar', () => {
     it('convert the JDC 2458094 back to the Gregorian Calendar date 06-12-2017', () => {
@@ -216,8 +251,21 @@ describe('Conversion JDN to Gregorian calendar', () => {
         checkCalendarDate(expectedDate, gregorianDate);
     });
 
+});
+
+describe('Conversion JDN to Julian calendar', () => {
+
+
+    it('convert the JDC 2026872 back to the Julian Calendar date 10-04-837', () => {
+        const gregorianDate = JDNConvertibleConversionModule.JDNToJulian(2026872);
+
+        const expectedDate = new CalendarDate(837, 4, 10);
+
+        checkCalendarDate(expectedDate, gregorianDate);
+    });
+
     it('convert the JDC 1355671 back to the Gregorian Calendar date 17-08-(-1001)', () => {
-        const gregorianDate = JDNConvertibleConversionModule.JDNToGregorian(1355671);
+        const gregorianDate = JDNConvertibleConversionModule.JDNToJulian(1355671);
 
         const expectedDate = new CalendarDate(-1001, 8, 17);
 
@@ -226,7 +274,7 @@ describe('Conversion JDN to Gregorian calendar', () => {
 
 });
 
-/*
+
 describe('JDN conversions to Julian calendar format and back', () => {
 
     it('convert the Julian Calendar date 2017-11-23 to JDN', () => {
@@ -247,7 +295,8 @@ describe('JDN conversions to Julian calendar format and back', () => {
 
 });
 
-describe('Conversions from JDN to Gregorian and Julian calendar format an in between conversions', () => {
+
+describe('Conversions from JDN to Gregorian and Julian calendar format and in between conversions', () => {
 
     it('create a Gregorian date from JDN using an example from Meeus', () => {
 
@@ -658,21 +707,23 @@ describe('Create a JDNPeriod', () => {
 });
 
 describe('For Julian and Gregorian calendar: Create a BCE date', () => {
-
+    //
+    // all out conversion routines use the year 0! Thus 44 BCE is -43
+    //
     it('create the JDN for the Julian calendar date 15-03-44 BCE when Caesar was murdered and convert it to Gregorian', () => {
 
         // assassination of Caesar: Julian calendar date 15-03-44 BCE
-        const jdn = JDNConvertibleConversionModule.julianToJDN(new CalendarDate(-44,3,15));
+        const jdn = JDNConvertibleConversionModule.julianToJDN(new CalendarDate(-43,3,15));
 
-        checkJDN(1705426, jdn);
+        checkJDN(1705426, jdn)
 
         const murderOfCaesarJulianCalendarDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
 
         const murderOfJuliusCaesarJulianCalPeriod = murderOfCaesarJulianCalendarDate.toCalendarPeriod();
 
-        // in the Julian calendar, there is no year 0 in the conversion algorithm we use: <http://fourmilab.ch/documents/calendar/>, 44 BCE -> -44
+        // in the Julian calendar, there is a year 0 in the conversion algorithm we use: 44 BCE -> -43
         // TODO: see https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/3
-        const expectedJulianCalendarDate = new CalendarDate(-44, 3, 15, 3);
+        const expectedJulianCalendarDate = new CalendarDate(-43, 3, 15, 3);
 
         checkCalendarDate(expectedJulianCalendarDate, murderOfJuliusCaesarJulianCalPeriod.periodStart);
         checkCalendarDate(expectedJulianCalendarDate, murderOfJuliusCaesarJulianCalPeriod.periodEnd);
@@ -681,7 +732,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const murderOfJuliusCaesarGregorianCalPeriod = murderOfCaesarGregorianCalendarDate.toCalendarPeriod();
 
-        // in the Gregorian calendar, there is a year 0 in the conversion algorithm we use: http://fourmilab.ch/documents/calendar/ 44 BCE -> -43
+        // in the Gregorian calendar, there is a year 0 in the conversion algorithm we use: 44 BCE -> -43
         // TODO: https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/3
         const expectedGregorianCalendarDate = new CalendarDate(-43, 3, 13, 3);
 
@@ -706,7 +757,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
-        const expectedDate = new CalendarDate(-43, 3, 15, 4);
+        const expectedDate = new CalendarDate(-42, 3, 15, 4);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
@@ -729,7 +780,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
-        const expectedDate = new CalendarDate(-45, 3, 15, 2);
+        const expectedDate = new CalendarDate(-44, 3, 15, 2);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
@@ -752,7 +803,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
-        const expectedDate = new CalendarDate(-44, 4, 15, 6);
+        const expectedDate = new CalendarDate(-43, 4, 15, 6);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
@@ -775,7 +826,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
-        const expectedDate = new CalendarDate(-42, 2, 15, 5);
+        const expectedDate = new CalendarDate(-41, 2, 15, 5);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
@@ -798,7 +849,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
-        const expectedDate = new CalendarDate(-45, 4, 15, 5);
+        const expectedDate = new CalendarDate(-44, 4, 15, 5);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
@@ -821,7 +872,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
-        const expectedDate = new CalendarDate(-44, 2, 15, 3);
+        const expectedDate = new CalendarDate(-43, 2, 15, 3);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
@@ -844,7 +895,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
-        const expectedDate = new CalendarDate(-44, 3, 25, 6);
+        const expectedDate = new CalendarDate(-43, 3, 25, 6);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
@@ -867,7 +918,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
-        const expectedDate = new CalendarDate(-44, 3, 5, 0);
+        const expectedDate = new CalendarDate(-43, 3, 5, 0);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
@@ -953,7 +1004,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
         checkJDN(jdn +365, jdnPeriodFromJulian.periodEnd);
 
     });
-
+/*
     it('shift the Julian Calendar date 1-1-1 CE one day into the past and check for correct behaviour for year 0', () => {
 
         // Julian Calendar date 1-1-1 CE
@@ -1004,8 +1055,6 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
     });
 
-
-
+*/
 });
 
-*/

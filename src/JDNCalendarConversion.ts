@@ -97,13 +97,13 @@ export module JDNConvertibleConversionModule {
         if (year < 0) {
             c = -0.75;
         }
-        else {
-            const idate = calendarDate.year*10000 + month*100 + day;
-            if (idate >= 15821015) {
+        //else {
+        //    const idate = calendarDate.year*10000 + month*100 + day;
+        //    if (idate >= 15821015) { // this is if the date is after 15-10-1582 (Gregorian/Julian switch)
                 a = truncateDecimals(year/100.);
                 b = 2 - a + truncateDecimals(a/4.);
-            }
-        }
+        //    }
+        //}
 
         const jdc = truncateDecimals(365.25*year + c) +
             truncateDecimals(30.6001*(month + 1)) +
@@ -170,22 +170,22 @@ export module JDNConvertibleConversionModule {
         return new JDNConvertibleCalendarModule.CalendarDate(Math.round(year), Math.round(month), Math.round(day));
         */
         jdc = jdc + 0.5;
-        const z = Math.floor(jdc);
+        const z = truncateDecimals(jdc);
         const f = jdc - z;
         let a;
-        if (z < 2299161) {
-            a = z;
-        }
-        else {
-            const alpha = Math.floor((z - 1867216.25)/36524.25);
-            a = z + 1 + alpha - Math.floor(alpha/4.);
-        }
+        //if (z < 2299161) { // earlier than 15.10.582 ??
+        //    a = z; // it's a julian calendar
+        //}
+        //else {
+            const alpha = truncateDecimals((z - 1867216.25)/36524.25);
+            a = z + 1 + alpha - truncateDecimals(alpha/4.);
+        //}
         const b = a + 1524;
-        const c = Math.floor((b - 122.1)/365.25);
-        const d = Math.floor(365.25*c);
-        const e = Math.floor((b - d)/30.6001);
+        const c = truncateDecimals((b - 122.1)/365.25);
+        const d = truncateDecimals(365.25*c);
+        const e = truncateDecimals((b - d)/30.6001);
 
-        const day = b - d - Math.floor(30.6001*e) + f;
+        const day = b - d - truncateDecimals(30.6001*e) + f;
         let month;
         if (e < 14) {
             month = e - 1;
@@ -201,15 +201,50 @@ export module JDNConvertibleConversionModule {
             year = c - 4715;
         }
 
-        console.log("year: " + year + " month: " + month + " day: " + day);
-
-        let fullday = Math.floor(day);
+        let fullday = truncateDecimals(day);
         let daytime = day - fullday;
         return new JDNConvertibleCalendarModule.CalendarDate(year, month, fullday, undefined, daytime);
     };
 
     export const JDNToGregorian = (jdn: number): JDNConvertibleCalendarModule.CalendarDate => {
        return JDCToGregorian(jdn);
+    };
+
+
+    export const julianToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): number => {
+
+        // TODO: check validity of given calendar date
+
+        let year = 0;
+        let month = 0;
+        let day = calendarDate.day;
+
+        if (calendarDate.daytime !== undefined) {
+            day = day + calendarDate.daytime;
+        }
+
+        if (calendarDate.month > 2) {
+            year = calendarDate.year;
+            month = calendarDate.month;
+        }
+        else {
+            year = calendarDate.year - 1;
+            month = calendarDate.month + 12;
+        }
+
+
+        let a = 0;
+        let b = 0;
+        let c = 0;
+
+        if (year < 0) {
+            c = -0.75;
+        }
+
+        const jdc = truncateDecimals(365.25*year + c) +
+            truncateDecimals(30.6001*(month + 1)) + day + 1720994.5;
+
+        return jdc;
     };
 
     /**
@@ -232,18 +267,18 @@ export module JDNConvertibleConversionModule {
     export const julianToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate) => {
 
         // TODO: check validity of given calendar date
-
+/*
         let yearInt = Math.floor(calendarDate.year);
         let monthInt = Math.floor(calendarDate.month);
         const dayInt = Math.floor(calendarDate.day);
 
-        /* Adjust negative common era years to the zero-based notation we use.  */
+        // Adjust negative common era years to the zero-based notation we use.
 
         if (yearInt < 1) {
             yearInt++;
         }
 
-        /* Algorithm as given in Meeus, Astronomical Algorithms, Chapter 7, page 61 */
+        // Algorithm as given in Meeus, Astronomical Algorithms, Chapter 7, page 61
 
         if (monthInt <= 2) {
             yearInt--;
@@ -255,6 +290,10 @@ export module JDNConvertibleConversionModule {
             dayInt) - 1524.5);
 
         return Math.round(jdn);
+        */
+        const jdc = julianToJDC(calendarDate);
+        return truncateDecimals(jdc + 0.5); // adaption because full number without fraction of JDC represents noon.
+
     };
 
     /**
@@ -274,7 +313,8 @@ export module JDNConvertibleConversionModule {
      * @param {number} jdn JDN to be converted to a Julian calendar date.
      * @returns {JDNConvertibleCalendarModule.CalendarDate}
      */
-    export const JDNToJulian = (jdn: number): JDNConvertibleCalendarModule.CalendarDate => {
+    export const JDCToJulian = (jdc: number): JDNConvertibleCalendarModule.CalendarDate => {
+        /*
         let jdc = Math.floor(jdn) + 0.5;
 
         const z = Math.floor(jdc);
@@ -289,15 +329,48 @@ export module JDNConvertibleConversionModule {
         let year = Math.floor((month > 2) ? (c - 4716) : (c - 4715));
         const day = b - d - Math.floor(30.6001 * e);
 
-        /*  If year is less than 1, subtract one to convert from
-                    a zero based date system to the common era system in
-                    which the year -1 (1 B.C.E) is followed by year 1 (1 C.E.).  */
+        //  If year is less than 1, subtract one to convert from
+        //            a zero based date system to the common era system in
+        //            which the year -1 (1 B.C.E) is followed by year 1 (1 C.E.).
 
         if (year < 1) {
             year--;
         }
 
         return new JDNConvertibleCalendarModule.CalendarDate(Math.round(year), Math.round(month), Math.round(day));
+        */
+        jdc = jdc + 0.5;
+        const z = truncateDecimals(jdc);
+        const f = jdc - z;
+        const a = z; // it's a julian calendar
+        const b = a + 1524;
+        const c = truncateDecimals((b - 122.1)/365.25);
+        const d = truncateDecimals(365.25*c);
+        const e = truncateDecimals((b - d)/30.6001);
+
+        const day = b - d - truncateDecimals(30.6001*e) + f;
+        let month;
+        if (e < 14) {
+            month = e - 1;
+        }
+        else {
+            month = e - 13;
+        }
+        let year;
+        if (month > 2) {
+            year = c - 4716;
+        }
+        else {
+            year = c - 4715;
+        }
+
+        let fullday = truncateDecimals(day);
+        let daytime = day - fullday;
+        return new JDNConvertibleCalendarModule.CalendarDate(year, month, fullday, undefined, daytime);
+    };
+
+    export const JDNToJulian = (jdn: number): JDNConvertibleCalendarModule.CalendarDate => {
+        return JDCToJulian(jdn);
     };
 
     // TODO: I am not sure if this is useful for other calendar formats than Gregorian and Julian
