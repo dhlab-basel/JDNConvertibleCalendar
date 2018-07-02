@@ -1004,7 +1004,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
         checkJDN(jdn +365, jdnPeriodFromJulian.periodEnd);
 
     });
-/*
+
     it('shift the Julian Calendar date 1-1-1 CE one day into the past and check for correct behaviour for year 0', () => {
 
         // Julian Calendar date 1-1-1 CE
@@ -1018,7 +1018,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         // Julian Calendar dates have no year 0 (convention used in the conversions functions)
         // hence the year after -1 is the year 1
-        const expectedDate = new CalendarDate(-1,12,31, 5);
+        const expectedDate = new CalendarDate(0,12,31, 5);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
@@ -1043,7 +1043,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         // Julian Calendar dates have no year 0 (convention used in the conversions functions)
         // hence the year after -1 is the year 1
-        const expectedDate = new CalendarDate(-1,12,1, 3);
+        const expectedDate = new CalendarDate(0,12,1, 3);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodEnd);
@@ -1055,6 +1055,5 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
     });
 
-*/
 });
 

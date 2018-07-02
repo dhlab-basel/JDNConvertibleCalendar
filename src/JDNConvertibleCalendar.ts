@@ -647,7 +647,8 @@ export module JDNConvertibleCalendarModule {
 
         // we use a calendar conversion methods that uses the convention
         // that the year zero does not exist in the Julian Calendar: https://www.fourmilab.ch/documents
-        public readonly yearZeroExists = false;
+        //public readonly yearZeroExists = false;
+        public readonly yearZeroExists = true;
 
         protected JDNToCalendar(jdn: JDN): CalendarDate {
             return JDNConvertibleConversionModule.JDNToJulian(jdn);
