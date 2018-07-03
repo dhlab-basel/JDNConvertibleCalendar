@@ -5,7 +5,7 @@
     "declaration": true,
     "outDir": "./dist",
     "strict": true,
-    "baseUrl": "src",
+    "baseUrl": "./",
     "experimentalDecorators": true
   },
   "exclude": [
