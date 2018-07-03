@@ -22,31 +22,18 @@ import {JDNConvertibleCalendarModule} from "./JDNConvertibleCalendar";
 
 export module JDNConvertibleConversionModule {
 
-
+    /**
+     * Removes the fraction from a given number (<https://stackoverflow.com/questions/4912788/truncate-not-round-off-decimal-numbers-in-javascript/9232092#9232092>).
+     * This also works for negative numbers.
+     *
+     * 1.2 -> 1
+     * -3.2 -> 3
+     *
+     * @param {number} num the number whose .
+     * @returns {number} the number without fraction.
+     */
     const truncateDecimals =  (num: number): number => {
         return Math[num < 0 ? 'ceil' : 'floor'](num);
-    };
-
-
-    /**
-     * From https://www.fourmilab.ch/documents/calendar/calendar.js
-     */
-    const GREGORIAN_EPOCH = 1721425.5;
-    const JULIAN_EPOCH = 1721423.5;
-    const HEBREW_EPOCH = 347995.5;
-    const FRENCH_REVOLUTIONARY_EPOCH = 2375839.5;
-
-    /**
-     * Indicates if given year is a leap year in Gregorian calendar.
-     *
-     * Algorithm from: https://www.fourmilab.ch/documents/calendar/calendar.js
-     *
-     * @param {number} year year to check for.
-     * @returns {boolean}
-     */
-    const leapGregorian = (year: number): boolean => {
-        let yearInt = Math.floor(year);
-        return ((yearInt % 4) == 0) && (!(((yearInt % 100) == 0) && ((yearInt % 400) != 0)));
     };
 
     // TODO: document this method
@@ -126,14 +113,14 @@ export module JDNConvertibleConversionModule {
 
 
     /**
-     * Converts a JDN to a Gregorian Calendar date.
+     * Converts a JDC to a Gregorian Calendar date.
      *
      * Conversion algorithm from:
+     * Jean Meeus, Astronomical Algorithms, 1998, 60pp.
      *
      * There is a year 0.
      *
-     *
-     * @param {number} jdc JDN to be converted to a Gregorian calendar date.
+     * @param {number} jdc JDC to be converted to a Gregorian calendar date.
      * @returns {JDNConvertibleCalendarModule.CalendarDate}
      */
     export const JDCToGregorian = (jdc: number): JDNConvertibleCalendarModule.CalendarDate => {
@@ -206,11 +193,27 @@ export module JDNConvertibleConversionModule {
         return new JDNConvertibleCalendarModule.CalendarDate(year, month, fullday, undefined, daytime);
     };
 
+    /**
+     * Converts a JDN to a Gregorian calendar date.
+     *
+     * @param {number} jdn the given JDN.
+     * @returns {JDNConvertibleCalendarModule.CalendarDate}
+     */
     export const JDNToGregorian = (jdn: number): JDNConvertibleCalendarModule.CalendarDate => {
        return JDCToGregorian(jdn);
     };
 
-
+    /**
+     * Converts a Julian calendar date to a JDC.
+     *
+     * Conversion algorithm from:
+     * Jean Meeus, Astronomical Algorithms, 1998, 60pp.
+     *
+     * There is a year 0.
+     *
+     * @param {JDNConvertibleCalendarModule.CalendarDate} calendarDate
+     * @returns {number}
+     */
     export const julianToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): number => {
 
         // TODO: check validity of given calendar date
@@ -249,17 +252,6 @@ export module JDNConvertibleConversionModule {
 
     /**
      * Converts a Julian calendar date to a JDN.
-     *
-     * Conversion algorithm from:
-     * https://www.fourmilab.ch/documents/calendar/calendar.js
-     *
-     * There is **no** year 0.
-     *
-     * From <https://www.fourmilab.ch/documents/calendar>:
-     * > "While one can't properly speak of 'Gregorian dates' prior to the adoption of the calendar in 1582,
-     * > the calendar can be extrapolated to prior dates. In doing so, this implementation uses the convention that the year prior to year 1 is year 0.
-     * > This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
-     * > The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar."
      *
      * @param {JDNConvertibleCalendarModule.CalendarDate} calendarDate Julian calendar date to be converted to JDN.
      * @returns {number}
@@ -300,17 +292,11 @@ export module JDNConvertibleConversionModule {
      * Converts a JDN to a Julian Calendar date.
      *
      * Conversion algorithm from:
-     * https://www.fourmilab.ch/documents/calendar/calendar.js
+     * Jean Meeus, Astronomical Algorithms, 1998, 60pp.
      *
-     * There is **no** year 0.
+     * There is a year 0.
      *
-     * From <https://www.fourmilab.ch/documents/calendar>:
-     * > "While one can't properly speak of 'Gregorian dates' prior to the adoption of the calendar in 1582,
-     * > the calendar can be extrapolated to prior dates. In doing so, this implementation uses the convention that the year prior to year 1 is year 0.
-     * > This differs from the Julian calendar in which there is no year 0—the year before year 1 in the Julian calendar is year −1.
-     * > The date December 30th, 0 in the Gregorian calendar corresponds to January 1st, 1 in the Julian calendar."
-     *
-     * @param {number} jdn JDN to be converted to a Julian calendar date.
+     * @param {number} jdc JDC to be converted to a Julian calendar date.
      * @returns {JDNConvertibleCalendarModule.CalendarDate}
      */
     export const JDCToJulian = (jdc: number): JDNConvertibleCalendarModule.CalendarDate => {
