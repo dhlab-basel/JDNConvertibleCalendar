@@ -303,6 +303,18 @@ export module JDNConvertibleCalendarModule {
          * @param {JDNConvertibleCalendarModule.JDNPeriod} jdnPeriod JDN period to create a calendar specific date from.
          */
         constructor(jdnPeriod: JDNPeriod) {
+            const julianPeriodStart = new CalendarDate(-4712, 1, 1);
+
+            this.calendarStart = julianPeriodStart;
+
+            this.calendarEnd = julianPeriodStart;
+
+            this.exactDate = true;
+
+            this.jdnStart = 0;
+
+            this.jdnEnd = 0;
+
             this.convertJDNPeriodToCalendarPeriod(jdnPeriod);
         }
 
