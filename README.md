@@ -2,18 +2,25 @@
 
 ## General Remarks
 
-**Please note that this software is still in a very early state of development. Its existing functionality hasn't been properly tested yet.**
+**Please note that this software is still in a early state of development. Currently only Gregorian and Julian calendars are supported.**
 
 ## Introduction
 
-`JDNConvertibleCalendar` offers a convenient way to convert a given date to different calendar formats making use of Julian Day Number (JDN). 
+`JDNConvertibleCalendar` offers a convenient way to convert a given date to different calendar formats making use of Julian Day Count (JDC) and Julian Day Number (JDN). The Julian Day is
+continuous count of days since the beginning of the Julian Period in 4713 BCE.
+JDC contains a fraction that contains the daytime. It is to note that the JDC starts a noon with a fraction of .0 and midnight is at .5. For example the day with the date
+27th of January 1987 starts with the JDC of 2446822.5 and ends with a JDC of 2446823.4999…. Hence noon is at 2446823.0 .
+The corresponding JDN is at noon, that is for this example (27th of January 1987) at 2446823 .
+
+Please note that this software uses the (astronomical) convention that BCE dates are represented as negative years and that the year zero (0) is used! This the year 1 BCE must be given as year 0,
+and the year 2 BCE corresponds to -1 etc. .
 
 Currently, Gregorian and Julian calendar are supported.
 
 ## Focus
 
 The focus of this project is to provide a design or architecture that makes it easy to convert between calendar formats. It is, however, not primarily a library for astronomical algorithms. 
-For now, we put the these methods in the module `JDNConvertibleConversionModule` which is basically a (partial) reimplementation in TypeScript of what you find at <https://www.fourmilab.ch/documents/calendar>. 
+For now, we put the these methods in the module `JDNConvertibleConversionModule`.
 We would like to make this an separate module which could be used with `JDNConvertibleCalendar` (see <https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/1>).
 
 ## Design
@@ -39,8 +46,6 @@ The HTML-documentation can also be built locally running `npm run builddocs` in 
 For working examples, please see the tests in the test directory. Run the test with `npm test` from the project root.
 
 ## Known Problems
-
-- I am pretty sure that here are still some problems with the rounding of JDC (which includes a fraction for daytime) to JDN. See <https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/2>.
 
 - The static configuration of how many months a year has per calendar may not be good enough for other calendars than Gregorian and Julian (lunar calendars). 
 Maybe this has to be made a function that returns the number of months for a given year. This would make transposing by month more complicated.

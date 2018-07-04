@@ -63,8 +63,8 @@ export module JDNConvertibleCalendarModule {
 
         /**
          *
-         * Attention: depending on the conventions used, there may be a year 0 or not.
-         * This depends on the implementation of the conversion functions: `JDNConvertibleCalendarModule.JDNToCalendar`, `JDNConvertibleCalendarModule.calendarToJDN`
+         * Please note that this software uses the (astronomical) convention that BCE dates are represented as negative years and that the year zero (0) is used!
+         * This the year 1 BCE must be given as year 0,and the year 2 BCE corresponds to -1 etc.
          *
          * @param {number} year Year of the given date.
          * @param {number} month Month of the given date.
