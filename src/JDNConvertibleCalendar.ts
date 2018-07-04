@@ -643,7 +643,7 @@ export module JDNConvertibleCalendarModule {
         }
 
         protected dayOfWeekFromJDN(jdn: number): number {
-            return JDNConvertibleConversionModule.dayOfWeekFromJDN(jdn);
+            return JDNConvertibleConversionModule.dayOfWeekFromJDC(jdn);
         };
 
     }
@@ -671,7 +671,7 @@ export module JDNConvertibleCalendarModule {
         }
 
         protected dayOfWeekFromJDN(jdn: JDN): number {
-            return JDNConvertibleConversionModule.dayOfWeekFromJDN(jdn);
+            return JDNConvertibleConversionModule.dayOfWeekFromJDC(jdn);
         };
     }
 

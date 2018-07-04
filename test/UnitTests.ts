@@ -21,12 +21,14 @@
 import {
     CalendarDate,
     JDNPeriod,
-    JDNConvertibleConversionModule,
     GregorianCalendarDate,
     JulianCalendarDate,
     CalendarPeriod,
-    JDNConvertibleCalendar
+    JDNConvertibleCalendar, JDNConvertibleConversionModule
 } from '../src'
+import dayOfWeekFromJDC = JDNConvertibleConversionModule.dayOfWeekFromJDC;
+
+
 
 let assert = require('assert');
 
@@ -60,7 +62,7 @@ const checkJDN = (expected: number, received: number) => {
 };
 
 /**
- * Checks if the rceived JDC corresponds to the received JDC.
+ * Checks if the received JDC corresponds to the received JDC.
  *
  * @param {number} expected expected JDC.
  * @param {number} received received JDC.
@@ -1094,3 +1096,20 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
 });
 
+//
+// testing the day of week function
+//
+describe('Determine day of week from JDC', () => {
+
+    it('Test for day of the week from JDC 2434923.5 to 3 (Wednesday)', () => {
+        assert.strictEqual(dayOfWeekFromJDC(2434923.5), 3);
+    });
+
+    it('Test for day of the week from JDC 2434924.0 to 3 (Wednesday)', () => {
+        assert.strictEqual(dayOfWeekFromJDC(2434924.0), 3);
+    });
+
+    it('Test for day of the week from JDC 2434924.4999 to 3 (Wednesday)', () => {
+        assert.strictEqual(dayOfWeekFromJDC(2434924.4999), 3);
+    });
+});
