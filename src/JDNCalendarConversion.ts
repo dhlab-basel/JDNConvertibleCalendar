@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 Lukas Rosenthaler, Benjamin Geer, Ivan Subotic,
+ * Copyright © 2018 Lukas Rosenthaler, Benjamin Geer, Ivan Subotic,
  * Tobias Schweizer, André Kilchenmann, and Sepideh Alassi.
  *
  * This file is part of JDNConvertibleCalendar.
@@ -30,7 +30,7 @@ export module JDNConvertibleConversionModule {
      * -3.2 -> -3
      *
      * @param {number} num the number whose fraction is to be removed.
-     * @returns {number} the number without fraction.
+     * @returns {number}
      */
     const truncateDecimals =  (num: number): number => {
         return Math[num < 0 ? 'ceil' : 'floor'](num);

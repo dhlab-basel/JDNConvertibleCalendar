@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 Lukas Rosenthaler, Benjamin Geer, Ivan Subotic,
+ * Copyright © 2018 Lukas Rosenthaler, Benjamin Geer, Ivan Subotic,
  * Tobias Schweizer, André Kilchenmann, and Sepideh Alassi.
  *
  * This file is part of JDNConvertibleCalendar.
@@ -26,8 +26,6 @@ import {
     CalendarPeriod,
     JDNConvertibleCalendar, JDNConvertibleConversionModule
 } from '../src'
-import dayOfWeekFromJDC = JDNConvertibleConversionModule.dayOfWeekFromJDC;
-
 
 
 let assert = require('assert');
@@ -1100,14 +1098,14 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 describe('Determine day of week from JDC', () => {
 
     it('Test for day of the week from JDC 2434923.5 to 3 (Wednesday)', () => {
-        assert.strictEqual(dayOfWeekFromJDC(2434923.5), 3);
+        assert.strictEqual(JDNConvertibleConversionModule.dayOfWeekFromJDC(2434923.5), 3);
     });
 
     it('Test for day of the week from JDC 2434924.0 to 3 (Wednesday)', () => {
-        assert.strictEqual(dayOfWeekFromJDC(2434924.0), 3);
+        assert.strictEqual(JDNConvertibleConversionModule.dayOfWeekFromJDC(2434924.0), 3);
     });
 
     it('Test for day of the week from JDC 2434924.4999 to 3 (Wednesday)', () => {
-        assert.strictEqual(dayOfWeekFromJDC(2434924.4999), 3);
+        assert.strictEqual(JDNConvertibleConversionModule.dayOfWeekFromJDC(2434924.4999), 3);
     });
 });

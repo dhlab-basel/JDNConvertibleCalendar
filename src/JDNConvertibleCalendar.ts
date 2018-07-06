@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 Lukas Rosenthaler, Benjamin Geer, Ivan Subotic,
+ * Copyright © 2018 Lukas Rosenthaler, Benjamin Geer, Ivan Subotic,
  * Tobias Schweizer, André Kilchenmann, and Sepideh Alassi.
  *
  * This file is part of JDNConvertibleCalendar.
@@ -18,7 +18,7 @@
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {JDNConvertibleConversionModule} from "./JDNCalendarConversion";
+import {JDNConvertibleConversionModule} from './JDNCalendarConversion';
 
 export module JDNConvertibleCalendarModule {
 
@@ -28,6 +28,16 @@ export module JDNConvertibleCalendarModule {
      * A JDN is an integer representing a Julian Day (without fraction).
      */
     export type JDN = number;
+
+    /**
+     * Type alias for a Julian Day Count (JDC).
+     *
+     * A JDC is a number representing a Julian Day with daytime (including a fraction).
+     *
+     * Attention: A fraction of .5 represents midnight, .0 represents noon.
+     *
+     */
+    export type JDC = number;
 
     /**
      * Checks if a given number is an integer.
@@ -64,17 +74,18 @@ export module JDNConvertibleCalendarModule {
         /**
          *
          * Please note that this software uses the (astronomical) convention that BCE dates are represented as negative years and that the year zero (0) is used!
-         * This the year 1 BCE must be given as year 0,and the year 2 BCE corresponds to -1 etc.
+         * The year 1 BCE must be indicated as year 0, and the year 2 BCE corresponds to -1 etc.
          *
-         * @param {number} year Year of the given date.
-         * @param {number} month Month of the given date.
-         * @param {number} day Day of the given date (day of month, 1 based index).
-         * @param {number} dayOfWeek Day of week of the given date (0 based index).
+         * @param year Year of the given date.
+         * @param month Month of the given date.
+         * @param day Day of the given date (day of month, 1 based index).
+         * @param dayOfWeek Day of week of the given date (0 based index), if any.
+         * @param daytime time of the day, if any. 0 refers to midnight, 0.5 to noon.
          */
         constructor(public readonly year: number, public readonly month: number, public readonly day: number, public readonly dayOfWeek?: number, public readonly daytime?: number) {
 
             // TODO: When other calendar formats than Gregorian or Julian are implemented, this may have to be changed
-            if (dayOfWeek !== undefined && (!isInteger(dayOfWeek) || dayOfWeek < 0 || dayOfWeek > 6)) throw new JDNConvertibleCalendarError("Invalid day of week: " + dayOfWeek)
+            if (dayOfWeek !== undefined && (!isInteger(dayOfWeek) || dayOfWeek < 0 || dayOfWeek > 6)) throw new JDNConvertibleCalendarError('Invalid day of week: ' + dayOfWeek)
 
         }
 
@@ -116,7 +127,7 @@ export module JDNConvertibleCalendarModule {
 
             // check that given arguments are integers (JDNs have to fractions)
             if (!(isInteger(periodStart) && isInteger(periodEnd))) {
-                throw new JDNConvertibleCalendarError("JDNs are expected to be integers");
+                throw new JDNConvertibleCalendarError('JDNs are expected to be integers');
             }
 
             this.exactDate = (periodStart === periodEnd);
@@ -347,7 +358,7 @@ export module JDNConvertibleCalendarModule {
         public convertCalendar(toCalendarType: 'Gregorian' | 'Julian'): JDNConvertibleCalendar {
 
             if (JDNConvertibleCalendar.supportedCalendars.indexOf(toCalendarType) == -1) {
-                throw new JDNConvertibleCalendarError("Target calendar format not supported: " + toCalendarType);
+                throw new JDNConvertibleCalendarError('Target calendar format not supported: ' + toCalendarType);
             }
 
             if (this.calendarFormat == toCalendarType) return this; // no conversion needed
@@ -410,7 +421,7 @@ export module JDNConvertibleCalendarModule {
                 // when switching from a negative to a negative year and the year zero does not exist in the calendar used, correct it.
                 if (!this.yearZeroExists && intoTheFuture && currentCalendarPeriod.periodStart.year < 1 && (currentCalendarPeriod.periodStart.year + years > -1)) {
                     yearZeroCorrection = 1;
-                // when switching from a positive to a negative year and the year zero does not exist in the calendar used, correct it.
+                    // when switching from a positive to a negative year and the year zero does not exist in the calendar used, correct it.
                 } else if (!this.yearZeroExists && !intoTheFuture && currentCalendarPeriod.periodStart.year > -1 && (currentCalendarPeriod.periodStart.year + years < 1)) {
                     yearZeroCorrection = -1;
                 }
@@ -419,17 +430,16 @@ export module JDNConvertibleCalendarModule {
                 const maxDaysInNewMonth: number = this.daysInMonth(new CalendarDate(currentCalendarPeriod.periodStart.year + years + yearZeroCorrection, currentCalendarPeriod.periodStart.month, 1));
 
                 const newCalendarDate = new CalendarDate(
-                    currentCalendarPeriod.periodStart.year + years + yearZeroCorrection,
-                    currentCalendarPeriod.periodStart.month,
-                    (currentCalendarPeriod.periodStart.day > maxDaysInNewMonth) ? maxDaysInNewMonth : currentCalendarPeriod.periodStart.day
+                        currentCalendarPeriod.periodStart.year + years + yearZeroCorrection,
+                        currentCalendarPeriod.periodStart.month,
+                        (currentCalendarPeriod.periodStart.day > maxDaysInNewMonth) ? maxDaysInNewMonth : currentCalendarPeriod.periodStart.day
                 );
 
                 let newJDN = this.calendarToJDN(newCalendarDate);
 
                 newJDNPeriod = new JDNPeriod(newJDN, newJDN);
 
-            } else
-            {
+            } else {
 
                 let yearZeroCorrectionStart = 0;
                 // when switching from a negative to a negative year and the year zero does not exist in the calendar used, correct it.
@@ -444,9 +454,9 @@ export module JDNConvertibleCalendarModule {
                 const maxDaysInNewMonthStart: number = this.daysInMonth(new CalendarDate(currentCalendarPeriod.periodStart.year + years + yearZeroCorrectionStart, currentCalendarPeriod.periodStart.month, 1));
 
                 const newCalendarDateStart = new CalendarDate(
-                    currentCalendarPeriod.periodStart.year + years + yearZeroCorrectionStart,
-                    currentCalendarPeriod.periodStart.month,
-                    (currentCalendarPeriod.periodStart.day > maxDaysInNewMonthStart) ? maxDaysInNewMonthStart : currentCalendarPeriod.periodStart.day
+                        currentCalendarPeriod.periodStart.year + years + yearZeroCorrectionStart,
+                        currentCalendarPeriod.periodStart.month,
+                        (currentCalendarPeriod.periodStart.day > maxDaysInNewMonthStart) ? maxDaysInNewMonthStart : currentCalendarPeriod.periodStart.day
                 );
 
                 let newJDNStart = this.calendarToJDN(newCalendarDateStart);
@@ -464,9 +474,9 @@ export module JDNConvertibleCalendarModule {
                 const maxDaysInNewMonthEnd: number = this.daysInMonth(new CalendarDate(currentCalendarPeriod.periodEnd.year + years + yearZeroCorrectionEnd, currentCalendarPeriod.periodEnd.month, 1));
 
                 const newCalendarDateEnd = new CalendarDate(
-                    currentCalendarPeriod.periodEnd.year + years + yearZeroCorrectionEnd,
-                    currentCalendarPeriod.periodEnd.month,
-                    (currentCalendarPeriod.periodEnd.day > maxDaysInNewMonthEnd) ? maxDaysInNewMonthEnd : currentCalendarPeriod.periodEnd.day
+                        currentCalendarPeriod.periodEnd.year + years + yearZeroCorrectionEnd,
+                        currentCalendarPeriod.periodEnd.month,
+                        (currentCalendarPeriod.periodEnd.day > maxDaysInNewMonthEnd) ? maxDaysInNewMonthEnd : currentCalendarPeriod.periodEnd.day
                 );
 
                 let newJDNEnd = this.calendarToJDN(newCalendarDateEnd);
@@ -511,7 +521,7 @@ export module JDNConvertibleCalendarModule {
 
                     // when switching from a negative to a negative year and the year zero does not exist in the calendar used, correct it.
                     let yearZeroCorrection = 0;
-                    if (!this.yearZeroExists && calendarDate.year < 1 && (calendarDate.year + yearsToShift +1 > -1)) {
+                    if (!this.yearZeroExists && calendarDate.year < 1 && (calendarDate.year + yearsToShift + 1 > -1)) {
                         yearZeroCorrection = 1;
                     }
 
@@ -519,9 +529,9 @@ export module JDNConvertibleCalendarModule {
                     const maxDaysInNewMonth: number = this.daysInMonth(new CalendarDate(calendarDate.year + yearsToShift + 1 + yearZeroCorrection, monthsOverflow, 1));
 
                     newCalendarDate = new CalendarDate(
-                        calendarDate.year + yearsToShift + 1 + yearZeroCorrection, // add an extra year
-                        monthsOverflow,
-                        (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
+                            calendarDate.year + yearsToShift + 1 + yearZeroCorrection, // add an extra year
+                            monthsOverflow,
+                            (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
                     );
                 } else {
 
@@ -529,9 +539,9 @@ export module JDNConvertibleCalendarModule {
                     const maxDaysInNewMonth = this.daysInMonth(new CalendarDate(calendarDate.year + yearsToShift, calendarDate.month + monthsToShift, 1));
 
                     newCalendarDate = new CalendarDate(
-                        calendarDate.year + yearsToShift,
-                        calendarDate.month + monthsToShift,
-                        (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
+                            calendarDate.year + yearsToShift,
+                            calendarDate.month + monthsToShift,
+                            (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
                     );
 
                 }
@@ -540,21 +550,21 @@ export module JDNConvertibleCalendarModule {
                 if (calendarDate.month - monthsToShift < 1) {
 
                     // months to be subtracted from the previous year
-                    const newMonth =  this.monthsInYear - (monthsToShift - calendarDate.month);
+                    const newMonth = this.monthsInYear - (monthsToShift - calendarDate.month);
 
                     // when switching from a positive to a negative year and the year zero does not exist in the calendar used, correct it.
                     let yearZeroCorrection = 0;
-                    if (!this.yearZeroExists && calendarDate.year > -1 && (calendarDate.year - yearsToShift -1 < 1)) {
+                    if (!this.yearZeroExists && calendarDate.year > -1 && (calendarDate.year - yearsToShift - 1 < 1)) {
                         yearZeroCorrection = -1;
                     }
 
                     // determine max. number of days in the new month
-                    const maxDaysInNewMonth = this.daysInMonth(new CalendarDate(calendarDate.year - yearsToShift -1 + yearZeroCorrection, newMonth, 1));
+                    const maxDaysInNewMonth = this.daysInMonth(new CalendarDate(calendarDate.year - yearsToShift - 1 + yearZeroCorrection, newMonth, 1));
 
                     newCalendarDate = new CalendarDate(
-                        calendarDate.year - yearsToShift -1 + yearZeroCorrection, // subtract an extra year
-                        newMonth,
-                        (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
+                            calendarDate.year - yearsToShift - 1 + yearZeroCorrection, // subtract an extra year
+                            newMonth,
+                            (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
                     );
 
                 } else {
@@ -563,9 +573,9 @@ export module JDNConvertibleCalendarModule {
                     const maxDaysInNewMonth = this.daysInMonth(new CalendarDate(calendarDate.year - yearsToShift, calendarDate.month - monthsToShift, 1));
 
                     newCalendarDate = new CalendarDate(
-                        calendarDate.year - yearsToShift,
-                        calendarDate.month - monthsToShift,
-                        (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
+                            calendarDate.year - yearsToShift,
+                            calendarDate.month - monthsToShift,
+                            (calendarDate.day > maxDaysInNewMonth) ? maxDaysInNewMonth : calendarDate.day
                     );
 
                 }

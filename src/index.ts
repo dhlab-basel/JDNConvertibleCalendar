@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 Lukas Rosenthaler, Benjamin Geer, Ivan Subotic,
+ * Copyright © 2018 Lukas Rosenthaler, Benjamin Geer, Ivan Subotic,
  * Tobias Schweizer, André Kilchenmann, and Sepideh Alassi.
  *
  * This file is part of JDNConvertibleCalendar.
