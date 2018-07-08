@@ -29,7 +29,7 @@ export module JDNConvertibleCalendarModule {
      * Checks if a given number is an integer.
      *
      * @param num number to check for.
-     * @returns {boolean}
+     * @returns true if the given number is an integer, returns false otherwise.
      */
     const isInteger: (num: number) => boolean = (num: number) => {
 
@@ -38,10 +38,14 @@ export module JDNConvertibleCalendarModule {
     };
 
     /**
-     * Represents an error that occurred when using JDNConvertibleCalendarModule.
+     * Represents an error that occurred when using `JDNConvertibleCalendarModule`.
      */
     export class JDNConvertibleCalendarError extends Error {
 
+        /**
+         *
+         * @param message description of the error.
+         */
         constructor(message: string) {
             super(message);
         }
@@ -65,9 +69,13 @@ export module JDNConvertibleCalendarModule {
          * @param month month of the given date.
          * @param day day of the given date (day of month, 1 based index).
          * @param dayOfWeek day of week of the given date (0 based index), if any.
-         * @param daytime time of the day, if any. 0 refers to midnight, 0.5 to noon.
+         * @param daytime time of the day (0 - 0.9…), if any. 0 refers to midnight, 0.5 to noon, 0.9… to midnigh of the same day. 1 would already refer to the next day and is thus not valid.
          */
         constructor(public readonly year: number, public readonly month: number, public readonly day: number, public readonly dayOfWeek?: number, public readonly daytime?: number) {
+
+
+            // check validity of daytime
+            if (daytime !== undefined && daytime >= 1) throw new JDNConvertibleCalendarError('Invalid daytime: ' + daytime + ', valid range: 0 - 0.9…');
 
             // TODO: When other calendar formats than Gregorian or Julian are implemented, this may have to be changed
             if (dayOfWeek !== undefined && (!isInteger(dayOfWeek) || dayOfWeek < 0 || dayOfWeek > 6)) throw new JDNConvertibleCalendarError('Invalid day of week: ' + dayOfWeek)
@@ -106,8 +114,8 @@ export module JDNConvertibleCalendarModule {
 
         /**
          *
-         * @param {JDNConvertibleCalendarModule.JDN} periodStart start of the period.
-         * @param {JDNConvertibleCalendarModule.JDN} periodEnd End of the period.
+         * @param periodStart start of the period.
+         * @param periodEnd End of the period.
          */
         constructor(public readonly periodStart: JDN, public readonly periodEnd: JDN) {
 
@@ -198,8 +206,8 @@ export module JDNConvertibleCalendarModule {
          * Attention: depending on the conventions used, there may be a year 0 or not.
          * This depends on the implementation of this conversion function.
          *
-         * @param {JDN} jdn Julian Day Number
-         * @returns {JDNConvertibleCalendarModule.CalendarDate}
+         * @param jdn JDN to be converted to a calendar date.
+         * @returns calendar date created from given JDN.
          */
         protected abstract JDNToCalendar(jdn: JDN): CalendarDate;
 
@@ -211,16 +219,16 @@ export module JDNConvertibleCalendarModule {
          * Attention: depending on the conventions used, there may be a year 0 or not.
          * This depends on the implementation of this conversion function.
          *
-         * @param {JDNConvertibleCalendarModule.CalendarDate} date calendar date
-         * @returns {JDN}
+         * @param date calendar date to be converted to a JDN.
+         * @returns JDN created from given calendar date.
          */
         protected abstract calendarToJDN(date: CalendarDate): JDN;
 
         /**
          * Calculates the day of week of a given JDN.
          *
-         * @param {JDN} jdn Julian Day Number
-         * @returns {number} day of week of the given JDN (as a 0-based index).
+         * @param jdn JDN for which the day of the week is to be calculated.
+         * @returns day of week of the given JDN (as a 0-based index).
          */
         protected abstract dayOfWeekFromJDN(jdn: JDN): number;
 
@@ -229,8 +237,8 @@ export module JDNConvertibleCalendarModule {
          *
          * The given date is expected to be of the same calendar format as the instance the method is called on.
          *
-         * @param {JDNConvertibleCalendarModule.CalendarDate} date given date.
-         * @returns {number} number of days in month of given date.
+         * @param date given date.
+         * @returns number of days in month of given date.
          */
         public daysInMonth(date: CalendarDate): number {
 
@@ -301,7 +309,7 @@ export module JDNConvertibleCalendarModule {
         /**
          * This constructor is inherited by all subclasses (no implementation in subclass required).
          *
-         * @param {JDNConvertibleCalendarModule.JDNPeriod} jdnPeriod JDN period to create a calendar specific date from.
+         * @param jdnPeriod JDN period to create a calendar specific date from.
          */
         constructor(jdnPeriod: JDNPeriod) {
 
@@ -325,7 +333,7 @@ export module JDNConvertibleCalendarModule {
         /**
          * Returns the given period as two calendar dates.
          *
-         * @returns {JDNConvertibleCalendarModule.CalendarPeriod}
+         * @returns period consisting of two calendar dates.
          */
         public toCalendarPeriod(): CalendarPeriod {
             return new CalendarPeriod(this.calendarStart, this.calendarEnd);
@@ -334,7 +342,7 @@ export module JDNConvertibleCalendarModule {
         /**
          * Converts an instance of `JDNConvertibleCalendar` to a `JDNPeriod`.
          *
-         * @returns {JDNConvertibleCalendarModule.JDNPeriod}
+         * @returns period consisting of two JDNs.
          */
         public toJDNPeriod(): JDNPeriod {
             return new JDNPeriod(this.jdnStart, this.jdnEnd);
@@ -346,7 +354,7 @@ export module JDNConvertibleCalendarModule {
          * To be extended when new subclasses are added.
          *
          * @param {"Gregorian" | "Julian"} toCalendarType calendar to convert to.
-         * @returns {JDNConvertibleCalendar}
+         * @returns instance of target calendar (subclass of `JDNConvertibleCalendar`).
          */
         public convertCalendar(toCalendarType: 'Gregorian' | 'Julian'): JDNConvertibleCalendar {
 
@@ -372,9 +380,9 @@ export module JDNConvertibleCalendarModule {
         /**
          * Transposes the current period by the given number of days.
          *
-         * @param {number} days the number of days that the current period will be shifted.
+         * @param days the number of days that the current period will be shifted.
          */
-        public transposePeriodByDay(days: number) {
+        public transposePeriodByDay(days: number): void {
 
             if (days === 0) return;
 
@@ -393,7 +401,7 @@ export module JDNConvertibleCalendarModule {
          * This method is not accurate in the arithmetical sense: it tries to fit the given day in the month of the new year.
          * If this is not possible, it takes the last day of the new month (e.g., February 29 will become the last possible day of February).
          *
-         * @param {number} years the number of years that the current period will be shifted.
+         * @param years the number of years that the current period will be shifted.
          */
         public transposePeriodByYear(years: number): void {
 
@@ -484,9 +492,9 @@ export module JDNConvertibleCalendarModule {
         /**
          * Converts the given calendar date to a new one, shifting the months by the given number.
          *
-         * @param {JDNConvertibleCalendarModule.CalendarDate} calendarDate the given calendar date.
-         * @param {number} months the number of months to shift.
-         * @returns {JDNConvertibleCalendarModule.CalendarDate}
+         * @param calendarDate the given calendar date.
+         * @param months the number of months to shift.
+         * @returns calendar transposed by the given number of months.
          */
         protected handleMonthTransposition(calendarDate: CalendarDate, months: number): CalendarDate {
 
@@ -583,7 +591,7 @@ export module JDNConvertibleCalendarModule {
          * This method is not accurate in the arithmetical sense: it tries to fit the given day in the new month.
          * If this is not possible, it takes the last day of the new month (e.g., January 31 will become the last possible day of February).
          *
-         * @param {number} months the number of months that the current period will be shifted.
+         * @param months the number of months that the current period will be shifted.
          */
         public transposePeriodByMonth(months: number): void {
 

@@ -19,6 +19,9 @@
  */
 
 import {JDNConvertibleCalendarModule} from "./JDNConvertibleCalendar";
+import {TypeDefinitionsModule} from './TypeDefinitions';
+import JDC = TypeDefinitionsModule.JDC;
+import JDN = TypeDefinitionsModule.JDN;
 
 export module JDNConvertibleConversionModule {
 
@@ -29,8 +32,8 @@ export module JDNConvertibleConversionModule {
      * 1.2 -> 1
      * -3.2 -> -3
      *
-     * @param {number} num the number whose fraction is to be removed.
-     * @returns {number}
+     * @param num the number whose fraction is to be removed.
+     * @returns given number without fractions.
      */
     const truncateDecimals =  (num: number): number => {
         return Math[num < 0 ? 'ceil' : 'floor'](num);
@@ -44,10 +47,10 @@ export module JDNConvertibleConversionModule {
      *
      * There is a year 0.
      *
-     * @param {JDNConvertibleCalendarModule.CalendarDate} calendarDate Gregorian calendar date to be converted to JDC.
-     * @returns {number}
+     * @param calendarDate Gregorian calendar date to be converted to JDC.
+     * @returns the JDC representing the given Gregorian calendar date.
      */
-    export const gregorianToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): number => {
+    export const gregorianToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
 
         // TODO: check validity of given calendar date
 
@@ -89,12 +92,21 @@ export module JDNConvertibleConversionModule {
     /**
      * Converts a Gregorian calendar date to a JDN.
      *
-     * @param {JDNConvertibleCalendarModule.CalendarDate} calendarDate Gregorian calendar date to be converted to JDN.
-     * @returns {number}
+     * @param calendarDate Gregorian calendar date to be converted to JDN.
+     * @returns the JDN representing the given Gregorian calendar date.
      */
-    export const gregorianToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): number => {
-        const jdc = gregorianToJDC(calendarDate);
-        return truncateDecimals(jdc + 0.5); // adaption because full number without fraction of JDC represents noon.
+    export const gregorianToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDN => {
+        const jdc: JDC = gregorianToJDC(calendarDate);
+
+        /*
+
+        Convert JDC to JDN by adding 0.5 and getting rid of fractions.
+
+        2446822.5 up to 2446823.49… (JDCs for January 27th 1987) -> 2446823 (JDN for January 27th 1987)
+
+         */
+
+        return truncateDecimals(jdc + 0.5);
     };
 
 
@@ -102,14 +114,14 @@ export module JDNConvertibleConversionModule {
      * Converts a JDC to a Gregorian Calendar date.
      *
      * Conversion algorithm from:
-     * Jean Meeus, Astronomical Algorithms, 1998, 60pp.
+     * Jean Meeus, Astronomical Algorithms, 1998, 63pp.
      *
      * There is a year 0.
      *
-     * @param {number} jdc JDC to be converted to a Gregorian calendar date.
-     * @returns {JDNConvertibleCalendarModule.CalendarDate}
+     * @param jdc JDC to be converted to a Gregorian calendar date.
+     * @returns the Gregorian calendar date created from the given JDC.
      */
-    export const JDCToGregorian = (jdc: number): JDNConvertibleCalendarModule.CalendarDate => {
+    export const JDCToGregorian = (jdc: JDC): JDNConvertibleCalendarModule.CalendarDate => {
         jdc = jdc + 0.5;
         const z = truncateDecimals(jdc);
         const f = jdc - z;
@@ -146,10 +158,10 @@ export module JDNConvertibleConversionModule {
     /**
      * Converts a JDN to a Gregorian calendar date.
      *
-     * @param {number} jdn the given JDN.
-     * @returns {JDNConvertibleCalendarModule.CalendarDate}
+     * @param jdn the given JDN.
+     * @returns the Gregorian calendar date created from the given JDN.
      */
-    export const JDNToGregorian = (jdn: number): JDNConvertibleCalendarModule.CalendarDate => {
+    export const JDNToGregorian = (jdn: JDN): JDNConvertibleCalendarModule.CalendarDate => {
        return JDCToGregorian(jdn);
     };
 
@@ -161,10 +173,10 @@ export module JDNConvertibleConversionModule {
      *
      * There is a year 0.
      *
-     * @param {JDNConvertibleCalendarModule.CalendarDate} calendarDate
-     * @returns {number}
+     * @param calendarDate Julian calendar date to be converted to JDC.
+     * @returns JDC representing the given Julian calendar date.
      */
-    export const julianToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): number => {
+    export const julianToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
 
         // TODO: check validity of given calendar date
 
@@ -199,13 +211,22 @@ export module JDNConvertibleConversionModule {
     /**
      * Converts a Julian calendar date to a JDN.
      *
-     * @param {JDNConvertibleCalendarModule.CalendarDate} calendarDate Julian calendar date to be converted to JDN.
-     * @returns {number}
+     * @param calendarDate Julian calendar date to be converted to JDN.
+     * @returns JDN representing the given Julian calendar date.
      */
-    export const julianToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate) => {
+    export const julianToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDN => {
 
         // TODO: check validity of given calendar date
         const jdc = julianToJDC(calendarDate);
+
+        /*
+
+        Convert JDC to JDN by adding 0.5 and getting rid of fractions.
+
+        2446822.5 up to 2446823.49… (JDCs for January 14th 1987) -> 2446823 (JDN for January 14th 1987)
+
+         */
+
         return truncateDecimals(jdc + 0.5); // adaption because full number without fraction of JDC represents noon.
     };
 
@@ -213,14 +234,14 @@ export module JDNConvertibleConversionModule {
      * Converts a JDC to a Julian Calendar date.
      *
      * Conversion algorithm from:
-     * Jean Meeus, Astronomical Algorithms, 1998, 60pp.
+     * Jean Meeus, Astronomical Algorithms, 1998, 63pp.
      *
      * There is a year 0.
      *
-     * @param {number} jdc JDC to be converted to a Julian calendar date.
-     * @returns {JDNConvertibleCalendarModule.CalendarDate}
+     * @param jdc JDC to be converted to a Julian calendar date.
+     * @returns Julian calendar date created from given JDC.
      */
-    export const JDCToJulian = (jdc: number): JDNConvertibleCalendarModule.CalendarDate => {
+    export const JDCToJulian = (jdc: JDC): JDNConvertibleCalendarModule.CalendarDate => {
         jdc = jdc + 0.5;
         const z = truncateDecimals(jdc);
         const f = jdc - z;
@@ -254,10 +275,10 @@ export module JDNConvertibleConversionModule {
     /**
      * Converts a JDN to a Julian calendar date.
      *
-     * @param {number} jdn JDN to be converted to a Julian calendar date.
-     * @returns {JDNConvertibleCalendarModule.CalendarDate}
+     * @param jdn JDN to be converted to a Julian calendar date.
+     * @returns Julian calendar date created from given JDN.
      */
-    export const JDNToJulian = (jdn: number): JDNConvertibleCalendarModule.CalendarDate => {
+    export const JDNToJulian = (jdn: JDN): JDNConvertibleCalendarModule.CalendarDate => {
         return JDCToJulian(jdn);
     };
 
@@ -268,10 +289,10 @@ export module JDNConvertibleConversionModule {
      * Algorithm from:
      * Jean Meeus: Astronomical Algorithms, 1998, p. 65.
      *
-     * @param {number} jdc given Julian Day Number.
-     * @returns {number} the number of the day of the week (0 Sunday, 1 Monday, 2 Tuesday, 3 Wednesday, 4 Thursday, 5 Friday, 6 Saturday).
+     * @param jdc given JDC.
+     * @returns the number of the day of the week for the given JDC (0 Sunday, 1 Monday, 2 Tuesday, 3 Wednesday, 4 Thursday, 5 Friday, 6 Saturday).
      */
-    export const dayOfWeekFromJDC = (jdc: number) => {
+    export const dayOfWeekFromJDC = (jdc: JDC) => {
         return Math.floor(jdc + 1.5) %  7;
     }
 }
