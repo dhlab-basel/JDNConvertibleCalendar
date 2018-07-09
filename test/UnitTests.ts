@@ -296,7 +296,7 @@ describe('Conversion JDN to Julian calendar', () => {
 //
 // Julian to JDN and back
 //
-describe('JDN conversions to Julian calendar format and back', () => {
+describe('JDN conversions to Julian calendar and back', () => {
 
     it('convert the Julian Calendar date 2017-11-23 to JDN', () => {
 
@@ -317,9 +317,9 @@ describe('JDN conversions to Julian calendar format and back', () => {
 });
 
 //
-// Conversions between different calendar formats
+// Conversions between different calendars
 //
-describe('Conversions from JDN to Gregorian and Julian calendar format and in between conversions', () => {
+describe('Conversions from JDN to Gregorian and Julian calendar and in between conversions', () => {
 
     it('create a Gregorian date from JDN using an example from Meeus', () => {
 

@@ -31,7 +31,7 @@ export module JDNConvertibleCalendarModule {
      * @param num number to check for.
      * @returns true if the given number is an integer, returns false otherwise.
      */
-    const isInteger: (num: number) => boolean = (num: number) => {
+    const isInteger = (num: number): boolean => {
 
         // https://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer
         return num % 1 === 0;
@@ -52,9 +52,9 @@ export module JDNConvertibleCalendarModule {
     }
 
     /**
-     * Represents a calendar date (calendar format agnostic).
+     * Represents a calendar date (calendar agnostic).
      *
-     * Assumes that every supported calendar format
+     * Assumes that every supported calendar
      * can be represented by a combination of year, month, and day.
      *
      */
@@ -77,7 +77,7 @@ export module JDNConvertibleCalendarModule {
             // check validity of daytime
             if (daytime !== undefined && daytime >= 1) throw new JDNConvertibleCalendarError('Invalid daytime: ' + daytime + ', valid range: 0 - 0.9…');
 
-            // TODO: When other calendar formats than Gregorian or Julian are implemented, this may have to be changed
+            // TODO: When other calendar than Gregorian or Julian are implemented, this may have to be changed
             if (dayOfWeek !== undefined && (!isInteger(dayOfWeek) || dayOfWeek < 0 || dayOfWeek > 6)) throw new JDNConvertibleCalendarError('Invalid day of week: ' + dayOfWeek)
 
         }
@@ -139,17 +139,17 @@ export module JDNConvertibleCalendarModule {
     export abstract class JDNConvertibleCalendar {
 
         /**
-         * Constant for the Gregorian calendar format.
+         * Constant for the Gregorian calendar.
          */
         protected static readonly gregorian = 'Gregorian';
 
         /**
-         * Constant for the Julian calendar format.
+         * Constant for the Julian calendar.
          */
         protected static readonly julian = 'Julian';
 
         /**
-         * Supported calendar formats (to be extended when new subclasses are implemented).
+         * Supported calendars (to be extended when new subclasses are implemented).
          */
         public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian];
 
@@ -159,12 +159,12 @@ export module JDNConvertibleCalendarModule {
         public abstract readonly calendarName: string;
 
         /**
-         * Indicates how many months a year has in a specific calendar format.
+         * Indicates how many months a year has in a specific calendar.
          */
         public abstract readonly monthsInYear: number;
 
         /**
-         * Indicates if the year 0 exists in a specific calendar format.
+         * Indicates if the year 0 exists in a specific calendar.
          */
         public abstract readonly yearZeroExists: Boolean;
 
@@ -174,12 +174,12 @@ export module JDNConvertibleCalendarModule {
         //
 
         /**
-         * Start of a given date in a specific calendar format.
+         * Start of a given date in a specific calendar.
          */
         protected calendarStart: CalendarDate;
 
         /**
-         * End of a given date in a specific calendar format.
+         * End of a given date in a specific calendar.
          */
         protected calendarEnd: CalendarDate;
 
@@ -201,7 +201,7 @@ export module JDNConvertibleCalendarModule {
         /**
          * Converts a given JDN to a calendar date.
          * This method has to be implemented for each subclass
-         * (specific calendar format).
+         * (specific calendar).
          *
          * Attention: depending on the conventions used, there may be a year 0 or not.
          * This depends on the implementation of this conversion function.
@@ -214,7 +214,7 @@ export module JDNConvertibleCalendarModule {
         /**
          * Converts a given calendar date to JDN.
          * This method has to be implemented for each subclass
-         * (specific calendar format).
+         * (specific calendar).
          *
          * Attention: depending on the conventions used, there may be a year 0 or not.
          * This depends on the implementation of this conversion function.
@@ -235,7 +235,7 @@ export module JDNConvertibleCalendarModule {
         /**
          * Calculates number of days for the month of the given date.
          *
-         * The given date is expected to be of the same calendar format as the instance the method is called on.
+         * The given date is expected to be of the same calendar as the instance the method is called on.
          *
          * @param date given date.
          * @returns number of days in month of given date.
@@ -359,7 +359,7 @@ export module JDNConvertibleCalendarModule {
         public convertCalendar(toCalendarType: 'Gregorian' | 'Julian'): JDNConvertibleCalendar {
 
             if (JDNConvertibleCalendar.supportedCalendars.indexOf(toCalendarType) == -1) {
-                throw new JDNConvertibleCalendarError('Target calendar format not supported: ' + toCalendarType);
+                throw new JDNConvertibleCalendarError('Target calendar not supported: ' + toCalendarType);
             }
 
             if (this.calendarName == toCalendarType) return this; // no conversion needed

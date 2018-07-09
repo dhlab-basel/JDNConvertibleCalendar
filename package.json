@@ -1,7 +1,7 @@
 {
   "name": "jdnconvertiblecalendar",
   "version": "0.0.1",
-  "description": "Conversions between various calendar formats and manipulations using Julian Day Number (JDN)",
+  "description": "Conversions between various calendars and manipulations using Julian Day Number (JDN)",
   "types": "dist/src/index.d.ts",
   "main": "dist/src/index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "url": "git+https://github.com/dhlab-basel/JDNConvertibleCalendar.git"
   },
   "keywords": [
-    "calendar format",
+    "calendar",
     "conversion",
     "Julian Day Number",
     "JDN",
