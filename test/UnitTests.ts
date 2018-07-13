@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 Lukas Rosenthaler, Benjamin Geer, Ivan Subotic,
+ * Copyright © 2018 Lukas Rosenthaler, Rita Gautschy, Benjamin Geer, Ivan Subotic,
  * Tobias Schweizer, André Kilchenmann, and Sepideh Alassi.
  *
  * This file is part of JDNConvertibleCalendar.
@@ -815,6 +815,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
+        // Julian calendar date 15-03-45 BCE
         const expectedDate = new CalendarDate(-44, 3, 15, 2);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
@@ -838,6 +839,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
+        // Julian calendar date 15-04-44 BCE
         const expectedDate = new CalendarDate(-43, 4, 15, 6);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
@@ -861,6 +863,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
+        // Julian calendar date 15-02-42 BCE
         const expectedDate = new CalendarDate(-41, 2, 15, 5);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
@@ -884,6 +887,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
+        // Julian calendar date 15-03-45 BCE
         const expectedDate = new CalendarDate(-44, 4, 15, 5);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
@@ -907,6 +911,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
+        // Julian calendar date 15-03-44 BCE
         const expectedDate = new CalendarDate(-43, 2, 15, 3);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
@@ -930,6 +935,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
+        // Julian calendar date 25-03-44 BCE
         const expectedDate = new CalendarDate(-43, 3, 25, 6);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);
@@ -953,6 +959,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
         const julianCalendarPeriod = julianCalendarDate.toCalendarPeriod();
 
+        // Julian calendar date 05-03-44 BCE
         const expectedDate = new CalendarDate(-43, 3, 5, 0);
 
         checkCalendarDate(expectedDate, julianCalendarPeriod.periodStart);

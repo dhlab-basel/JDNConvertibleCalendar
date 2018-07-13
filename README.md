@@ -40,6 +40,11 @@ All dates are treated as periods. This allows for the handling of different prec
 When adding a new subclass for `JDNConvertibleCalendar`, calendar specific methods have to be implemented, e.g., the conversion from and to the Julian Day. 
 Calendar specific methods are declared abstract in the base class and have to be implemented when making a subclass. The new subclass has to be added to `supportedCalendars` (configuration array) and `convertCalendar` (conversion method) in `JDNConvertibleCalendar`.
 
+## Scientific board
+
+The project is scientifically accompanied by Rita Gautschy (University of Basel). 
+She reviewed the calendar conversion algorithms in `JDNConvertibleConversionModule` and provided an implementation in Fortran that allows for comparison of the results.  
+
 ## Documentation
 
 See <https://dhlab-basel.github.io/JDNConvertibleCalendar/docs/index.html>.
