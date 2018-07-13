@@ -17,7 +17,7 @@ For more information about the Julian Day, see Jean: Meeus, Astronomical Algorit
 
 Please note that this software uses the (astronomical) convention that BCE dates are represented as negative years and that the year zero (0) is used.
 This means that the year 1 BCE must be given as year 0,
-and the year 2 BCE corresponds to -1 etc. .
+and the year 2 BCE corresponds to -1 etc.
 
 Currently, the Gregorian and Julian calendar are supported.
 
