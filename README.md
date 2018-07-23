@@ -13,7 +13,7 @@ The Julian Day Count (JDC) contains a fraction that represents the daytime. A fr
 For example, the day with the date January 27th 1987 starts with the JDC of 2446822.5 and ends with a JDC of 2446823.4999… Hence, noon is at 2446823.0.
 The corresponding Julian Day Number (JDN) is at noon, which is 2446823 for the given example (January 27th 1987).
 
-For more information about the Julian Day, see Jean: Meeus, Astronomical Algorithms, 1998, 59pp. and <https://en.wikipedia.org/wiki/Julian_day>
+For more information about the Julian Day, see: Jean Meeus, Astronomical Algorithms, 1998, 59pp. and <https://en.wikipedia.org/wiki/Julian_day>
 
 Please note that this software uses the (astronomical) convention that BCE dates are represented as negative years and that the year zero (0) is used.
 This means that the year 1 BCE must be given as year 0,
