@@ -26,14 +26,17 @@ let assert = require('assert');
  *
  * @param {CalendarDate} expected expected calendar date.
  * @param {CalendarDate} received received calendar date.
+ * @param checkDayOfWeek indicates if week day should be checked.
  */
-const checkCalendarDate = (expected: CalendarDate, received: CalendarDate) => {
+const checkCalendarDate = (expected: CalendarDate, received: CalendarDate, checkDayOfWeek: Boolean = true) => {
 
     assert.strictEqual(received.year, expected.year, `calendar date is wrong: year is ${received.year} instead of ${expected.year}`);
     assert.strictEqual(received.month, expected.month, `calendar date is wrong: month is ${received.month} instead of ${expected.month}`);
     assert.strictEqual(received.day, expected.day, `calendar date is wrong: day is ${received.day} instead of ${expected.day}`);
-    assert.strictEqual(received.dayOfWeek, expected.dayOfWeek, `calendar date is wrong: day of week is ${received.dayOfWeek} instead of ${expected.dayOfWeek}`);
 
+    if (checkDayOfWeek) {
+        assert.strictEqual(received.dayOfWeek, expected.dayOfWeek, `calendar date is wrong: day of week is ${received.dayOfWeek} instead of ${expected.dayOfWeek}`);
+    }
 };
 
 /**
@@ -860,6 +863,33 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
     });
 
+
+    describe('Instantiate a calendar date from a calendar period', () => {
+
+        it('create a Gregorian date from a calendar period', () => {
+
+            const gregorianCalendarDate: GregorianCalendarDate = new GregorianCalendarDate(new CalendarPeriod(new CalendarDate(2018, 7, 26), new CalendarDate(2018, 7, 26)));
+
+            const calPeriod = gregorianCalendarDate.toCalendarPeriod();
+
+            checkCalendarDate(new CalendarDate(2018, 7, 26), calPeriod.periodStart, false);
+            checkCalendarDate(new CalendarDate(2018, 7, 26), calPeriod.periodEnd, false);
+
+
+        });
+
+        it('create a Gregorian date from a calendar period', () => {
+
+            const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new CalendarPeriod(new CalendarDate(2018, 7, 26), new CalendarDate(2018, 7, 26)));
+
+            const calPeriod = julianCalendarDate.toCalendarPeriod();
+
+            checkCalendarDate(new CalendarDate(2018, 7, 26), calPeriod.periodStart, false);
+            checkCalendarDate(new CalendarDate(2018, 7, 26), calPeriod.periodEnd, false);
+
+        });
+
+    });
 
 
 });

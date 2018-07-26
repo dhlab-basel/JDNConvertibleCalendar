@@ -300,10 +300,25 @@ export module JDNConvertibleCalendarModule {
         /**
          * This constructor is inherited by all subclasses (no implementation in subclass required).
          *
-         * @param {JDNConvertibleCalendarModule.JDNPeriod} jdnPeriod JDN period to create a calendar specific date from.
          */
-        constructor(jdnPeriod: JDNPeriod) {
-            this.convertJDNPeriodToCalendarPeriod(jdnPeriod);
+        constructor(period: JDNPeriod);
+        constructor(period: CalendarPeriod);
+        constructor(period: any) {
+
+            if (period instanceof JDNPeriod) {
+                // period is a JDNPeriod
+
+                this.convertJDNPeriodToCalendarPeriod(period);
+            } else {
+                // period is a CalendarPeriod
+
+                let jdnStart = this.calendarToJDN(period.periodStart);
+                let jdnEnd = this.calendarToJDN(period.periodEnd);
+
+                this.convertJDNPeriodToCalendarPeriod(new JDNPeriod(jdnStart, jdnEnd));
+            }
+
+
         }
 
         /**
