@@ -866,7 +866,7 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
     describe('Instantiate a calendar date from a calendar period', () => {
 
-        it('create a Gregorian date from a calendar period', () => {
+        it('create a Gregorian date from an exact calendar period', () => {
 
             const gregorianCalendarDate: GregorianCalendarDate = new GregorianCalendarDate(new CalendarPeriod(new CalendarDate(2018, 7, 26), new CalendarDate(2018, 7, 26)));
 
@@ -875,10 +875,30 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
             checkCalendarDate(new CalendarDate(2018, 7, 26), calPeriod.periodStart, false);
             checkCalendarDate(new CalendarDate(2018, 7, 26), calPeriod.periodEnd, false);
 
+            const jdnPeriod = gregorianCalendarDate.toJDNPeriod();
+
+            checkJDN(2458326, jdnPeriod.periodStart);
+            checkJDN(2458326, jdnPeriod.periodEnd);
 
         });
 
         it('create a Gregorian date from a calendar period', () => {
+
+            const gregorianCalendarDate: GregorianCalendarDate = new GregorianCalendarDate(new CalendarPeriod(new CalendarDate(2018, 7, 26), new CalendarDate(2018, 7, 27)));
+
+            const calPeriod = gregorianCalendarDate.toCalendarPeriod();
+
+            checkCalendarDate(new CalendarDate(2018, 7, 26), calPeriod.periodStart, false);
+            checkCalendarDate(new CalendarDate(2018, 7, 27), calPeriod.periodEnd, false);
+
+            const jdnPeriod = gregorianCalendarDate.toJDNPeriod();
+
+            checkJDN(2458326, jdnPeriod.periodStart);
+            checkJDN(2458327, jdnPeriod.periodEnd);
+
+        });
+
+        it('create a Gregorian date from an exact calendar period', () => {
 
             const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new CalendarPeriod(new CalendarDate(2018, 7, 26), new CalendarDate(2018, 7, 26)));
 
@@ -886,6 +906,27 @@ describe('For Julian and Gregorian calendar: Create a BCE date', () => {
 
             checkCalendarDate(new CalendarDate(2018, 7, 26), calPeriod.periodStart, false);
             checkCalendarDate(new CalendarDate(2018, 7, 26), calPeriod.periodEnd, false);
+
+            const jdnPeriod = julianCalendarDate.toJDNPeriod();
+
+            checkJDN(2458339, jdnPeriod.periodStart);
+            checkJDN(2458339, jdnPeriod.periodEnd);
+
+        });
+
+        it('create a Gregorian date from a calendar period', () => {
+
+            const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new CalendarPeriod(new CalendarDate(2018, 7, 26), new CalendarDate(2018, 7, 27)));
+
+            const calPeriod = julianCalendarDate.toCalendarPeriod();
+
+            checkCalendarDate(new CalendarDate(2018, 7, 26), calPeriod.periodStart, false);
+            checkCalendarDate(new CalendarDate(2018, 7, 27), calPeriod.periodEnd, false);
+
+            const jdnPeriod = julianCalendarDate.toJDNPeriod();
+
+            checkJDN(2458339, jdnPeriod.periodStart);
+            checkJDN(2458340, jdnPeriod.periodEnd);
 
         });
 
