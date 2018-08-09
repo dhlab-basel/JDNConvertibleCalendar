@@ -2,31 +2,48 @@
 
 ## General Remarks
 
-**Please note that this software is still in a very early state of development. Its existing functionality hasn't been properly tested yet.**
+**Please note that this software is still in a early state of development. 
+Currently, only the Gregorian and Julian calendar are supported.**
 
 ## Introduction
 
-`JDNConvertibleCalendar` offers a convenient way to convert a given date to different calendar formats making use of Julian Day Number (JDN). 
+`JDNConvertibleCalendar` offers a convenient way to convert a given date to other calendars making use of the *Julian Day*. The Julian Day is
+the continuous count of days since the beginning of the Julian Period in 4713 BCE.
+The Julian Day Count (JDC) contains a fraction that represents the daytime. A fraction of .5 represents midnight and .0 represents noon. 
+For example, the day with the date January 27th 1987 starts with the JDC of 2446822.5 and ends with a JDC of 2446823.4999… Hence, noon is at 2446823.0.
+The corresponding Julian Day Number (JDN) is at noon, which is 2446823 for the given example (January 27th 1987).
 
-Currently, Gregorian and Julian calendar are supported.
+For more information about the Julian Day, see: Jean Meeus, Astronomical Algorithms, 1998, 59pp. and <https://en.wikipedia.org/wiki/Julian_day>
+
+Please note that this software uses the (astronomical) convention that BCE dates are represented as negative years and that the year zero (0) is used.
+This means that the year 1 BCE must be given as year 0,
+and the year 2 BCE corresponds to -1 etc.
+
+Currently, the Gregorian and Julian calendar are supported.
 
 ## Focus
 
-The focus of this project is to provide a design or architecture that makes it easy to convert between calendar formats. It is, however, not primarily a library for astronomical algorithms. 
-For now, we put the these methods in the module `JDNConvertibleConversionModule` which is basically a (partial) reimplementation in TypeScript of what you find at <https://www.fourmilab.ch/documents/calendar>. 
+The focus of this project is to provide a design or architecture that makes it easy to convert between calendars. It is, however, not primarily a library for astronomical algorithms. 
+For now, we put the these methods in the module `JDNConvertibleConversionModule`.
 We would like to make this an separate module which could be used with `JDNConvertibleCalendar` (see <https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/1>).
 
 ## Design
 
-`JDNConvertibleCalendar` is an abstract class that can be implemented for various calendar formats, provided that those can be converted from and to JDN. 
+`JDNConvertibleCalendar` is an abstract class that can be implemented for various calendars, provided that those can be converted from and to a Julian Day. 
 
 The abstract base class offers a generic way to convert from and to any of its subclasses. Also calculations based on JDN are already implemented in the base class (shifting of a given period to the future or the past).
 
 All dates are treated as periods. This allows for the handling of different precisions.
 
-## Adding more Calendar Formats
+## Adding more Calendars
 
-When adding a new subclass for `JDNConvertibleCalendar`, calendar specific methods have to be implemented, e.g., the conversion from and to JDN. Calendar specific methods are declared abstract in the base class and have to be implemented when making a subclass. The new subclass has to be added to `supportedCalendars` (configuration array) and `convertCalendar` (conversion method) in `JDNConvertibleCalendar`.
+When adding a new subclass for `JDNConvertibleCalendar`, calendar specific methods have to be implemented, e.g., the conversion from and to the Julian Day. 
+Calendar specific methods are declared abstract in the base class and have to be implemented when making a subclass. The new subclass has to be added to `supportedCalendars` (configuration array) and `convertCalendar` (conversion method) in `JDNConvertibleCalendar`.
+
+## Scientific board
+
+The project is scientifically accompanied by Rita Gautschy (University of Basel). 
+She reviewed the calendar conversion algorithms in `JDNConvertibleConversionModule` and provided an implementation in Fortran that allows for comparison of the results.  
 
 ## Documentation
 
@@ -39,8 +56,6 @@ The HTML-documentation can also be built locally running `npm run builddocs` in 
 For working examples, please see the tests in the test directory. Run the test with `npm test` from the project root.
 
 ## Known Problems
-
-- I am pretty sure that here are still some problems with the rounding of JDC (which includes a fraction for daytime) to JDN. See <https://github.com/dhlab-basel/JDNConvertibleCalendar/issues/2>.
 
 - The static configuration of how many months a year has per calendar may not be good enough for other calendars than Gregorian and Julian (lunar calendars). 
 Maybe this has to be made a function that returns the number of months for a given year. This would make transposing by month more complicated.
