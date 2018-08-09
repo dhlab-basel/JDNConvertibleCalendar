@@ -18,15 +18,23 @@
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {JDNConvertibleCalendarModule} from './JDNConvertibleCalendar';
-import {JDNConvertibleConversionModule} from './JDNCalendarConversion';
+export module TypeDefinitionsModule {
 
-import CalendarDate = JDNConvertibleCalendarModule.CalendarDate
-import JDNPeriod = JDNConvertibleCalendarModule.JDNPeriod;
-import CalendarPeriod = JDNConvertibleCalendarModule.CalendarPeriod;
-import GregorianCalendarDate = JDNConvertibleCalendarModule.GregorianCalendarDate;
-import JulianCalendarDate = JDNConvertibleCalendarModule.JulianCalendarDate;
-import JDNConvertibleCalendar = JDNConvertibleCalendarModule.JDNConvertibleCalendar;
+    /**
+     * Type alias for a Julian Day Number (JDN).
+     *
+     * A JDN is an integer representing a Julian Day (without fraction).
+     */
+    export type JDN = number;
 
-export {CalendarDate, JDNConvertibleCalendar, GregorianCalendarDate, JulianCalendarDate, JDNPeriod, CalendarPeriod}
-export {JDNConvertibleConversionModule}
+    /**
+     * Type alias for a Julian Day Count (JDC).
+     *
+     * A JDC is a number representing a Julian Day with daytime (including a fraction).
+     *
+     * Attention: A fraction of .5 represents midnight, .0 represents noon.
+     *
+     */
+    export type JDC = number;
+
+}

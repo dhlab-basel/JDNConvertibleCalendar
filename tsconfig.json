@@ -5,12 +5,11 @@
     "declaration": true,
     "outDir": "./dist",
     "strict": true,
-    "baseUrl": "src",
+    "baseUrl": "./",
     "experimentalDecorators": true
   },
   "exclude": [
     "node_modules",
-    "test",
     "dist"
   ]
 }
