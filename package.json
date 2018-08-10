@@ -30,11 +30,11 @@
   "dependencies": {},
   "devDependencies": {
     "@types/mocha": "^2.2.48",
-    "@types/node": "^8.0.56",
+    "@types/node": "^8.10.24",
     "assert": "^1.4.1",
-    "mocha": "^4.0.1",
-    "ts-node": "^4.0.2",
+    "mocha": "^4.1.0",
+    "ts-node": "^4.1.0",
     "typedoc": "^0.9.0",
-    "typescript": "^2.6.2"
+    "typescript": "^2.9.2"
   }
 }
