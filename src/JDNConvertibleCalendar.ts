@@ -309,6 +309,9 @@ export module JDNConvertibleCalendarModule {
         /**
          * This constructor is inherited by all subclasses (no implementation in subclass required).
          *
+         * The constructor supports two signatures:
+         * - period: JDNPeriod creates a date from the given `JDNPeriod` (two JDNs)
+         * - period: CalendarPeriod creates a date from the given `CalendarPeriod` (two calendar dates)
          */
         constructor(period: JDNPeriod);
         constructor(period: CalendarPeriod);
@@ -329,7 +332,6 @@ export module JDNConvertibleCalendarModule {
 
             if (period instanceof JDNPeriod) {
                 // period is a JDNPeriod
-
                 this.convertJDNPeriodToCalendarPeriod(period);
             } else {
                 // period is a CalendarPeriod
