@@ -69,7 +69,7 @@ export module JDNConvertibleCalendarModule {
          * @param month month of the given date.
          * @param day day of the given date (day of month, 1 based index).
          * @param dayOfWeek day of week of the given date (0 based index), if any.
-         * @param daytime time of the day (0 - 0.9…), if any. 0 refers to midnight, 0.5 to noon, 0.9… to midnigh of the same day. 1 would already refer to the next day and is thus not valid.
+         * @param daytime time of the day (0 - 0.9…), if any. 0 refers to midnight, 0.5 to noon, 0.9… to midnight of the same day. 1 would already refer to the next day and is thus not valid.
          */
         constructor(public readonly year: number, public readonly month: number, public readonly day: number, public readonly dayOfWeek?: number, public readonly daytime?: number) {
 
