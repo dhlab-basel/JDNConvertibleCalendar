@@ -1500,7 +1500,7 @@ describe('Instantiate a calendar date from a calendar period', () => {
 
     });
 
-    it('create a Gregorian date from an exact calendar period', () => {
+    it('create a Julian date from an exact calendar period', () => {
 
         const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new CalendarPeriod(new CalendarDate(2018, 7, 26), new CalendarDate(2018, 7, 26)));
 
@@ -1516,7 +1516,7 @@ describe('Instantiate a calendar date from a calendar period', () => {
 
     });
 
-    it('create a Gregorian date from a calendar period', () => {
+    it('create a Julian date from a calendar period', () => {
 
         const julianCalendarDate: JulianCalendarDate = new JulianCalendarDate(new CalendarPeriod(new CalendarDate(2018, 7, 26), new CalendarDate(2018, 7, 27)));
 
