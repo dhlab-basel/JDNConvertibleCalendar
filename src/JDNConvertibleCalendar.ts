@@ -69,7 +69,7 @@ export module JDNConvertibleCalendarModule {
          * @param month month of the given date.
          * @param day day of the given date (day of month, 1 based index).
          * @param dayOfWeek day of week of the given date (0 based index), if any.
-         * @param daytime time of the day (0 - 0.9…), if any. 0 refers to midnight, 0.5 to noon, 0.9… to midnigh of the same day. 1 would already refer to the next day and is thus not valid.
+         * @param daytime time of the day (0 - 0.9…), if any. 0 refers to midnight, 0.5 to noon, 0.9… to midnight of the same day. 1 would already refer to the next day and is thus not valid.
          */
         constructor(public readonly year: number, public readonly month: number, public readonly day: number, public readonly dayOfWeek?: number, public readonly daytime?: number) {
 
@@ -309,9 +309,13 @@ export module JDNConvertibleCalendarModule {
         /**
          * This constructor is inherited by all subclasses (no implementation in subclass required).
          *
-         * @param jdnPeriod JDN period to create a calendar specific date from.
+         * The constructor supports two signatures:
+         * - period: JDNPeriod creates a date from the given `JDNPeriod` (two JDNs)
+         * - period: CalendarPeriod creates a date from the given `CalendarPeriod` (two calendar dates)
          */
-        constructor(jdnPeriod: JDNPeriod) {
+        constructor(period: JDNPeriod);
+        constructor(period: CalendarPeriod);
+        constructor(period: any) {
 
             // initialize members (required by TypeScript compiler)
             const julianPeriodStart = new CalendarDate(-4712, 1, 1);
@@ -326,8 +330,17 @@ export module JDNConvertibleCalendarModule {
 
             this.jdnEnd = 0;
 
-            // calculate calendar date from given JDN period
-            this.convertJDNPeriodToCalendarPeriod(jdnPeriod);
+            if (period instanceof JDNPeriod) {
+                // period is a JDNPeriod
+                this.convertJDNPeriodToCalendarPeriod(period);
+            } else {
+                // period is a CalendarPeriod
+
+                let jdnStart = this.calendarToJDN(period.periodStart);
+                let jdnEnd = this.calendarToJDN(period.periodEnd);
+
+                this.convertJDNPeriodToCalendarPeriod(new JDNPeriod(jdnStart, jdnEnd));
+            }
         }
 
         /**
