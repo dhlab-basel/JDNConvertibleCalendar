@@ -4,3 +4,4 @@ docs/
 dist/test
 .idea/
 .DS_Store
+.travis.yml
