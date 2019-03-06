@@ -148,29 +148,54 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new JDNConvertible<wbr>Calendar<span class="tsd-signature-symbol">(</span>jdnPeriod<span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnperiod.html" class="tsd-signature-type">JDNPeriod</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html" class="tsd-signature-type">JDNConvertibleCalendar</a></li>
+						<li class="tsd-signature tsd-kind-icon">new JDNConvertible<wbr>Calendar<span class="tsd-signature-symbol">(</span>period<span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnperiod.html" class="tsd-signature-type">JDNPeriod</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html" class="tsd-signature-type">JDNConvertibleCalendar</a></li>
+						<li class="tsd-signature tsd-kind-icon">new JDNConvertible<wbr>Calendar<span class="tsd-signature-symbol">(</span>period<span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendarperiod.html" class="tsd-signature-type">CalendarPeriod</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html" class="tsd-signature-type">JDNConvertibleCalendar</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L307">JDNConvertibleCalendar.ts:307</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L307">JDNConvertibleCalendar.ts:307</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>This constructor is inherited by all subclasses (no implementation in subclass required).</p>
 								</div>
+								<p>The constructor supports two signatures:</p>
+								<ul>
+									<li>period: JDNPeriod creates a date from the given <code>JDNPeriod</code> (two JDNs)</li>
+									<li>period: CalendarPeriod creates a date from the given <code>CalendarPeriod</code> (two calendar dates)</li>
+								</ul>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>jdnPeriod: <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnperiod.html" class="tsd-signature-type">JDNPeriod</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>JDN period to create a calendar specific date from.</p>
-										</div>
-									</div>
+									<h5>period: <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnperiod.html" class="tsd-signature-type">JDNPeriod</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html" class="tsd-signature-type">JDNConvertibleCalendar</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L316">JDNConvertibleCalendar.ts:316</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>This constructor is inherited by all subclasses (no implementation in subclass required).</p>
+								</div>
+								<p>The constructor supports two signatures:</p>
+								<ul>
+									<li>period: JDNPeriod creates a date from the given <code>JDNPeriod</code> (two JDNs)</li>
+									<li>period: CalendarPeriod creates a date from the given <code>CalendarPeriod</code> (two calendar dates)</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>period: <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendarperiod.html" class="tsd-signature-type">CalendarPeriod</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html" class="tsd-signature-type">JDNConvertibleCalendar</a></h4>
@@ -186,7 +211,7 @@
 					<div class="tsd-signature tsd-kind-icon">calendar<wbr>End<span class="tsd-signature-symbol">:</span> <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendardate.html" class="tsd-signature-type">CalendarDate</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L184">JDNConvertibleCalendar.ts:184</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L184">JDNConvertibleCalendar.ts:184</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -197,11 +222,11 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="calendarname" class="tsd-anchor"></a>
-					<h3>calendar<wbr>Name</h3>
+					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> calendar<wbr>Name</h3>
 					<div class="tsd-signature tsd-kind-icon">calendar<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L159">JDNConvertibleCalendar.ts:159</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L159">JDNConvertibleCalendar.ts:159</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -216,7 +241,7 @@
 					<div class="tsd-signature tsd-kind-icon">calendar<wbr>Start<span class="tsd-signature-symbol">:</span> <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendardate.html" class="tsd-signature-type">CalendarDate</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L179">JDNConvertibleCalendar.ts:179</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L179">JDNConvertibleCalendar.ts:179</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -231,7 +256,7 @@
 					<div class="tsd-signature tsd-kind-icon">exact<wbr>Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L189">JDNConvertibleCalendar.ts:189</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L189">JDNConvertibleCalendar.ts:189</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -246,7 +271,7 @@
 					<div class="tsd-signature tsd-kind-icon">jdn<wbr>End<span class="tsd-signature-symbol">:</span> <a href="../modules/_typedefinitions_.typedefinitionsmodule.html#jdn" class="tsd-signature-type">JDN</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L199">JDNConvertibleCalendar.ts:199</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L199">JDNConvertibleCalendar.ts:199</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -261,7 +286,7 @@
 					<div class="tsd-signature tsd-kind-icon">jdn<wbr>Start<span class="tsd-signature-symbol">:</span> <a href="../modules/_typedefinitions_.typedefinitionsmodule.html#jdn" class="tsd-signature-type">JDN</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L194">JDNConvertibleCalendar.ts:194</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L194">JDNConvertibleCalendar.ts:194</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -272,11 +297,11 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="monthsinyear" class="tsd-anchor"></a>
-					<h3>months<wbr>InYear</h3>
+					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> months<wbr>InYear</h3>
 					<div class="tsd-signature tsd-kind-icon">months<wbr>InYear<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L164">JDNConvertibleCalendar.ts:164</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L164">JDNConvertibleCalendar.ts:164</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -287,11 +312,11 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="yearzeroexists" class="tsd-anchor"></a>
-					<h3>year<wbr>Zero<wbr>Exists</h3>
+					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> year<wbr>Zero<wbr>Exists</h3>
 					<div class="tsd-signature tsd-kind-icon">year<wbr>Zero<wbr>Exists<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L169">JDNConvertibleCalendar.ts:169</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L169">JDNConvertibleCalendar.ts:169</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -306,7 +331,7 @@
 					<div class="tsd-signature tsd-kind-icon">gregorian<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"Gregorian"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Gregorian&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L144">JDNConvertibleCalendar.ts:144</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L144">JDNConvertibleCalendar.ts:144</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -321,7 +346,7 @@
 					<div class="tsd-signature tsd-kind-icon">julian<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"Julian"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Julian&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L149">JDNConvertibleCalendar.ts:149</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L149">JDNConvertibleCalendar.ts:149</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -336,7 +361,7 @@
 					<div class="tsd-signature tsd-kind-icon">supported<wbr>Calendars<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L154">JDNConvertibleCalendar.ts:154</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L154">JDNConvertibleCalendar.ts:154</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -350,7 +375,7 @@
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
 					<a name="jdntocalendar" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> JDNTo<wbr>Calendar</h3>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagAbstract">Abstract</span> JDNTo<wbr>Calendar</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
 						<li class="tsd-signature tsd-kind-icon">JDNTo<wbr>Calendar<span class="tsd-signature-symbol">(</span>jdn<span class="tsd-signature-symbol">: </span><a href="../modules/_typedefinitions_.typedefinitionsmodule.html#jdn" class="tsd-signature-type">JDN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendardate.html" class="tsd-signature-type">CalendarDate</a></li>
 					</ul>
@@ -358,7 +383,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L212">JDNConvertibleCalendar.ts:212</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L212">JDNConvertibleCalendar.ts:212</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -386,7 +411,7 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
 					<a name="calendartojdn" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> calendar<wbr>ToJDN</h3>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagAbstract">Abstract</span> calendar<wbr>ToJDN</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
 						<li class="tsd-signature tsd-kind-icon">calendar<wbr>ToJDN<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendardate.html" class="tsd-signature-type">CalendarDate</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_typedefinitions_.typedefinitionsmodule.html#jdn" class="tsd-signature-type">JDN</a></li>
 					</ul>
@@ -394,7 +419,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L225">JDNConvertibleCalendar.ts:225</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L225">JDNConvertibleCalendar.ts:225</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -430,7 +455,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L359">JDNConvertibleCalendar.ts:359</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L372">JDNConvertibleCalendar.ts:372</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -463,7 +488,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L276">JDNConvertibleCalendar.ts:276</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L276">JDNConvertibleCalendar.ts:276</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -490,7 +515,7 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
 					<a name="dayofweekfromjdn" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> day<wbr>OfWeek<wbr>FromJDN</h3>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagAbstract">Abstract</span> day<wbr>OfWeek<wbr>FromJDN</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
 						<li class="tsd-signature tsd-kind-icon">day<wbr>OfWeek<wbr>FromJDN<span class="tsd-signature-symbol">(</span>jdn<span class="tsd-signature-symbol">: </span><a href="../modules/_typedefinitions_.typedefinitionsmodule.html#jdn" class="tsd-signature-type">JDN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
@@ -498,7 +523,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L233">JDNConvertibleCalendar.ts:233</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L233">JDNConvertibleCalendar.ts:233</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -530,7 +555,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L243">JDNConvertibleCalendar.ts:243</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L243">JDNConvertibleCalendar.ts:243</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -563,7 +588,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L499">JDNConvertibleCalendar.ts:499</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L512">JDNConvertibleCalendar.ts:512</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -601,7 +626,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L338">JDNConvertibleCalendar.ts:338</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L351">JDNConvertibleCalendar.ts:351</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -624,7 +649,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L347">JDNConvertibleCalendar.ts:347</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L360">JDNConvertibleCalendar.ts:360</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -647,7 +672,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L385">JDNConvertibleCalendar.ts:385</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L398">JDNConvertibleCalendar.ts:398</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -678,7 +703,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L596">JDNConvertibleCalendar.ts:596</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L609">JDNConvertibleCalendar.ts:609</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -711,7 +736,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L406">JDNConvertibleCalendar.ts:406</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L419">JDNConvertibleCalendar.ts:419</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

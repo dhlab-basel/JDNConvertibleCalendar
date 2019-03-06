@@ -144,30 +144,56 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Julian<wbr>Calendar<wbr>Date<span class="tsd-signature-symbol">(</span>jdnPeriod<span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnperiod.html" class="tsd-signature-type">JDNPeriod</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.juliancalendardate.html" class="tsd-signature-type">JulianCalendarDate</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Julian<wbr>Calendar<wbr>Date<span class="tsd-signature-symbol">(</span>period<span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnperiod.html" class="tsd-signature-type">JDNPeriod</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.juliancalendardate.html" class="tsd-signature-type">JulianCalendarDate</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Julian<wbr>Calendar<wbr>Date<span class="tsd-signature-symbol">(</span>period<span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendarperiod.html" class="tsd-signature-type">CalendarPeriod</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.juliancalendardate.html" class="tsd-signature-type">JulianCalendarDate</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L307">JDNConvertibleCalendar.ts:307</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L307">JDNConvertibleCalendar.ts:307</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>This constructor is inherited by all subclasses (no implementation in subclass required).</p>
 								</div>
+								<p>The constructor supports two signatures:</p>
+								<ul>
+									<li>period: JDNPeriod creates a date from the given <code>JDNPeriod</code> (two JDNs)</li>
+									<li>period: CalendarPeriod creates a date from the given <code>CalendarPeriod</code> (two calendar dates)</li>
+								</ul>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>jdnPeriod: <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnperiod.html" class="tsd-signature-type">JDNPeriod</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>JDN period to create a calendar specific date from.</p>
-										</div>
-									</div>
+									<h5>period: <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnperiod.html" class="tsd-signature-type">JDNPeriod</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.juliancalendardate.html" class="tsd-signature-type">JulianCalendarDate</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#constructor">constructor</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L316">JDNConvertibleCalendar.ts:316</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>This constructor is inherited by all subclasses (no implementation in subclass required).</p>
+								</div>
+								<p>The constructor supports two signatures:</p>
+								<ul>
+									<li>period: JDNPeriod creates a date from the given <code>JDNPeriod</code> (two JDNs)</li>
+									<li>period: CalendarPeriod creates a date from the given <code>CalendarPeriod</code> (two calendar dates)</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>period: <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendarperiod.html" class="tsd-signature-type">CalendarPeriod</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.juliancalendardate.html" class="tsd-signature-type">JulianCalendarDate</a></h4>
@@ -184,7 +210,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#calendarend">calendarEnd</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L184">JDNConvertibleCalendar.ts:184</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L184">JDNConvertibleCalendar.ts:184</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -200,7 +226,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#calendarname">calendarName</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L667">JDNConvertibleCalendar.ts:667</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L680">JDNConvertibleCalendar.ts:680</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -211,7 +237,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#calendarstart">calendarStart</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L179">JDNConvertibleCalendar.ts:179</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L179">JDNConvertibleCalendar.ts:179</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -227,7 +253,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#exactdate">exactDate</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L189">JDNConvertibleCalendar.ts:189</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L189">JDNConvertibleCalendar.ts:189</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -243,7 +269,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#jdnend">jdnEnd</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L199">JDNConvertibleCalendar.ts:199</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L199">JDNConvertibleCalendar.ts:199</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -259,7 +285,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#jdnstart">jdnStart</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L194">JDNConvertibleCalendar.ts:194</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L194">JDNConvertibleCalendar.ts:194</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -275,7 +301,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#monthsinyear">monthsInYear</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L669">JDNConvertibleCalendar.ts:669</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L682">JDNConvertibleCalendar.ts:682</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -286,7 +312,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#yearzeroexists">yearZeroExists</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L673">JDNConvertibleCalendar.ts:673</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L686">JDNConvertibleCalendar.ts:686</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -297,7 +323,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#gregorian">gregorian</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L144">JDNConvertibleCalendar.ts:144</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L144">JDNConvertibleCalendar.ts:144</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -313,7 +339,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#julian">julian</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L149">JDNConvertibleCalendar.ts:149</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L149">JDNConvertibleCalendar.ts:149</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -329,7 +355,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#supportedcalendars">supportedCalendars</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L154">JDNConvertibleCalendar.ts:154</a></li>
+							<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L154">JDNConvertibleCalendar.ts:154</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -352,7 +378,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#jdntocalendar">JDNToCalendar</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L675">JDNConvertibleCalendar.ts:675</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L688">JDNConvertibleCalendar.ts:688</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -376,7 +402,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#calendartojdn">calendarToJDN</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L679">JDNConvertibleCalendar.ts:679</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L692">JDNConvertibleCalendar.ts:692</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -400,7 +426,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#convertcalendar">convertCalendar</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L359">JDNConvertibleCalendar.ts:359</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L372">JDNConvertibleCalendar.ts:372</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -434,7 +460,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#convertjdnperiodtocalendarperiod">convertJDNPeriodToCalendarPeriod</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L276">JDNConvertibleCalendar.ts:276</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L276">JDNConvertibleCalendar.ts:276</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -470,7 +496,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#dayofweekfromjdn">dayOfWeekFromJDN</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L683">JDNConvertibleCalendar.ts:683</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L696">JDNConvertibleCalendar.ts:696</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -494,7 +520,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#daysinmonth">daysInMonth</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L243">JDNConvertibleCalendar.ts:243</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L243">JDNConvertibleCalendar.ts:243</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -528,7 +554,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#handlemonthtransposition">handleMonthTransposition</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L499">JDNConvertibleCalendar.ts:499</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L512">JDNConvertibleCalendar.ts:512</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -567,7 +593,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#tocalendarperiod">toCalendarPeriod</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L338">JDNConvertibleCalendar.ts:338</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L351">JDNConvertibleCalendar.ts:351</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -591,7 +617,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#tojdnperiod">toJDNPeriod</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L347">JDNConvertibleCalendar.ts:347</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L360">JDNConvertibleCalendar.ts:360</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -615,7 +641,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#transposeperiodbyday">transposePeriodByDay</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L385">JDNConvertibleCalendar.ts:385</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L398">JDNConvertibleCalendar.ts:398</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -647,7 +673,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#transposeperiodbymonth">transposePeriodByMonth</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L596">JDNConvertibleCalendar.ts:596</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L609">JDNConvertibleCalendar.ts:609</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -681,7 +707,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html">JDNConvertibleCalendar</a>.<a href="_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.jdnconvertiblecalendar.html#transposeperiodbyyear">transposePeriodByYear</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/5ffa569/src/JDNConvertibleCalendar.ts#L406">JDNConvertibleCalendar.ts:406</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNConvertibleCalendar.ts#L419">JDNConvertibleCalendar.ts:419</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
