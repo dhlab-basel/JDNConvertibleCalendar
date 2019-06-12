@@ -294,5 +294,52 @@ export module JDNConvertibleConversionModule {
      */
     export const dayOfWeekFromJDC = (jdc: JDC) => {
         return Math.floor(jdc + 1.5) %  7;
+    };
+
+    // copied from https://www.fourmilab.ch/documents/calendar/calendar.js
+
+    //  LEAP_ISLAMIC  --  Is a given year a leap year in the Islamic calendar ?
+
+    function leap_islamic(year: number)
+    {
+        return (((year * 11) + 14) % 30) < 11;
+    }
+
+//  ISLAMIC_TO_JD  --  Determine Julian day from Islamic date
+
+    const ISLAMIC_EPOCH = 1948439.5;
+    const ISLAMIC_WEEKDAYS = new Array("al-'ahad", "al-'ithnayn",
+        "ath-thalatha'", "al-'arb`a'",
+        "al-khamis", "al-jum`a", "as-sabt");
+
+    export const islamicToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
+        return (calendarDate.day +
+            Math.ceil(29.5 * (calendarDate.month - 1)) +
+            (calendarDate.year - 1) * 354 +
+            Math.floor((3 + (11 * calendarDate.year)) / 30) +
+            ISLAMIC_EPOCH) - 1;
+    };
+
+    export const islamicToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDN => {
+        const jdc = islamicToJDC(calendarDate);
+
+        return truncateDecimals(jdc + 0.5); // adaption because full number without fraction of JDC represents noon.
+    };
+
+//  JD_TO_ISLAMIC  --  Calculate Islamic date from Julian day
+
+    export const JDCToIslamic = (jdc: JDC): JDNConvertibleCalendarModule.CalendarDate => {
+        let year, month, day;
+
+        jdc = Math.floor(jdc) + 0.5;
+        year = Math.floor(((30 * (jdc - ISLAMIC_EPOCH)) + 10646) / 10631);
+        month = Math.min(12,
+            Math.ceil((jdc - (29 + islamicToJDC(new JDNConvertibleCalendarModule.CalendarDate(year, 1, 1)))) / 29.5) + 1);
+        day = (jdc - islamicToJDC(new JDNConvertibleCalendarModule.CalendarDate(year, month, 1))) + 1;
+        return new JDNConvertibleCalendarModule.CalendarDate(year, month, day);
+    };
+
+    export const JDNToIslamic = (jdn: JDN): JDNConvertibleCalendarModule.CalendarDate => {
+        return JDCToIslamic(jdn);
     }
 }

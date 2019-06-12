@@ -22,6 +22,7 @@ import {
     CalendarDate,
     JDNPeriod,
     GregorianCalendarDate,
+    IslamicCalendarDate,
     JulianCalendarDate,
     CalendarPeriod,
     JDNConvertibleCalendar, JDNConvertibleConversionModule
@@ -438,6 +439,28 @@ describe('Conversion JDN to Julian calendar', () => {
         const expectedDate = new CalendarDate(-1001, 8, 17);
 
         checkCalendarDate(expectedDate, julianCalendarDate);
+    });
+
+});
+
+describe('JDC to Islamic', () => {
+
+    it('convert the JDN 2458094 to the Islamic Calendar date 18-03-1439', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2458094.5);
+
+        const expectedDate = new CalendarDate(1439, 3, 18);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+});
+
+describe('Islamic to JDC', () => {
+
+    it('convert the Islamic Calendar date 06-12-2017 to JDC 2458094.5', () => {
+        const jdc = JDNConvertibleConversionModule.islamicToJDC(new CalendarDate(1439, 3, 18));
+
+        checkJDC(2458094.5, jdc);
     });
 
 });
