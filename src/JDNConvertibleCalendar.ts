@@ -720,11 +720,11 @@ export module JDNConvertibleCalendarModule {
         public readonly yearZeroExists = true;
 
         protected JDNToCalendar(jdn: JDN): CalendarDate {
-            return JDNConvertibleConversionModule.JDCToIslamic(jdn);
+            return JDNConvertibleConversionModule.JDNToIslamic(jdn);
         }
 
         protected calendarToJDN(date: CalendarDate): JDN {
-            return JDNConvertibleConversionModule.islamicToJDC(date);
+            return JDNConvertibleConversionModule.islamicToJDN(date);
         }
 
         protected dayOfWeekFromJDN(jdn: JDN): number {

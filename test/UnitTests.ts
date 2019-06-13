@@ -776,6 +776,36 @@ describe('Conversions from JDN to Gregorian and Julian calendar and in between c
 
     });
 
+    it('convert an Islamic date into a Gregorian date', () => {
+
+        // Islamic calendar date 17-03-1439
+        const jdn = 2458094;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const islamicCalendarPeriod: CalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedIslamicDate = new CalendarDate(1439, 3, 17, 3);
+
+        checkCalendarDate(expectedIslamicDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedIslamicDate, islamicCalendarPeriod.periodEnd);
+
+        const gregorianDate: JDNConvertibleCalendar = islamicDate.convertCalendar('Gregorian');
+
+        const jdnPeriod = gregorianDate.toJDNPeriod();
+
+        checkJDN(jdn, jdnPeriod.periodStart);
+        checkJDN(jdn, jdnPeriod.periodEnd);
+
+        const GREGORIANCalendarPeriod = gregorianDate.toCalendarPeriod();
+
+        const expectedGREGORIANDate = new CalendarDate(2017, 12, 6, 3);
+
+        checkCalendarDate(expectedGREGORIANDate, GREGORIANCalendarPeriod.periodStart);
+        checkCalendarDate(expectedGREGORIANDate, GREGORIANCalendarPeriod.periodEnd);
+
+    });
+
 });
 
 //
