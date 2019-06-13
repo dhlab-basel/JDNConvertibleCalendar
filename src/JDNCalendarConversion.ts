@@ -296,22 +296,17 @@ export module JDNConvertibleConversionModule {
         return Math.floor(jdc + 1.5) %  7;
     };
 
-    // copied from https://www.fourmilab.ch/documents/calendar/calendar.js
-
-    //  LEAP_ISLAMIC  --  Is a given year a leap year in the Islamic calendar ?
-
-    function leap_islamic(year: number)
-    {
-        return (((year * 11) + 14) % 30) < 11;
-    }
-
-//  ISLAMIC_TO_JD  --  Determine Julian day from Islamic date
-
     const ISLAMIC_EPOCH = 1948439.5;
-    const ISLAMIC_WEEKDAYS = new Array("al-'ahad", "al-'ithnayn",
-        "ath-thalatha'", "al-'arb`a'",
-        "al-khamis", "al-jum`a", "as-sabt");
 
+    /**
+     * Converts an Islamic calendar date to a JDC.
+     *
+     * Algorithm from:
+     * https://www.fourmilab.ch/documents/calendar/calendar.js
+     *
+     * @param calendarDate Islamic calendar date to be converted to JDC.
+     * @returns JDC representing the given Islamic calendar date.
+     */
     export const islamicToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
         return (calendarDate.day +
             Math.ceil(29.5 * (calendarDate.month - 1)) +
@@ -320,26 +315,45 @@ export module JDNConvertibleConversionModule {
             ISLAMIC_EPOCH) - 1;
     };
 
+    /**
+     * Converts an Islamic calendar date to a JDN.
+     *
+     * @param calendarDate Islamic calendar date to be converted to JDN.
+     * @returns JDN representing the given Islamic calendar date.
+     */
     export const islamicToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDN => {
         const jdc = islamicToJDC(calendarDate);
 
         return truncateDecimals(jdc + 0.5); // adaption because full number without fraction of JDC represents noon.
     };
 
-//  JD_TO_ISLAMIC  --  Calculate Islamic date from Julian day
-
+    /**
+     * Converts a JDC to an Islamic calendar date.
+     *
+     * Algorithm from:
+     * https://www.fourmilab.ch/documents/calendar/calendar.js
+     *
+     * @param jdc JDC to be converted to an Islamic calendar date.
+     * @returns Islamic calendar date created from given JDC.
+     */
     export const JDCToIslamic = (jdc: JDC): JDNConvertibleCalendarModule.CalendarDate => {
         let year, month, day;
 
-        jdc = Math.floor(jdc) + 0.5;
+        jdc = Math.floor(jdc) + 0.5; // TODO: handle JDN correctly
         year = Math.floor(((30 * (jdc - ISLAMIC_EPOCH)) + 10646) / 10631);
         month = Math.min(12,
             Math.ceil((jdc - (29 + islamicToJDC(new JDNConvertibleCalendarModule.CalendarDate(year, 1, 1)))) / 29.5) + 1);
         day = (jdc - islamicToJDC(new JDNConvertibleCalendarModule.CalendarDate(year, month, 1))) + 1;
-        return new JDNConvertibleCalendarModule.CalendarDate(year, month, day);
+        return new JDNConvertibleCalendarModule.CalendarDate(year, month, day); // TODO: determine daytime
     };
 
+    /**
+     * Converts a JDN to an Islamic calendar date.
+     *
+     * @param jdn JDN to be converted to an Islamic calendar date.
+     * @returns @returns Islamic calendar date created from given JDN.
+     */
     export const JDNToIslamic = (jdn: JDN): JDNConvertibleCalendarModule.CalendarDate => {
-        return JDCToIslamic(jdn);
+        return JDCToIslamic(jdn - 0.5); // TODO: handle JDN correctly
     }
 }
