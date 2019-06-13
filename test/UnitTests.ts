@@ -797,12 +797,42 @@ describe('Conversions from JDN to Gregorian and Julian calendar and in between c
         checkJDN(jdn, jdnPeriod.periodStart);
         checkJDN(jdn, jdnPeriod.periodEnd);
 
-        const GREGORIANCalendarPeriod = gregorianDate.toCalendarPeriod();
+        const gregorianCalendarPeriod = gregorianDate.toCalendarPeriod();
 
-        const expectedGREGORIANDate = new CalendarDate(2017, 12, 6, 3);
+        const expectedGregorianDate = new CalendarDate(2017, 12, 6, 3);
 
-        checkCalendarDate(expectedGREGORIANDate, GREGORIANCalendarPeriod.periodStart);
-        checkCalendarDate(expectedGREGORIANDate, GREGORIANCalendarPeriod.periodEnd);
+        checkCalendarDate(expectedGregorianDate, gregorianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedGregorianDate, gregorianCalendarPeriod.periodEnd);
+
+    });
+
+    it('convert a Gregorian into an Islamic date', () => {
+
+        // Gregorian calendar date 06-04-2000
+        const jdn =  2451641;
+
+        const gregorianDate: GregorianCalendarDate = new GregorianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const gregorianCalendarPeriod: CalendarPeriod = gregorianDate.toCalendarPeriod();
+
+        const expectedGregorianDate = new CalendarDate(2000, 4, 6, 4);
+
+        checkCalendarDate(expectedGregorianDate, gregorianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedGregorianDate, gregorianCalendarPeriod.periodEnd);
+
+        const islamicDate: JDNConvertibleCalendar = gregorianDate.convertCalendar('Islamic');
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn, jdnPeriod.periodStart);
+        checkJDN(jdn, jdnPeriod.periodEnd);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedIslamicDate = new CalendarDate(1421, 1, 1, 4);
+
+        checkCalendarDate(expectedIslamicDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedIslamicDate, islamicCalendarPeriod.periodEnd);
 
     });
 

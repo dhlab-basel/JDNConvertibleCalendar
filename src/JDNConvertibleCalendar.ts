@@ -156,7 +156,7 @@ export module JDNConvertibleCalendarModule {
         /**
          * Supported calendars (to be extended when new subclasses are implemented).
          */
-        public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian];
+        public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian, JDNConvertibleCalendar.islamic];
 
         /**
          * Calendar name of a subclass of `JDNConvertibleCalendar`.
