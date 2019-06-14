@@ -319,7 +319,7 @@ export module JDNConvertibleConversionModule {
         let d = calendarDate.day;
 
         if (calendarDate.daytime !== undefined) {
-            d =+ calendarDate.daytime;
+            d = d + calendarDate.daytime;
         }
 
         const n = d + truncateDecimals(29.5001 * (m - 1) + 0.99);
@@ -345,7 +345,7 @@ export module JDNConvertibleConversionModule {
             x =+ 1;
         }
 
-        const jdc = truncateDecimals(365.25 * (x-1)) + 1721423 + j;
+        const jdc = truncateDecimals(365.25 * (x-1)) + 1721423 + j - 0.5;
 
         return jdc;
     };

@@ -451,6 +451,18 @@ describe('Islamic to JDC', () => {
         checkJDC(2458093.5, jdc);
     });
 
+    it('convert the Islamic Calendar date 17-03-1439 to JDC 2458094', () => {
+        const jdc = JDNConvertibleConversionModule.islamicToJDC(new CalendarDate(1439, 3, 17, undefined, 0.5));
+
+        checkJDC(2458094, jdc);
+    });
+
+    it('convert the Islamic Calendar date 17-03-1439 to JDC 2458094', () => {
+        const jdc = JDNConvertibleConversionModule.islamicToJDC(new CalendarDate(1439, 3, 17, undefined, 0.9));
+
+        checkJDC(2458094.4, jdc);
+    });
+
     it('convert the Islamic Calendar date 01-01-1421 to JDC 2451640.5', () => {
         const jdc = JDNConvertibleConversionModule.islamicToJDC(new CalendarDate(1421, 1, 1));
 
@@ -462,9 +474,15 @@ describe('Islamic to JDC', () => {
 describe('Islamic to JDN', () => {
 
     it('convert the Islamic Calendar date 17-03-1439 to JDN 2458094', () => {
-        const jdc = JDNConvertibleConversionModule.islamicToJDN(new CalendarDate(1439, 3, 17));
+        const jdn = JDNConvertibleConversionModule.islamicToJDN(new CalendarDate(1439, 3, 17));
 
-        checkJDC(2458094, jdc);
+        checkJDN(2458094, jdn);
+    });
+
+    it('convert the Islamic Calendar date 01-01-1421 to JDC 2451641', () => {
+        const jdn = JDNConvertibleConversionModule.islamicToJDN(new CalendarDate(1421, 1, 1));
+
+        checkJDN(2451641, jdn);
     });
 
 });
