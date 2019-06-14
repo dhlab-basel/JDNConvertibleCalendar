@@ -302,17 +302,52 @@ export module JDNConvertibleConversionModule {
      * Converts an Islamic calendar date to a JDC.
      *
      * Algorithm from:
-     * https://www.fourmilab.ch/documents/calendar/calendar.js
+     * Jean Meeus, Astronomical Algorithms, 1998, 73pp.
      *
      * @param calendarDate Islamic calendar date to be converted to JDC.
      * @returns JDC representing the given Islamic calendar date.
      */
     export const islamicToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
-        return (calendarDate.day +
+        /*return (calendarDate.day +
             Math.ceil(29.5 * (calendarDate.month - 1)) +
             (calendarDate.year - 1) * 354 +
             Math.floor((3 + (11 * calendarDate.year)) / 30) +
-            ISLAMIC_EPOCH) - 1;
+            ISLAMIC_EPOCH) - 1; // jd=intPart((11*y+3)/30)+354*y+30*m-intPart((m-1)/2)+d+1948440-385 http://www.muslimphilosophy.com/ip/hijri.htm*/
+
+        const h = calendarDate.year;
+        const m = calendarDate.month;
+        let d = calendarDate.day;
+
+        if (calendarDate.daytime !== undefined) {
+            d =+ calendarDate.daytime;
+        }
+
+        const n = d + truncateDecimals(29.5001 * (m - 1) + 0.99);
+        const q = truncateDecimals(h/30);
+        const r = h % 30;
+        // IF (r.lt.0) r = r + 30
+        const a = truncateDecimals((11*r +3)/30);
+        const w = 404 * q + 354 * r + 208 + a;
+        const q1 = truncateDecimals(w/1461);
+        const q2 = w % 1461;
+        // IF (q2.lt.0) q2 = q2 + 1461
+        const g = 621 + 4  * truncateDecimals(7*q + q1);
+        const k = truncateDecimals(q2/365.2422);
+        const e = truncateDecimals(365.2422*k);
+        let j = q2 - e + n - 1;
+        let x = g + k;
+
+        if (j > 366 && (x % 4 == 0)) {
+            j =- 366;
+            x =+ 1;
+        } else if (j > 365 && (x % 4 > 0)) {
+            j =- 365;
+            x =+ 1;
+        }
+
+        const jdc = truncateDecimals(365.25 * (x-1)) + 1721423 + j;
+
+        return jdc;
     };
 
     /**
@@ -354,6 +389,6 @@ export module JDNConvertibleConversionModule {
      * @returns @returns Islamic calendar date created from given JDN.
      */
     export const JDNToIslamic = (jdn: JDN): JDNConvertibleCalendarModule.CalendarDate => {
-        return JDCToIslamic(jdn - 0.5); // TODO: handle JDN correctly
+        return JDCToIslamic(jdn);
     }
 }

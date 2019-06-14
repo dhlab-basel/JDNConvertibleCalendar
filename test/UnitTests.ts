@@ -451,6 +451,12 @@ describe('Islamic to JDC', () => {
         checkJDC(2458093.5, jdc);
     });
 
+    it('convert the Islamic Calendar date 01-01-1421 to JDC 2451640.5', () => {
+        const jdc = JDNConvertibleConversionModule.islamicToJDC(new CalendarDate(1421, 1, 1));
+
+        checkJDC(2451640.5, jdc);
+    });
+
 });
 
 describe('Islamic to JDN', () => {
