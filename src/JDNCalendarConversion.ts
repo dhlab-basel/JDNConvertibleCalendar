@@ -366,20 +366,96 @@ export module JDNConvertibleConversionModule {
      * Converts a JDC to an Islamic calendar date.
      *
      * Algorithm from:
-     * https://www.fourmilab.ch/documents/calendar/calendar.js
+     * Jean Meeus, Astronomical Algorithms, 1998, 75pp.
      *
      * @param jdc JDC to be converted to an Islamic calendar date.
      * @returns Islamic calendar date created from given JDC.
      */
     export const JDCToIslamic = (jdc: JDC): JDNConvertibleCalendarModule.CalendarDate => {
-        let year, month, day;
+        /*let year, month, day;
 
         jdc = Math.floor(jdc) + 0.5; // TODO: handle JDN correctly
         year = Math.floor(((30 * (jdc - ISLAMIC_EPOCH)) + 10646) / 10631);
         month = Math.min(12,
             Math.ceil((jdc - (29 + islamicToJDC(new JDNConvertibleCalendarModule.CalendarDate(year, 1, 1)))) / 29.5) + 1);
         day = (jdc - islamicToJDC(new JDNConvertibleCalendarModule.CalendarDate(year, month, 1))) + 1;
-        return new JDNConvertibleCalendarModule.CalendarDate(year, month, day); // TODO: determine daytime
+        return new JDNConvertibleCalendarModule.CalendarDate(year, month, day); // TODO: determine daytime*/
+
+        // convert given JDC into a Julian calendar date
+        const julianCalendarDate: JDNConvertibleCalendarModule.CalendarDate = JDCToJulian(jdc);
+
+        const x = julianCalendarDate.year;
+        let m = julianCalendarDate.month;
+        let d = julianCalendarDate.day;
+
+        if (julianCalendarDate.daytime !== undefined) {
+            d = d + julianCalendarDate.daytime;
+        }
+
+        let w;
+        if ((x % 4) == 0) {
+            w = 1;
+        } else {
+            w = 2;
+        }
+
+        const n = truncateDecimals((275 * m)/9) - w * truncateDecimals((m + 9)/12) + d - 30;
+        const a = x - 623;
+        const b = truncateDecimals(a/4);
+        const c = a % 4;
+        const c1 = 365.2501 * c;
+        let c2 = truncateDecimals(c1);
+
+        if ((c1 - c2) > 0.5) {
+            c2 = c2 + 1;
+        }
+
+        const d_ = 1461 * b + 170 + c2;
+        const q = truncateDecimals(d_/10631);
+        const r = d_ % 10631;
+        const j = truncateDecimals(r/354);
+        const k = r % 354;
+        const o = truncateDecimals((11*j +14)/30);
+        let h = 30 * q  + j + 1;
+        let jj = k - o + n -1;
+
+        if (jj > 354) {
+            const cl = h % 30;
+            const dl = (11 * cl + 3) % 30;
+
+            if (dl < 19) {
+                jj = jj - 354;
+                h = h + 1;
+            }
+
+            if (dl > 18) {
+               jj = jj - 355;
+               h = h + 1;
+            }
+
+            if (jj == 0) {
+                jj = 355;
+                h = h - 1;
+            }
+        }
+
+        const s = truncateDecimals((jj -1)/29.5)
+
+        m = 1 + s;
+
+        d = truncateDecimals(jj - 29.5 * s);
+
+        if (jj == 355) {
+            m = 12;
+            d= 30;
+        }
+
+        // console.log(x, m, d, julianCalendarDate.daytime, w, n, a, b, c, c1, c2, d_, q, r, j, k, o, h, jj);
+
+        let fullday = truncateDecimals(d);
+        let daytime = d - fullday;
+
+        return new JDNConvertibleCalendarModule.CalendarDate(h, m, fullday, undefined, daytime);
     };
 
     /**
