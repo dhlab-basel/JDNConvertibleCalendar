@@ -296,8 +296,6 @@ export module JDNConvertibleConversionModule {
         return Math.floor(jdc + 1.5) %  7;
     };
 
-    const ISLAMIC_EPOCH = 1948439.5;
-
     /**
      * Converts an Islamic calendar date to a JDC.
      *
@@ -388,10 +386,6 @@ export module JDNConvertibleConversionModule {
         let m = julianCalendarDate.month;
         let d = julianCalendarDate.day;
 
-        if (julianCalendarDate.daytime !== undefined) {
-            d = d + julianCalendarDate.daytime;
-        }
-
         let w;
         if ((x % 4) == 0) {
             w = 1;
@@ -439,7 +433,7 @@ export module JDNConvertibleConversionModule {
             }
         }
 
-        const s = truncateDecimals((jj -1)/29.5)
+        const s = truncateDecimals((jj -1)/29.5);
 
         m = 1 + s;
 
@@ -452,10 +446,7 @@ export module JDNConvertibleConversionModule {
 
         // console.log(x, m, d, julianCalendarDate.daytime, w, n, a, b, c, c1, c2, d_, q, r, j, k, o, h, jj);
 
-        let fullday = truncateDecimals(d);
-        let daytime = d - fullday;
-
-        return new JDNConvertibleCalendarModule.CalendarDate(h, m, fullday, undefined, daytime);
+        return new JDNConvertibleCalendarModule.CalendarDate(h, m, d, undefined, julianCalendarDate.daytime);
     };
 
     /**

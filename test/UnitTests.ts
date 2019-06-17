@@ -501,6 +501,26 @@ describe('JDC to Islamic', () => {
         const expectedDate = new CalendarDate(1439, 3, 17);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
+        
+    });
+
+    it('convert the JDC 2458093.6 to the Islamic Calendar date 17-03-1439', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2458093.6);
+
+        const expectedDate = new CalendarDate(1439, 3, 17, undefined, 0.1);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+
+        assert.notStrictEqual(undefined, islamicCalendarDate.daytime);
+
+        if (islamicCalendarDate.daytime !== undefined) {
+
+            const diffDaytime = Math.abs(islamicCalendarDate.daytime - 0.1);
+
+            assert(diffDaytime < 0.01);
+
+        }
+
     });
 
     it('convert the JDC 2448481.5 to the Islamic Calendar date 02-02-1412', () => {
