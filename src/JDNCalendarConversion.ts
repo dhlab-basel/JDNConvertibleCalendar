@@ -322,13 +322,17 @@ export module JDNConvertibleConversionModule {
 
         const n = d + truncateDecimals(29.5001 * (m - 1) + 0.99);
         const q = truncateDecimals(h/30);
-        const r = h % 30;
-        // IF (r.lt.0) r = r + 30
+        let r = h % 30;
+        if (r < 0) {
+            r = r + 30;
+        }
         const a = truncateDecimals((11*r +3)/30);
         const w = 404 * q + 354 * r + 208 + a;
         const q1 = truncateDecimals(w/1461);
-        const q2 = w % 1461;
-        // IF (q2.lt.0) q2 = q2 + 1461
+        let q2 = w % 1461;
+        if (q2 < 0) {
+            q2 = q2 + 1461
+        }
         const g = 621 + 4  * truncateDecimals(7*q + q1);
         const k = truncateDecimals(q2/365.2422);
         const e = truncateDecimals(365.2422*k);
