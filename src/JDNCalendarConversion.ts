@@ -331,7 +331,7 @@ export module JDNConvertibleConversionModule {
         const q1 = truncateDecimals(w/1461);
         let q2 = w % 1461;
         if (q2 < 0) {
-            q2 = q2 + 1461
+            q2 = q2 + 1461;
         }
         const g = 621 + 4  * truncateDecimals(7*q + q1);
         const k = truncateDecimals(q2/365.2422);
@@ -340,11 +340,11 @@ export module JDNConvertibleConversionModule {
         let x = g + k;
 
         if (j > 366 && (x % 4 == 0)) {
-            j =- 366;
-            x =+ 1;
+            j = j - 366;
+            x = x + 1;
         } else if (j > 365 && (x % 4 > 0)) {
-            j =- 365;
-            x =+ 1;
+            j = j - 365;
+            x = x + 1;
         }
 
         const jdc = truncateDecimals(365.25 * (x-1)) + 1721423 + j - 0.5;
@@ -399,8 +399,9 @@ export module JDNConvertibleConversionModule {
 
         const n = truncateDecimals((275 * m)/9) - w * truncateDecimals((m + 9)/12) + d - 30;
         const a = x - 623;
-        const b = truncateDecimals(a/4);
-        const c = a % 4;
+        const b = Math.floor(a/4);
+        let c = a / 4 - b;
+        c = Math.floor(c * 4);
         const c1 = 365.2501 * c;
         let c2 = truncateDecimals(c1);
 
@@ -409,8 +410,11 @@ export module JDNConvertibleConversionModule {
         }
 
         const d_ = 1461 * b + 170 + c2;
-        const q = truncateDecimals(d_/10631);
-        const r = d_ % 10631;
+        const q = Math.floor(d_/10631);
+        let r = d_ % 10631;
+        if (r < 0) {
+            r = r + 10631;
+        }
         const j = truncateDecimals(r/354);
         const k = r % 354;
         const o = truncateDecimals((11*j +14)/30);
@@ -447,7 +451,6 @@ export module JDNConvertibleConversionModule {
             m = 12;
             d= 30;
         }
-
         // console.log(x, m, d, julianCalendarDate.daytime, w, n, a, b, c, c1, c2, d_, q, r, j, k, o, h, jj);
 
         return new JDNConvertibleCalendarModule.CalendarDate(h, m, d, undefined, julianCalendarDate.daytime);

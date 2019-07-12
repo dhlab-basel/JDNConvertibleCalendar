@@ -723,7 +723,133 @@ describe('JDC to Islamic', () => {
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
+    it('convert the JDC 1948438.5 to the Islamic Calendar date 29-12-0000', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(1948438.5);
 
+        const expectedDate = new CalendarDate(0, 12, 29);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 1948439.5 to the Islamic Calendar date 01-01-0001', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(1948439.5);
+
+        const expectedDate = new CalendarDate(1, 1, 1);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 1984963.5 to the Islamic Calendar date 25-01-0104', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(1984963.5);
+
+        const expectedDate = new CalendarDate(104, 1, 25);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2021488.5 to the Islamic Calendar date 20-02-0207', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2021488.5);
+
+        const expectedDate = new CalendarDate(207, 2, 20);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2058044.5 to the Islamic Calendar date 18-04-0310', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2058044.5);
+
+        const expectedDate = new CalendarDate(310, 4, 18);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2094600.5 to the Islamic Calendar date 15-06-0413', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2094600.5);
+
+        const expectedDate = new CalendarDate(413, 6, 15);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2131094.5 to the Islamic Calendar date 09-06-0516', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2131094.5);
+
+        const expectedDate = new CalendarDate(516, 6, 9);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2167583.5 to the Islamic Calendar date 28-05-0619', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2167583.5);
+
+        const expectedDate = new CalendarDate(619, 5, 28);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2204108.5 to the Islamic Calendar date 24-06-0722', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2204108.5);
+
+        const expectedDate = new CalendarDate(722, 6, 24);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2240651.5 to the Islamic Calendar date 08-08-0825', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2240651.5);
+
+        const expectedDate = new CalendarDate(825, 8, 8);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2277173.5 to the Islamic Calendar date 01-09-0928', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2277173.5);
+
+        const expectedDate = new CalendarDate(928, 9, 1);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2313710.5 to the Islamic Calendar date 08-10-1031', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2313710.5);
+
+        const expectedDate = new CalendarDate(1031, 10, 8);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2350257.5 to the Islamic Calendar date 27-11-1134', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2350257.5);
+
+        const expectedDate = new CalendarDate(1134, 11, 27);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2386789.5 to the Islamic Calendar date 29-12-1237', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2386789.5);
+
+        const expectedDate = new CalendarDate(1237, 12, 29);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2423373.5 to the Islamic Calendar date 25-03-1341', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2423373.5);
+
+        const expectedDate = new CalendarDate(1341, 3, 25);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDC 2451481.5 to the Islamic Calendar date 20-07-1420', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDCToIslamic(2451481.5);
+
+        const expectedDate = new CalendarDate(1420, 7, 20);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
 
 });
 
@@ -733,6 +859,134 @@ describe('JDN to Islamic', () => {
         const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2458094);
 
         const expectedDate = new CalendarDate(1439, 3, 17);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 1948438.5 to the Islamic Calendar date 29-12-0000', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(1948438.5);
+
+        const expectedDate = new CalendarDate(0, 12, 29);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 1948439.5 to the Islamic Calendar date 01-01-0001', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(1948439.5);
+
+        const expectedDate = new CalendarDate(1, 1, 1);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 1984963.5 to the Islamic Calendar date 25-01-0104', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(1984963.5);
+
+        const expectedDate = new CalendarDate(104, 1, 25);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2021488.5 to the Islamic Calendar date 20-02-0207', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2021488.5);
+
+        const expectedDate = new CalendarDate(207, 2, 20);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2058044.5 to the Islamic Calendar date 18-04-0310', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2058044.5);
+
+        const expectedDate = new CalendarDate(310, 4, 18);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2094600.5 to the Islamic Calendar date 15-06-0413', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2094600.5);
+
+        const expectedDate = new CalendarDate(413, 6, 15);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2131094.5 to the Islamic Calendar date 09-06-0516', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2131094.5);
+
+        const expectedDate = new CalendarDate(516, 6, 9);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2167583.5 to the Islamic Calendar date 28-05-0619', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2167583.5);
+
+        const expectedDate = new CalendarDate(619, 5, 28);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2204108.5 to the Islamic Calendar date 24-06-0722', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2204108.5);
+
+        const expectedDate = new CalendarDate(722, 6, 24);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2240651.5 to the Islamic Calendar date 08-08-0825', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2240651.5);
+
+        const expectedDate = new CalendarDate(825, 8, 8);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2277173.5 to the Islamic Calendar date 01-09-0928', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2277173.5);
+
+        const expectedDate = new CalendarDate(928, 9, 1);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2313710.5 to the Islamic Calendar date 08-10-1031', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2313710.5);
+
+        const expectedDate = new CalendarDate(1031, 10, 8);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2350257.5 to the Islamic Calendar date 27-11-1134', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2350257.5);
+
+        const expectedDate = new CalendarDate(1134, 11, 27);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2386789.5 to the Islamic Calendar date 29-12-1237', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2386789.5);
+
+        const expectedDate = new CalendarDate(1237, 12, 29);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2423373.5 to the Islamic Calendar date 25-03-1341', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2423373.5);
+
+        const expectedDate = new CalendarDate(1341, 3, 25);
+
+        checkCalendarDate(expectedDate, islamicCalendarDate);
+    });
+
+    it('convert the JDN 2451481.5 to the Islamic Calendar date 20-07-1420', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2451481.5);
+
+        const expectedDate = new CalendarDate(1420, 7, 20);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
