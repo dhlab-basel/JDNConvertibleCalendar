@@ -100,7 +100,7 @@ export module JDNConvertibleConversionModule {
 
         /*
 
-        Convert JDC to JDN by adding 0.5 and getting rid of fractions.
+        Converts JDC to JDN by adding 0.5 and getting rid of fractions.
 
         2446822.5 up to 2446823.49… (JDCs for January 27th 1987) -> 2446823 (JDN for January 27th 1987)
 
@@ -221,7 +221,7 @@ export module JDNConvertibleConversionModule {
 
         /*
 
-        Convert JDC to JDN by adding 0.5 and getting rid of fractions.
+        Converts JDC to JDN by adding 0.5 and getting rid of fractions.
 
         2446822.5 up to 2446823.49… (JDCs for January 14th 1987) -> 2446823 (JDN for January 14th 1987)
 
@@ -306,11 +306,6 @@ export module JDNConvertibleConversionModule {
      * @returns JDC representing the given Islamic calendar date.
      */
     export const islamicToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
-        /*return (calendarDate.day +
-            Math.ceil(29.5 * (calendarDate.month - 1)) +
-            (calendarDate.year - 1) * 354 +
-            Math.floor((3 + (11 * calendarDate.year)) / 30) +
-            ISLAMIC_EPOCH) - 1; // jd=intPart((11*y+3)/30)+354*y+30*m-intPart((m-1)/2)+d+1948440-385 http://www.muslimphilosophy.com/ip/hijri.htm*/
 
         const h = calendarDate.year;
         const m = calendarDate.month;
@@ -374,14 +369,6 @@ export module JDNConvertibleConversionModule {
      * @returns Islamic calendar date created from given JDC.
      */
     export const JDCToIslamic = (jdc: JDC): JDNConvertibleCalendarModule.CalendarDate => {
-        /*let year, month, day;
-
-        jdc = Math.floor(jdc) + 0.5; // TODO: handle JDN correctly
-        year = Math.floor(((30 * (jdc - ISLAMIC_EPOCH)) + 10646) / 10631);
-        month = Math.min(12,
-            Math.ceil((jdc - (29 + islamicToJDC(new JDNConvertibleCalendarModule.CalendarDate(year, 1, 1)))) / 29.5) + 1);
-        day = (jdc - islamicToJDC(new JDNConvertibleCalendarModule.CalendarDate(year, month, 1))) + 1;
-        return new JDNConvertibleCalendarModule.CalendarDate(year, month, day); // TODO: determine daytime*/
 
         // convert given JDC into a Julian calendar date
         const julianCalendarDate: JDNConvertibleCalendarModule.CalendarDate = JDCToJulian(jdc);
@@ -451,7 +438,6 @@ export module JDNConvertibleConversionModule {
             m = 12;
             d= 30;
         }
-        // console.log(x, m, d, julianCalendarDate.daytime, w, n, a, b, c, c1, c2, d_, q, r, j, k, o, h, jj);
 
         return new JDNConvertibleCalendarModule.CalendarDate(h, m, d, undefined, julianCalendarDate.daytime);
     };
