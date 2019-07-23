@@ -100,7 +100,7 @@ export module JDNConvertibleConversionModule {
 
         /*
 
-        Convert JDC to JDN by adding 0.5 and getting rid of fractions.
+        Converts JDC to JDN by adding 0.5 and getting rid of fractions.
 
         2446822.5 up to 2446823.49… (JDCs for January 27th 1987) -> 2446823 (JDN for January 27th 1987)
 
@@ -221,7 +221,7 @@ export module JDNConvertibleConversionModule {
 
         /*
 
-        Convert JDC to JDN by adding 0.5 and getting rid of fractions.
+        Converts JDC to JDN by adding 0.5 and getting rid of fractions.
 
         2446822.5 up to 2446823.49… (JDCs for January 14th 1987) -> 2446823 (JDN for January 14th 1987)
 
@@ -293,6 +293,198 @@ export module JDNConvertibleConversionModule {
      * @returns the number of the day of the week for the given JDC (0 Sunday, 1 Monday, 2 Tuesday, 3 Wednesday, 4 Thursday, 5 Friday, 6 Saturday).
      */
     export const dayOfWeekFromJDC = (jdc: JDC) => {
-        return Math.floor(jdc + 1.5) %  7;
+        return truncateDecimals(jdc + 1.5) %  7;
+    };
+
+    /**
+     * Converts an Islamic calendar date to a JDC.
+     *
+     * Algorithm from:
+     * Jean Meeus, Astronomical Algorithms, 1998, 73pp.
+     *
+     * The first day of the Islamic calendar according to this algorithm is July 16th, 622 CE (Julian; JDC = 1948439.5).
+     * This is in agreement with the widely used tables of Wuestenfeld et al., Wuestenfeld-Mahler'sche
+     * Vergleichungs-Tabellen zur muslimischen und iranischen Zeitrechnung, 1961. However, it is well known that
+     * these calendar dates may be off by 1 to 2 days in comparison to the calendar that was actually used, especially
+     * if historical dates are concerned. There are two more points of concern: Sura 9, 36-37 of the Koran
+     * suggests that a lunar calendar without intercalation was applied from year 10 of the Hijra onwards only; earlier
+     * on, probably a luni-solar calendar was used. This algorithm assumes that a lunar calendar without any
+     * intercalation started in year 1 of the Hijra. Secondly, in many countries the first actual sighting of the lunar
+     * crescent was decisive for the beginning of a new month up to quite recent times, but not a regular scheme. This
+     * introduces a dependency on the location: a new Islamic calendar month may have started on different days in
+     * different locations.
+     * Unambiguous conversion of historical Islamic dates into Julian or Gregorian calendar dates or vice cersa can
+     * only be achieved if the day of the week is known in addition.
+     *
+     * @param calendarDate Islamic calendar date to be converted to JDC.
+     * @returns JDC representing the given Islamic calendar date.
+     */
+    export const islamicToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
+
+        const h = calendarDate.year;
+        const m = calendarDate.month;
+        let d = calendarDate.day;
+
+        if (calendarDate.daytime !== undefined) {
+            d = d + calendarDate.daytime;
+        }
+
+        const n = d + Math.floor(29.5001 * (m - 1) + 0.99);
+        const q = Math.floor(h/30);
+        let r = h % 30;
+        if (r < 0) {
+            r = r + 30;
+        }
+        const a = Math.floor((11*r +3)/30);
+        const w = 404 * q + 354 * r + 208 + a;
+        const q1 = Math.floor(w/1461);
+        let q2 = w % 1461;
+        if (q2 < 0) {
+            q2 = q2 + 1461;
+        }
+        const g = 621 + 4  * Math.floor(7*q + q1);
+        const k = Math.floor(q2/365.2422);
+        const e = Math.floor(365.2422*k);
+        let j = q2 - e + n - 1;
+        let x = g + k;
+
+        if (j > 366 && (x % 4 == 0)) {
+            j = j - 366;
+            x = x + 1;
+        } else if (j > 365 && (x % 4 > 0)) {
+            j = j - 365;
+            x = x + 1;
+        }
+
+        const jdc = truncateDecimals(365.25 * (x-1)) + 1721423 + j - 0.5;
+
+        return jdc;
+    };
+
+    /**
+     * Converts an Islamic calendar date to a JDN.
+     *
+     * @param calendarDate Islamic calendar date to be converted to JDN.
+     * @returns JDN representing the given Islamic calendar date.
+     */
+    export const islamicToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDN => {
+        const jdc = islamicToJDC(calendarDate);
+
+        return truncateDecimals(jdc + 0.5); // adaption because full number without fraction of JDC represents noon.
+    };
+
+    /**
+     * Converts a JDC to an Islamic calendar date.
+     *
+     * Algorithm from:
+     * Jean Meeus, Astronomical Algorithms, 1998, 75pp.
+     *
+     * The first day of the Islamic calendar according to this algorithm is July 16th, 622 CE (Julian; JDC = 1948439.5).
+     * This is in agreement with the widely used tables of Wuestenfeld et al., Wuestenfeld-Mahler'sche
+     * Vergleichungs-Tabellen zur muslimischen und iranischen Zeitrechnung, 1961. However, it is well known that
+     * these calendar dates may be off by 1 to 2 days in comparison to the calendar that was actually used, especially
+     * if historical dates are concerned. There are two more points of concern: Sura 9, 36-37 of the Koran
+     * suggests that a lunar calendar without intercalation was applied from year 10 of the Hijra onwards only; earlier
+     * on, probably a luni-solar calendar was used. This algorithm assumes that a lunar calendar without any
+     * intercalation started in year 1 of the Hijra. Secondly, in many countries the first actual sighting of the lunar
+     * crescent was decisive for the beginning of a new month up to quite recent times, but not a regular scheme. This
+     * introduces a dependency on the location: a new Islamic calendar month may have started on different days in
+     * different locations.
+     * Unambiguous conversion of historical Islamic dates into Julian or Gregorian calendar dates or vice cersa can
+     * only be achieved if the day of the week is known in addition.
+     *
+     * @param jdc JDC to be converted to an Islamic calendar date.
+     * @returns Islamic calendar date created from given JDC.
+     */
+    export const JDCToIslamic = (jdc: JDC): JDNConvertibleCalendarModule.CalendarDate => {
+
+        // convert given JDC into a Julian calendar date
+        const julianCalendarDate: JDNConvertibleCalendarModule.CalendarDate = JDCToJulian(jdc);
+
+        const x = julianCalendarDate.year;
+        let m = julianCalendarDate.month;
+        let d = julianCalendarDate.day;
+
+        let w;
+        if ((x % 4) == 0) {
+            w = 1;
+        } else {
+            w = 2;
+        }
+
+        const n = truncateDecimals((275 * m)/9) - w * truncateDecimals((m + 9)/12) + d - 30;
+        const a = x - 623;
+        const b = Math.floor(a/4);
+        let c = a / 4 - b;
+        c = Math.floor(c * 4);
+        const c1 = 365.2501 * c;
+        let c2 = Math.floor(c1);
+
+        if ((c1 - c2) > 0.5) {
+            c2 = c2 + 1;
+        }
+
+        const d_ = 1461 * b + 170 + c2;
+        const q = Math.floor(d_/10631);
+        let r = d_ % 10631;
+        if (r < 0) {
+            r = r + 10631;
+        }
+        const j = Math.floor(r/354);
+        let k = r % 354;
+        if (k < 0) {
+            k = k + 354;
+        }
+        const o = Math.floor((11*j +14)/30);
+        let h = 30 * q  + j + 1;
+        let jj = k - o + n -1;
+
+        if (jj > 354) {
+            let cl = h % 30;
+            if (cl < 0) {
+                cl = cl + 30;
+            }
+            let dl = (11 * cl + 3) % 30;
+            if (dl < 0) {
+                dl = dl + 30;
+            }
+            console.log(cl,dl)
+            if (dl < 19) {
+                jj = jj - 354;
+                h = h + 1;
+            }
+            if (dl > 18) {
+               jj = jj - 355;
+               h = h + 1;
+            }
+
+            if (jj == 0) {
+                jj = 355;
+                h = h - 1;
+            }
+        }
+
+        const s = Math.floor((jj -1)/29.5);
+
+        m = 1 + s;
+
+        d = Math.floor(jj - 29.5 * s);
+
+        if (jj == 355) {
+            m = 12;
+            d= 30;
+        }
+
+        return new JDNConvertibleCalendarModule.CalendarDate(h, m, d, undefined, julianCalendarDate.daytime);
+    };
+
+    /**
+     * Converts a JDN to an Islamic calendar date.
+     *
+     * @param jdn JDN to be converted to an Islamic calendar date.
+     * @returns @returns Islamic calendar date created from given JDN.
+     */
+    export const JDNToIslamic = (jdn: JDN): JDNConvertibleCalendarModule.CalendarDate => {
+        return JDCToIslamic(jdn);
     }
 }

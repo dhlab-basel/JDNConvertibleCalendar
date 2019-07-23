@@ -149,9 +149,14 @@ export module JDNConvertibleCalendarModule {
         protected static readonly julian = 'Julian';
 
         /**
+         * Constant for the Islamic calendar.
+         */
+        protected static readonly islamic = 'Islamic';
+
+        /**
          * Supported calendars (to be extended when new subclasses are implemented).
          */
-        public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian];
+        public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian, JDNConvertibleCalendar.islamic];
 
         /**
          * Calendar name of a subclass of `JDNConvertibleCalendar`.
@@ -366,10 +371,10 @@ export module JDNConvertibleCalendarModule {
          *
          * To be extended when new subclasses are added.
          *
-         * @param {"Gregorian" | "Julian"} toCalendarType calendar to convert to.
+         * @param {"Gregorian" | "Julian" | "Islamic"} toCalendarType calendar to convert to.
          * @returns instance of target calendar (subclass of `JDNConvertibleCalendar`).
          */
-        public convertCalendar(toCalendarType: 'Gregorian' | 'Julian'): JDNConvertibleCalendar {
+        public convertCalendar(toCalendarType: 'Gregorian' | 'Julian' | 'Islamic'): JDNConvertibleCalendar {
 
             if (JDNConvertibleCalendar.supportedCalendars.indexOf(toCalendarType) == -1) {
                 throw new JDNConvertibleCalendarError('Target calendar not supported: ' + toCalendarType);
@@ -386,6 +391,9 @@ export module JDNConvertibleCalendarModule {
 
                 case JDNConvertibleCalendar.julian:
                     return new JulianCalendarDate(jdnPeriod);
+
+                case JDNConvertibleCalendar.islamic:
+                    return new IslamicCalendarDate(jdnPeriod);
             }
 
         }
@@ -654,7 +662,7 @@ export module JDNConvertibleCalendarModule {
 
         public readonly monthsInYear = 12;
 
-        // We use a calendar conversion methods that use the convention
+        // We use calendar conversion methods that use the convention
         // that the year zero exists in the Gregorian Calendar.
         public readonly yearZeroExists = true;
 
@@ -681,7 +689,7 @@ export module JDNConvertibleCalendarModule {
 
         public readonly monthsInYear = 12;
 
-        // We use a calendar conversion methods that use the convention
+        // We use calendar conversion methods that use the convention
         // that the year zero does exist in the Julian Calendar.
         public readonly yearZeroExists = true;
 
@@ -691,6 +699,32 @@ export module JDNConvertibleCalendarModule {
 
         protected calendarToJDN(date: CalendarDate): JDN {
             return JDNConvertibleConversionModule.julianToJDN(date);
+        }
+
+        protected dayOfWeekFromJDN(jdn: JDN): number {
+            return JDNConvertibleConversionModule.dayOfWeekFromJDC(jdn);
+        };
+    }
+
+    /**
+     * Represents an Islamic calendar date.
+     */
+    export class IslamicCalendarDate extends JDNConvertibleCalendar {
+
+        public readonly calendarName = JDNConvertibleCalendar.islamic;
+
+        public readonly monthsInYear = 12;
+
+        // We use calendar conversion methods that use the convention
+        // that the year zero does exist in the Julian Calendar.
+        public readonly yearZeroExists = true;
+
+        protected JDNToCalendar(jdn: JDN): CalendarDate {
+            return JDNConvertibleConversionModule.JDNToIslamic(jdn);
+        }
+
+        protected calendarToJDN(date: CalendarDate): JDN {
+            return JDNConvertibleConversionModule.islamicToJDN(date);
         }
 
         protected dayOfWeekFromJDN(jdn: JDN): number {
