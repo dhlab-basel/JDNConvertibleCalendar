@@ -293,7 +293,7 @@ export module JDNConvertibleConversionModule {
      * @returns the number of the day of the week for the given JDC (0 Sunday, 1 Monday, 2 Tuesday, 3 Wednesday, 4 Thursday, 5 Friday, 6 Saturday).
      */
     export const dayOfWeekFromJDC = (jdc: JDC) => {
-        return Math.floor(jdc + 1.5) %  7;
+        return truncateDecimals(jdc + 1.5) %  7;
     };
 
     /**
@@ -315,22 +315,22 @@ export module JDNConvertibleConversionModule {
             d = d + calendarDate.daytime;
         }
 
-        const n = d + truncateDecimals(29.5001 * (m - 1) + 0.99);
-        const q = truncateDecimals(h/30);
+        const n = d + Math.floor(29.5001 * (m - 1) + 0.99);
+        const q = Math.floor(h/30);
         let r = h % 30;
         if (r < 0) {
             r = r + 30;
         }
-        const a = truncateDecimals((11*r +3)/30);
+        const a = Math.floor((11*r +3)/30);
         const w = 404 * q + 354 * r + 208 + a;
-        const q1 = truncateDecimals(w/1461);
+        const q1 = Math.floor(w/1461);
         let q2 = w % 1461;
         if (q2 < 0) {
             q2 = q2 + 1461;
         }
-        const g = 621 + 4  * truncateDecimals(7*q + q1);
-        const k = truncateDecimals(q2/365.2422);
-        const e = truncateDecimals(365.2422*k);
+        const g = 621 + 4  * Math.floor(7*q + q1);
+        const k = Math.floor(q2/365.2422);
+        const e = Math.floor(365.2422*k);
         let j = q2 - e + n - 1;
         let x = g + k;
 
@@ -390,7 +390,7 @@ export module JDNConvertibleConversionModule {
         let c = a / 4 - b;
         c = Math.floor(c * 4);
         const c1 = 365.2501 * c;
-        let c2 = truncateDecimals(c1);
+        let c2 = Math.floor(c1);
 
         if ((c1 - c2) > 0.5) {
             c2 = c2 + 1;
@@ -402,16 +402,24 @@ export module JDNConvertibleConversionModule {
         if (r < 0) {
             r = r + 10631;
         }
-        const j = truncateDecimals(r/354);
-        const k = r % 354;
-        const o = truncateDecimals((11*j +14)/30);
+        const j = Math.floor(r/354);
+        let k = r % 354;
+        if (k < 0) {
+            k = k + 354;
+        }
+        const o = Math.floor((11*j +14)/30);
         let h = 30 * q  + j + 1;
         let jj = k - o + n -1;
 
         if (jj > 354) {
-            const cl = h % 30;
+            let cl = h % 30;
+            if (cl > 0) {
+                cl = cl + 30;
+            }
             const dl = (11 * cl + 3) % 30;
-
+            if (dl > 0) {
+                dl = dl + 30;
+            }
             if (dl < 19) {
                 jj = jj - 354;
                 h = h + 1;
@@ -428,11 +436,11 @@ export module JDNConvertibleConversionModule {
             }
         }
 
-        const s = truncateDecimals((jj -1)/29.5);
+        const s = Math.floor((jj -1)/29.5);
 
         m = 1 + s;
 
-        d = truncateDecimals(jj - 29.5 * s);
+        d = Math.floor(jj - 29.5 * s);
 
         if (jj == 355) {
             m = 12;
