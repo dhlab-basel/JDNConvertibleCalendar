@@ -302,6 +302,20 @@ export module JDNConvertibleConversionModule {
      * Algorithm from:
      * Jean Meeus, Astronomical Algorithms, 1998, 73pp.
      *
+     * The first day of the Islamic calendar according to this algorithm is July 16th, 622 CE (Julian; JDC = 1948439.5).
+     * This is in agreement with the widely used tables of Wuestenfeld et al., Wuestenfeld-Mahler'sche
+     * Vergleichungs-Tabellen zur muslimischen und iranischen Zeitrechnung, 1961. However, it is well known that
+     * these calendar dates may be off by 1 to 2 days in comparison to the calendar that was actually used, especially
+     * if historical dates are concerned. There are two more points of concern: Sura 9, 36-37 of the Koran
+     * suggests that a lunar calendar without intercalation was applied from year 10 of the Hijra onwards only; earlier
+     * on, probably a luni-solar calendar was used. This algorithm assumes that a lunar calendar without any
+     * intercalation started in year 1 of the Hijra. Secondly, in many countries the first actual sighting of the lunar
+     * crescent was decisive for the beginning of a new month up to quite recent times, but not a regular scheme. This
+     * introduces a dependency on the location: a new Islamic calendar month may have started on different days in
+     * different locations.
+     * Unambiguous conversion of historical Islamic dates into Julian or Gregorian calendar dates or vice cersa can
+     * only be achieved if the day of the week is known in addition.
+     *
      * @param calendarDate Islamic calendar date to be converted to JDC.
      * @returns JDC representing the given Islamic calendar date.
      */
@@ -365,6 +379,20 @@ export module JDNConvertibleConversionModule {
      * Algorithm from:
      * Jean Meeus, Astronomical Algorithms, 1998, 75pp.
      *
+     * The first day of the Islamic calendar according to this algorithm is July 16th, 622 CE (Julian; JDC = 1948439.5).
+     * This is in agreement with the widely used tables of Wuestenfeld et al., Wuestenfeld-Mahler'sche
+     * Vergleichungs-Tabellen zur muslimischen und iranischen Zeitrechnung, 1961. However, it is well known that
+     * these calendar dates may be off by 1 to 2 days in comparison to the calendar that was actually used, especially
+     * if historical dates are concerned. There are two more points of concern: Sura 9, 36-37 of the Koran
+     * suggests that a lunar calendar without intercalation was applied from year 10 of the Hijra onwards only; earlier
+     * on, probably a luni-solar calendar was used. This algorithm assumes that a lunar calendar without any
+     * intercalation started in year 1 of the Hijra. Secondly, in many countries the first actual sighting of the lunar
+     * crescent was decisive for the beginning of a new month up to quite recent times, but not a regular scheme. This
+     * introduces a dependency on the location: a new Islamic calendar month may have started on different days in
+     * different locations.
+     * Unambiguous conversion of historical Islamic dates into Julian or Gregorian calendar dates or vice cersa can
+     * only be achieved if the day of the week is known in addition.
+     *
      * @param jdc JDC to be converted to an Islamic calendar date.
      * @returns Islamic calendar date created from given JDC.
      */
@@ -413,18 +441,18 @@ export module JDNConvertibleConversionModule {
 
         if (jj > 354) {
             let cl = h % 30;
-            if (cl > 0) {
+            if (cl < 0) {
                 cl = cl + 30;
             }
             let dl = (11 * cl + 3) % 30;
-            if (dl > 0) {
+            if (dl < 0) {
                 dl = dl + 30;
             }
+            console.log(cl,dl)
             if (dl < 19) {
                 jj = jj - 354;
                 h = h + 1;
             }
-
             if (dl > 18) {
                jj = jj - 355;
                h = h + 1;
