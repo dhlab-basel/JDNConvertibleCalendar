@@ -416,7 +416,7 @@ export module JDNConvertibleConversionModule {
             if (cl > 0) {
                 cl = cl + 30;
             }
-            const dl = (11 * cl + 3) % 30;
+            let dl = (11 * cl + 3) % 30;
             if (dl > 0) {
                 dl = dl + 30;
             }
