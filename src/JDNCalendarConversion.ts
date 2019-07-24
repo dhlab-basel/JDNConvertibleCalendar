@@ -448,7 +448,7 @@ export module JDNConvertibleConversionModule {
             if (dl < 0) {
                 dl = dl + 30;
             }
-            console.log(cl,dl)
+            
             if (dl < 19) {
                 jj = jj - 354;
                 h = h + 1;
