@@ -994,6 +994,150 @@ describe('JDN to Islamic', () => {
 });
 
 
+describe('Jewish to JDC', () => {
+
+    it('convert the Jewish Calendar date 18-04-0760 to JDC 625307.5', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(760, 4, 18));
+
+        checkJDC(625307.5, jdc);
+    });
+    it('convert the Jewish Calendar date 17-05-1381 to JDC 852160.5', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(1381, 5, 17));
+
+        checkJDC(852160.5, jdc);
+    });
+    it('convert the Jewish Calendar date 08-03-2562 to JDC 1283446.5', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(2562, 3, 8));
+
+        checkJDC(1283446.5, jdc);
+    });
+    it('convert the Jewish Calendar date 14-01-3312 to JDC 1557317.5', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(3312, 1, 14));
+
+        checkJDC(1557317.5, jdc);
+    });
+    it('convert the Jewish Calendar date 25-07-3762 to JDC 1721874.5', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(3762, 7, 25));
+
+        checkJDC(1721874.5, jdc);
+    });
+    it('convert the Jewish Calendar date 10-01-4090 to JDC 1841744.5', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(4090, 1, 10));
+
+        checkJDC(1841744.5, jdc);
+    });
+    it('convert the Jewish Calendar date 11-03-4382 to JDC 1948439.5', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(4382, 3, 11));
+
+        checkJDC(1948439.5, jdc);
+    });
+    it('convert the Jewish Calendar date 17-01-4783 to JDC 2094600.5', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(4783, 1, 17));
+
+        checkJDC(2094600.5, jdc);
+    });
+    it('convert the Jewish Calendar date 27-10-5283 to JDC 2277523.5', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(5283, 11, 27));
+
+        checkJDC(2277523.5, jdc);
+    });
+    it('convert the Jewish Calendar date 20-02-5760 to JDC 2451481.5', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(5760, 2, 20));
+
+        checkJDC(2451481.5, jdc);
+    });
+});
+
+
+describe('JDC to Jewish', () => {
+
+    it('convert the JDC 625307.5 to the Jewish Calendar date 18-04-0760', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(625307.5);
+
+        const expectedDate = new CalendarDate(760, 4, 18);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 852160.5 to the Jewish Calendar date 17-05-1381', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(852160.5);
+
+        const expectedDate = new CalendarDate(1381, 5, 17);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 1283446.5 to the Jewish Calendar date 08-03-2562', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(1283446.5);
+
+        const expectedDate = new CalendarDate(2562, 3, 8);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 1557317.5 to the Jewish Calendar date 14-01-3312', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(1557317.5);
+
+        const expectedDate = new CalendarDate(3312, 1, 14);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 1721874.5 to the Jewish Calendar date 25-07-3762', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(1721874.5);
+
+        const expectedDate = new CalendarDate(3762, 8, 25);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 1841744.5 to the Jewish Calendar date 01-10-4090', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(1841744.5);
+
+        const expectedDate = new CalendarDate(4090, 11, 1);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 1948439.5 to the Jewish Calendar date 03-11-4382', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(1948439.5);
+
+        const expectedDate = new CalendarDate(4382, 12, 3);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 2094600.5 to the Jewish Calendar date 17-01-4783', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2094600.5);
+
+        const expectedDate = new CalendarDate(4783, 1, 17);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 2277523.5 to the Jewish Calendar date 27-10-5283', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2277523.5);
+
+        const expectedDate = new CalendarDate(5283, 11, 27);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 2451481.5 to the Jewish Calendar date 20-02-5760', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2451481.5);
+
+        const expectedDate = new CalendarDate(5760, 2, 20);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+
+});
+
+
+
+
+
 //
 // Julian to JDN and back
 //

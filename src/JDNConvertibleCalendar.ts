@@ -85,6 +85,27 @@ export module JDNConvertibleCalendarModule {
     }
 
     /**
+     * Class returning the basic characteristics of a certain Jewish calendar year.
+     *
+     */
+    export class JewishCharact {
+
+        /**
+         *
+         * Please note that this software uses the (astronomical) convention that BCE dates are represented as negative years and that the year zero (0) is used.
+         * The year 1 BCE must be indicated as year 0, and the year 2 BCE corresponds to -1 etc.
+         *
+         * @param year Jewish year of the given date.
+         * @param day Number of days of the Jewish year of the given date.
+         * @param dayofWeek Weekday of the start of the Jewish year.
+         * @param month Number of lunar months of the Jewish year.
+         */
+        constructor(public readonly year: number, public readonly day: number, public readonly dayofWeek: number, public readonly month: number) {
+
+        }
+    }
+
+    /**
      * Represents a period as two calendar dates.
      */
     export class CalendarPeriod {
@@ -154,9 +175,14 @@ export module JDNConvertibleCalendarModule {
         protected static readonly islamic = 'Islamic';
 
         /**
+         * Constant for the Jewish calendar.
+         */
+        protected static readonly jewish = 'Jewish';
+
+        /**
          * Supported calendars (to be extended when new subclasses are implemented).
          */
-        public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian, JDNConvertibleCalendar.islamic];
+        public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian, JDNConvertibleCalendar.islamic, JDNConvertibleCalendar.jewish];
 
         /**
          * Calendar name of a subclass of `JDNConvertibleCalendar`.
@@ -371,10 +397,10 @@ export module JDNConvertibleCalendarModule {
          *
          * To be extended when new subclasses are added.
          *
-         * @param {"Gregorian" | "Julian" | "Islamic"} toCalendarType calendar to convert to.
+         * @param {"Gregorian" | "Julian" | "Islamic" | "Jewish"} toCalendarType calendar to convert to.
          * @returns instance of target calendar (subclass of `JDNConvertibleCalendar`).
          */
-        public convertCalendar(toCalendarType: 'Gregorian' | 'Julian' | 'Islamic'): JDNConvertibleCalendar {
+        public convertCalendar(toCalendarType: 'Gregorian' | 'Julian' | 'Islamic' | 'Jewish'): JDNConvertibleCalendar {
 
             if (JDNConvertibleCalendar.supportedCalendars.indexOf(toCalendarType) == -1) {
                 throw new JDNConvertibleCalendarError('Target calendar not supported: ' + toCalendarType);
@@ -394,6 +420,9 @@ export module JDNConvertibleCalendarModule {
 
                 case JDNConvertibleCalendar.islamic:
                     return new IslamicCalendarDate(jdnPeriod);
+
+                case JDNConvertibleCalendar.jewish:
+                    return new JewishCalendarDate(jdnPeriod);
             }
 
         }
@@ -725,6 +754,32 @@ export module JDNConvertibleCalendarModule {
 
         protected calendarToJDN(date: CalendarDate): JDN {
             return JDNConvertibleConversionModule.islamicToJDN(date);
+        }
+
+        protected dayOfWeekFromJDN(jdn: JDN): number {
+            return JDNConvertibleConversionModule.dayOfWeekFromJDC(jdn);
+        };
+    }
+
+    /**
+     * Represents a Jewish calendar date.
+     */
+    export class JewishCalendarDate extends JDNConvertibleCalendar {
+
+        public readonly calendarName = JDNConvertibleCalendar.jewish;
+
+        public readonly monthsInYear = 13;
+
+        // We use calendar conversion methods that use the convention
+        // that the year zero does exist in the Julian Calendar.
+        public readonly yearZeroExists = true;
+
+        protected JDNToCalendar(jdn: JDN): CalendarDate {
+            return JDNConvertibleConversionModule.JDNToJewish(jdn);
+        }
+
+        protected calendarToJDN(date: CalendarDate): JDN {
+            return JDNConvertibleConversionModule.jewishToJDN(date);
         }
 
         protected dayOfWeekFromJDN(jdn: JDN): number {
