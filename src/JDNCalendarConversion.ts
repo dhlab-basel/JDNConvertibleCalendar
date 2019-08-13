@@ -731,10 +731,10 @@ export module JDNConvertibleConversionModule {
 
         /* Calculate the distance of the Jewish date to Pesach feast date on Nisan 15
          * (mj = 8, dj = 15)*/
-        let daydiff = JewishDaydiff(hj,mj,dj);
+        let daydiff = JewishDaydiff(calendarDate);
 
         /* Calculate the corresponding Julian date of the Pesach feast*/
-        let pesach = Pesachfeast(hj,mj,dj);
+        let pesach = Pesachfeast(calendarDate);
         let jde = pesach + daydiff;
 
         /* Calculate the corresponding Julian date of New Year*/
@@ -744,8 +744,8 @@ export module JDNConvertibleConversionModule {
         *  everything for the next Jewish year*/
         if (jde>jdenewyear) {
             hj = hj + 1;
-            let daydiff = JewishDaydiff(hj,mj,dj);
-            let pesach = Pesachfeast(hj,mj,dj);
+            let daydiff = JewishDaydiff(new JDNConvertibleCalendarModule.CalendarDate(hj,mj,dj));
+            let pesach = Pesachfeast(new JDNConvertibleCalendarModule.CalendarDate(hj,mj,dj));
             let jde = pesach + daydiff;
         }
 
@@ -787,16 +787,16 @@ export module JDNConvertibleConversionModule {
 
         /* Determine the Julian day number of the Pesach feast (m = 8, d = 15) of the corresponding Jewish year*/
         let hj = x + 3760;
-        let pesach = Pesachfeast(hj);
+        let pesach = Pesachfeast(new JDNConvertibleCalendarModule.CalendarDate(hj, 8, 15));
 
         /* Determine the Julian day number of the following Jewish New Year*/
         let jdenewyear = pesach + 163;
 
         /* Determine the Jewish calendar date by establishing its distance from the Pesach feast date*/
         let data = JewishDayDate(jdc, pesach, jdenewyear);
-        hj = data[0];
-        const mj = data[1];
-        const dj = data[2];
+        hj = data.year;
+        const mj = data.month;
+        const dj = data.day;
 
         return new JDNConvertibleCalendarModule.CalendarDate(hj, mj, dj, undefined, julianCalendarDate.daytime);
 
@@ -825,7 +825,7 @@ export module JDNConvertibleConversionModule {
         const dj = calendarDate.day;
 
         const data = JewishCharact(hj);
-        const jdays = data[1];
+        const jdays = data.jdays;
 
         let daydiff = 0;
 
@@ -994,7 +994,7 @@ export module JDNConvertibleConversionModule {
             }
         }
 
-        return JewishDaydiff(daydiff);
+        return daydiff;
     };
 
     /**
@@ -1052,7 +1052,7 @@ export module JDNConvertibleConversionModule {
         }
         const jdepesach = julianDayFromGregorianJulianDate(new JDNConvertibleCalendarModule.CalendarDate(jj1, mpesach, dpesach));
 
-        return Pesachfeast(jdepesach);
+        return jdepesach;
      }
 
     /**
@@ -1110,13 +1110,13 @@ export module JDNConvertibleConversionModule {
         if (jdc<pesach) {
             hj = hj - 1;
             const data = JewishCharact(hj);
-            let jdays = data[1];
+            let jdays = data.jdays;
             jdenewyear = jdenewyear - jdays;
             jdediff = jdc - jdenewyear;
         }
         if ((jdc>jdenewyear)&&(jdc>pesach)) {
             const data = JewishCharact(hj);
-            let jdays = data[1];
+            let jdays = data.jdays;
             jdediff = jdc - jdenewyear;
         }
 
