@@ -1324,7 +1324,7 @@ export module JDNConvertibleConversionModule {
             }
         }
 
-        return JewishDayDate(hj,mj,dj);
+        return new JDNConvertibleCalendarModule.CalendarDate(hj,mj,dj);
 
     }
 
