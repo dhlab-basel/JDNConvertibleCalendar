@@ -557,13 +557,7 @@ export module JDNConvertibleConversionModule {
      *
      * @returns Number of months and days and the weekday of the first day of the year of a given Jewish year.
      */
-    export const JewishCharact = (jdc: JDC): CharacterOfJewishYear => {
-
-        // convert given JDC into a Julian calendar date
-        const julianCalendarDate: JDNConvertibleCalendarModule.CalendarDate = JDCToJulian(jdc);
-
-        const h = julianCalendarDate.year;
-        let hj = h + 3760;
+    export const JewishCharact = (hj: number): CharacterOfJewishYear => {
 
         let r1 = 7 * hj - 6;
         r1 = r1 % 19;
@@ -819,7 +813,6 @@ export module JDNConvertibleConversionModule {
      * @returns daydiff: day difference of a given Jewish date from the Pesach feast date.
      */
     export const JewishDaydiff = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
-    /*export const JewishDaydiff = (hj: number, mj: number, dj: number): number => {*/
         const hj = calendarDate.year;
         const mj = calendarDate.month;
         const dj = calendarDate.day;
@@ -993,7 +986,6 @@ export module JDNConvertibleConversionModule {
                 daydiff = dj - 44;
             }
         }
-
         return daydiff;
     };
 
@@ -1065,7 +1057,8 @@ export module JDNConvertibleConversionModule {
 
         // convert given JDC into a Julian calendar date
         const julianCalendarDate: JDNConvertibleCalendarModule.CalendarDate = JDCToJulian(jdc);
-        let hj = julianCalendarDate.year;
+        const h = julianCalendarDate.year;
+        let hj = h + 3760;
 
         let jdediff = 0;
         let mj = 0;
@@ -1108,15 +1101,16 @@ export module JDNConvertibleConversionModule {
         let jdays = 0;
         /* If date is in between Jewish New Year and the Pesach feast */
         if (jdc<pesach) {
-            hj = hj - 1;
+            //hj = hj - 1;
             const data = JewishCharact(hj);
-            let jdays = data.jdays;
+            jdays = data.jdays;
             jdenewyear = jdenewyear - jdays;
             jdediff = jdc - jdenewyear;
         }
         if ((jdc>jdenewyear)&&(jdc>pesach)) {
+            hj = hj + 1;
             const data = JewishCharact(hj);
-            let jdays = data.jdays;
+            jdays = data.jdays;
             jdediff = jdc - jdenewyear;
         }
 
@@ -1325,7 +1319,6 @@ export module JDNConvertibleConversionModule {
         }
 
         return new JDNConvertibleCalendarModule.CalendarDate(hj,mj,dj);
-
     }
 
 }

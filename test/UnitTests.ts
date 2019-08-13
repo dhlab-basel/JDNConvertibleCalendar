@@ -1021,13 +1021,13 @@ describe('Jewish to JDC', () => {
 
         checkJDC(1721874.5, jdc);
     });
-    it('convert the Jewish Calendar date 10-01-4090 to JDC 1841744.5', () => {
-        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(4090, 1, 10));
+    it('convert the Jewish Calendar date 01-11-4090 to JDC 1841744.5', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(4090, 11, 1));
 
         checkJDC(1841744.5, jdc);
     });
-    it('convert the Jewish Calendar date 11-03-4382 to JDC 1948439.5', () => {
-        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(4382, 3, 11));
+    it('convert the Jewish Calendar date 03-12-4382 to JDC 1948439.5', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDC(new CalendarDate(4382, 12, 3));
 
         checkJDC(1948439.5, jdc);
     });
@@ -1086,7 +1086,7 @@ describe('JDC to Jewish', () => {
     it('convert the JDC 1721874.5 to the Jewish Calendar date 25-07-3762', () => {
         const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(1721874.5);
 
-        const expectedDate = new CalendarDate(3762, 8, 25);
+        const expectedDate = new CalendarDate(3762, 7, 25);
 
         checkCalendarDate(expectedDate, jewishCalendarDate);
 
