@@ -1365,7 +1365,7 @@ describe('Get the number of days for a given month', () => {
     it('create a Julian date and get the number of days for a given Julian\'s date\'s month', () => {
 
         // Gregorian Calendar date 06-12-2017
-        const jdn = 2458094;
+        const jdn = 2457768;
 
         const julianDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
 
@@ -1375,12 +1375,180 @@ describe('Get the number of days for a given month', () => {
 
     });
 
+    it('create an Islamic date and get the number of days for a given Islamic date\'s month', () => {
+
+        // Islamic Calendar date 16-04-1438
+        const jdn = 2457768;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1438, 4, 16));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create an Islamic date and get the number of days for a given Islamic date\'s month', () => {
+
+        // Islamic Calendar date 18-05-1438
+        const jdn = 2457799;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1438, 5, 18));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create an Islamic date and get the number of days for a given Islamic date\'s month', () => {
+
+        // Islamic Calendar date 16-06-1438
+        const jdn = 2457827;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1438, 6, 16));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create an Islamic date and get the number of days for a given Islamic date\'s month', () => {
+
+        // Islamic Calendar date 18-07-1438
+        const jdn = 2457858;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1438, 7, 18));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create an Islamic date and get the number of days for a given Islamic date\'s month', () => {
+
+        // Islamic Calendar date 18-08-1438
+        const jdn = 2457888;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1438, 8, 18));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create an Islamic date and get the number of days for a given Islamic date\'s month', () => {
+
+        // Islamic Calendar date 20-09-1438
+        const jdn = 2457919;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1438, 9, 20));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create an Islamic date and get the number of days for a given Islamic date\'s month', () => {
+
+        // Islamic Calendar date 20-10-1438
+        const jdn = 2457949;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1438, 10, 20));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create an Islamic date and get the number of days for a given Islamic date\'s month', () => {
+
+        // Islamic Calendar date 22-11-1438
+        const jdn = 2457980;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1438, 11, 22));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create an Islamic date and get the number of days for a given Islamic date\'s month', () => {
+
+        // Islamic Calendar date 23-12-1438
+        const jdn = 2458011;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1438, 12, 23));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create an Islamic date and get the number of days for a given Islamic date\'s month', () => {
+
+        // Islamic Calendar date 24-01-1439
+        const jdn = 2458041;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1439, 1, 24));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create an Islamic date and get the number of days for a given Islamic date\'s month', () => {
+
+        // Islamic Calendar date 25-02-1439
+        const jdn = 2458072;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1439, 2, 25));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create an Islamic date and get the number of days for a given Islamic date\'s month', () => {
+
+        // Islamic Calendar date 26-03-1439
+        const jdn = 2458102;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1439, 3, 26));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+    it('create an Islamic date and get the number of days for month 12 in a leap year (30 instead of 29)', () => {
+
+        // Islamic Calendar date 22-12-1439
+        const jdn = 2458364;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = islamicDate.daysInMonth(new CalendarDate(1439, 12, 22));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
 });
 
 //
 // Transpose a date by a given number of days
 //
-describe('Create a Gregorian date and transpose it by a given number of days', () => {
+describe('Create a date and transpose it by a given number of days', () => {
 
     it('create the Gregorian date 06-12-2017 and shift it 365 days into the future', () => {
 
@@ -1429,12 +1597,85 @@ describe('Create a Gregorian date and transpose it by a given number of days', (
         checkJDN(jdn - 365, jdnPeriod.periodEnd);
 
     });
+
+    it('shift the Islamic date 16-04-1438 365 days into the future', () => {
+
+        // Islamic Calendar date 16-04-1438
+        const jdn = 2457768;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date 365 into the future
+        islamicDate.transposePeriodByDay(365);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1439, 4, 26, 0);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn + 365, jdnPeriod.periodStart);
+        checkJDN(jdn + 365, jdnPeriod.periodEnd);
+
+    });
+
+    it('shift the Islamic date 18-05-1438 365 days into the future', () => {
+
+        // Islamic Calendar date 18-05-1438
+        const jdn = 2457799;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date 365 into the future
+        islamicDate.transposePeriodByDay(365);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1439, 5, 28, 3);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn + 365, jdnPeriod.periodStart);
+        checkJDN(jdn + 365, jdnPeriod.periodEnd);
+
+    });
+
+    it('shift the Islamic date 18-05-1438 365 days into the past', () => {
+
+        // Islamic Calendar date 18-05-1438
+        const jdn = 2457799;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date 365 into the future
+        islamicDate.transposePeriodByDay(-365);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1437, 5, 6, 1);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn - 365, jdnPeriod.periodStart);
+        checkJDN(jdn - 365, jdnPeriod.periodEnd);
+
+    });
+
 });
 
 //
 // Transpose a date by a given number of years
 //
-describe('Create a Gregorian date and transpose it by a given number of years', () => {
+describe('Create a date and transpose it by a given number of years', () => {
 
     it('create the Gregorian date 06-12-2017 and shift it one year into the future', () => {
 
@@ -1483,12 +1724,61 @@ describe('Create a Gregorian date and transpose it by a given number of years', 
         checkJDN(jdn - 365, jdnPeriod.periodEnd);
 
     });
+
+    it('create the Islamic date 18-05-1438 and shift it one year into the future', () => {
+
+        // Islamic Calendar date 18-05-1438
+        const jdn = 2457800;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date one year into the future
+        islamicDate.transposePeriodByYear(1);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1439, 5, 18, 0);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn + 354, jdnPeriod.periodStart);
+        checkJDN(jdn + 354, jdnPeriod.periodEnd);
+
+    });
+
+    it('create the Islamic date 18-05-1438 and shift it five years into the past', () => {
+
+        // Islamic Calendar date 18-05-1438
+        const jdn = 2457800;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date one year into the future
+        islamicDate.transposePeriodByYear(-5);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1433, 5, 18, 2);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn - 354 - 354 - 355 - 354 - 355, jdnPeriod.periodStart);
+        checkJDN(jdn - 354 - 354 - 355 - 354 - 355, jdnPeriod.periodEnd);
+
+    });
+
 });
 
 //
 // Transpose a date by a given number of months
 //
-describe('Create a Gregorian date and transpose it by a given number of months', () => {
+describe('Create a date and transpose it by a given number of months', () => {
 
     it('create the Gregorian date 31-12-2017 and shift it one month into the future', () => {
 
@@ -1659,7 +1949,197 @@ describe('Create a Gregorian date and transpose it by a given number of months',
 
     });
 
+    it('create the Islamic date 18-12-1438 and shift it one month into the future', () => {
 
+        // Islamic Calendar date 18-12-1438
+        const jdn = 2458007;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date one year into the future
+        islamicDate.transposePeriodByMonth(1);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1439, 1, 18, 1);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn + 29, jdnPeriod.periodStart);
+        checkJDN(jdn + 29, jdnPeriod.periodEnd);
+
+    });
+
+    it('create the Islamic date 18-12-1434 (leap year) and shift it one month into the future', () => {
+
+        // Islamic Calendar date 18-12-1434
+        const jdn = 2456589;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date one year into the future
+        islamicDate.transposePeriodByMonth(1);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1435, 1, 18, 5);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn + 30, jdnPeriod.periodStart);
+        checkJDN(jdn + 30, jdnPeriod.periodEnd);
+
+    });
+
+    it('create the Islamic date 18-01-1439 and shift it one month into the past', () => {
+
+        // Islamic Calendar date 18-01-1439
+        const jdn = 2458036;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date one year into the future
+        islamicDate.transposePeriodByMonth(-1);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1438, 12, 18, 0);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn - 29, jdnPeriod.periodStart);
+        checkJDN(jdn - 29, jdnPeriod.periodEnd);
+
+    });
+
+    it('create the Islamic date 18-01-1435 (leap year) and shift it one month into the past', () => {
+
+        // Islamic Calendar date 18-01-1435
+        const jdn = 2456619;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date one year into the future
+        islamicDate.transposePeriodByMonth(-1);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1434, 12, 18, 3);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn - 30, jdnPeriod.periodStart);
+        checkJDN(jdn - 30, jdnPeriod.periodEnd);
+
+    });
+
+    it('create the Islamic date 18-12-1438 and shift it six months into the future', () => {
+
+        // Islamic Calendar date 18-12-1438
+        const jdn = 2458007;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date one year into the future
+        islamicDate.transposePeriodByMonth(6);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1439, 6, 18, 2);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn + 29 + 30 + 29 + 30 + 29 + 30, jdnPeriod.periodStart);
+        checkJDN(jdn + 29 + 30 + 29 + 30 + 29 + 30, jdnPeriod.periodEnd);
+
+    });
+
+    it('create the Islamic date 18-12-1434 (leap year) and shift it six months into the future', () => {
+
+        // Islamic Calendar date 18-12-1434
+        const jdn = 2456589;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date one year into the future
+        islamicDate.transposePeriodByMonth(6);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1435, 6, 18, 6);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn + 30 + 30 + 29 + 30 + 29 + 30, jdnPeriod.periodStart);
+        checkJDN(jdn + 30 + 30 + 29 + 30 + 29 + 30, jdnPeriod.periodEnd);
+
+    });
+
+    it('create the Islamic date 18-01-1439 and shift it six months into the past', () => {
+
+        // Islamic Calendar date 18-01-1439
+        const jdn = 2458036;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date one year into the future
+        islamicDate.transposePeriodByMonth(-6);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1438, 7, 18, 6);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn - 29 - 30 - 29 - 30 - 29 - 30, jdnPeriod.periodStart);
+        checkJDN(jdn - 29 - 30 - 29 - 30 - 29 - 30, jdnPeriod.periodEnd);
+
+    });
+
+    it('create the Islamic date 18-01-1435 (1434 is leap year) and shift it six months into the past', () => {
+
+        // Islamic Calendar date 18-01-1435
+        const jdn = 2456619;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        // shift date one year into the future
+        islamicDate.transposePeriodByMonth(-6);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedDate = new CalendarDate(1434, 7, 18, 2);
+
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedDate, islamicCalendarPeriod.periodEnd);
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn - 30 - 30 - 29 - 30 - 29 - 30, jdnPeriod.periodStart);
+        checkJDN(jdn - 30 - 30 - 29 - 30 - 29 - 30, jdnPeriod.periodEnd);
+
+    });
 });
 
 //
@@ -2141,6 +2621,54 @@ describe('Instantiate a calendar date from a calendar period', () => {
 
         checkJDN(2458339, jdnPeriod.periodStart);
         checkJDN(2458340, jdnPeriod.periodEnd);
+
+    });
+
+    it('create an Islamic date from an exact calendar period', () => {
+
+        const islamicCalendarDate: IslamicCalendarDate = new IslamicCalendarDate(new CalendarPeriod(new CalendarDate(1439, 11, 3), new CalendarDate(1439, 11, 13)));
+
+        const calPeriod = islamicCalendarDate.toCalendarPeriod();
+
+        checkCalendarDate(new CalendarDate(1439, 11, 3, 1), calPeriod.periodStart);
+        checkCalendarDate(new CalendarDate(1439, 11, 13, 4), calPeriod.periodEnd);
+
+        const jdnPeriod = islamicCalendarDate.toJDNPeriod();
+
+        checkJDN(2458316, jdnPeriod.periodStart);
+        checkJDN(2458326, jdnPeriod.periodEnd);
+
+    });
+
+    it('create an Islamic date from an exact calendar period', () => {
+
+        const islamicCalendarDate: IslamicCalendarDate = new IslamicCalendarDate(new CalendarPeriod(new CalendarDate(1438, 12, 3), new CalendarDate(1439, 1, 13)));
+
+        const calPeriod = islamicCalendarDate.toCalendarPeriod();
+
+        checkCalendarDate(new CalendarDate(1438, 12, 3, 6), calPeriod.periodStart);
+        checkCalendarDate(new CalendarDate(1439, 1, 13, 3), calPeriod.periodEnd);
+
+        const jdnPeriod = islamicCalendarDate.toJDNPeriod();
+
+        checkJDN(2457992, jdnPeriod.periodStart);
+        checkJDN(2458031, jdnPeriod.periodEnd);
+
+    });
+
+    it('create an Islamic date from an exact calendar period in a leap year', () => {
+
+        const islamicCalendarDate: IslamicCalendarDate = new IslamicCalendarDate(new CalendarPeriod(new CalendarDate(1434, 12, 3), new CalendarDate(1435, 1, 13)));
+
+        const calPeriod = islamicCalendarDate.toCalendarPeriod();
+
+        checkCalendarDate(new CalendarDate(1434, 12, 3, 2), calPeriod.periodStart);
+        checkCalendarDate(new CalendarDate(1435, 1, 13, 0), calPeriod.periodEnd);
+
+        const jdnPeriod = islamicCalendarDate.toJDNPeriod();
+
+        checkJDN(2456574, jdnPeriod.periodStart);
+        checkJDN(2456614, jdnPeriod.periodEnd);
 
     });
 
