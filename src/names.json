@@ -1,0 +1,17 @@
+{
+  "Gregorian": {
+    "weekdays": {
+      "en-US": {
+        "long": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "short": ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"],
+        "narrow": ["Su", "M", "T", "W", "T", "F", "Sa"]
+      }
+    },
+    "months": {
+      "en-US": {
+        "long": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        "short": ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
+      }
+    }
+  }
+}

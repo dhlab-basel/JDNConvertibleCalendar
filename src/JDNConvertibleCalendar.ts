@@ -22,6 +22,8 @@ import {JDNConvertibleConversionModule} from './JDNCalendarConversion';
 import {TypeDefinitionsModule} from './TypeDefinitions';
 import JDN = TypeDefinitionsModule.JDN;
 
+import names from './names.json';
+
 export module JDNConvertibleCalendarModule {
 
 
