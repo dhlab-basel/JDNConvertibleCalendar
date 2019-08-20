@@ -7,7 +7,7 @@
   "scripts": {
     "prepublishOnly": "npm run prepare",
     "prepare": "tsc",
-    "test": "tsc && ./node_modules/mocha/bin/mocha ./dist/test/conversions.js",
+    "test": "tsc && ./node_modules/mocha/bin/mocha ./dist/test/conversions.js && ./node_modules/mocha/bin/mocha ./dist/test/names.js",
     "builddocs": "typedoc --out docs --readme none --name 'JDNConvertibleCalendar API Documentation' --module commonjs src/*.ts"
   },
   "repository": {

@@ -29,5 +29,8 @@ import IslamicCalendarDate = JDNConvertibleCalendarModule.IslamicCalendarDate;
 import JulianCalendarDate = JDNConvertibleCalendarModule.JulianCalendarDate;
 import JDNConvertibleCalendar = JDNConvertibleCalendarModule.JDNConvertibleCalendar;
 
+import { JDNConvertibleCalendarNames } from './JDNCalendarNames';
+
 export {CalendarDate, JDNConvertibleCalendar, GregorianCalendarDate, IslamicCalendarDate, JulianCalendarDate, JDNPeriod, CalendarPeriod}
 export {JDNConvertibleConversionModule}
+export {JDNConvertibleCalendarNames}
