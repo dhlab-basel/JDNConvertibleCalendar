@@ -1364,7 +1364,7 @@ describe('Get the number of days for a given month', () => {
 
     it('create a Julian date and get the number of days for a given Julian\'s date\'s month', () => {
 
-        // Gregorian Calendar date 06-12-2017
+        // Julian Calendar date 01-01-2017
         const jdn = 2457768;
 
         const julianDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
