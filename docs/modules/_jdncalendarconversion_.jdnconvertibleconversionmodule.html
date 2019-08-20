@@ -77,12 +77,16 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#jdctogregorian" class="tsd-kind-icon">JDCTo<wbr>Gregorian</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#jdctoislamic" class="tsd-kind-icon">JDCTo<wbr>Islamic</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#jdctojulian" class="tsd-kind-icon">JDCTo<wbr>Julian</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#jdntogregorian" class="tsd-kind-icon">JDNTo<wbr>Gregorian</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#jdntoislamic" class="tsd-kind-icon">JDNTo<wbr>Islamic</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#jdntojulian" class="tsd-kind-icon">JDNTo<wbr>Julian</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#dayofweekfromjdc" class="tsd-kind-icon">day<wbr>OfWeek<wbr>FromJDC</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#gregoriantojdc" class="tsd-kind-icon">gregorian<wbr>ToJDC</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#gregoriantojdn" class="tsd-kind-icon">gregorian<wbr>ToJDN</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#islamictojdc" class="tsd-kind-icon">islamic<wbr>ToJDC</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#islamictojdn" class="tsd-kind-icon">islamic<wbr>ToJDN</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#juliantojdc" class="tsd-kind-icon">julian<wbr>ToJDC</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#juliantojdn" class="tsd-kind-icon">julian<wbr>ToJDN</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#truncatedecimals" class="tsd-kind-icon">truncate<wbr>Decimals</a></li>
@@ -103,7 +107,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNCalendarConversion.ts#L124">JDNCalendarConversion.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L124">JDNCalendarConversion.ts:124</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -131,6 +135,55 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="jdctoislamic" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> JDCTo<wbr>Islamic</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">JDCTo<wbr>Islamic<span class="tsd-signature-symbol">(</span>jdc<span class="tsd-signature-symbol">: </span><a href="_typedefinitions_.typedefinitionsmodule.html#jdc" class="tsd-signature-type">JDC</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendardate.html" class="tsd-signature-type">CalendarDate</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L399">JDNCalendarConversion.ts:399</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Converts a JDC to an Islamic calendar date.</p>
+								</div>
+								<p>Algorithm from:
+								Jean Meeus, Astronomical Algorithms, 1998, 75pp.</p>
+								<p>The first day of the Islamic calendar according to this algorithm is July 16th, 622 CE (Julian; JDC = 1948439.5).
+									This is in agreement with the widely used tables of Wuestenfeld et al., Wuestenfeld-Mahler&#39;sche
+									Vergleichungs-Tabellen zur muslimischen und iranischen Zeitrechnung, 1961. However, it is well known that
+									these calendar dates may be off by 1 to 2 days in comparison to the calendar that was actually used, especially
+									if historical dates are concerned. There are two more points of concern: Sura 9, 36-37 of the Koran
+									suggests that a lunar calendar without intercalation was applied from year 10 of the Hijra onwards only; earlier
+									on, probably a luni-solar calendar was used. This algorithm assumes that a lunar calendar without any
+									intercalation started in year 1 of the Hijra. Secondly, in many countries the first actual sighting of the lunar
+									crescent was decisive for the beginning of a new month up to quite recent times, but not a regular scheme. This
+									introduces a dependency on the location: a new Islamic calendar month may have started on different days in
+									different locations.
+									Unambiguous conversion of historical Islamic dates into Julian or Gregorian calendar dates or vice cersa can
+								only be achieved if the day of the week is known in addition.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jdc: <a href="_typedefinitions_.typedefinitionsmodule.html#jdc" class="tsd-signature-type">JDC</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>JDC to be converted to an Islamic calendar date.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../classes/_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendardate.html" class="tsd-signature-type">CalendarDate</a></h4>
+							<p>Islamic calendar date created from given JDC.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="jdctojulian" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> JDCTo<wbr>Julian</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -140,7 +193,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNCalendarConversion.ts#L244">JDNCalendarConversion.ts:244</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L244">JDNCalendarConversion.ts:244</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -177,7 +230,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNCalendarConversion.ts#L164">JDNCalendarConversion.ts:164</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L164">JDNCalendarConversion.ts:164</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -202,6 +255,40 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="jdntoislamic" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> JDNTo<wbr>Islamic</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">JDNTo<wbr>Islamic<span class="tsd-signature-symbol">(</span>jdn<span class="tsd-signature-symbol">: </span><a href="_typedefinitions_.typedefinitionsmodule.html#jdn" class="tsd-signature-type">JDN</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendardate.html" class="tsd-signature-type">CalendarDate</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L487">JDNCalendarConversion.ts:487</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Converts a JDN to an Islamic calendar date.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jdn: <a href="_typedefinitions_.typedefinitionsmodule.html#jdn" class="tsd-signature-type">JDN</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>JDN to be converted to an Islamic calendar date.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../classes/_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendardate.html" class="tsd-signature-type">CalendarDate</a></h4>
+							<p>@returns Islamic calendar date created from given JDN.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="jdntojulian" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> JDNTo<wbr>Julian</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -211,7 +298,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNCalendarConversion.ts#L281">JDNCalendarConversion.ts:281</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L281">JDNCalendarConversion.ts:281</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -245,7 +332,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNCalendarConversion.ts#L295">JDNCalendarConversion.ts:295</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L295">JDNCalendarConversion.ts:295</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -282,7 +369,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNCalendarConversion.ts#L53">JDNCalendarConversion.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L53">JDNCalendarConversion.ts:53</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -319,7 +406,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNCalendarConversion.ts#L98">JDNCalendarConversion.ts:98</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L98">JDNCalendarConversion.ts:98</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -344,6 +431,89 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="islamictojdc" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> islamic<wbr>ToJDC</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">islamic<wbr>ToJDC<span class="tsd-signature-symbol">(</span>calendarDate<span class="tsd-signature-symbol">: </span><a href="../classes/_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendardate.html" class="tsd-signature-type">CalendarDate</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_typedefinitions_.typedefinitionsmodule.html#jdc" class="tsd-signature-type">JDC</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L322">JDNCalendarConversion.ts:322</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Converts an Islamic calendar date to a JDC.</p>
+								</div>
+								<p>Algorithm from:
+								Jean Meeus, Astronomical Algorithms, 1998, 73pp.</p>
+								<p>The first day of the Islamic calendar according to this algorithm is July 16th, 622 CE (Julian; JDC = 1948439.5).
+									This is in agreement with the widely used tables of Wuestenfeld et al., Wuestenfeld-Mahler&#39;sche
+									Vergleichungs-Tabellen zur muslimischen und iranischen Zeitrechnung, 1961. However, it is well known that
+									these calendar dates may be off by 1 to 2 days in comparison to the calendar that was actually used, especially
+									if historical dates are concerned. There are two more points of concern: Sura 9, 36-37 of the Koran
+									suggests that a lunar calendar without intercalation was applied from year 10 of the Hijra onwards only; earlier
+									on, probably a luni-solar calendar was used. This algorithm assumes that a lunar calendar without any
+									intercalation started in year 1 of the Hijra. Secondly, in many countries the first actual sighting of the lunar
+									crescent was decisive for the beginning of a new month up to quite recent times, but not a regular scheme. This
+									introduces a dependency on the location: a new Islamic calendar month may have started on different days in
+									different locations.
+									Unambiguous conversion of historical Islamic dates into Julian or Gregorian calendar dates or vice cersa can
+								only be achieved if the day of the week is known in addition.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>calendarDate: <a href="../classes/_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendardate.html" class="tsd-signature-type">CalendarDate</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Islamic calendar date to be converted to JDC.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_typedefinitions_.typedefinitionsmodule.html#jdc" class="tsd-signature-type">JDC</a></h4>
+							<p>JDC representing the given Islamic calendar date.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="islamictojdn" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> islamic<wbr>ToJDN</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">islamic<wbr>ToJDN<span class="tsd-signature-symbol">(</span>calendarDate<span class="tsd-signature-symbol">: </span><a href="../classes/_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendardate.html" class="tsd-signature-type">CalendarDate</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_typedefinitions_.typedefinitionsmodule.html#jdn" class="tsd-signature-type">JDN</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L370">JDNCalendarConversion.ts:370</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Converts an Islamic calendar date to a JDN.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>calendarDate: <a href="../classes/_jdnconvertiblecalendar_.jdnconvertiblecalendarmodule.calendardate.html" class="tsd-signature-type">CalendarDate</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Islamic calendar date to be converted to JDN.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_typedefinitions_.typedefinitionsmodule.html#jdn" class="tsd-signature-type">JDN</a></h4>
+							<p>JDN representing the given Islamic calendar date.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="juliantojdc" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> julian<wbr>ToJDC</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -353,7 +523,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNCalendarConversion.ts#L179">JDNCalendarConversion.ts:179</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L179">JDNCalendarConversion.ts:179</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -390,7 +560,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNCalendarConversion.ts#L217">JDNCalendarConversion.ts:217</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L217">JDNCalendarConversion.ts:217</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -424,7 +594,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/598b4eb/src/JDNCalendarConversion.ts#L38">JDNCalendarConversion.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/dhlab-basel/JDNConvertibleCalendar/blob/89799e6/src/JDNCalendarConversion.ts#L38">JDNCalendarConversion.ts:38</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -467,10 +637,16 @@
 						<a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#jdctogregorian" class="tsd-kind-icon">JDCTo<wbr>Gregorian</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#jdctoislamic" class="tsd-kind-icon">JDCTo<wbr>Islamic</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#jdctojulian" class="tsd-kind-icon">JDCTo<wbr>Julian</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#jdntogregorian" class="tsd-kind-icon">JDNTo<wbr>Gregorian</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#jdntoislamic" class="tsd-kind-icon">JDNTo<wbr>Islamic</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#jdntojulian" class="tsd-kind-icon">JDNTo<wbr>Julian</a>
@@ -483,6 +659,12 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#gregoriantojdn" class="tsd-kind-icon">gregorian<wbr>ToJDN</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#islamictojdc" class="tsd-kind-icon">islamic<wbr>ToJDC</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#islamictojdn" class="tsd-kind-icon">islamic<wbr>ToJDN</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="_jdncalendarconversion_.jdnconvertibleconversionmodule.html#juliantojdc" class="tsd-kind-icon">julian<wbr>ToJDC</a>
