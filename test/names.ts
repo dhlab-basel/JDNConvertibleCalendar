@@ -28,7 +28,55 @@ describe("get weekday names", () => {
 
         const weekdays = JDNConvertibleCalendarNames.getWeekdayNames("Gregorian", "en", "long");
 
-        assert.deepEqual(weekdays, ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]);
+        assert.deepStrictEqual(weekdays, ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]);
+
+    });
+
+    it("get weekdays for the Gregorian calendar using the locale 'en' in short format", () => {
+
+        const weekdays = JDNConvertibleCalendarNames.getWeekdayNames("Gregorian", "en", "short");
+
+        assert.deepStrictEqual(weekdays, ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"]);
+
+    });
+
+    it("get weekdays for the Gregorian calendar using the locale 'en' in narrow format", () => {
+
+        const weekdays = JDNConvertibleCalendarNames.getWeekdayNames("Gregorian", "en", "narrow");
+
+        assert.deepStrictEqual(weekdays, ["Su", "M", "Tu", "W", "Th", "F", "Sa"]);
+
+    });
+
+    it("get weekdays for the Gregorian calendar using the locale 'de' in long format", () => {
+
+        const weekdays = JDNConvertibleCalendarNames.getWeekdayNames("Gregorian", "de", "long");
+
+        assert.deepStrictEqual(weekdays, ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Sonntag"]);
+
+    });
+
+    it("get weekdays for the Gregorian calendar using the locale 'de' in short format", () => {
+
+        const weekdays = JDNConvertibleCalendarNames.getWeekdayNames("Gregorian", "de", "short");
+
+        assert.deepStrictEqual(weekdays,  ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]);
+
+    });
+
+    it("get weekdays for the Gregorian calendar using the locale 'de' in narrow format", () => {
+
+        const weekdays = JDNConvertibleCalendarNames.getWeekdayNames("Gregorian", "de", "narrow");
+
+        assert.deepStrictEqual(weekdays, ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]);
+
+    });
+
+    it("use English as fallback when attempting to get weekdays for the Gregorian calendar using the non existing locale 'la' in long format", () => {
+
+        const weekdays = JDNConvertibleCalendarNames.getWeekdayNames("Gregorian", "la", "long");
+
+        assert.deepStrictEqual(weekdays, ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]);
 
     });
 
