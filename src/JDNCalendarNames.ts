@@ -66,11 +66,12 @@ interface Calendars {
 export module JDNConvertibleCalendarNames {
 
     const defaultLocale = 'en';
+
     const defaultFormat = 'long';
 
-    export const getWeekdayNames = (calendar: 'Gregorian' | 'Julian' | 'Islamic', locale: string, format: 'long' | 'short' | 'narrow'): string[] => {
+    const labels: Calendars = names;
 
-        const labels: Calendars = names;
+    export const getWeekdayNames = (calendar: 'Gregorian' | 'Julian' | 'Islamic', locale: string, format: 'long' | 'short' | 'narrow'): string[] => {
 
         let weekdays: Weekdays;
 
@@ -95,8 +96,6 @@ export module JDNConvertibleCalendarNames {
     };
 
     export const getMonthNames = (calendar: 'Gregorian' | 'Julian' | 'Islamic', locale: string, format: 'long' | 'short'): string[] => {
-
-        const labels: Calendars = names;
 
         let months: Months;
 
