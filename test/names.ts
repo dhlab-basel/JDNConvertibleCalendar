@@ -81,3 +81,48 @@ describe("get weekday names", () => {
     });
 
 });
+
+describe("get months names", () => {
+
+    it("get months for the Gregorian calendar using the locale 'en' in long format", () => {
+
+        const months = JDNConvertibleCalendarNames.getMonthNames("Gregorian", "en", "long");
+
+        assert.deepStrictEqual(months, ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+
+    });
+
+    it("get months for the Gregorian calendar using the locale 'en' in short format", () => {
+
+        const months = JDNConvertibleCalendarNames.getMonthNames("Gregorian", "en", "short");
+
+        assert.deepStrictEqual(months, ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]);
+
+    });
+
+    it("get months for the Islamic calendar using the locale 'ar' in long format", () => {
+
+        const months = JDNConvertibleCalendarNames.getMonthNames("Islamic", "ar", "long");
+
+        assert.deepStrictEqual(months, ["محرم", "صفر", "ربيع الأول", "ربيع الثاني", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الججة"]);
+
+    });
+
+    it("use long format as a fallback  when attempting to get months for the Islamic calendar using the locale 'ar' in short format", () => {
+
+        const months = JDNConvertibleCalendarNames.getMonthNames("Islamic", "ar", "short");
+
+        assert.deepStrictEqual(months, ["محرم", "صفر", "ربيع الأول", "ربيع الثاني", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الججة"]);
+
+    });
+
+    it("use English as fallback when attempting to get months for the Gregorian calendar using the non existing locale 'la' in long format", () => {
+
+        const weekdays = JDNConvertibleCalendarNames.getMonthNames("Gregorian", "la", "long");
+
+        assert.deepStrictEqual(weekdays, ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+
+    });
+
+
+});
