@@ -1,13 +1,13 @@
 {
   "name": "jdnconvertiblecalendar",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Conversions between various calendars and manipulations using Julian Day Number (JDN)",
   "types": "dist/src/index.d.ts",
   "main": "dist/src/index.js",
   "scripts": {
     "prepublishOnly": "npm run prepare",
     "prepare": "tsc",
-    "test": "tsc && ./node_modules/mocha/bin/mocha ./dist/test/UnitTests.js",
+    "test": "tsc && ./node_modules/mocha/bin/mocha ./dist/test/conversions.js && ./node_modules/mocha/bin/mocha ./dist/test/names.js",
     "builddocs": "typedoc --out docs --readme none --name 'JDNConvertibleCalendar API Documentation' --module commonjs src/*.ts"
   },
   "repository": {
@@ -27,14 +27,13 @@
     "url": "https://github.com/dhlab-basel/JDNConvertibleCalendar/issues"
   },
   "homepage": "https://github.com/dhlab-basel/JDNConvertibleCalendar#readme",
-  "dependencies": {},
   "devDependencies": {
     "@types/mocha": "^2.2.48",
     "@types/node": "^8.0.56",
     "assert": "^1.4.1",
     "mocha": "^4.0.1",
     "ts-node": "^4.0.2",
-    "typedoc": "^0.14.2",
-    "typescript": "^2.6.2"
+    "typedoc": "^0.15.0",
+    "typescript": "3.5.3"
   }
 }
