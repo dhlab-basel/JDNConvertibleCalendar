@@ -20,6 +20,7 @@
 
 import names from './names.json';
 
+// Names of weekdays
 interface Weekdays {
 
     long: string[];
@@ -29,12 +30,14 @@ interface Weekdays {
     narrow?: string[];
 }
 
+// Map of locales to weekdays
 interface LocaleToWeekdays {
 
     [locale: string]: Weekdays;
 
 }
 
+// Names of months
 interface Months {
 
     long: string[];
@@ -43,11 +46,13 @@ interface Months {
 
 }
 
+// Map of Locales to names of months
 interface LocaleToMonths {
 
     [locale: string]: Months;
 }
 
+// Names of weekdays and months for a calendar.
 interface Names {
 
     weekdays: LocaleToWeekdays;
@@ -57,6 +62,8 @@ interface Names {
 
 }
 
+// Map of calendars to names
+// of weekdays and months.
 interface Calendars {
 
     [calendar: string]: Names;
@@ -71,6 +78,15 @@ export module JDNConvertibleCalendarNames {
 
     const labels: Calendars = names;
 
+    /**
+     * Get names of weekdays for the given calendar and the given locale in the given format.
+     * Will fall back to the default locale if there are no names available for the preferred locale.
+     * Will fall back to long if the preferred format is not available.
+     *
+     * @param calendar the calendar to get the weekday names for.
+     * @param locale the preferred locale.
+     * @param format the preferred format.
+     */
     export const getWeekdayNames = (calendar: 'Gregorian' | 'Julian' | 'Islamic', locale: string, format: 'long' | 'short' | 'narrow'): string[] => {
 
         let weekdays: Weekdays;
@@ -95,6 +111,15 @@ export module JDNConvertibleCalendarNames {
 
     };
 
+    /**
+     * Get names of months for the given calendar and the given locale in the given format.
+     * Will fall back to the default locale if there are no names available for the preferred locale.
+     * Will fall back to long if the preferred format is not available.
+     *
+     * @param calendar calendar the calendar to get the month names for.
+     * @param locale the preferred locale.
+     * @param format the preferred format.
+     */
     export const getMonthNames = (calendar: 'Gregorian' | 'Julian' | 'Islamic', locale: string, format: 'long' | 'short'): string[] => {
 
         let months: Months;
