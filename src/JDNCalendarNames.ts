@@ -44,6 +44,8 @@ interface Months {
 
     short?: string[];
 
+    narrow?: string[];
+
 }
 
 // Map of Locales to names of months
@@ -120,7 +122,7 @@ export module JDNConvertibleCalendarNames {
      * @param locale the preferred locale.
      * @param format the preferred format.
      */
-    export const getMonthNames = (calendar: 'Gregorian' | 'Julian' | 'Islamic', locale: string, format: 'long' | 'short'): string[] => {
+    export const getMonthNames = (calendar: 'Gregorian' | 'Julian' | 'Islamic', locale: string, format: 'long' | 'short' | 'narrow'): string[] => {
 
         let months: Months;
 
