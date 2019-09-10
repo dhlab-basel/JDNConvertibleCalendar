@@ -263,6 +263,26 @@ export module JDNConvertibleCalendarModule {
          */
         protected abstract dayOfWeekFromJDN(jdn: JDN): number;
 
+
+        /**
+         * Calculates month difference for the calculation of the number of days of a given month. For all calendars
+         * with 12 months the difference will always be 1. The Jewish calendar can either have 12 or 13 months and
+         * the leap month is month 7. This means that in normal years month 8 follows month 6. In this case the
+         * month difference will be 2, not 1.
+         *
+         * The given date is expected to be of the same calendar as the instance the method is called on.
+         *
+         * @param date given date.
+         * @returns number of months in a given year.
+         */
+
+
+
+
+
+
+
+
         /**
          * Calculates number of days for the month of the given date.
          *
@@ -768,6 +788,7 @@ export module JDNConvertibleCalendarModule {
 
         public readonly calendarName = JDNConvertibleCalendar.jewish;
 
+        // Determine the number of months of a certain Jewish year
         public readonly monthsInYear = 13;
 
         // We use calendar conversion methods that use the convention

@@ -684,7 +684,7 @@ export module JDNConvertibleConversionModule {
                 wbeg = 2;
             } else
             if ((k1 >= 0.428570)&&(k1 < 0.533590)) {
-                jdays = 384;
+                jdays = 383;
                 wbeg = 4;
             } else
             if ((k1 >= 0.533590)&&(k1 < 0.714282)) {
@@ -740,7 +740,7 @@ export module JDNConvertibleConversionModule {
             hj = hj + 1;
             let daydiff = JewishDaydiff(new JDNConvertibleCalendarModule.CalendarDate(hj,mj,dj));
             let pesach = Pesachfeast(new JDNConvertibleCalendarModule.CalendarDate(hj,mj,dj));
-            let jde = pesach + daydiff;
+            jde = pesach + daydiff;
         }
 
         return jde;
@@ -790,7 +790,7 @@ export module JDNConvertibleConversionModule {
         let data = JewishDayDate(jdc, pesach, jdenewyear);
         hj = data.year;
         const mj = data.month;
-        const dj = data.day;
+        const dj = truncateDecimals(data.day);
 
         return new JDNConvertibleCalendarModule.CalendarDate(hj, mj, dj, undefined, julianCalendarDate.daytime);
 
@@ -804,6 +804,7 @@ export module JDNConvertibleConversionModule {
      */
     export const JDNToJewish = (jdn: JDN): JDNConvertibleCalendarModule.CalendarDate => {
         return JDCToJewish(jdn);
+
     };
 
     /**
@@ -822,7 +823,7 @@ export module JDNConvertibleConversionModule {
 
         let daydiff = 0;
 
-        /* If the date in question is in between Pesach feast and New Year (m = 1, d = 1)*/
+        /* If the date in question is in between Pesach feast (m = 8, d = 15) and New Year (m = 1, d = 1)*/
         if (mj==8) {
             daydiff = dj - 15;
         }
@@ -1068,7 +1069,7 @@ export module JDNConvertibleConversionModule {
         if ((jdc>=pesach)&&(jdc<=jdenewyear)) {
             jdediff = jdc - pesach;
             if (jdediff==163) {
-                mj = 1;
+                mj = 8;
                 dj = 1;
                 hj  = hj + 1;
             }
@@ -1101,7 +1102,6 @@ export module JDNConvertibleConversionModule {
         let jdays = 0;
         /* If date is in between Jewish New Year and the Pesach feast */
         if (jdc<pesach) {
-            //hj = hj - 1;
             const data = JewishCharact(hj);
             jdays = data.jdays;
             jdenewyear = jdenewyear - jdays;
@@ -1317,7 +1317,6 @@ export module JDNConvertibleConversionModule {
                 dj = jdediff - 207;
             }
         }
-
         return new JDNConvertibleCalendarModule.CalendarDate(hj,mj,dj);
     }
 

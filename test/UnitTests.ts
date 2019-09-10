@@ -23,6 +23,7 @@ import {
     JDNPeriod,
     GregorianCalendarDate,
     IslamicCalendarDate,
+    JewishCalendarDate,
     JulianCalendarDate,
     CalendarPeriod,
     JDNConvertibleCalendar, JDNConvertibleConversionModule
@@ -863,128 +864,128 @@ describe('JDN to Islamic', () => {
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 1948438.5 to the Islamic Calendar date 29-12-0000', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(1948438.5);
+    it('convert the JDN 1948439 to the Islamic Calendar date 29-12-0000', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(1948439);
 
         const expectedDate = new CalendarDate(0, 12, 29);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 1948439.5 to the Islamic Calendar date 01-01-0001', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(1948439.5);
+    it('convert the JDN 1948440 to the Islamic Calendar date 01-01-0001', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(1948440);
 
         const expectedDate = new CalendarDate(1, 1, 1);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 1984963.5 to the Islamic Calendar date 25-01-0104', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(1984963.5);
+    it('convert the JDN 1984964 to the Islamic Calendar date 25-01-0104', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(1984964);
 
         const expectedDate = new CalendarDate(104, 1, 25);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2021488.5 to the Islamic Calendar date 20-02-0207', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2021488.5);
+    it('convert the JDN 2021489 to the Islamic Calendar date 20-02-0207', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2021489);
 
         const expectedDate = new CalendarDate(207, 2, 20);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2058044.5 to the Islamic Calendar date 18-04-0310', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2058044.5);
+    it('convert the JDN 2058045 to the Islamic Calendar date 18-04-0310', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2058045);
 
         const expectedDate = new CalendarDate(310, 4, 18);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2094600.5 to the Islamic Calendar date 15-06-0413', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2094600.5);
+    it('convert the JDN 2094601 to the Islamic Calendar date 15-06-0413', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2094601);
 
         const expectedDate = new CalendarDate(413, 6, 15);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2131094.5 to the Islamic Calendar date 09-06-0516', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2131094.5);
+    it('convert the JDN 2131095 to the Islamic Calendar date 09-06-0516', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2131095);
 
         const expectedDate = new CalendarDate(516, 6, 9);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2167583.5 to the Islamic Calendar date 28-05-0619', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2167583.5);
+    it('convert the JDN 2167584 to the Islamic Calendar date 28-05-0619', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2167584);
 
         const expectedDate = new CalendarDate(619, 5, 28);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2204108.5 to the Islamic Calendar date 24-06-0722', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2204108.5);
+    it('convert the JDN 2204109 to the Islamic Calendar date 24-06-0722', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2204109);
 
         const expectedDate = new CalendarDate(722, 6, 24);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2240651.5 to the Islamic Calendar date 08-08-0825', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2240651.5);
+    it('convert the JDN 2240652 to the Islamic Calendar date 08-08-0825', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2240652);
 
         const expectedDate = new CalendarDate(825, 8, 8);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2277173.5 to the Islamic Calendar date 01-09-0928', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2277173.5);
+    it('convert the JDN 2277174 to the Islamic Calendar date 01-09-0928', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2277174);
 
         const expectedDate = new CalendarDate(928, 9, 1);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2313710.5 to the Islamic Calendar date 08-10-1031', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2313710.5);
+    it('convert the JDN 2313711 to the Islamic Calendar date 08-10-1031', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2313711);
 
         const expectedDate = new CalendarDate(1031, 10, 8);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2350257.5 to the Islamic Calendar date 27-11-1134', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2350257.5);
+    it('convert the JDN 2350258 to the Islamic Calendar date 27-11-1134', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2350258);
 
         const expectedDate = new CalendarDate(1134, 11, 27);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2386789.5 to the Islamic Calendar date 29-12-1237', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2386789.5);
+    it('convert the JDN 2386790 to the Islamic Calendar date 29-12-1237', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2386790);
 
         const expectedDate = new CalendarDate(1237, 12, 29);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2423373.5 to the Islamic Calendar date 25-03-1341', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2423373.5);
+    it('convert the JDN 2423374 to the Islamic Calendar date 25-03-1341', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2423374);
 
         const expectedDate = new CalendarDate(1341, 3, 25);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
     });
 
-    it('convert the JDN 2451481.5 to the Islamic Calendar date 20-07-1420', () => {
-        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2451481.5);
+    it('convert the JDN 2451482 to the Islamic Calendar date 20-07-1420', () => {
+        const islamicCalendarDate = JDNConvertibleConversionModule.JDNToIslamic(2451482);
 
         const expectedDate = new CalendarDate(1420, 7, 20);
 
@@ -1048,6 +1049,59 @@ describe('Jewish to JDC', () => {
     });
 });
 
+describe('Jewish to JDN', () => {
+
+    it('convert the Jewish Calendar date 18-04-0760 to JDN 625308', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDN(new CalendarDate(760, 4, 18));
+
+        checkJDN(625308, jdc);
+    });
+    it('convert the Jewish Calendar date 17-05-1381 to JDN 852161', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDN(new CalendarDate(1381, 5, 17));
+
+        checkJDN(852161, jdc);
+    });
+    it('convert the Jewish Calendar date 08-03-2562 to JDN 1283447', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDN(new CalendarDate(2562, 3, 8));
+
+        checkJDN(1283447, jdc);
+    });
+    it('convert the Jewish Calendar date 14-01-3312 to JDN 1557318', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDN(new CalendarDate(3312, 1, 14));
+
+        checkJDN(1557318, jdc);
+    });
+    it('convert the Jewish Calendar date 25-07-3762 to JDN 1721875', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDN(new CalendarDate(3762, 7, 25));
+
+        checkJDN(1721875, jdc);
+    });
+    it('convert the Jewish Calendar date 01-11-4090 to JDN 1841745', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDN(new CalendarDate(4090, 11, 1));
+
+        checkJDN(1841745, jdc);
+    });
+    it('convert the Jewish Calendar date 03-12-4382 to JDN 1948440', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDN(new CalendarDate(4382, 12, 3));
+
+        checkJDN(1948440, jdc);
+    });
+    it('convert the Jewish Calendar date 17-01-4783 to JDN 2094601', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDN(new CalendarDate(4783, 1, 17));
+
+        checkJDN(2094601, jdc);
+    });
+    it('convert the Jewish Calendar date 27-10-5283 to JDN 2277524', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDN(new CalendarDate(5283, 11, 27));
+
+        checkJDN(2277524, jdc);
+    });
+    it('convert the Jewish Calendar date 20-02-5760 to JDN 2451482', () => {
+        const jdc = JDNConvertibleConversionModule.jewishToJDN(new CalendarDate(5760, 2, 20));
+
+        checkJDN(2451482, jdc);
+    });
+});
 
 describe('JDC to Jewish', () => {
 
@@ -1131,10 +1185,205 @@ describe('JDC to Jewish', () => {
         checkCalendarDate(expectedDate, jewishCalendarDate);
 
     });
+    it('convert the JDC 2454422.5 to the Jewish Calendar date 07-03-5768', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2454421.5);
+
+        const expectedDate = new CalendarDate(5768, 3, 7);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 2454444.5 to the Jewish Calendar date 01-04-5768', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2454444.5);
+
+        const expectedDate = new CalendarDate(5768, 4, 1);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 2455248.5 to the Jewish Calendar date 07-06-5770', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2455248.5);
+
+        const expectedDate = new CalendarDate(5770, 6, 7);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 2455270.5 to the Jewish Calendar date 29-06-5770', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2455270.5);
+
+        const expectedDate = new CalendarDate(5770, 6, 29);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 2455271.5 to the Jewish Calendar date 01-08-5770', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2455271.5);
+
+        const expectedDate = new CalendarDate(5770, 8, 1);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 2455272.5 to the Jewish Calendar date 02-08-5770', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2455272.5);
+
+        const expectedDate = new CalendarDate(5770, 8, 2);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 2455987.5 to the Jewish Calendar date 07-06-5772', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2455987.5);
+
+        const expectedDate = new CalendarDate(5772, 6, 7);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDC 2456010.5 to the Jewish Calendar date 01-08-5772', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2456010.5);
+
+        const expectedDate = new CalendarDate(5772, 8, 1);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 2456340.5 to the Jewish Calendar date 07-06-5773', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2456340.5);
+
+        const expectedDate = new CalendarDate(5773, 6, 7);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 2456363.5 to the Jewish Calendar date 01-08-5773', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDCToJewish(2456363.5);
+
+        const expectedDate = new CalendarDate(5773, 8, 1);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
 
 });
 
+describe('JDN to Jewish', () => {
 
+    it('convert the JDN 625308 to the Jewish Calendar date 18-04-0760', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(625308);
+
+        const expectedDate = new CalendarDate(760, 4, 18);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 852161 to the Jewish Calendar date 17-05-1381', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(852161);
+
+        const expectedDate = new CalendarDate(1381, 5, 17);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 1283447 to the Jewish Calendar date 08-03-2562', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(1283447);
+
+        const expectedDate = new CalendarDate(2562, 3, 8);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 1557318 to the Jewish Calendar date 14-01-3312', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(1557318);
+
+        const expectedDate = new CalendarDate(3312, 1, 14);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 1721875 to the Jewish Calendar date 25-07-3762', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(1721875);
+
+        const expectedDate = new CalendarDate(3762, 7, 25);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 1841745 to the Jewish Calendar date 01-10-4090', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(1841745);
+
+        const expectedDate = new CalendarDate(4090, 11, 1);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 1948440 to the Jewish Calendar date 03-11-4382', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(1948440);
+
+        const expectedDate = new CalendarDate(4382, 12, 3);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 2094601 to the Jewish Calendar date 17-01-4783', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(2094601);
+
+        const expectedDate = new CalendarDate(4783, 1, 17);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 2277524 to the Jewish Calendar date 27-10-5283', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(2277524);
+
+        const expectedDate = new CalendarDate(5283, 11, 27);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 2451482 to the Jewish Calendar date 20-02-5760', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(2451482);
+
+        const expectedDate = new CalendarDate(5760, 2, 20);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 2454422 to the Jewish Calendar date 07-03-5768', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(2454422);
+
+        const expectedDate = new CalendarDate(5768, 3, 7);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 2455249 to the Jewish Calendar date 07-06-5770', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(2455249);
+
+        const expectedDate = new CalendarDate(5770, 6, 7);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 2455988 to the Jewish Calendar date 07-06-5772', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(2455988);
+
+        const expectedDate = new CalendarDate(5772, 6, 7);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+    it('convert the JDN 2456341 to the Jewish Calendar date 07-06-5773', () => {
+        const jewishCalendarDate = JDNConvertibleConversionModule.JDNToJewish(2456341);
+
+        const expectedDate = new CalendarDate(5773, 6, 7);
+
+        checkCalendarDate(expectedDate, jewishCalendarDate);
+
+    });
+
+});
 
 
 
@@ -1486,6 +1735,186 @@ describe('Conversions from JDN to Gregorian and Julian calendar and in between c
 
     });
 
+    it('convert a Jewish date into a Julian date', () => {
+
+        // Jewish calendar date 21-04-4760
+        const jdn = 2086308;
+
+        const jewishDate: JewishCalendarDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const jewishCalendarPeriod: CalendarPeriod = jewishDate.toCalendarPeriod();
+
+        const expectedJewishDate = new CalendarDate(4760, 4, 21, 1);
+
+        checkCalendarDate(expectedJewishDate, jewishCalendarPeriod.periodStart);
+        checkCalendarDate(expectedJewishDate, jewishCalendarPeriod.periodEnd);
+
+        const julianDate: JDNConvertibleCalendar = jewishDate.convertCalendar('Julian');
+
+        const jdnPeriod = julianDate.toJDNPeriod();
+
+        checkJDN(jdn, jdnPeriod.periodStart);
+        checkJDN(jdn, jdnPeriod.periodEnd);
+
+        const julianCalendarPeriod = julianDate.toCalendarPeriod();
+
+        const expectedJulianDate = new CalendarDate(1000, 1, 1, 1);
+
+        checkCalendarDate(expectedJulianDate, julianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedJulianDate, julianCalendarPeriod.periodEnd);
+
+    });
+
+    it('convert a Julian into a Jewish date', () => {
+
+        // Julian calendar date 01-01-1000
+        const jdn =  2086308;
+
+        const julianDate: JulianCalendarDate = new JulianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const julianCalendarPeriod: CalendarPeriod = julianDate.toCalendarPeriod();
+
+        const expectedJulianDate = new CalendarDate(1000, 1, 1, 1);
+
+        checkCalendarDate(expectedJulianDate, julianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedJulianDate, julianCalendarPeriod.periodEnd);
+
+        const jewishDate: JDNConvertibleCalendar = julianDate.convertCalendar('Jewish');
+
+        const jdnPeriod = jewishDate.toJDNPeriod();
+
+        checkJDN(jdn, jdnPeriod.periodStart);
+        checkJDN(jdn, jdnPeriod.periodEnd);
+
+        const jewishCalendarPeriod = jewishDate.toCalendarPeriod();
+
+        const expectedJewishDate = new CalendarDate(4760, 4, 21, 1);
+
+        checkCalendarDate(expectedJewishDate, jewishCalendarPeriod.periodStart);
+        checkCalendarDate(expectedJewishDate, jewishCalendarPeriod.periodEnd);
+
+    });
+
+    it('convert a Jewish date into a Gregorian date', () => {
+
+        // Jewish calendar date 23-04-5760
+        const jdn = 2451545;
+
+        const jewishDate: JewishCalendarDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const jewishCalendarPeriod: CalendarPeriod = jewishDate.toCalendarPeriod();
+
+        const expectedJewishDate = new CalendarDate(5760, 4, 23, 6);
+
+        checkCalendarDate(expectedJewishDate, jewishCalendarPeriod.periodStart);
+        checkCalendarDate(expectedJewishDate, jewishCalendarPeriod.periodEnd);
+
+        const gregorianDate: JDNConvertibleCalendar = jewishDate.convertCalendar('Gregorian');
+
+        const jdnPeriod = gregorianDate.toJDNPeriod();
+
+        checkJDN(jdn, jdnPeriod.periodStart);
+        checkJDN(jdn, jdnPeriod.periodEnd);
+
+        const gregorianCalendarPeriod = gregorianDate.toCalendarPeriod();
+
+        const expectedGregorianDate = new CalendarDate(2000, 1, 1, 6);
+
+        checkCalendarDate(expectedGregorianDate, gregorianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedGregorianDate, gregorianCalendarPeriod.periodEnd);
+
+    });
+
+    it('convert a Gregorian into a Jewish date', () => {
+
+        // Gregorian calendar date 01-01-2000
+        const jdn =  2451545;
+
+        const gregorianDate: GregorianCalendarDate = new GregorianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const gregorianCalendarPeriod: CalendarPeriod = gregorianDate.toCalendarPeriod();
+
+        const expectedGregorianDate = new CalendarDate(2000, 1, 1, 6);
+
+        checkCalendarDate(expectedGregorianDate, gregorianCalendarPeriod.periodStart);
+        checkCalendarDate(expectedGregorianDate, gregorianCalendarPeriod.periodEnd);
+
+        const jewishDate: JDNConvertibleCalendar = gregorianDate.convertCalendar('Jewish');
+
+        const jdnPeriod = jewishDate.toJDNPeriod();
+
+        checkJDN(jdn, jdnPeriod.periodStart);
+        checkJDN(jdn, jdnPeriod.periodEnd);
+
+        const jewishCalendarPeriod = jewishDate.toCalendarPeriod();
+
+        const expectedJewishDate = new CalendarDate(5760, 4, 23, 6);
+
+        checkCalendarDate(expectedJewishDate, jewishCalendarPeriod.periodStart);
+        checkCalendarDate(expectedJewishDate, jewishCalendarPeriod.periodEnd);
+
+    });
+
+    it('convert a Jewish date into an Islamic date', () => {
+
+        // Jewish calendar date 03-11-4382
+        const jdn = 1948440;
+
+        const jewishDate: JewishCalendarDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const jewishCalendarPeriod: CalendarPeriod = jewishDate.toCalendarPeriod();
+
+        const expectedJewishDate = new CalendarDate(4382, 12, 3, 5);
+
+        checkCalendarDate(expectedJewishDate, jewishCalendarPeriod.periodStart);
+        checkCalendarDate(expectedJewishDate, jewishCalendarPeriod.periodEnd);
+
+        const islamicDate: JDNConvertibleCalendar = jewishDate.convertCalendar('Islamic');
+
+        const jdnPeriod = islamicDate.toJDNPeriod();
+
+        checkJDN(jdn, jdnPeriod.periodStart);
+        checkJDN(jdn, jdnPeriod.periodEnd);
+
+        const islamicCalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedIslamicDate = new CalendarDate(1, 1, 1, 5);
+
+        checkCalendarDate(expectedIslamicDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedIslamicDate, islamicCalendarPeriod.periodEnd);
+
+    });
+
+    it('convert an Islamic into a Jewish date', () => {
+
+        // Islamic calendar date 01-01-0001
+        const jdn =  1948440;
+
+        const islamicDate: IslamicCalendarDate = new IslamicCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const islamicCalendarPeriod: CalendarPeriod = islamicDate.toCalendarPeriod();
+
+        const expectedIslamicDate = new CalendarDate(1, 1, 1, 5);
+
+        checkCalendarDate(expectedIslamicDate, islamicCalendarPeriod.periodStart);
+        checkCalendarDate(expectedIslamicDate, islamicCalendarPeriod.periodEnd);
+
+        const jewishDate: JDNConvertibleCalendar = islamicDate.convertCalendar('Jewish');
+
+        const jdnPeriod = jewishDate.toJDNPeriod();
+
+        checkJDN(jdn, jdnPeriod.periodStart);
+        checkJDN(jdn, jdnPeriod.periodEnd);
+
+        const jewishCalendarPeriod = jewishDate.toCalendarPeriod();
+
+        const expectedJewishDate = new CalendarDate(4382, 12, 3, 5);
+
+        checkCalendarDate(expectedJewishDate, jewishCalendarPeriod.periodStart);
+        checkCalendarDate(expectedJewishDate, jewishCalendarPeriod.periodEnd);
+
+    });
+
 });
 
 //
@@ -1516,6 +1945,370 @@ describe('Get the number of days for a given month', () => {
         const days: number = julianDate.daysInMonth(new CalendarDate(2017, 2, 15));
 
         assert.strictEqual(days, 28, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for leap month 13 (Vaedar)', () => {
+
+        // Jewish Calendar date 07-07-5774
+        const jdn = 2456726;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5774, 7, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 7 (Nisan)', () => {
+
+        // Jewish Calendar date 07-07-5774
+        const jdn = 2456755;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5774, 8, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 8 (Iyar)', () => {
+
+        // Jewish Calendar date 07-08-5774
+        const jdn = 2456785;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5774, 9, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 9 (Sivan)', () => {
+
+        // Jewish Calendar date 07-09-5774
+        const jdn = 2456814;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5774, 10, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 10 (Tammuz)', () => {
+
+        // Jewish Calendar date 07-10-5774
+        const jdn = 2456844;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5774, 11, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 11 (Av)', () => {
+
+        // Jewish Calendar date 07-11-5774
+        const jdn = 2456873;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5774, 12, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 12 (Elul)', () => {
+
+        // Jewish Calendar date 07-12-5774
+        const jdn = 2456903;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5774, 13, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 1 (Tishri)', () => {
+
+        // Jewish Calendar date 07-01-5775
+        const jdn = 2456932;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5775, 1, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 4 (Tevet)', () => {
+
+        // Jewish Calendar date 07-04-5775
+        const jdn = 2457021;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5775, 4, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 5 (Shevat)', () => {
+
+        // Jewish Calendar date 07-05-5775
+        const jdn = 2457050;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5775, 5, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 2 (Heshvan) in a complete leap year', () => {
+
+        // Jewish Calendar date 07-02-5776
+        const jdn = 2456962;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5776, 2, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 3 (Kislev) in a complete leap year', () => {
+
+        // Jewish Calendar date 07-03-5776
+        const jdn = 2457346;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5776, 3, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 6 (Adar) in a complete leap year', () => {
+
+        // Jewish Calendar date 07-06-5776
+        const jdn = 2457080;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5776, 6, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 2 (Heshvan) in a regular leap year', () => {
+
+        // Jewish Calendar date 07-02-5755
+        const jdn = 2449638;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5755, 2, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 3 (Kislev) in a regular leap year', () => {
+
+        // Jewish Calendar date 07-03-5755
+        const jdn = 2449667;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5755, 3, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 6 (Adar) in a regular leap year', () => {
+
+        // Jewish Calendar date 07-06-5755
+        const jdn = 2449756;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5755, 6, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 2 (Heshvan) in a deficient leap year', () => {
+
+        // Jewish Calendar date 07-02-5768
+        const jdn = 2454393;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5768, 2, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 3 (Kislev) in a deficient leap year', () => {
+
+        // Jewish Calendar date 07-03-5768
+        const jdn = 2454422;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5768, 3, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 6 (Adar) in a deficient leap year', () => {
+
+        // Jewish Calendar date 07-06-5768
+        const jdn = 2454510;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5768, 6, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 2 (Heshvan) in a complete common year', () => {
+
+        // Jewish Calendar date 07-02-5770
+        const jdn = 2455130;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5770, 2, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 3 (Kislev) in a complete common year', () => {
+
+        // Jewish Calendar date 07-03-5770
+        const jdn = 2455160;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5770, 3, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 6 (Adar) in a complete common year', () => {
+
+        // Jewish Calendar date 07-06-5770
+        const jdn = 2455249;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5770, 6, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 2 (Heshvan) in a regular common year', () => {
+
+        // Jewish Calendar date 07-02-5772
+        const jdn = 2455870;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5772, 2, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 3 (Kislev) in a regular common year', () => {
+
+        // Jewish Calendar date 07-03-5772
+        const jdn = 2455899;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5772, 3, 7));
+
+        assert.strictEqual(days, 30, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 6 (Adar) in a regular common year', () => {
+
+        // Jewish Calendar date 07-06-5772
+        const jdn = 2455988;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5772, 6, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 2 (Heshvan) in a deficient common year', () => {
+
+        // Jewish Calendar date 07-02-5773
+        const jdn = 2456224;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5773, 2, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 3 (Kislev) in a deficient common year', () => {
+
+        // Jewish Calendar date 07-03-5773
+        const jdn = 2456253;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5773, 3, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
+
+    });
+
+    it('create a Jewish date and get the number of days for month 6 (Adar) in a deficient common year', () => {
+
+        // Jewish Calendar date 07-06-5773
+        const jdn = 2456341;
+
+        const jewishDate = new JewishCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = jewishDate.daysInMonth(new CalendarDate(5773, 6, 7));
+
+        assert.strictEqual(days, 29, `wrong number of days`)
 
     });
 
