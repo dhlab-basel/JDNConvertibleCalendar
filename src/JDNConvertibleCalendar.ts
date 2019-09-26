@@ -192,7 +192,7 @@ export module JDNConvertibleCalendarModule {
         /**
          * Indicates how many months a year has in a specific calendar.
          */
-        public abstract readonly monthsInYear: (year: number) => number;
+        public abstract monthsInYear(year: number): number;
 
         /**
          * Indicates if the year 0 exists in a specific calendar.
@@ -709,7 +709,9 @@ export module JDNConvertibleCalendarModule {
 
         public readonly calendarName = JDNConvertibleCalendar.gregorian;
 
-        public readonly monthsInYear = () => 12;
+        public monthsInYear() {
+            return 12
+        };
 
         // We use calendar conversion methods that use the convention
         // that the year zero exists in the Gregorian Calendar.
@@ -736,7 +738,9 @@ export module JDNConvertibleCalendarModule {
 
         public readonly calendarName = JDNConvertibleCalendar.julian;
 
-        public readonly monthsInYear = () => 12;
+        public monthsInYear() {
+            return 12;
+        }
 
         // We use calendar conversion methods that use the convention
         // that the year zero does exist in the Julian Calendar.
@@ -762,7 +766,9 @@ export module JDNConvertibleCalendarModule {
 
         public readonly calendarName = JDNConvertibleCalendar.islamic;
 
-        public readonly monthsInYear = () => 12;
+        public monthsInYear() {
+            return 12
+        };
 
         // We use calendar conversion methods that use the convention
         // that the year zero does exist in the Julian Calendar.
@@ -789,7 +795,7 @@ export module JDNConvertibleCalendarModule {
         public readonly calendarName = JDNConvertibleCalendar.jewish;
 
         // Determine the number of months of a certain Jewish year
-        public readonly monthsInYear = (year: number) => {
+        public monthsInYear(year: number) {
             return JDNConvertibleConversionModule.JewishCharact(year).nmo;
         };
 
