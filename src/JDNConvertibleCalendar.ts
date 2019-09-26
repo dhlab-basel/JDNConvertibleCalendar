@@ -192,7 +192,7 @@ export module JDNConvertibleCalendarModule {
         /**
          * Indicates how many months a year has in a specific calendar.
          */
-        public abstract readonly monthsInYear: number;
+        public abstract readonly monthsInYear: (year: number) => number;
 
         /**
          * Indicates if the year 0 exists in a specific calendar.
@@ -300,7 +300,7 @@ export module JDNConvertibleCalendarModule {
             let firstDayOfNextMonth;
 
             // if the given date is in the last month of the year, switch to first day of the first month the next year.
-            if ((date.month + 1) > this.monthsInYear) {
+            if ((date.month + 1) > this.monthsInYear(date.year)) {
                 firstDayOfNextMonth = this.calendarToJDN(new CalendarDate(date.year + 1, 1, 1));
             }
             else {
@@ -576,19 +576,19 @@ export module JDNConvertibleCalendarModule {
             const intoTheFuture: Boolean = (months > 0);
 
             // get number of full years to shift
-            const yearsToShift = Math.floor(Math.abs(months) / this.monthsInYear);
+            const yearsToShift = Math.floor(Math.abs(months) / this.monthsInYear(calendarDate.year));
 
             // get remaining months to shift: max. this.monthsInYear - 1
-            const monthsToShift = Math.abs(months) % this.monthsInYear;
+            const monthsToShift = Math.abs(months) % this.monthsInYear(calendarDate.year);
 
             let newCalendarDate: CalendarDate;
 
             if (intoTheFuture) {
                 // switch to the next year if the number of months does not fit
-                if (calendarDate.month + monthsToShift > this.monthsInYear) {
+                if (calendarDate.month + monthsToShift > this.monthsInYear(calendarDate.year)) {
 
                     // months to be added to new year
-                    const monthsOverflow = calendarDate.month + monthsToShift - this.monthsInYear;
+                    const monthsOverflow = calendarDate.month + monthsToShift - this.monthsInYear(calendarDate.year);
 
                     // when switching from a negative to a negative year and the year zero does not exist in the calendar used, correct it.
                     let yearZeroCorrection = 0;
@@ -621,7 +621,7 @@ export module JDNConvertibleCalendarModule {
                 if (calendarDate.month - monthsToShift < 1) {
 
                     // months to be subtracted from the previous year
-                    const newMonth = this.monthsInYear - (monthsToShift - calendarDate.month);
+                    const newMonth = this.monthsInYear(calendarDate.year) - (monthsToShift - calendarDate.month);
 
                     // when switching from a positive to a negative year and the year zero does not exist in the calendar used, correct it.
                     let yearZeroCorrection = 0;
@@ -709,7 +709,7 @@ export module JDNConvertibleCalendarModule {
 
         public readonly calendarName = JDNConvertibleCalendar.gregorian;
 
-        public readonly monthsInYear = 12;
+        public readonly monthsInYear = () => 12;
 
         // We use calendar conversion methods that use the convention
         // that the year zero exists in the Gregorian Calendar.
@@ -736,7 +736,7 @@ export module JDNConvertibleCalendarModule {
 
         public readonly calendarName = JDNConvertibleCalendar.julian;
 
-        public readonly monthsInYear = 12;
+        public readonly monthsInYear = () => 12;
 
         // We use calendar conversion methods that use the convention
         // that the year zero does exist in the Julian Calendar.
@@ -762,7 +762,7 @@ export module JDNConvertibleCalendarModule {
 
         public readonly calendarName = JDNConvertibleCalendar.islamic;
 
-        public readonly monthsInYear = 12;
+        public readonly monthsInYear = () => 12;
 
         // We use calendar conversion methods that use the convention
         // that the year zero does exist in the Julian Calendar.
@@ -789,7 +789,9 @@ export module JDNConvertibleCalendarModule {
         public readonly calendarName = JDNConvertibleCalendar.jewish;
 
         // Determine the number of months of a certain Jewish year
-        public readonly monthsInYear = 13;
+        public readonly monthsInYear = (year: number) => {
+            return JDNConvertibleConversionModule.JewishCharact(year).nmo;
+        };
 
         // We use calendar conversion methods that use the convention
         // that the year zero does exist in the Julian Calendar.
