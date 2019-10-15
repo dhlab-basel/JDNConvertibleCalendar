@@ -190,7 +190,9 @@ export module JDNConvertibleCalendarModule {
         public abstract readonly calendarName: string;
 
         /**
-         * Indicates how many months a year has in a specific calendar.
+         * Indicates how many months a given year has in a specific calendar.
+         *
+         * @param year the given year.
          */
         public abstract monthsInYear(year: number): number;
 
