@@ -85,6 +85,27 @@ export module JDNConvertibleCalendarModule {
     }
 
     /**
+     * Class returning the basic characteristics of a certain Jewish calendar year.
+     *
+     */
+    export class JewishCharact {
+
+        /**
+         *
+         * Please note that this software uses the (astronomical) convention that BCE dates are represented as negative years and that the year zero (0) is used.
+         * The year 1 BCE must be indicated as year 0, and the year 2 BCE corresponds to -1 etc.
+         *
+         * @param year Jewish year of the given date.
+         * @param day Number of days of the Jewish year of the given date.
+         * @param dayofWeek Weekday of the start of the Jewish year.
+         * @param month Number of lunar months of the Jewish year.
+         */
+        constructor(public readonly year: number, public readonly day: number, public readonly dayofWeek: number, public readonly month: number) {
+
+        }
+    }
+
+    /**
      * Represents a period as two calendar dates.
      */
     export class CalendarPeriod {
@@ -154,9 +175,14 @@ export module JDNConvertibleCalendarModule {
         protected static readonly islamic = 'Islamic';
 
         /**
+         * Constant for the Jewish calendar.
+         */
+        protected static readonly jewish = 'Jewish';
+
+        /**
          * Supported calendars (to be extended when new subclasses are implemented).
          */
-        public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian, JDNConvertibleCalendar.islamic];
+        public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian, JDNConvertibleCalendar.islamic, JDNConvertibleCalendar.jewish];
 
         /**
          * Calendar name of a subclass of `JDNConvertibleCalendar`.
@@ -164,9 +190,11 @@ export module JDNConvertibleCalendarModule {
         public abstract readonly calendarName: string;
 
         /**
-         * Indicates how many months a year has in a specific calendar.
+         * Indicates how many months a given year has in a specific calendar.
+         *
+         * @param year the given year.
          */
-        public abstract readonly monthsInYear: number;
+        public abstract monthsInYear(year: number): number;
 
         /**
          * Indicates if the year 0 exists in a specific calendar.
@@ -237,6 +265,26 @@ export module JDNConvertibleCalendarModule {
          */
         protected abstract dayOfWeekFromJDN(jdn: JDN): number;
 
+
+        /**
+         * Calculates month difference for the calculation of the number of days of a given month. For all calendars
+         * with 12 months the difference will always be 1. The Jewish calendar can either have 12 or 13 months and
+         * the leap month is month 7. This means that in normal years month 8 follows month 6. In this case the
+         * month difference will be 2, not 1.
+         *
+         * The given date is expected to be of the same calendar as the instance the method is called on.
+         *
+         * @param date given date.
+         * @returns number of months in a given year.
+         */
+
+
+
+
+
+
+
+
         /**
          * Calculates number of days for the month of the given date.
          *
@@ -254,7 +302,7 @@ export module JDNConvertibleCalendarModule {
             let firstDayOfNextMonth;
 
             // if the given date is in the last month of the year, switch to first day of the first month the next year.
-            if ((date.month + 1) > this.monthsInYear) {
+            if ((date.month + 1) > this.monthsInYear(date.year)) {
                 firstDayOfNextMonth = this.calendarToJDN(new CalendarDate(date.year + 1, 1, 1));
             }
             else {
@@ -371,10 +419,10 @@ export module JDNConvertibleCalendarModule {
          *
          * To be extended when new subclasses are added.
          *
-         * @param {"Gregorian" | "Julian" | "Islamic"} toCalendarType calendar to convert to.
+         * @param {"Gregorian" | "Julian" | "Islamic" | "Jewish"} toCalendarType calendar to convert to.
          * @returns instance of target calendar (subclass of `JDNConvertibleCalendar`).
          */
-        public convertCalendar(toCalendarType: 'Gregorian' | 'Julian' | 'Islamic'): JDNConvertibleCalendar {
+        public convertCalendar(toCalendarType: 'Gregorian' | 'Julian' | 'Islamic' | 'Jewish'): JDNConvertibleCalendar {
 
             if (JDNConvertibleCalendar.supportedCalendars.indexOf(toCalendarType) == -1) {
                 throw new JDNConvertibleCalendarError('Target calendar not supported: ' + toCalendarType);
@@ -394,6 +442,9 @@ export module JDNConvertibleCalendarModule {
 
                 case JDNConvertibleCalendar.islamic:
                     return new IslamicCalendarDate(jdnPeriod);
+
+                case JDNConvertibleCalendar.jewish:
+                    return new JewishCalendarDate(jdnPeriod);
             }
 
         }
@@ -527,19 +578,19 @@ export module JDNConvertibleCalendarModule {
             const intoTheFuture: Boolean = (months > 0);
 
             // get number of full years to shift
-            const yearsToShift = Math.floor(Math.abs(months) / this.monthsInYear);
+            const yearsToShift = Math.floor(Math.abs(months) / this.monthsInYear(calendarDate.year));
 
             // get remaining months to shift: max. this.monthsInYear - 1
-            const monthsToShift = Math.abs(months) % this.monthsInYear;
+            const monthsToShift = Math.abs(months) % this.monthsInYear(calendarDate.year);
 
             let newCalendarDate: CalendarDate;
 
             if (intoTheFuture) {
                 // switch to the next year if the number of months does not fit
-                if (calendarDate.month + monthsToShift > this.monthsInYear) {
+                if (calendarDate.month + monthsToShift > this.monthsInYear(calendarDate.year)) {
 
                     // months to be added to new year
-                    const monthsOverflow = calendarDate.month + monthsToShift - this.monthsInYear;
+                    const monthsOverflow = calendarDate.month + monthsToShift - this.monthsInYear(calendarDate.year);
 
                     // when switching from a negative to a negative year and the year zero does not exist in the calendar used, correct it.
                     let yearZeroCorrection = 0;
@@ -572,7 +623,7 @@ export module JDNConvertibleCalendarModule {
                 if (calendarDate.month - monthsToShift < 1) {
 
                     // months to be subtracted from the previous year
-                    const newMonth = this.monthsInYear - (monthsToShift - calendarDate.month);
+                    const newMonth = this.monthsInYear(calendarDate.year) - (monthsToShift - calendarDate.month);
 
                     // when switching from a positive to a negative year and the year zero does not exist in the calendar used, correct it.
                     let yearZeroCorrection = 0;
@@ -660,7 +711,9 @@ export module JDNConvertibleCalendarModule {
 
         public readonly calendarName = JDNConvertibleCalendar.gregorian;
 
-        public readonly monthsInYear = 12;
+        public monthsInYear() {
+            return 12
+        };
 
         // We use calendar conversion methods that use the convention
         // that the year zero exists in the Gregorian Calendar.
@@ -687,7 +740,9 @@ export module JDNConvertibleCalendarModule {
 
         public readonly calendarName = JDNConvertibleCalendar.julian;
 
-        public readonly monthsInYear = 12;
+        public monthsInYear() {
+            return 12;
+        }
 
         // We use calendar conversion methods that use the convention
         // that the year zero does exist in the Julian Calendar.
@@ -713,7 +768,9 @@ export module JDNConvertibleCalendarModule {
 
         public readonly calendarName = JDNConvertibleCalendar.islamic;
 
-        public readonly monthsInYear = 12;
+        public monthsInYear() {
+            return 12
+        };
 
         // We use calendar conversion methods that use the convention
         // that the year zero does exist in the Julian Calendar.
@@ -725,6 +782,35 @@ export module JDNConvertibleCalendarModule {
 
         protected calendarToJDN(date: CalendarDate): JDN {
             return JDNConvertibleConversionModule.islamicToJDN(date);
+        }
+
+        protected dayOfWeekFromJDN(jdn: JDN): number {
+            return JDNConvertibleConversionModule.dayOfWeekFromJDC(jdn);
+        };
+    }
+
+    /**
+     * Represents a Jewish calendar date.
+     */
+    export class JewishCalendarDate extends JDNConvertibleCalendar {
+
+        public readonly calendarName = JDNConvertibleCalendar.jewish;
+
+        // Determine the number of months of a certain Jewish year
+        public monthsInYear(year: number) {
+            return JDNConvertibleConversionModule.JewishCharact(year).nmo;
+        };
+
+        // We use calendar conversion methods that use the convention
+        // that the year zero does exist in the Julian Calendar.
+        public readonly yearZeroExists = true;
+
+        protected JDNToCalendar(jdn: JDN): CalendarDate {
+            return JDNConvertibleConversionModule.JDNToJewish(jdn);
+        }
+
+        protected calendarToJDN(date: CalendarDate): JDN {
+            return JDNConvertibleConversionModule.jewishToJDN(date);
         }
 
         protected dayOfWeekFromJDN(jdn: JDN): number {

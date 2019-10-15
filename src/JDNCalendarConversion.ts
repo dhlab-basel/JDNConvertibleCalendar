@@ -486,5 +486,838 @@ export module JDNConvertibleConversionModule {
      */
     export const JDNToIslamic = (jdn: JDN): JDNConvertibleCalendarModule.CalendarDate => {
         return JDCToIslamic(jdn);
+    };
+
+
+    /**
+     * Function that calculates the Julian day number of a given date.
+     *
+     * Algorithm from:
+     * Jean Meeus, Astronomical Algorithms, 1998, 60-63.
+     *
+     * The Gregorian calendar starts on October 15th, 1582 at 0 UT (JDE = 2299160.5). Prior to this date,
+     * the Julian calendar is used.
+     *
+     * @returns jde: Julian day number.
+     */
+
+    export const julianDayFromGregorianJulianDate = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDN => {
+
+        let a, m1, jde, y;
+        let b = 0;
+        let c = 0;
+        const ka = calendarDate.year;
+        if (calendarDate.month > 2) {
+            y = ka;
+            m1 = calendarDate.month;
+        } else {
+            y = ka - 1;
+            m1 = calendarDate.month + 12;
+        }
+
+        if (y<0) {
+            c = -0.75;
+        } else {
+            const idate = ka * 10000 + m1 * 100 + calendarDate.day;
+            if (idate>=15821015) {
+                a = truncateDecimals(y/100);
+                b = 2 - a + truncateDecimals(a/4);
+            }
+        }
+        jde = truncateDecimals(365.25*y+c) + truncateDecimals(30.6001*(m1+1)) + calendarDate.day + b + 1720994.5;
+
+        return jde;
+    };
+
+    /**
+     * Determines the character of the Jewish year: number of days, weekday of the first day of the year
+     * and the number of months
+     */
+    export class CharacterOfJewishYear {
+
+        /**
+         *
+         * @param hj: Jewish year, usually Julian/Gregorian year + 3760
+         * @param jdays: number of days of the Jewish year (may be 353, 354, 355, 383, 384 or 385 days)
+         * @param wbeg: weekday of the first day of the Jewish year (may be 1, 2, 4 or 6; 1 = Monday, etc.)
+         * @param nmo: number of months of the Jewish year (either 12 or 13)
+         */
+        constructor(readonly hj: number, readonly jdays: number, readonly wbeg: number, readonly nmo: number){
+
+        }
     }
+
+    /**
+     * Function that determines the character of a specific Jewish calendar based on the
+     * so called Slonimski formula.
+     *
+     * Algorithms developed based on:
+     * Slonimnski formula: see Dershowitz & Reingold, Calendrical Calculations, 2008, 96 ff. and
+     * https://de.wikipedia.org/wiki/Slonimski-Formel
+     *
+     * @returns Number of months and days and the weekday of the first day of the year of a given Jewish year.
+     */
+    export const JewishCharact = (hj: number): CharacterOfJewishYear => {
+
+        let r1 = 7 * hj - 6;
+        r1 = r1 % 19;
+        if (r1 < 0) {
+            r1 = r1 + 19;
+        }
+        let nmo = 0;
+        if (r1 < 12) {
+            nmo = 12;
+        }
+        if (r1 >= 12) {
+            nmo = 13;
+        }
+
+        let k1 = 0.178117458 * hj + 0.7779654 * r1 + 0.2533747;
+        k1 = k1 - Math.floor(k1);
+
+        let wbeg = 0;
+        let jdays = 0;
+
+        /* Determine the number of days of the Jewish year and the weekday of the first day of the year
+        * */
+        if (r1 < 5) {
+            if ((k1 >= 0)&&(k1 < 0.090410)) {
+                jdays = 353;
+                wbeg = 1;
+            } else
+            if ((k1 >= 0.090410)&&(k1 < 0.271103)) {
+                jdays = 355;
+                wbeg = 1;
+            } else
+            if ((k1 >= 0.271103)&&(k1 < 0.376121)) {
+                jdays = 354;
+                wbeg = 2;
+            } else
+            if ((k1 >= 0.376121)&&(k1 < 0.661835)) {
+                jdays = 354;
+                wbeg = 4;
+            } else
+            if ((k1 >= 0.661835)&&(k1 < 0.714282)) {
+                jdays = 355;
+                wbeg = 4;
+            } else
+            if ((k1 >= 0.714282)&&(k1 < 0.752248)) {
+                jdays = 353;
+                wbeg = 6;
+            } else
+            if ((k1 >= 0.752248)&&(k1 < 1)) {
+                jdays = 355;
+                wbeg = 6;
+            }
+        } else
+        if ((r1 >= 5)&&(r1 < 7)) {
+            if ((k1 >= 0)&&(k1 < 0.090410)) {
+                jdays = 353;
+                wbeg = 1;
+            } else
+            if ((k1 >= 0.090410)&&(k1 < 0.271103)) {
+                jdays = 355;
+                wbeg = 1;
+            } else
+            if ((k1 >= 0.271103)&&(k1 < 0.376121)) {
+                jdays = 354;
+                wbeg = 2;
+            } else
+            if ((k1 >= 0.376121)&&(k1 < 0.661835)) {
+                jdays = 354;
+                wbeg = 4;
+            } else
+            if ((k1 >= 0.661835)&&(k1 < 0.714282)) {
+                jdays = 355;
+                wbeg = 4;
+            } else
+            if ((k1 >= 0.714282)&&(k1 < 0.804693)) {
+                jdays = 353;
+                wbeg = 6;
+            } else
+            if ((k1 >= 0.804693)&&(k1 < 1)) {
+                jdays = 355;
+                wbeg = 6;
+            }
+        } else
+        if ((r1 >= 7)&&(r1 < 12)) {
+            if ((k1 >= 0)&&(k1 < 0.090410)) {
+                jdays = 353;
+                wbeg = 1;
+            } else
+            if ((k1 >= 0.090410)&&(k1 < 0.285711)) {
+                jdays = 355;
+                wbeg = 1;
+            } else
+            if ((k1 >= 0.285711)&&(k1 < 0.376121)) {
+                jdays = 354;
+                wbeg = 2;
+            } else
+            if ((k1 >= 0.376121)&&(k1 < 0.661835)) {
+                jdays = 354;
+                wbeg = 4;
+            } else
+            if ((k1 >= 0.661835)&&(k1 < 0.714282)) {
+                jdays = 355;
+                wbeg = 4;
+            } else
+            if ((k1 >= 0.714282)&&(k1 < 0.804693)) {
+                jdays = 353;
+                wbeg = 6;
+            } else
+            if ((k1 >= 0.804693)&&(k1 < 1)) {
+                jdays = 355;
+                wbeg = 6;
+            }
+        } else
+        if (r1 >= 12) {
+            if ((k1 >= 0)&&(k1 < 0.157466)) {
+                jdays = 383;
+                wbeg = 1;
+            } else
+            if ((k1 >= 0.157466)&&(k1 < 0.285711)) {
+                jdays = 385;
+                wbeg = 1;
+            } else
+            if ((k1 >= 0.285711)&&(k1 < 0.428570)) {
+                jdays = 384;
+                wbeg = 2;
+            } else
+            if ((k1 >= 0.428570)&&(k1 < 0.533590)) {
+                jdays = 383;
+                wbeg = 4;
+            } else
+            if ((k1 >= 0.533590)&&(k1 < 0.714282)) {
+                jdays = 385;
+                wbeg = 4;
+            } else
+            if ((k1 >= 0.714282)&&(k1 < 0.871750)) {
+                jdays = 383;
+                wbeg = 6;
+            } else
+            if ((k1 >= 0.871750)&&(k1 < 1)) {
+                jdays = 385;
+                wbeg = 6;
+            }
+        }
+
+        return new CharacterOfJewishYear(hj,jdays,wbeg,nmo);
+    };
+
+    /**
+     * Converts a Jewish calendar date to a JDC.
+     *
+     * Algorithm from:
+     * Jean Meeus, Astronomical Algorithms, 1998, 71-73.
+     *
+     * @param calendarDate Jewish calendar date to be converted to JDC.
+     * @returns JDC representing the given Jewish calendar date.
+     */
+    export const jewishToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
+
+        let hj = calendarDate.year;
+        const mj = calendarDate.month;
+        let dj = calendarDate.day;
+
+        if (calendarDate.daytime !== undefined) {
+            dj = dj + calendarDate.daytime;
+        }
+
+        /* Calculate the distance of the Jewish date to Pesach feast date on Nisan 15
+         * (mj = 8, dj = 15)*/
+        let daydiff = JewishDaydiff(calendarDate);
+
+        /* Calculate the corresponding Julian date of the Pesach feast*/
+        let pesach = Pesachfeast(calendarDate);
+        let jde = pesach + daydiff;
+
+        /* Calculate the corresponding Julian date of New Year*/
+        let jdenewyear = pesach + 163;
+
+        /* If the Julian day number of the chosen date is larger than the Julian day number of Jewish New Year redo
+        *  everything for the next Jewish year*/
+        if (jde>jdenewyear) {
+            hj = hj + 1;
+            let daydiff = JewishDaydiff(new JDNConvertibleCalendarModule.CalendarDate(hj,mj,dj));
+            let pesach = Pesachfeast(new JDNConvertibleCalendarModule.CalendarDate(hj,mj,dj));
+            jde = pesach + daydiff;
+        }
+
+        return jde;
+
+    };
+
+    /**
+     * Converts a Jewish calendar date to a JDN.
+     *
+     * @param calendarDate Jewish calendar date to be converted to JDN.
+     * @returns JDN representing the given Jewish calendar date.
+     */
+    export const jewishToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDN => {
+        const jdc = jewishToJDC(calendarDate);
+
+        return truncateDecimals(jdc + 0.5); // adaption because full number without fraction of JDC represents noon.
+    };
+
+    /**
+     * Converts a JDC date to a Jewish calendar date.
+     *
+     * Algorithm from:
+     * Jean Meeus, Astronomical Algorithms, 1998, 71-73 and
+     * Slonimnski formula: see Dershowitz & Reingold, Calendrical Calculations, 2008, 96 ff. and
+     * https://de.wikipedia.org/wiki/Slonimski-Formel
+     *
+     * @param JDC to be converted to Jewish calendar date.
+     * @returns Jewish calendar date.
+     */
+    export const JDCToJewish = (jdc: JDC): JDNConvertibleCalendarModule.CalendarDate => {
+
+        // convert given JDC into a Julian calendar date
+        const julianCalendarDate: JDNConvertibleCalendarModule.CalendarDate = JDCToJulian(jdc);
+
+        let x = julianCalendarDate.year;
+        let m = julianCalendarDate.month;
+        let d = julianCalendarDate.day;
+
+        /* Determine the Julian day number of the Pesach feast (m = 8, d = 15) of the corresponding Jewish year*/
+        let hj = x + 3760;
+        let pesach = Pesachfeast(new JDNConvertibleCalendarModule.CalendarDate(hj, 8, 15));
+
+        /* Determine the Julian day number of the following Jewish New Year*/
+        let jdenewyear = pesach + 163;
+
+        /* Determine the Jewish calendar date by establishing its distance from the Pesach feast date*/
+        let data = JewishDayDate(jdc, pesach, jdenewyear);
+        hj = data.year;
+        const mj = data.month;
+        const dj = truncateDecimals(data.day);
+
+        return new JDNConvertibleCalendarModule.CalendarDate(hj, mj, dj, undefined, julianCalendarDate.daytime);
+
+    };
+
+    /**
+     * Converts a JDN to an Jewish calendar date.
+     *
+     * @param jdn JDN to be converted to a Jewish calendar date.
+     * @returns @returns Jeiwsh calendar date created from given JDN.
+     */
+    export const JDNToJewish = (jdn: JDN): JDNConvertibleCalendarModule.CalendarDate => {
+        return JDCToJewish(jdn);
+
+    };
+
+    /**
+     * Function that determines the difference in days of a given Jewish date from the date of the Pesach feast.
+     * The Pesach feast date is fixed: mj = 8, dj = 15
+     *
+     * @returns daydiff: day difference of a given Jewish date from the Pesach feast date.
+     */
+    export const JewishDaydiff = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
+        const hj = calendarDate.year;
+        const mj = calendarDate.month;
+        const dj = calendarDate.day;
+
+        const data = JewishCharact(hj);
+        const jdays = data.jdays;
+
+        let daydiff = 0;
+
+        /* If the date in question is in between Pesach feast (m = 8, d = 15) and New Year (m = 1, d = 1)*/
+        if (mj==8) {
+            daydiff = dj - 15;
+        }
+        if (mj==9) {
+            daydiff = dj + 15;
+        }
+        if (mj==10) {
+            daydiff = dj + 44;
+        }
+        if (mj==11) {
+            daydiff = dj + 74;
+        }
+        if (mj==12) {
+            daydiff = dj + 103;
+        }
+        if (mj==13) {
+            daydiff = dj + 133;
+        }
+
+        /* If the date in question is in between New Year and Pesach feast it is necessary to
+         * distinguish, since the months are of variable length depending on the character of
+         * the Jewish year determined by the Slonimski formula.*/
+
+        /* In a deficient normal year:*/
+        if (jdays==353) {
+            if (mj==1) {
+                daydiff = dj - 191;
+            }
+            if (mj==2) {
+                daydiff = dj - 161;
+            }
+            if (mj==3) {
+                daydiff = dj - 132;
+            }
+            if (mj==4) {
+                daydiff = dj - 103;
+            }
+            if (mj==5) {
+                daydiff = dj - 74;
+            }
+            if (mj==6) {
+                daydiff = dj - 44;
+            }
+        }
+
+        /* In a regular normal year:*/
+        if (jdays==354) {
+            if (mj==1) {
+                daydiff = dj - 192;
+            }
+            if (mj==2) {
+                daydiff = dj - 162;
+            }
+            if (mj==3) {
+                daydiff = dj - 133;
+            }
+            if (mj==4) {
+                daydiff = dj - 103;
+            }
+            if (mj==5) {
+                daydiff = dj - 74;
+            }
+            if (mj==6) {
+                daydiff = dj - 44;
+            }
+        }
+
+        /* In an excessive normal year:*/
+        if (jdays==355) {
+            if (mj==1) {
+                daydiff = dj - 193;
+            }
+            if (mj==2) {
+                daydiff = dj - 163;
+            }
+            if (mj==3) {
+                daydiff = dj - 133;
+            }
+            if (mj==4) {
+                daydiff = dj - 103;
+            }
+            if (mj==5) {
+                daydiff = dj - 74;
+            }
+            if (mj==6) {
+                daydiff = dj - 44;
+            }
+        }
+
+        /* In a deficient leap year:*/
+        if (jdays==383) {
+            if (mj==1) {
+                daydiff = dj - 221;
+            }
+            if (mj==2) {
+                daydiff = dj - 191;
+            }
+            if (mj==3) {
+                daydiff = dj - 162;
+            }
+            if (mj==4) {
+                daydiff = dj - 133;
+            }
+            if (mj==5) {
+                daydiff = dj - 104;
+            }
+            if (mj==6) {
+                daydiff = dj - 74;
+            }
+            if (mj==7) {
+                daydiff = dj - 44;
+            }
+        }
+
+        /* In a regular leap year:*/
+        if (jdays==384) {
+            if (mj==1) {
+                daydiff = dj - 222;
+            }
+            if (mj==2) {
+                daydiff = dj - 192;
+            }
+            if (mj==3) {
+                daydiff = dj - 163;
+            }
+            if (mj==4) {
+                daydiff = dj - 133;
+            }
+            if (mj==5) {
+                daydiff = dj - 104;
+            }
+            if (mj==6) {
+                daydiff = dj - 74;
+            }
+            if (mj==7) {
+                daydiff = dj - 44;
+            }
+        }
+
+        /* In an excessive leap year:*/
+        if (jdays==385) {
+            if (mj==1) {
+                daydiff = dj - 223;
+            }
+            if (mj==2) {
+                daydiff = dj - 193;
+            }
+            if (mj==3) {
+                daydiff = dj - 163;
+            }
+            if (mj==4) {
+                daydiff = dj - 133;
+            }
+            if (mj==5) {
+                daydiff = dj - 104;
+            }
+            if (mj==6) {
+                daydiff = dj - 74;
+            }
+            if (mj==7) {
+                daydiff = dj - 44;
+            }
+        }
+        return daydiff;
+    };
+
+    /**
+     * Function that calculates the corresponding Julian day number of the Pesach feast of a Jewish year.
+     *
+     * @returns jdepesach: Julian day number of the day of the Pesach feast.
+     */
+     export const Pesachfeast = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDN => {
+
+        const hj = calendarDate.year;
+
+        let jj =  hj - 3760;
+        let jj1 = truncateDecimals(jj);
+        let c1 = Math.floor(jj/100);
+        let s = Math.floor((3 * c1 - 5) / 4);
+        if (jj<1583) {
+            s = 0;
+        }
+        let a1 = 12 * jj + 12;
+        a1 = a1 % 19;
+        if (a1<0) {
+            a1 = a1 + 19;
+        }
+        let b1 = jj % 4;
+        if (b1<0) {
+            b1 = b1 + 4;
+        }
+
+        const q = -1.904412361576 + 1.554241796621 * a1 + 0.25 * b1 - 0.003177794022 * jj + s;
+        let j = Math.floor(q) + 3 * jj + 5 * b1 + 2 - s;
+        j = j % 7;
+        if (j<0) {
+            j = j + 7;
+        }
+        let r = q - Math.floor(q);
+
+        let dpesach = Math.floor(q) + 22;
+        if((j==2)||(j==4)||(j==6)) {
+            dpesach = Math.floor(q) + 23;
+        }
+        if((j==1)&&(a1>6)&&(r>=0.632870370)) {
+            dpesach = Math.floor(q) + 24;
+        }
+        if((j==0)&&(a1>11)&&(r>=0.897723765)) {
+            dpesach = Math.floor(q) + 23;
+        }
+
+        let mpesach = 3;
+        if (dpesach==0) {
+            dpesach = 31;
+        }
+        if (dpesach>31) {
+            mpesach = mpesach + 1;
+            dpesach = dpesach - 31;
+        }
+        const jdepesach = julianDayFromGregorianJulianDate(new JDNConvertibleCalendarModule.CalendarDate(jj1, mpesach, dpesach));
+
+        return jdepesach;
+     }
+
+    /**
+     * Function that determines the Jewish month and day.
+     *
+     * @returns hj, mj, dj: Jewish year, month and day.
+     */
+
+    export const JewishDayDate = (jdc: JDC, pesach: number, jdenewyear: number) : JDNConvertibleCalendarModule.CalendarDate => {
+
+        // convert given JDC into a Julian calendar date
+        const julianCalendarDate: JDNConvertibleCalendarModule.CalendarDate = JDCToJulian(jdc);
+        const h = julianCalendarDate.year;
+        let hj = h + 3760;
+
+        let jdediff = 0;
+        let mj = 0;
+        let dj = 0;
+
+        /* If date is in between the Pesach feast and Jewish New Year */
+        if ((jdc>=pesach)&&(jdc<=jdenewyear)) {
+            jdediff = jdc - pesach;
+            if (jdediff==163) {
+                mj = 8;
+                dj = 1;
+                hj  = hj + 1;
+            }
+            if (jdediff<=15) {
+                mj = 8;
+                dj = jdediff + 15;
+            }
+            if ((jdediff>15)&&(jdediff<=44)) {
+                mj = 9;
+                dj = jdediff - 15;
+            }
+            if ((jdediff>44)&&(jdediff<=74)) {
+                mj = 10;
+                dj = jdediff - 44;
+            }
+            if ((jdediff>74)&&(jdediff<=103)) {
+                mj = 11;
+                dj = jdediff - 74;
+            }
+            if ((jdediff>103)&&(jdediff<=133)) {
+                mj = 12;
+                dj = jdediff - 103;
+            }
+            if ((jdediff>133)&&(jdediff<=162)) {
+                mj = 13;
+                dj = jdediff - 133;
+            }
+        }
+
+        let jdays = 0;
+        /* If date is in between Jewish New Year and the Pesach feast */
+        if (jdc<pesach) {
+            const data = JewishCharact(hj);
+            jdays = data.jdays;
+            jdenewyear = jdenewyear - jdays;
+            jdediff = jdc - jdenewyear;
+        }
+        if ((jdc>jdenewyear)&&(jdc>pesach)) {
+            hj = hj + 1;
+            const data = JewishCharact(hj);
+            jdays = data.jdays;
+            jdediff = jdc - jdenewyear;
+        }
+
+        /* If the Jewish year is a deficient normal year*/
+        if (jdays==353) {
+            if (jdediff<30) {
+                mj = 1;
+                dj = jdediff + 1;
+            }
+            if ((jdediff>=30)&&(jdediff<59)) {
+                mj = 2;
+                dj = jdediff - 29;
+            }
+            if ((jdediff>=59)&&(jdediff<88)) {
+                mj = 3;
+                dj = jdediff - 58;
+            }
+            if ((jdediff>=88)&&(jdediff<117)) {
+                mj = 4;
+                dj = jdediff - 87;
+            }
+            if ((jdediff>=117)&&(jdediff<147)) {
+                mj = 5;
+                dj = jdediff - 116;
+            }
+            if ((jdediff>=147)&&(jdediff<176)) {
+                mj = 6;
+                dj = jdediff - 146;
+            }
+            if ((jdediff>=176)&&(jdediff<191)) {
+                mj = 8;
+                dj = jdediff - 175;
+            }
+        }
+
+        /* If the Jewish year is a regular normal year*/
+        if (jdays==354) {
+            if (jdediff<30) {
+                mj = 1;
+                dj = jdediff + 1;
+            }
+            if ((jdediff>=30)&&(jdediff<59)) {
+                mj = 2;
+                dj = jdediff - 29;
+            }
+            if ((jdediff>=59)&&(jdediff<89)) {
+                mj = 3;
+                dj = jdediff - 58;
+            }
+            if ((jdediff>=89)&&(jdediff<118)) {
+                mj = 4;
+                dj = jdediff - 88;
+            }
+            if ((jdediff>=118)&&(jdediff<148)) {
+                mj = 5;
+                dj = jdediff - 117;
+            }
+            if ((jdediff>=148)&&(jdediff<177)) {
+                mj = 6;
+                dj = jdediff - 147;
+            }
+            if ((jdediff>=177)&&(jdediff<192)) {
+                mj = 8;
+                dj = jdediff - 176;
+            }
+        }
+
+        /* If the Jewish year is an excessive normal year*/
+        if (jdays==355) {
+            if (jdediff<30) {
+                mj = 1;
+                dj = jdediff + 1;
+            }
+            if ((jdediff>=30)&&(jdediff<60)) {
+                mj = 2;
+                dj = jdediff - 29;
+            }
+            if ((jdediff>=60)&&(jdediff<90)) {
+                mj = 3;
+                dj = jdediff - 59;
+            }
+            if ((jdediff>=90)&&(jdediff<119)) {
+                mj = 4;
+                dj = jdediff - 89;
+            }
+            if ((jdediff>=119)&&(jdediff<149)) {
+                mj = 5;
+                dj = jdediff - 118;
+            }
+            if ((jdediff>=149)&&(jdediff<178)) {
+                mj = 6;
+                dj = jdediff - 148;
+            }
+            if ((jdediff>=178)&&(jdediff<193)) {
+                mj = 8;
+                dj = jdediff - 177;
+            }
+        }
+
+        /* If the Jewish year is a deficient leap year*/
+        if (jdays==383) {
+            if (jdediff<30) {
+                mj = 1;
+                dj = jdediff + 1;
+            }
+            if ((jdediff>=30)&&(jdediff<59)) {
+                mj = 2;
+                dj = jdediff - 29;
+            }
+            if ((jdediff>=59)&&(jdediff<88)) {
+                mj = 3;
+                dj = jdediff - 58;
+            }
+            if ((jdediff>=88)&&(jdediff<117)) {
+                mj = 4;
+                dj = jdediff - 87;
+            }
+            if ((jdediff>=117)&&(jdediff<147)) {
+                mj = 5;
+                dj = jdediff - 116;
+            }
+            if ((jdediff>=147)&&(jdediff<177)) {
+                mj = 6;
+                dj = jdediff - 146;
+            }
+            if ((jdediff>=177)&&(jdediff<206)) {
+                mj = 7;
+                dj = jdediff - 176;
+            }
+            if ((jdediff>=206)&&(jdediff<221)) {
+                mj = 8;
+                dj = jdediff - 205;
+            }
+        }
+
+        /* If the Jewish year is a regular leap year*/
+        if (jdays==384) {
+            if (jdediff<30) {
+                mj = 1;
+                dj = jdediff + 1;
+            }
+            if ((jdediff>=30)&&(jdediff<59)) {
+                mj = 2;
+                dj = jdediff - 29;
+            }
+            if ((jdediff>=59)&&(jdediff<89)) {
+                mj = 3;
+                dj = jdediff - 58;
+            }
+            if ((jdediff>=89)&&(jdediff<118)) {
+                mj = 4;
+                dj = jdediff - 88;
+            }
+            if ((jdediff>=118)&&(jdediff<148)) {
+                mj = 5;
+                dj = jdediff - 117;
+            }
+            if ((jdediff>=148)&&(jdediff<178)) {
+                mj = 6;
+                dj = jdediff - 147;
+            }
+            if ((jdediff>=178)&&(jdediff<207)) {
+                mj = 7;
+                dj = jdediff - 177;
+            }
+            if ((jdediff>=207)&&(jdediff<222)) {
+                mj = 8;
+                dj = jdediff - 206;
+            }
+        }
+
+        /* If the Jewish year is an excessive leap year*/
+        if (jdays==385) {
+            if (jdediff<30) {
+                mj = 1;
+                dj = jdediff + 1;
+            }
+            if ((jdediff>=30)&&(jdediff<60)) {
+                mj = 2;
+                dj = jdediff - 29;
+            }
+            if ((jdediff>=60)&&(jdediff<90)) {
+                mj = 3;
+                dj = jdediff - 59;
+            }
+            if ((jdediff>=90)&&(jdediff<119)) {
+                mj = 4;
+                dj = jdediff - 89;
+            }
+            if ((jdediff>=119)&&(jdediff<149)) {
+                mj = 5;
+                dj = jdediff - 118;
+            }
+            if ((jdediff>=149)&&(jdediff<179)) {
+                mj = 6;
+                dj = jdediff - 148;
+            }
+            if ((jdediff>=179)&&(jdediff<208)) {
+                mj = 7;
+                dj = jdediff - 178;
+            }
+            if ((jdediff>=208)&&(jdediff<223)) {
+                mj = 8;
+                dj = jdediff - 207;
+            }
+        }
+        return new JDNConvertibleCalendarModule.CalendarDate(hj,mj,dj);
+    }
+
 }

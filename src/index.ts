@@ -26,11 +26,11 @@ import JDNPeriod = JDNConvertibleCalendarModule.JDNPeriod;
 import CalendarPeriod = JDNConvertibleCalendarModule.CalendarPeriod;
 import GregorianCalendarDate = JDNConvertibleCalendarModule.GregorianCalendarDate;
 import IslamicCalendarDate = JDNConvertibleCalendarModule.IslamicCalendarDate;
+import JewishCalendarDate = JDNConvertibleCalendarModule.JewishCalendarDate;
 import JulianCalendarDate = JDNConvertibleCalendarModule.JulianCalendarDate;
 import JDNConvertibleCalendar = JDNConvertibleCalendarModule.JDNConvertibleCalendar;
-
 import { JDNConvertibleCalendarNames } from './JDNCalendarNames';
 
-export {CalendarDate, JDNConvertibleCalendar, GregorianCalendarDate, IslamicCalendarDate, JulianCalendarDate, JDNPeriod, CalendarPeriod}
+export {CalendarDate, JDNConvertibleCalendar, GregorianCalendarDate, IslamicCalendarDate, JewishCalendarDate, JulianCalendarDate, JDNPeriod, CalendarPeriod}
 export {JDNConvertibleConversionModule}
 export {JDNConvertibleCalendarNames}
