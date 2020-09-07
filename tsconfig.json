@@ -10,7 +10,10 @@
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "types": [
+      "mocha",
+      "@types/node"
+    ]
   },
   "exclude": [
     "node_modules",
