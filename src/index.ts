@@ -1,36 +1,31 @@
-/*
- * Copyright © 2018 Lukas Rosenthaler, Rita Gautschy, Benjamin Geer, Ivan Subotic,
- * Tobias Schweizer, André Kilchenmann, and Sepideh Alassi.
- *
- * This file is part of JDNConvertibleCalendar.
- *
- * JDNConvertibleCalendar is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published
- * by the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * JDNConvertibleCalendar is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public
- * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
- */
+export { CalendarDate } from "./CalendarDate";
+export { CalendarPeriod } from "./CalendarPeriod";
+export { JDNPeriod } from "./JDNPeriod";
+export { JDNConvertibleCalendar, GregorianCalendarDate, IslamicCalendarDate, JulianCalendarDate } from "./JDNConvertibleCalendar";
 
-import {JDNConvertibleCalendarModule} from './JDNConvertibleCalendar';
-import {JDNConvertibleConversionModule} from './JDNCalendarConversion';
+import { JDNConvertibleConversionModule } from './JDNCalendarConversion';
 
-import CalendarDate = JDNConvertibleCalendarModule.CalendarDate;
-import JDNPeriod = JDNConvertibleCalendarModule.JDNPeriod;
-import CalendarPeriod = JDNConvertibleCalendarModule.CalendarPeriod;
-import GregorianCalendarDate = JDNConvertibleCalendarModule.GregorianCalendarDate;
-import IslamicCalendarDate = JDNConvertibleCalendarModule.IslamicCalendarDate;
-import JulianCalendarDate = JDNConvertibleCalendarModule.JulianCalendarDate;
-import JDNConvertibleCalendar = JDNConvertibleCalendarModule.JDNConvertibleCalendar;
+import gregorianToJDC = JDNConvertibleConversionModule.gregorianToJDC;
+import gregorianToJDN = JDNConvertibleConversionModule.gregorianToJDN;
+import julianToJDC = JDNConvertibleConversionModule.julianToJDC;
+import julianToJDN = JDNConvertibleConversionModule.julianToJDN;
+import islamicToJDC = JDNConvertibleConversionModule.islamicToJDC;
+import islamicToJDN = JDNConvertibleConversionModule.islamicToJDN;
+
+import JDNToGregorian = JDNConvertibleConversionModule.JDNToGregorian;
+import JDCToGregorian = JDNConvertibleConversionModule.JDCToGregorian;
+import JDNToJulian = JDNConvertibleConversionModule.JDNToJulian;
+import JDCToJulian = JDNConvertibleConversionModule.JDCToJulian;
+import JDNToIslamic = JDNConvertibleConversionModule.JDNToIslamic;
+import JDCToIslamic = JDNConvertibleConversionModule.JDCToIslamic;
+
+import dayOfWeekFromJDC = JDNConvertibleConversionModule.dayOfWeekFromJDC
+
+export {gregorianToJDC, gregorianToJDN, julianToJDC, julianToJDN, JDNToGregorian, JDCToGregorian, JDNToJulian, JDCToJulian, islamicToJDC, islamicToJDN, JDNToIslamic, JDCToIslamic, dayOfWeekFromJDC}
 
 import { JDNConvertibleCalendarNames } from './JDNCalendarNames';
 
-export {CalendarDate, JDNConvertibleCalendar, GregorianCalendarDate, IslamicCalendarDate, JulianCalendarDate, JDNPeriod, CalendarPeriod}
-export {JDNConvertibleConversionModule}
-export {JDNConvertibleCalendarNames}
+import getWeekdayNames = JDNConvertibleCalendarNames.getWeekdayNames;
+import getMonthNames = JDNConvertibleCalendarNames.getMonthNames;
+
+export {getWeekdayNames, getMonthNames}

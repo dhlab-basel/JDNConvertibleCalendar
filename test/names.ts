@@ -18,7 +18,7 @@
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {JDNConvertibleCalendarNames} from '../src';
+import { JDNConvertibleCalendarNames } from '../src/JDNCalendarNames';
 
 let assert = require('assert');
 
