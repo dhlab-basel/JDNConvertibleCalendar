@@ -8,6 +8,7 @@
     "prepublishOnly": "npm run prepare",
     "prepare": "tsc",
     "test": "tsc && ./node_modules/mocha/bin/mocha --require esm ./dist/test/conversions.js && ./node_modules/mocha/bin/mocha --require esm ./dist/test/names.js",
+    "yalc-publish": "tsc && yalc publish --push",
     "builddocs": "typedoc --out docs --readme none --name 'JDNConvertibleCalendar API Documentation' --module commonjs src/*.ts"
   },
   "repository": {
