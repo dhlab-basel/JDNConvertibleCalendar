@@ -1,10 +1,5 @@
 # JDNConvertibleCalendar
 
-## General Remarks
-
-**Please note that this software is still in a early state of development. 
-Currently, only the Gregorian and Julian calendar are supported.**
-
 ## Introduction
 
 `JDNConvertibleCalendar` offers a convenient way to convert a given date to other calendars making use of the *Julian Day*. The Julian Day is
@@ -19,7 +14,7 @@ Please note that this software uses the (astronomical) convention that BCE dates
 This means that the year 1 BCE must be given as year 0,
 and the year 2 BCE corresponds to -1 etc.
 
-Currently, the Gregorian, Julian, and Islamic calendar are supported.
+Currently, the Gregorian, Julian, and Islamic calendars are supported.
 
 ## Focus
 
