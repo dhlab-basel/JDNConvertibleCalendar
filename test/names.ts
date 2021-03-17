@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Lukas Rosenthaler, Rita Gautschy, Benjamin Geer, Ivan Subotic,
+ * Copyright © 2020 Lukas Rosenthaler, Rita Gautschy, Benjamin Geer, Ivan Subotic,
  * Tobias Schweizer, André Kilchenmann, and Sepideh Alassi.
  *
  * This file is part of JDNConvertibleCalendar.
@@ -18,7 +18,7 @@
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {JDNConvertibleCalendarNames} from '../src';
+import { JDNConvertibleCalendarNames } from '../src/JDNCalendarNames';
 
 let assert = require('assert');
 

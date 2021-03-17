@@ -18,23 +18,18 @@
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export module TypeDefinitionsModule {
+export namespace Utils {
 
     /**
-     * Type alias for a Julian Day Number (JDN).
+     * Checks if a given number is an integer.
      *
-     * A JDN is an integer representing a Julian Day (without fraction).
+     * @param num number to check for.
+     * @returns true if the given number is an integer, returns false otherwise.
      */
-    export type JDN = number;
+    export const isInteger = (num: number): boolean => {
 
-    /**
-     * Type alias for a Julian Day Count (JDC).
-     *
-     * A JDC is a number representing a Julian Day with daytime (including a fraction).
-     *
-     * Attention: A fraction of .5 represents midnight, .0 represents noon.
-     *
-     */
-    export type JDC = number;
+        // https://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer
+        return num % 1 === 0;
+    };
 
 }

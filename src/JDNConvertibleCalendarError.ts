@@ -18,23 +18,16 @@
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export module TypeDefinitionsModule {
+/**
+ * Represents an error that occurred when using `JDNConvertibleCalendarModule`.
+ */
+export class JDNConvertibleCalendarError extends Error {
 
     /**
-     * Type alias for a Julian Day Number (JDN).
      *
-     * A JDN is an integer representing a Julian Day (without fraction).
+     * @param message description of the error.
      */
-    export type JDN = number;
-
-    /**
-     * Type alias for a Julian Day Count (JDC).
-     *
-     * A JDC is a number representing a Julian Day with daytime (including a fraction).
-     *
-     * Attention: A fraction of .5 represents midnight, .0 represents noon.
-     *
-     */
-    export type JDC = number;
-
+    constructor(message: string) {
+        super(message);
+    }
 }

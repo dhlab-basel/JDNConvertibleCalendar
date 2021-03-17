@@ -7,8 +7,9 @@
   "scripts": {
     "prepublishOnly": "npm run prepare",
     "prepare": "tsc",
-    "test": "tsc && ./node_modules/mocha/bin/mocha ./dist/test/conversions.js && ./node_modules/mocha/bin/mocha ./dist/test/names.js",
-    "builddocs": "typedoc --out docs --readme none --name 'JDNConvertibleCalendar API Documentation' --module commonjs src/*.ts"
+    "test": "tsc && ./node_modules/mocha/bin/mocha --require esm ./dist/test/conversions.js && ./node_modules/mocha/bin/mocha --require esm ./dist/test/names.js",
+    "yalc-publish": "tsc && yalc publish --push",
+    "builddocs": "typedoc --readme none --name 'JDNConvertibleCalendar API Documentation' --excludeExternals true src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -28,12 +29,13 @@
   },
   "homepage": "https://github.com/dhlab-basel/JDNConvertibleCalendar#readme",
   "devDependencies": {
-    "@types/mocha": "^2.2.48",
-    "@types/node": "^8.0.56",
-    "assert": "^1.4.1",
-    "mocha": "^4.0.1",
+    "@types/mocha": "^8.0.3",
+    "@types/node": "^14.6.4",
+    "assert": "^2.0.0",
+    "esm": "^3.2.25",
+    "mocha": "^8.1.3",
     "ts-node": "^4.0.2",
-    "typedoc": "^0.15.0",
-    "typescript": "3.5.3"
+    "typedoc": "^0.20.32",
+    "typescript": "4.0.2"
   }
 }

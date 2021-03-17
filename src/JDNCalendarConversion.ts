@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 Lukas Rosenthaler, Rita Gautschy, Benjamin Geer, Ivan Subotic,
+ * Copyright © 2020 Lukas Rosenthaler, Rita Gautschy, Benjamin Geer, Ivan Subotic,
  * Tobias Schweizer, André Kilchenmann, and Sepideh Alassi.
  *
  * This file is part of JDNConvertibleCalendar.
@@ -17,11 +17,8 @@
  * You should have received a copy of the GNU Affero General Public
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-import {JDNConvertibleCalendarModule} from "./JDNConvertibleCalendar";
 import {TypeDefinitionsModule} from './TypeDefinitions';
-import JDC = TypeDefinitionsModule.JDC;
-import JDN = TypeDefinitionsModule.JDN;
+import { CalendarDate } from './CalendarDate';
 
 export module JDNConvertibleConversionModule {
 
@@ -50,7 +47,7 @@ export module JDNConvertibleConversionModule {
      * @param calendarDate Gregorian calendar date to be converted to JDC.
      * @returns the JDC representing the given Gregorian calendar date.
      */
-    export const gregorianToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
+    export const gregorianToJDC = (calendarDate: CalendarDate): TypeDefinitionsModule.JDC => {
 
         // TODO: check validity of given calendar date
 
@@ -95,8 +92,8 @@ export module JDNConvertibleConversionModule {
      * @param calendarDate Gregorian calendar date to be converted to JDN.
      * @returns the JDN representing the given Gregorian calendar date.
      */
-    export const gregorianToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDN => {
-        const jdc: JDC = gregorianToJDC(calendarDate);
+    export const gregorianToJDN = (calendarDate: CalendarDate): TypeDefinitionsModule.JDN => {
+        const jdc: TypeDefinitionsModule.JDC = gregorianToJDC(calendarDate);
 
         /*
 
@@ -121,7 +118,7 @@ export module JDNConvertibleConversionModule {
      * @param jdc JDC to be converted to a Gregorian calendar date.
      * @returns the Gregorian calendar date created from the given JDC.
      */
-    export const JDCToGregorian = (jdc: JDC): JDNConvertibleCalendarModule.CalendarDate => {
+    export const JDCToGregorian = (jdc: TypeDefinitionsModule.JDC): CalendarDate => {
         jdc = jdc + 0.5;
         const z = truncateDecimals(jdc);
         const f = jdc - z;
@@ -152,7 +149,7 @@ export module JDNConvertibleConversionModule {
 
         let fullday = truncateDecimals(day);
         let daytime = day - fullday;
-        return new JDNConvertibleCalendarModule.CalendarDate(year, month, fullday, undefined, daytime);
+        return new CalendarDate(year, month, fullday, undefined, daytime);
     };
 
     /**
@@ -161,7 +158,7 @@ export module JDNConvertibleConversionModule {
      * @param jdn the given JDN.
      * @returns the Gregorian calendar date created from the given JDN.
      */
-    export const JDNToGregorian = (jdn: JDN): JDNConvertibleCalendarModule.CalendarDate => {
+    export const JDNToGregorian = (jdn: TypeDefinitionsModule.JDN): CalendarDate => {
        return JDCToGregorian(jdn);
     };
 
@@ -176,7 +173,7 @@ export module JDNConvertibleConversionModule {
      * @param calendarDate Julian calendar date to be converted to JDC.
      * @returns JDC representing the given Julian calendar date.
      */
-    export const julianToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
+    export const julianToJDC = (calendarDate: CalendarDate): TypeDefinitionsModule.JDC => {
 
         // TODO: check validity of given calendar date
 
@@ -214,7 +211,7 @@ export module JDNConvertibleConversionModule {
      * @param calendarDate Julian calendar date to be converted to JDN.
      * @returns JDN representing the given Julian calendar date.
      */
-    export const julianToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDN => {
+    export const julianToJDN = (calendarDate: CalendarDate): TypeDefinitionsModule.JDN => {
 
         // TODO: check validity of given calendar date
         const jdc = julianToJDC(calendarDate);
@@ -241,7 +238,7 @@ export module JDNConvertibleConversionModule {
      * @param jdc JDC to be converted to a Julian calendar date.
      * @returns Julian calendar date created from given JDC.
      */
-    export const JDCToJulian = (jdc: JDC): JDNConvertibleCalendarModule.CalendarDate => {
+    export const JDCToJulian = (jdc: TypeDefinitionsModule.JDC): CalendarDate => {
         jdc = jdc + 0.5;
         const z = truncateDecimals(jdc);
         const f = jdc - z;
@@ -269,7 +266,7 @@ export module JDNConvertibleConversionModule {
 
         let fullday = truncateDecimals(day);
         let daytime = day - fullday;
-        return new JDNConvertibleCalendarModule.CalendarDate(year, month, fullday, undefined, daytime);
+        return new CalendarDate(year, month, fullday, undefined, daytime);
     };
 
     /**
@@ -278,7 +275,7 @@ export module JDNConvertibleConversionModule {
      * @param jdn JDN to be converted to a Julian calendar date.
      * @returns Julian calendar date created from given JDN.
      */
-    export const JDNToJulian = (jdn: JDN): JDNConvertibleCalendarModule.CalendarDate => {
+    export const JDNToJulian = (jdn: TypeDefinitionsModule.JDN): CalendarDate => {
         return JDCToJulian(jdn);
     };
 
@@ -292,7 +289,7 @@ export module JDNConvertibleConversionModule {
      * @param jdc given JDC.
      * @returns the number of the day of the week for the given JDC (0 Sunday, 1 Monday, 2 Tuesday, 3 Wednesday, 4 Thursday, 5 Friday, 6 Saturday).
      */
-    export const dayOfWeekFromJDC = (jdc: JDC) => {
+    export const dayOfWeekFromJDC = (jdc: TypeDefinitionsModule.JDC) => {
         return truncateDecimals(jdc + 1.5) %  7;
     };
 
@@ -319,7 +316,7 @@ export module JDNConvertibleConversionModule {
      * @param calendarDate Islamic calendar date to be converted to JDC.
      * @returns JDC representing the given Islamic calendar date.
      */
-    export const islamicToJDC = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDC => {
+    export const islamicToJDC = (calendarDate: CalendarDate): TypeDefinitionsModule.JDC => {
 
         const h = calendarDate.year;
         const m = calendarDate.month;
@@ -367,7 +364,7 @@ export module JDNConvertibleConversionModule {
      * @param calendarDate Islamic calendar date to be converted to JDN.
      * @returns JDN representing the given Islamic calendar date.
      */
-    export const islamicToJDN = (calendarDate: JDNConvertibleCalendarModule.CalendarDate): JDN => {
+    export const islamicToJDN = (calendarDate: CalendarDate): TypeDefinitionsModule.JDN => {
         const jdc = islamicToJDC(calendarDate);
 
         return truncateDecimals(jdc + 0.5); // adaption because full number without fraction of JDC represents noon.
@@ -396,10 +393,10 @@ export module JDNConvertibleConversionModule {
      * @param jdc JDC to be converted to an Islamic calendar date.
      * @returns Islamic calendar date created from given JDC.
      */
-    export const JDCToIslamic = (jdc: JDC): JDNConvertibleCalendarModule.CalendarDate => {
+    export const JDCToIslamic = (jdc: TypeDefinitionsModule.JDC): CalendarDate => {
 
         // convert given JDC into a Julian calendar date
-        const julianCalendarDate: JDNConvertibleCalendarModule.CalendarDate = JDCToJulian(jdc);
+        const julianCalendarDate: CalendarDate = JDCToJulian(jdc);
 
         const x = julianCalendarDate.year;
         let m = julianCalendarDate.month;
@@ -475,7 +472,7 @@ export module JDNConvertibleConversionModule {
             d= 30;
         }
 
-        return new JDNConvertibleCalendarModule.CalendarDate(h, m, d, undefined, julianCalendarDate.daytime);
+        return new CalendarDate(h, m, d, undefined, julianCalendarDate.daytime);
     };
 
     /**
@@ -484,7 +481,7 @@ export module JDNConvertibleConversionModule {
      * @param jdn JDN to be converted to an Islamic calendar date.
      * @returns @returns Islamic calendar date created from given JDN.
      */
-    export const JDNToIslamic = (jdn: JDN): JDNConvertibleCalendarModule.CalendarDate => {
+    export const JDNToIslamic = (jdn: TypeDefinitionsModule.JDN): CalendarDate => {
         return JDCToIslamic(jdn);
     }
 }

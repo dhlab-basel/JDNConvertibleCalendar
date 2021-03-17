@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 Lukas Rosenthaler, Rita Gautschy, Benjamin Geer, Ivan Subotic,
+ * Copyright © 2020 Lukas Rosenthaler, Rita Gautschy, Benjamin Geer, Ivan Subotic,
  * Tobias Schweizer, André Kilchenmann, and Sepideh Alassi.
  *
  * This file is part of JDNConvertibleCalendar.
@@ -18,16 +18,11 @@
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {
-    CalendarDate,
-    JDNPeriod,
-    GregorianCalendarDate,
-    IslamicCalendarDate,
-    JulianCalendarDate,
-    CalendarPeriod,
-    JDNConvertibleCalendar, JDNConvertibleConversionModule
-} from '../src'
-
+import { CalendarDate } from '../src/CalendarDate';
+import { JDNConvertibleConversionModule } from '../src/JDNCalendarConversion';
+import { GregorianCalendarDate, JulianCalendarDate, IslamicCalendarDate, JDNConvertibleCalendar } from '../src/JDNConvertibleCalendar';
+import { JDNPeriod } from '../src/JDNPeriod';
+import { CalendarPeriod } from '../src/CalendarPeriod';
 
 let assert = require('assert');
 
@@ -693,7 +688,7 @@ describe('JDC to Islamic', () => {
         const expectedDate = new CalendarDate(1439, 3, 17);
 
         checkCalendarDate(expectedDate, islamicCalendarDate);
-        
+
     });
 
     it('convert the JDC 2458093.6 to the Islamic Calendar date 17-03-1439', () => {
@@ -2151,14 +2146,14 @@ describe('Create a JDNPeriod', () => {
     it('attempt to create a JDN with invalid args: non integers', () => {
 
         assert.throws(
-                () => {
-                    new JDNPeriod(1.1, 2)
-                },
-                function (err: Error) {
-                    if ((err instanceof Error) && err.message === 'JDNs are expected to be integers') {
-                        return true;
-                    }
+            () => {
+                new JDNPeriod(1.1, 2)
+            },
+            function (err: Error) {
+                if ((err instanceof Error) && err.message === 'JDNs are expected to be integers') {
+                    return true;
                 }
+            }
         );
 
     });
@@ -2166,15 +2161,15 @@ describe('Create a JDNPeriod', () => {
     it('attempt to create a JDN with invalid args: end greater than start', () => {
 
         assert.throws(
-                () => {
-                    new JDNPeriod(2, 1)
-                },
-                function (err: Error) {
+            () => {
+                new JDNPeriod(2, 1)
+            },
+            function (err: Error) {
 
-                    if ((err instanceof Error) && err.message === 'start of a JDNPeriod must not be greater than its end') {
-                        return true;
-                    }
+                if ((err instanceof Error) && err.message === 'start of a JDNPeriod must not be greater than its end') {
+                    return true;
                 }
+            }
         );
 
     });

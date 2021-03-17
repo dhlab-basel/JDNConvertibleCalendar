@@ -18,23 +18,22 @@
  * License along with JDNConvertibleCalendar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export module TypeDefinitionsModule {
+/**
+ * Represents a period as two calendar dates.
+ */
+import { CalendarDate } from './CalendarDate';
+
+export class CalendarPeriod {
 
     /**
-     * Type alias for a Julian Day Number (JDN).
      *
-     * A JDN is an integer representing a Julian Day (without fraction).
+     * @param periodStart start of the period.
+     * @param periodEnd End of the period.
      */
-    export type JDN = number;
+    constructor(public readonly periodStart: CalendarDate, public readonly periodEnd: CalendarDate) {
 
-    /**
-     * Type alias for a Julian Day Count (JDC).
-     *
-     * A JDC is a number representing a Julian Day with daytime (including a fraction).
-     *
-     * Attention: A fraction of .5 represents midnight, .0 represents noon.
-     *
-     */
-    export type JDC = number;
+        // TODO: can we check that periodStart equals or is before periodEnd?
+
+    }
 
 }
