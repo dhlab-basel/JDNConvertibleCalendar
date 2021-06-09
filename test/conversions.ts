@@ -151,13 +151,6 @@ describe('Conversion of a Gregorian calendar date to JDC', () => {
         checkJDC(1684227.5, jdc);
     });
 
-    it('convert the Gregorian Calendar date 27-02(-101) to JDC', () => {
-        const gregorianCalendarDate: CalendarDate = new CalendarDate(-101, 2, 27, undefined, 0);
-        const jdc: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate);
-
-        checkJDC(1684227.5, jdc);
-    });
-
     it('convert the Gregorian Calendar date 28-02(-101) to JDC', () => {
         const gregorianCalendarDate: CalendarDate = new CalendarDate(-101, 2, 28, undefined, 0);
         const jdc: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate);
@@ -396,12 +389,123 @@ describe('Conversion of a  Julian calendar date to JDC', () => {
         checkJDC(1355671.4, jdc);
     });
 
-
     it('convert the Julian Calendar date 01-01-(-4712) to JDC', () => {
         const julianCalendarDate: CalendarDate = new CalendarDate(-4712, 1, 1, undefined, 0.5);
         const jdc: number = JDNConvertibleConversionModule.julianToJDC(julianCalendarDate);
 
         checkJDC(0, jdc);
+    });
+
+    it('convert the Julian Calendar date 02-03(-98) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-98, 3, 2, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1685323.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 02-03(-99) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-99, 3, 2, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1684958.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 02-03(-100) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-100, 3, 2, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1684593.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 02-03(-101) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-101, 3, 2, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1684227.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 03-03(-101) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-101, 3, 3, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1684228.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 03-03(-102) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-102, 3, 3, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1683863.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 03-03(-103) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-103, 3, 3, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1683498.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 03-03(-104) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-104, 3, 3, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1683133.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 02-03(-104) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-104, 3, 2, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1683132.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 04-03(-104) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-104, 3, 4, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1683134.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 03-03(-105) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-105, 3, 3, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1682767.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 03-03(-106) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-106, 3, 3, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1682402.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 03-03(-107) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-107, 3, 3, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1682037.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 03-03(-108) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-108, 3, 3, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1681672.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 02-03(-108) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-108, 3, 2, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1681671.5, jdc);
+    });
+
+    it('convert the Julian Calendar date 04-03(-108) to JDC', () => {
+        const JulianCalendarDate: CalendarDate = new CalendarDate(-108, 3, 4, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.julianToJDC(JulianCalendarDate);
+
+        checkJDC(1681673.5, jdc);
     });
 
 
