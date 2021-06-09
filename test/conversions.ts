@@ -116,6 +116,13 @@ describe('Conversion of a Gregorian calendar date to JDC', () => {
         checkJDC(0.5, jdc);
     });
 
+    it('convert the Gregorian Calendar date 01-02(-1899) to JDC', () => {
+        const gregorianCalendarDate: CalendarDate = new CalendarDate(-1899, 2, 1, undefined, 0);
+        const jdc: number = JDNConvertibleConversionModule.gregorianToJDC(gregorianCalendarDate);
+
+        checkJDC(1027495.5, jdc);
+    });
+
 });
 
 //
@@ -1353,6 +1360,20 @@ describe('Get the number of days for a given month', () => {
 
         const days: number = gregorianDate.daysInMonth(new CalendarDate(2017, 2, 15));
 
+        assert.strictEqual(days, 28, `wrong number of days`)
+
+    });
+
+    it('create a Gregorian date and get the number of days for a given BCE Gregorian date\'s month ', () => {
+
+        // Gregorian Calendar date 06-12-2017
+        const jdn = 2458094;
+
+        const gregorianDate: GregorianCalendarDate = new GregorianCalendarDate(new JDNPeriod(jdn, jdn));
+
+        const days: number = gregorianDate.daysInMonth(new CalendarDate(-1899, 2, 15));
+
+        // TODO: fix bug in gregorianToJDC -> returns 2.2.1900 BCE insted of 1.2.1900 BCE
         assert.strictEqual(days, 28, `wrong number of days`)
 
     });
