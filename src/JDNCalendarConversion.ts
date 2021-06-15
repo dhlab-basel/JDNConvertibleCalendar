@@ -49,8 +49,6 @@ export module JDNConvertibleConversionModule {
      */
     export const gregorianToJDC = (calendarDate: CalendarDate): TypeDefinitionsModule.JDC => {
 
-        // TODO: check validity of given calendar date
-
         let year = 0;
         let month = 0;
         let day = calendarDate.day;
@@ -68,20 +66,19 @@ export module JDNConvertibleConversionModule {
             month = calendarDate.month + 12;
         }
 
-        let c = 0;
-        if (year < 0) {
-            c = -0.75;
-        }
-        //
-        // we enforce Gregorian calendar for *all* dates (also prior to 1582)
-        //
+        let b = 0;
         let a = truncateDecimals(year/100.);
-        let b = 2 - a + truncateDecimals(a/4.);
+        let idate = year*10000 + month*100 + day;
+        if (idate >= 15821015) {
+            b = 2 - a + truncateDecimals(a/4.);
+        }
+        else {
+            b = 0;
+        }
 
-        const jdc = truncateDecimals(365.25*year + c) +
+        const jdc = truncateDecimals(365.25*(year + 4716)) +
             truncateDecimals(30.6001*(month + 1)) +
-            day + b + 1720994.5;
-
+            day + b - 1524.5;
         return jdc;
     };
 
