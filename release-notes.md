@@ -14,6 +14,8 @@
 
 - v0.0.6: change build options ([#23](https://github.com/dhlab-basel/JDNConvertibleCalendar/pull/23))
 
+- v0.0.7 fix problem in calculating JDN for Gregorian calendar dates ([#30](https://github.com/dhlab-basel/JDNConvertibleCalendar/pull/30))
+
 ## Publish to npm
 
 From the project root, run `npm publish --dry-run`.
