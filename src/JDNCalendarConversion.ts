@@ -69,6 +69,7 @@ export module JDNConvertibleConversionModule {
         let b = 0;
         let a = truncateDecimals(year/100.);
         let idate = year*10000 + month*100 + day;
+        // check whether given date is before October 15th, 1582 (see README)
         if (idate >= 15821015) {
             b = 2 - a + truncateDecimals(a/4.);
         }
