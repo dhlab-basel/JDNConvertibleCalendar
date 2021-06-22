@@ -2,10 +2,12 @@
 
 ## Introduction
 
-`JDNConvertibleCalendar` offers a convenient way to convert a given date to other calendars making use of the *Julian Day*. The Julian Day is
-the continuous count of days since the beginning of the Julian Period in 4713 BCE.
-The Julian Day Count (JDC) contains a fraction that represents the daytime. A fraction of .5 represents midnight and .0 represents noon. 
-For example, the day with the date January 27th 1987 starts with the JDC of 2446822.5 and ends with a JDC of 2446823.4999… Hence, noon is at 2446823.0.
+`JDNConvertibleCalendar` offers a convenient way to convert a given date to other calendars making use of the *Julian Day*.
+The Julian Day is the continuous count of days since the beginning of the Julian Period in 4713 BCE.
+The Julian Day Count (JDC) contains a fraction that represents the daytime.
+A fraction of .5 represents midnight and .0 represents noon. 
+For example, the day with the date January 27th 1987 starts with the JDC of 2446822.5 and ends with a JDC of 2446823.4999… 
+Hence, noon is at 2446823.0.
 The corresponding Julian Day Number (JDN) is at noon, which is 2446823 for the given example (January 27th 1987).
 
 For more information about the Julian Day, see: Jean Meeus, Astronomical Algorithms, 1998, 59pp. and <https://en.wikipedia.org/wiki/Julian_day>
@@ -34,6 +36,13 @@ All dates are treated as periods. This allows for the handling of different prec
 
 When adding a new subclass for `JDNConvertibleCalendar`, calendar specific methods have to be implemented, e.g., the conversion from and to the Julian Day. 
 Calendar specific methods are declared abstract in the base class and have to be implemented when making a subclass. The new subclass has to be added to `supportedCalendars` (configuration array) and `convertCalendar` (conversion method) in `JDNConvertibleCalendar`.
+
+## Change from the Julian to the Gregorian Calendar
+
+In order to reproduce BCE leap years and the respective length of the month February correctly
+we have to distinguish between the Gregorian and Julian calendar when calculating the Julian Day Number.
+The separating date is October 15th, 1582 when the Gregorian calendar was introduced in parts of Europe.
+Please note that in the Gregorian calendar October 4th, 1582 is immediately followed by October 15th, 1582.
 
 ## Scientific board
 
