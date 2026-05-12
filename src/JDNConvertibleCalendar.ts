@@ -49,9 +49,14 @@ export abstract class JDNConvertibleCalendar {
     protected static readonly islamic = 'Islamic';
 
     /**
+     * Constant for the Hebrew calendar.
+     */
+    protected static readonly hebrew = 'Hebrew';
+
+    /**
      * Supported calendars (to be extended when new subclasses are implemented).
      */
-    public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian, JDNConvertibleCalendar.islamic];
+    public static readonly supportedCalendars = [JDNConvertibleCalendar.gregorian, JDNConvertibleCalendar.julian, JDNConvertibleCalendar.islamic, JDNConvertibleCalendar.hebrew];
 
     /**
      * Calendar name of a subclass of `JDNConvertibleCalendar`.
@@ -60,8 +65,14 @@ export abstract class JDNConvertibleCalendar {
 
     /**
      * Indicates how many months a year has in a specific calendar.
+     * For calendars with a fixed number of months (Gregorian, Julian, Islamic),
+     * this returns a constant. For calendars with variable-length years (Hebrew),
+     * the result depends on the given year.
+     *
+     * @param year the year to check (relevant for Hebrew leap years).
+     * @returns number of months in the given year.
      */
-    public abstract readonly monthsInYear: number;
+    public abstract monthsInYear(year: number): number;
 
     /**
      * Indicates if the year 0 exists in a specific calendar.
@@ -149,7 +160,7 @@ export abstract class JDNConvertibleCalendar {
         let firstDayOfNextMonth;
 
         // if the given date is in the last month of the year, switch to first day of the first month the next year.
-        if ((date.month + 1) > this.monthsInYear) {
+        if ((date.month + 1) > this.monthsInYear(date.year)) {
             firstDayOfNextMonth = this.calendarToJDN(new CalendarDate(date.year + 1, 1, 1));
         } else {
             // switch to the first day of the next month
@@ -268,7 +279,7 @@ export abstract class JDNConvertibleCalendar {
      * @param {"Gregorian" | "Julian" | "Islamic"} toCalendarType calendar to convert to.
      * @returns instance of target calendar (subclass of `JDNConvertibleCalendar`).
      */
-    public convertCalendar(toCalendarType: 'Gregorian' | 'Julian' | 'Islamic'): JDNConvertibleCalendar {
+    public convertCalendar(toCalendarType: 'Gregorian' | 'Julian' | 'Islamic' | 'Hebrew'): JDNConvertibleCalendar {
 
         if (JDNConvertibleCalendar.supportedCalendars.indexOf(toCalendarType) == -1) {
             throw new JDNConvertibleCalendarError('Target calendar not supported: ' + toCalendarType);
@@ -288,6 +299,9 @@ export abstract class JDNConvertibleCalendar {
 
             case JDNConvertibleCalendar.islamic:
                 return new IslamicCalendarDate(jdnPeriod);
+
+            case JDNConvertibleCalendar.hebrew:
+                return new HebrewCalendarDate(jdnPeriod);
         }
 
     }
@@ -421,19 +435,19 @@ export abstract class JDNConvertibleCalendar {
         const intoTheFuture: Boolean = (months > 0);
 
         // get number of full years to shift
-        const yearsToShift = Math.floor(Math.abs(months) / this.monthsInYear);
+        const yearsToShift = Math.floor(Math.abs(months) / this.monthsInYear(calendarDate.year));
 
-        // get remaining months to shift: max. this.monthsInYear - 1
-        const monthsToShift = Math.abs(months) % this.monthsInYear;
+        // get remaining months to shift: max. this.monthsInYear(year) - 1
+        const monthsToShift = Math.abs(months) % this.monthsInYear(calendarDate.year);
 
         let newCalendarDate: CalendarDate;
 
         if (intoTheFuture) {
             // switch to the next year if the number of months does not fit
-            if (calendarDate.month + monthsToShift > this.monthsInYear) {
+            if (calendarDate.month + monthsToShift > this.monthsInYear(calendarDate.year)) {
 
                 // months to be added to new year
-                const monthsOverflow = calendarDate.month + monthsToShift - this.monthsInYear;
+                const monthsOverflow = calendarDate.month + monthsToShift - this.monthsInYear(calendarDate.year);
 
                 // when switching from a negative to a negative year and the year zero does not exist in the calendar used, correct it.
                 let yearZeroCorrection = 0;
@@ -466,7 +480,7 @@ export abstract class JDNConvertibleCalendar {
             if (calendarDate.month - monthsToShift < 1) {
 
                 // months to be subtracted from the previous year
-                const newMonth = this.monthsInYear - (monthsToShift - calendarDate.month);
+                const newMonth = this.monthsInYear(calendarDate.year - yearsToShift - 1) - (monthsToShift - calendarDate.month);
 
                 // when switching from a positive to a negative year and the year zero does not exist in the calendar used, correct it.
                 let yearZeroCorrection = 0;
@@ -554,7 +568,7 @@ export class GregorianCalendarDate extends JDNConvertibleCalendar {
 
     public readonly calendarName = JDNConvertibleCalendar.gregorian;
 
-    public readonly monthsInYear = 12;
+    public monthsInYear(_year: number): number { return 12; }
 
     // We use calendar conversion methods that use the convention
     // that the year zero exists in the Gregorian Calendar.
@@ -581,7 +595,7 @@ export class JulianCalendarDate extends JDNConvertibleCalendar {
 
     public readonly calendarName = JDNConvertibleCalendar.julian;
 
-    public readonly monthsInYear = 12;
+    public monthsInYear(_year: number): number { return 12; }
 
     // We use calendar conversion methods that use the convention
     // that the year zero does exist in the Julian Calendar.
@@ -607,7 +621,7 @@ export class IslamicCalendarDate extends JDNConvertibleCalendar {
 
     public readonly calendarName = JDNConvertibleCalendar.islamic;
 
-    public readonly monthsInYear = 12;
+    public monthsInYear(_year: number): number { return 12; }
 
     // We use calendar conversion methods that use the convention
     // that the year zero does exist in the Julian Calendar.
@@ -624,6 +638,57 @@ export class IslamicCalendarDate extends JDNConvertibleCalendar {
     protected dayOfWeekFromJDN(jdn: TypeDefinitionsModule.JDN): number {
         return JDNConvertibleConversionModule.dayOfWeekFromJDC(jdn);
     };
+}
+
+/**
+ * Represents a Hebrew calendar date.
+ *
+ * Month numbering follows the ecclesiastical (Nisan-first) convention:
+ *   1 = Nisan, 2 = Iyyar, 3 = Sivan, 4 = Tammuz, 5 = Av, 6 = Elul,
+ *   7 = Tishri, 8 = Cheshvan, 9 = Kislev, 10 = Tevet, 11 = Shevat,
+ *   12 = Adar I (leap year) / Adar (regular year),
+ *   13 = Adar II (leap years only)
+ *
+ * Years are counted from the traditional Hebrew epoch Anno Mundi (AM).
+ * There is no year zero (year 1 AM is the first year).
+ *
+ * Note: the Hebrew calendar is a lunisolar calendar. Regular years have
+ * 12 months and leap years have 13 months. `monthsInYear` returns the
+ * correct value for each year.
+ */
+export class HebrewCalendarDate extends JDNConvertibleCalendar {
+
+    public readonly calendarName = JDNConvertibleCalendar.hebrew;
+
+    /**
+     * Returns 12 for regular years and 13 for leap years.
+     */
+    public monthsInYear(year: number): number {
+        return JDNConvertibleConversionModule.hebrewMonthsInYear(year);
+    }
+
+    // The Hebrew calendar has no year zero; year 1 AM is the first year.
+    public readonly yearZeroExists = false;
+
+    protected JDNToCalendar(jdn: TypeDefinitionsModule.JDN): CalendarDate {
+        return JDNConvertibleConversionModule.JDNToHebrew(jdn);
+    }
+
+    protected calendarToJDN(date: CalendarDate): TypeDefinitionsModule.JDN {
+        return JDNConvertibleConversionModule.hebrewToJDN(date);
+    }
+
+    protected dayOfWeekFromJDN(jdn: TypeDefinitionsModule.JDN): number {
+        return JDNConvertibleConversionModule.dayOfWeekFromJDC(jdn);
+    }
+
+    /**
+     * Override daysInMonth to use the accurate Hebrew month-length calculation
+     * instead of the JDN-difference approach in the base class.
+     */
+    public daysInMonth(date: CalendarDate): number {
+        return JDNConvertibleConversionModule.hebrewDaysInMonth(date.year, date.month);
+    }
 }
 
 
