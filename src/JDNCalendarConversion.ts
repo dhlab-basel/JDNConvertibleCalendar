@@ -482,4 +482,238 @@ export module JDNConvertibleConversionModule {
     export const JDNToIslamic = (jdn: TypeDefinitionsModule.JDN): CalendarDate => {
         return JDCToIslamic(jdn);
     }
+
+    // -----------------------------------------------------------------------
+    // Hebrew Calendar
+    // -----------------------------------------------------------------------
+    //
+    // Algorithm based on:
+    //   Edward M. Reingold & Nachum Dershowitz, "Calendrical Calculations",
+    //   4th ed. (Cambridge University Press, 2018), chapters 7-8.
+    //
+    // The Hebrew calendar is a lunisolar calendar.  Years are counted from
+    // the traditional epoch Anno Mundi (1 Tishri 1 AM = 7 October 3761 BCE
+    // in the proleptic Julian calendar, JDN 347998).
+    //
+    // A regular year has 12 months; a leap year (shanah me'uberet) has 13
+    // months.  A leap year occurs when (7 * year + 1) mod 19 < 7  (the
+    // Metonic cycle with 7 intercalary years in every 19).
+    //
+    // Month lengths:
+    //   1  Nisan       30
+    //   2  Iyyar       29
+    //   3  Sivan       30
+    //   4  Tammuz      29
+    //   5  Av          30
+    //   6  Elul        29
+    //   7  Tishri      30
+    //   8  Cheshvan    29 or 30  (depends on year type)
+    //   9  Kislev      30 or 29  (depends on year type)
+    //  10  Tevet       29
+    //  11  Shevat      30
+    //  12  Adar I      30        (only in leap years; = Adar in regular years)
+    //  13  Adar II     29        (only in leap years)
+    //
+    // The civil year starts with month 7 (Tishri).  This implementation
+    // uses the *ecclesiastical* (Nisan-first) month numbering because it
+    // matches the natural 1-12 / 1-13 numbering used by Reingold & Dershowitz
+    // and is the most common convention in software libraries.
+    //
+    // JDN epoch offset: JDN 347998 = 1 Tishri 1 AM.
+    // -----------------------------------------------------------------------
+
+    /** JDN of 1 Nisan 1 AM (= 1 Tishri 1 AM minus 6 months back-calculated). */
+    const HEBREW_EPOCH = 347998; // JDN of 1 Tishri 1 AM
+
+    /**
+     * Returns true if the given Hebrew year is a leap year.
+     */
+    const isHebrewLeapYear = (year: number): boolean => {
+        return ((7 * year + 1) % 19) < 7;
+    };
+
+    /**
+     * Returns the number of months in the given Hebrew year (12 or 13).
+     */
+    export const hebrewMonthsInYear = (year: number): number => {
+        return isHebrewLeapYear(year) ? 13 : 12;
+    };
+
+    /**
+     * Returns the number of days elapsed from the Hebrew epoch to the
+     * beginning of the given Hebrew year (i.e. 1 Tishri of that year).
+     *
+     * This implements the molad-based postponement rules (dechiyot).
+     */
+    const hebrewYearStart = (year: number): number => {
+        // Number of months elapsed before this year
+        const monthsElapsed =
+            235 * Math.floor((year - 1) / 19) +        // complete Metonic cycles
+            12 * ((year - 1) % 19) +                   // regular years in current cycle
+            Math.floor((7 * ((year - 1) % 19) + 1) / 19); // leap months in current cycle
+
+        // Molad of Tishri (parts = 1/1080 of an hour)
+        const parts = 204 + 793 * (monthsElapsed % 1080);
+        const hours =
+            5 +
+            12 * monthsElapsed +
+            793 * Math.floor(monthsElapsed / 1080) +
+            Math.floor(parts / 1080);
+        const conjunctionDay = 1 + 29 * monthsElapsed + Math.floor(hours / 24);
+        const conjunctionParts = 1080 * (hours % 24) + (parts % 1080);
+
+        // Apply postponement rules (dechiyot)
+        let alternativeDay = conjunctionDay;
+
+        // Rule 1 (molad zaken): if the molad is at or after 18 hours (noon + 6h)
+        if (conjunctionParts >= 19440) {
+            alternativeDay = conjunctionDay + 1;
+        // Rule 2 (GaTaRaD): non-leap year, day of week is Tuesday (2), molad >= 9h 204p
+        } else if (conjunctionDay % 7 === 2 && conjunctionParts >= 9924 && !isHebrewLeapYear(year)) {
+            alternativeDay = conjunctionDay + 2;
+        // Rule 3 (BeTuTaKPoT): year after leap year, day of week is Monday (1), molad >= 15h 589p
+        } else if (conjunctionDay % 7 === 1 && conjunctionParts >= 16789 && isHebrewLeapYear(year - 1)) {
+            alternativeDay = conjunctionDay + 1;
+        }
+
+        // Rule 4 (lo ADU Rosh): Tishri must not fall on Sunday(0), Wednesday(3), or Friday(5)
+        const dayOfWeek = alternativeDay % 7;
+        if (dayOfWeek === 0 || dayOfWeek === 3 || dayOfWeek === 5) {
+            alternativeDay = alternativeDay + 1;
+        }
+
+        return alternativeDay;
+    };
+
+    /**
+     * Returns the total number of days in the given Hebrew year.
+     */
+    const hebrewDaysInYear = (year: number): number => {
+        return hebrewYearStart(year + 1) - hebrewYearStart(year);
+    };
+
+    /**
+     * Returns the number of days in a given month of a given Hebrew year.
+     *
+     * Month numbering (Nisan = 1):
+     *  1 Nisan, 2 Iyyar, 3 Sivan, 4 Tammuz, 5 Av, 6 Elul,
+     *  7 Tishri, 8 Cheshvan, 9 Kislev, 10 Tevet, 11 Shevat,
+     *  12 Adar I (leap) / Adar (regular), 13 Adar II (leap only)
+     */
+    export const hebrewDaysInMonth = (year: number, month: number): number => {
+        switch (month) {
+            case 1:  return 30; // Nisan
+            case 2:  return 29; // Iyyar
+            case 3:  return 30; // Sivan
+            case 4:  return 29; // Tammuz
+            case 5:  return 30; // Av
+            case 6:  return 29; // Elul
+            case 7:  return 30; // Tishri
+            case 8:  // Cheshvan: 30 in a complete (shalem) year
+                return (hebrewDaysInYear(year) % 10 === 5) ? 30 : 29;
+            case 9:  // Kislev: 29 in a deficient (chaser) year
+                return (hebrewDaysInYear(year) % 10 === 3) ? 29 : 30;
+            case 10: return 29; // Tevet
+            case 11: return 30; // Shevat
+            case 12: return isHebrewLeapYear(year) ? 30 : 29; // Adar I / Adar
+            case 13: return 29; // Adar II (leap years only)
+            default:
+                throw new Error(`Invalid Hebrew month: ${month}`);
+        }
+    };
+
+    /**
+     * Converts a Hebrew calendar date to a JDN.
+     *
+     * Month numbering follows the ecclesiastical (Nisan-first) convention:
+     *   1 = Nisan … 7 = Tishri … 12 = Adar (regular) / Adar I (leap) … 13 = Adar II (leap only)
+     *
+     * Algorithm based on:
+     *   Reingold & Dershowitz, "Calendrical Calculations", 4th ed., ch. 8.
+     *
+     * @param calendarDate Hebrew calendar date to be converted to JDN.
+     * @returns JDN representing the given Hebrew calendar date.
+     */
+    export const hebrewToJDN = (calendarDate: CalendarDate): TypeDefinitionsModule.JDN => {
+        const year = calendarDate.year;
+        const month = calendarDate.month;
+        const day = calendarDate.day;
+
+        // Days elapsed from Hebrew epoch to start of this year (1 Tishri)
+        const yearStart = hebrewYearStart(year);
+
+        // Accumulate days for months before the requested month.
+        // The year begins at Tishri (month 7), so we iterate in the
+        // civil order: Tishri(7) … Adar(12/13), then Nisan(1) … Elul(6).
+        let dayOfYear = day;
+
+        // Months from Tishri (7) to the end of the year
+        for (let m = 7; m < month && m <= hebrewMonthsInYear(year); m++) {
+            dayOfYear += hebrewDaysInMonth(year, m);
+        }
+        // Months from Nisan (1) up to but not including the requested month
+        // (only relevant when month < 7)
+        if (month < 7) {
+            // Add all months from Tishri to end of year first
+            for (let m = 7; m <= hebrewMonthsInYear(year); m++) {
+                dayOfYear += hebrewDaysInMonth(year, m);
+            }
+            // Then add months from Nisan up to (but not including) the target month
+            for (let m = 1; m < month; m++) {
+                dayOfYear += hebrewDaysInMonth(year, m);
+            }
+        }
+
+        // yearStart is days since Hebrew epoch; add HEBREW_EPOCH to get JDN
+        return HEBREW_EPOCH + yearStart + dayOfYear - 1;
+    };
+
+    /**
+     * Converts a JDN to a Hebrew calendar date.
+     *
+     * Month numbering follows the ecclesiastical (Nisan-first) convention:
+     *   1 = Nisan … 7 = Tishri … 12 = Adar (regular) / Adar I (leap) … 13 = Adar II (leap only)
+     *
+     * Algorithm based on:
+     *   Reingold & Dershowitz, "Calendrical Calculations", 4th ed., ch. 8.
+     *
+     * @param jdn JDN to be converted to a Hebrew calendar date.
+     * @returns Hebrew calendar date created from given JDN.
+     */
+    export const JDNToHebrew = (jdn: TypeDefinitionsModule.JDN): CalendarDate => {
+        // Approximate the Hebrew year using the mean year length (~365.2468 days)
+        const approxYear = Math.floor((jdn - HEBREW_EPOCH) / 365.2468) + 1;
+
+        // Find the actual year: the year whose Tishri 1 is <= jdn
+        let year = approxYear;
+        while (HEBREW_EPOCH + hebrewYearStart(year + 1) <= jdn) {
+            year++;
+        }
+        while (HEBREW_EPOCH + hebrewYearStart(year) > jdn) {
+            year--;
+        }
+
+        // Day within the year (1-based, counting from 1 Tishri)
+        const yearStartJDN = HEBREW_EPOCH + hebrewYearStart(year);
+        const dayInYear = jdn - yearStartJDN + 1; // 1-based
+
+        // Walk through months in civil order (Tishri first) to find the month
+        // Civil order: 7,8,9,10,11,12[,13],1,2,3,4,5,6
+        const civilOrder: number[] = [7, 8, 9, 10, 11, 12];
+        if (isHebrewLeapYear(year)) civilOrder.push(13);
+        civilOrder.push(1, 2, 3, 4, 5, 6);
+
+        let remaining = dayInYear;
+        let month = 7;
+        for (const m of civilOrder) {
+            const daysInM = hebrewDaysInMonth(year, m);
+            if (remaining <= daysInM) {
+                month = m;
+                break;
+            }
+            remaining -= daysInM;
+        }
+
+        return new CalendarDate(year, month, remaining);
+    };
 }

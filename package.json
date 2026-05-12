@@ -7,7 +7,7 @@
   "scripts": {
     "prepublishOnly": "npm run prepare",
     "prepare": "tsc",
-    "test": "mocha --require ts-node/register './test/conversions.ts' && mocha --require ts-node/register './test/names.ts'",
+    "test": "mocha --require ts-node/register './test/conversions.ts' && mocha --require ts-node/register './test/names.ts' && mocha --require ts-node/register './test/hebrew.ts'",
     "yalc-publish": "tsc && yalc publish --push",
     "builddocs": "typedoc --readme none --name 'JDNConvertibleCalendar API Documentation' --excludeExternals true src/index.ts"
   },
